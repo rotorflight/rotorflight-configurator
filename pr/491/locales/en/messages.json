@@ -695,19 +695,19 @@
         "message": "Throttle switch"
     },
     "setupWizardThrottleRangeText": {
-        "message": "On a helicopter the throttle channel is a switch, not the collective stick: motor off (throttle hold) and motor on. The flight controller arms only with that channel below 0 %. If the switch's off position doesn't reach that low, the helicopter won't arm. Press Measure, flick the throttle switch through all its positions (hold and on), then press Use: 0 % goes just above the off position and 100 % just below the on position."
+        "message": "On a helicopter the throttle is a switch, not the collective stick: one position is motor off (throttle hold), the other gives the ESC full power. Its off position must sit below the flight controller's 0 % point, or the flight controller takes the motor for running and refuses to arm the helicopter. Press Measure, flick the throttle switch through all its positions, then press Use: 0 % goes just above the off position and full power just below the on position."
     },
     "setupWizardThrottleRangeArms": {
-        "message": "Arms here"
+        "message": "Off position OK"
     },
     "setupWizardThrottleRangeNoArm": {
-        "message": "Too high to arm"
+        "message": "Off position too high"
     },
     "setupWizardThrottleRangeNow": {
         "message": "Throttle now: $1 µs"
     },
     "setupWizardThrottleRangePoints": {
-        "message": "0 % at $1 µs, 100 % at $2 µs, arms below $3 µs"
+        "message": "Motor off below $3 µs · 0 % at $1 µs · full power at $2 µs"
     },
     "setupWizardThrottleRangeMove": {
         "message": "Flick the throttle switch to off (hold) and on…"
@@ -723,6 +723,12 @@
     },
     "setupWizardThrottleRangeDefault": {
         "message": "Use the default range"
+    },
+    "setupWizardThrottleSwitchWarning": {
+        "message": "Once the helicopter is armed, the throttle switch on gives the ESC full power and the motor starts. Never arm it on the bench with the main blades fitted. While this wizard is open the flight controller cannot arm, so flicking the switch here does not start the motor."
+    },
+    "setupWizardThrottleSwitchWarningTitle": {
+        "message": "Main blades off"
     },
     "setupWizardSwashIntro": {
         "message": "Tell the flight controller how the swashplate servos are arranged and how the tail is driven."
