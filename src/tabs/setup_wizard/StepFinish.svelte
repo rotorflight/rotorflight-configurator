@@ -4,10 +4,12 @@
   import { Mixer } from "@/js/Mixer.js";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
+  import govState, { GOV_THROTTLE_TYPE } from "@/tabs/governor/state.svelte.js";
   import motorState from "@/tabs/motors/state.svelte.js";
 
   import HeliSide from "./HeliSide.svelte";
   import TabButton from "./TabButton.svelte";
+  import { hasFastRpm } from "./governor.js";
   import { COLLECTIVE, PITCH, limitDegrees } from "./heli.js";
 
   const wiz = getContext("setupWizard");
@@ -51,6 +53,16 @@
       2: limitDegrees(FC.MIXER_INPUTS[PITCH].max),
     }),
   );
+  let governor = $derived.by(() => {
+    if (!govState.enabled) return govState.govModes[0];
+    if (!govState.is_12_9) return govState.govMode;
+    const type = Object.keys(GOV_THROTTLE_TYPE).find(
+      (k) => GOV_THROTTLE_TYPE[k] === FC.GOVERNOR.gov_throttle_type,
+    );
+    return `${govState.govMode} · ${type}`;
+  });
+  let governorNoRpm = $derived(govState.govHeadspeed && !hasFastRpm());
+
   let armAssigned = $derived(
     FC.MODE_RANGES.some((r) => r.id === 0 && r.range.start < r.range.end),
   );
@@ -81,6 +93,13 @@
     <dt>{$i18n.t(row.label)}</dt>
     <dd>{row.value}</dd>
   {/each}
+  <dt>{$i18n.t("tabGovernor")}</dt>
+  <dd>
+    {governor}
+    {#if governorNoRpm}
+      <span class="badge bad">{$i18n.t("setupWizardGovNoRpmBadge")}</span>
+    {/if}
+  </dd>
   <dt>{$i18n.t("setupWizardMode_arm")}</dt>
   <dd>
     {#if armAssigned}
@@ -93,6 +112,10 @@
     {/if}
   </dd>
 </dl>
+
+{#if governorNoRpm}
+  <div class="note">{$i18n.t("setupWizardGovRpmMissing")}</div>
+{/if}
 
 {#if !armAssigned}
   <div class="note">{$i18n.t("setupWizardFinishNoArm")}</div>
