@@ -207,6 +207,10 @@ function defaultPidProfile() {
     btermCutoffYaw: 20,
     yaw_inertia_precomp_gain: 0,
     yaw_inertia_precomp_cutoff: 25,
+    error_decay_gain_cyclic: 0,
+    hasMasterGain: true,
+    cyclicMasterGain: 100,
+    yawMasterGain: 100,
 
     rescueMode: 0,
     rescueFlipMode: 1,

@@ -1,6 +1,6 @@
 import semver from "semver";
 
-import { API_VERSION_12_8, API_VERSION_12_9 } from "@/js/configurator.svelte.js";
+import { API_VERSION_12_8, API_VERSION_12_9, API_VERSION_12_10 } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import { i18n } from "@/js/localization.js";
 
@@ -10,6 +10,7 @@ import { i18n } from "@/js/localization.js";
 export function getFunctions() {
     const gte12_8 = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8);
     const gte12_9 = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9);
+    const gte12_10 = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10);
 
     return [
         { id: 0,    name: 'None',                       min: 0,     max: 100,    ticks: 10,   pips: [ 0, 20, 40, 60, 80, 100 ] },
@@ -95,6 +96,8 @@ export function getFunctions() {
         { id: 80,   name: 'GovHeadspeed',               min: 0,     max: 10000,  ticks: 200,   pips: [ 0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000 ], hide: !gte12_9 },
         { id: 81,   name: 'GovYawFF',                   min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_9 },
         { id: 82,   name: 'BatteryProfile',             min: 1,     max: 6,      ticks: 0.25, pips: [ 1, 2, 3, 4, 5, 6 ], hide: !gte12_9 },
+        { id: 83,   name: 'CyclicMasterGain',           min: 25,    max: 200,    ticks: 5,    pips: [ 25, 50, 75, 100, 125, 150, 175, 200 ], hide: !gte12_10 },
+        { id: 84,   name: 'YawMasterGain',              min: 25,    max: 200,    ticks: 5,    pips: [ 25, 50, 75, 100, 125, 150, 175, 200 ], hide: !gte12_10 },
     ];
 }
 
@@ -104,7 +107,7 @@ export const FUNCTION_GROUPS = [
     { label: 'adjustmentsGroupRates', ids: [5, 6, 7] },
     { label: 'adjustmentsGroupRcRates', ids: [8, 9, 10] },
     { label: 'adjustmentsGroupRcExpo', ids: [11, 12, 13] },
-    { label: 'adjustmentsGroupPidGains', ids: [14, 18, 22, 15, 19, 23, 16, 20, 24, 17, 21, 25, 56, 57, 58, 59, 60] },
+    { label: 'adjustmentsGroupPidGains', ids: [83, 84, 14, 18, 22, 15, 19, 23, 16, 20, 24, 17, 21, 25, 56, 57, 58, 59, 60] },
     { label: 'adjustmentsGroupFilters', ids: [33, 34, 35, 36, 37, 38] },
     { label: 'adjustmentsGroupYawDynamics', ids: [72, 74, 73] },
     { label: 'adjustmentsGroupStability', ids: [47, 45, 46] },
