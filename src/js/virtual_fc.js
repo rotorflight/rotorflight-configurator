@@ -43,6 +43,7 @@ const RC_CHANNEL_COUNT = 16; // CRSF
 const TELEM_SENSOR_SLOT_COUNT = 40;
 const ARMING_DISABLE_FLAGS_COUNT = 27;
 const ARMING_DISABLED_MSP = 1 << 16;
+const ARMING_DISABLED_OVERRIDE = 1 << 25; // API 12.9+
 const DEBUG_COUNT = 82;
 const DEBUG_VALUE_COUNT = 8;
 const RATE_PROFILE_MASK = 1 << 7;
@@ -372,6 +373,60 @@ function dataflashReadReply(address, blockSize) {
   return buffer;
 }
 
+// flight/servos.c servoUpdate(), disarmed: an override puts the servo at
+// mid + scale * override, a servo without one stays at mid (there is no
+// mixer here to move it).
+function updateServoOutput(index) {
+  const config = FC.SERVO_CONFIG[index];
+  if (!config) return;
+  const raw = FC.SERVO_OVERRIDE[index];
+  let pos = raw >= -2000 && raw <= 2000 ? raw / 1000 : 0;
+  if (config.flags & 1) pos = -pos;
+  const travel = (pos > 0 ? config.rpos : config.rneg) * pos;
+  FC.SERVO_DATA[index] = Math.round(
+    config.mid + Math.max(config.min, Math.min(config.max, travel)),
+  );
+}
+
+// flight/servos.c, flight/mixer.c (API 12.10+): an override sent with a
+// trailing U16 timeout lapses unless it is re-sent in time; one without
+// stays. Keyed "servo:N" / "mixer:N".
+const overrideLapse = new Map();
+
+function lapseOverride(key, bytes, clear) {
+  clearTimeout(overrideLapse.get(key));
+  overrideLapse.delete(key);
+  if (
+    bytes.length < 5 ||
+    !semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
+  ) {
+    return;
+  }
+  const timeoutMs = Math.min(30000, Math.max(500, bytes[3] | (bytes[4] << 8)));
+  overrideLapse.set(
+    key,
+    setTimeout(() => {
+      overrideLapse.delete(key);
+      clear();
+      updateOverrideFlag();
+    }, timeoutMs),
+  );
+}
+
+// fc/core.c updateArmingStatus(): any servo or mixer override blocks arming.
+function updateOverrideFlag() {
+  if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) return;
+  const servo = FC.SERVO_OVERRIDE.some((v) => v >= -2000 && v <= 2000);
+  const mixer = FC.MIXER_OVERRIDE.some(
+    (v, i) => i > 0 && v !== MIXER_OVERRIDE_OFF,
+  );
+  if (servo || mixer) {
+    FC.CONFIG.armingDisableFlags |= ARMING_DISABLED_OVERRIDE;
+  } else {
+    FC.CONFIG.armingDisableFlags &= ~ARMING_DISABLED_OVERRIDE;
+  }
+}
+
 function reply(code, buffer = new ArrayBuffer(0)) {
   const data = new DataView(buffer);
   return {
@@ -435,6 +490,27 @@ export function handleVirtualMessage(code, data) {
       if (config && firmwareLimitsTravel(FC.CONFIG.apiVersion)) {
         clampServoConfig(config, index >= BUS_SERVO_OFFSET);
       }
+      updateServoOutput(index);
+      break;
+    }
+
+    case MSPCodes.MSP_SET_SERVO_OVERRIDE: {
+      const index = bytes[0];
+      lapseOverride(`servo:${index}`, bytes, () => {
+        FC.SERVO_OVERRIDE[index] = SERVO_OVERRIDE_OFF;
+        updateServoOutput(index);
+      });
+      updateServoOutput(index);
+      updateOverrideFlag();
+      break;
+    }
+
+    case MSPCodes.MSP_SET_MIXER_OVERRIDE: {
+      const index = bytes[0];
+      lapseOverride(`mixer:${index}`, bytes, () => {
+        FC.MIXER_OVERRIDE[index] = MIXER_OVERRIDE_OFF;
+      });
+      updateOverrideFlag();
       break;
     }
 

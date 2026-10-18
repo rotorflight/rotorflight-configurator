@@ -2712,13 +2712,18 @@ MspHelper.prototype.resetServoOverrides = function(onCompleteCallback)
     this.sendServoOverrides(onCompleteCallback);
 };
 
-MspHelper.prototype.sendServoOverride = function(servoIndex, onCompleteCallback)
+// timeoutMs (API 12.10+): the FC drops the override unless it is re-sent
+// within that time. Without it the override stays until cleared.
+MspHelper.prototype.sendServoOverride = function(servoIndex, onCompleteCallback, timeoutMs)
 {
     const value = FC.SERVO_OVERRIDE[servoIndex];
     const buffer = [];
 
     buffer.push8(servoIndex)
           .push16(value);
+    if (timeoutMs) {
+        buffer.push16(timeoutMs);
+    }
 
     MSP.send_message(MSPCodes.MSP_SET_SERVO_OVERRIDE, buffer, false, onCompleteCallback);
 };
@@ -2837,13 +2842,17 @@ MspHelper.prototype.resetMixerOverrides = function(onCompleteCallback)
     this.sendMixerOverrides(onCompleteCallback);
 };
 
-MspHelper.prototype.sendMixerOverride = function(mixerIndex, onCompleteCallback)
+// timeoutMs (API 12.10+): as for sendServoOverride().
+MspHelper.prototype.sendMixerOverride = function(mixerIndex, onCompleteCallback, timeoutMs)
 {
     const value = FC.MIXER_OVERRIDE[mixerIndex];
     const buffer = [];
 
     buffer.push8(mixerIndex)
           .push16(value);
+    if (timeoutMs) {
+        buffer.push16(timeoutMs);
+    }
 
     MSP.send_message(MSPCodes.MSP_SET_MIXER_OVERRIDE, buffer, false, onCompleteCallback);
 };
