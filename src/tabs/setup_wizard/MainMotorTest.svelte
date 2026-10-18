@@ -5,6 +5,8 @@
   import { i18n } from "@/js/i18n.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
 
+  import BladesOffWarning from "./BladesOffWarning.svelte";
+
   // The main motor spun with the motor override, as the tail motor test
   // does: only while the button is held. The FC raises the override at
   // 25 % a second, drops it at once, lets it lapse 1 s after the last one
@@ -77,6 +79,9 @@
 
 <section class="card">
   <h3>{$i18n.t("setupWizardMainMotorTitle")}</h3>
+  <BladesOffWarning
+    text={$i18n.t("setupWizardMainMotorWarning", { 1: MAX_PERCENT })}
+  />
   <p>
     {$i18n.t("setupWizardMainMotorText", { 1: rotorDir })}
   </p>

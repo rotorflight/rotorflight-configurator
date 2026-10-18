@@ -23,7 +23,7 @@
   import { CHANNEL_PRESETS } from "@/tabs/receiver/channelPresets.js";
   import { RX_PROTOCOLS } from "@/tabs/receiver/protocols.js";
 
-  import HeliSide from "./HeliSide.svelte";
+  import BladesOffWarning from "./BladesOffWarning.svelte";
   import LiveBar from "./LiveBar.svelte";
   import ReceiverArt from "./ReceiverArt.svelte";
   import StickIcon from "./StickIcon.svelte";
@@ -596,16 +596,7 @@
         </span>
       {/if}
     </h3>
-    <div class="note warning">
-      <div class="warning-art"><HeliSide scene="bladesOff" /></div>
-      <div>
-        <strong>
-          <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
-          {$i18n.t("setupWizardThrottleSwitchWarningTitle")}
-        </strong>
-        <p>{$i18n.t("setupWizardThrottleSwitchWarning")}</p>
-      </div>
-    </div>
+    <BladesOffWarning text={$i18n.t("setupWizardThrottleSwitchWarning")} />
     <p>{$i18n.t("setupWizardThrottleRangeText")}</p>
     <div class="throttle-now">
       <span class="pill">
@@ -761,32 +752,6 @@
 
   .bar-name {
     font-weight: 600;
-  }
-
-  /* Stronger than the usual .note: this one is about the motor. */
-  .card .note.warning {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    border-left-color: var(--color-status-bad);
-
-    strong {
-      font-size: 1.1em;
-      color: var(--color-status-bad);
-    }
-
-    i {
-      margin-right: 6px;
-    }
-
-    p {
-      margin: 4px 0 0;
-      font-weight: 600;
-    }
-  }
-
-  .warning-art {
-    flex: 0 0 140px;
   }
 
   .throttle-now {
