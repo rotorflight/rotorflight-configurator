@@ -44,6 +44,8 @@ const TELEM_SENSOR_SLOT_COUNT = 40;
 const ARMING_DISABLE_FLAGS_COUNT = 27;
 const ARMING_DISABLED_MSP = 1 << 16;
 const ARMING_DISABLED_OVERRIDE = 1 << 25; // API 12.9+
+const ARMING_DISABLED_TAIL_MOTOR = 1 << 26; // API 12.10+
+const ARMING_DISABLE_FLAGS_COUNT_12_10 = 28;
 const DEBUG_COUNT = 82;
 const DEBUG_VALUE_COUNT = 8;
 const RATE_PROFILE_MASK = 1 << 7;
@@ -461,6 +463,18 @@ function updateMotorOutputs() {
   }
 }
 
+// fc/core.c updateArmingStatus() (API 12.10): a motorised tail needs a
+// MOTOR 2. The motor count is the one the FC booted with.
+function updateTailMotorFlag() {
+  if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) return;
+  const motorised = (FC.MIXER_CONFIG.tail_rotor_mode ?? 0) !== 0;
+  if (motorised && FC.CONFIG.motorCount < 2) {
+    FC.CONFIG.armingDisableFlags |= ARMING_DISABLED_TAIL_MOTOR;
+  } else {
+    FC.CONFIG.armingDisableFlags &= ~ARMING_DISABLED_TAIL_MOTOR;
+  }
+}
+
 // fc/core.c updateArmingStatus(): any servo or mixer override blocks arming.
 function updateOverrideFlag() {
   if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) return;
@@ -574,6 +588,10 @@ export function handleVirtualMessage(code, data) {
 
     case MSPCodes.MSP_MOTOR:
       updateMotorOutputs();
+      break;
+
+    case MSPCodes.MSP_STATUS:
+      updateTailMotorFlag();
       break;
 
     // flight/servos.c setTailOutput() (API 12.10): moves the tail pin
@@ -694,6 +712,10 @@ export function applyVirtualConfig() {
 
   const api12_9 = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9);
   const api12_10 = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10);
+
+  if (api12_10) {
+    FC.CONFIG.armingDisableCount = ARMING_DISABLE_FLAGS_COUNT_12_10;
+  }
 
   Object.assign(FC.ADVANCED_CONFIG, {
     gyro_sync_denom: 1,
