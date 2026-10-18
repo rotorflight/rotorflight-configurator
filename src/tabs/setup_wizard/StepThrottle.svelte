@@ -11,6 +11,7 @@
   import motorState from "@/tabs/motors/state.svelte.js";
 
   import EscArt from "./EscArt.svelte";
+  import MotorCheck from "./MotorCheck.svelte";
   import TabButton from "./TabButton.svelte";
 
   // A PWM ESC learns its throttle range at power-up: it sees full throttle
@@ -107,6 +108,8 @@
     <p>{$i18n.t("setupWizardThrottleIntro")}</p>
   </div>
 </div>
+
+<MotorCheck />
 
 {#if !isPwm}
   <p>{$i18n.t("setupWizardThrottleNotNeeded", { 1: protocolName })}</p>

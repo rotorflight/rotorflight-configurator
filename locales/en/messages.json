@@ -562,6 +562,9 @@
     "setupWizardOpenMotors": {
         "message": "Open the Motors tab"
     },
+    "setupWizardOpenRemap": {
+        "message": "Open the Remap FC tab"
+    },
     "setupWizardOpenModes": {
         "message": "Open the Modes tab"
     },
@@ -4858,6 +4861,15 @@
     },
     "tailOutputResult_5": {
         "message": "the flight controller didn't understand the request."
+    },
+    "tailOutputResult_6": {
+        "message": "the ESC protocol is DShot, and the pin has no DMA to drive it. Turn on DShot bitbang, or use a different pin on the Remap FC tab."
+    },
+    "motorOutputProblem_main": {
+        "message": "No motor output started, so the helicopter can't arm. One of the motor pins can't be driven with this ESC protocol, which stops all motors. Check the motor pins on the Remap FC tab, or choose another ESC protocol."
+    },
+    "motorOutputProblem_tail": {
+        "message": "The tail motor (motor 2) has no working output, so the tail won't run. Check that the tail pin is on motor 2 on the Remap FC tab."
     },
     "mixerTailRotorDirection": {
         "message": "Yaw Control Direction"

@@ -3,6 +3,7 @@
 
   import { i18n } from "@/js/i18n.js";
 
+  import MotorCheck from "./MotorCheck.svelte";
   import ServoArt from "./ServoArt.svelte";
 
   // The gate between typing settings in and working on the helicopter.
@@ -26,6 +27,7 @@
     <span>{$i18n.t("setupWizardConnectReboot")}</span>
   </div>
 {:else}
+  <MotorCheck />
   <section class="card">
     <h3>
       <span class="num">1</span>{$i18n.t("setupWizardConnectServosTitle")}
