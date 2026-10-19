@@ -2,6 +2,7 @@
 // conversions the Mixer and Servos tabs use.
 
 import { Mixer } from "@/js/Mixer.js";
+import { RATES_TYPE } from "@/js/RateCurve.js";
 import { SWASH_LAYOUTS, TAIL_SERVO } from "@/js/swash.js";
 
 // Mixer inputs (flight/mixer.h MIXER_IN_STABILIZED_*).
@@ -138,4 +139,53 @@ export function rangeForSwitch(from, to) {
     start: Math.max(CHANNEL_MIN, start),
     end: Math.min(CHANNEL_MAX, end),
   };
+}
+
+// Collective pitch at full stick, set by the collective rate (not by the
+// mixer's collective limit, which only caps it). RC_TUNING holds the MSP
+// bytes / 100; the scales are the Rates tab's display units, in degrees
+// (tabs/rates/rateTypes.js). At full stick the ROTORFLIGHT curve gives
+// its rate, and ACTUAL the larger of its centre and max rates. Other
+// rates types don't give it as a plain number: null.
+const ROTORFLIGHT_COL_DEG = 12.5;
+const ACTUAL_COL_DEG = 25;
+
+export function collectiveAtFullStick(tuning) {
+  switch (tuning.rates_type) {
+    case RATES_TYPE.ROTORFLIGHT:
+      return round1(tuning.collective_rc_rate * ROTORFLIGHT_COL_DEG);
+    case RATES_TYPE.ACTUAL:
+      return round1(
+        Math.max(tuning.collective_rc_rate, tuning.collective_srate) *
+          ACTUAL_COL_DEG,
+      );
+    default:
+      return null;
+  }
+}
+
+// Sets it in `tuning`; false for a rates type it can't be set in.
+export function setCollectiveAtFullStick(tuning, degrees) {
+  switch (tuning.rates_type) {
+    case RATES_TYPE.ROTORFLIGHT:
+      tuning.collective_rc_rate = round2(degrees / ROTORFLIGHT_COL_DEG);
+      return true;
+    case RATES_TYPE.ACTUAL:
+      tuning.collective_srate = round2(degrees / ACTUAL_COL_DEG);
+      tuning.collective_rc_rate = Math.min(
+        tuning.collective_rc_rate,
+        tuning.collective_srate,
+      );
+      return true;
+    default:
+      return false;
+  }
+}
+
+function round1(v) {
+  return Math.round(v * 10) / 10;
+}
+
+function round2(v) {
+  return Math.round(v * 100) / 100;
 }
