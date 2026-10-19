@@ -5,7 +5,8 @@ import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 // - beginner: the Setup Wizard is the main tool; the nav keeps only the
 //   tabs the wizard doesn't cover or sends the pilot to, and connecting
 //   opens the wizard.
-// - intermediate: every tab, with the detailed settings hidden.
+// - intermediate: every tab but the few only experts need, with the
+//   detailed settings (<Field expert>, <Expert>) not shown at all.
 // - advanced: every tab and every setting (what Expert Mode used to be).
 // CONFIGURATOR.expertMode stays as the "advanced" flag the tabs read.
 export const USER_LEVELS = ["beginner", "intermediate", "advanced"];
@@ -24,6 +25,9 @@ const BEGINNER_TABS = [
   "setup",
   "cli",
 ];
+
+// Tabs only Advanced shows.
+const ADVANCED_TABS = ["adjustments", "beepers", "sensors"];
 
 export function loadUserLevel() {
   let level = config.userLevel;
@@ -51,7 +55,9 @@ function applyUserLevel(level) {
 }
 
 export function isTabInUserLevel(tabName, level = CONFIGURATOR.userLevel) {
-  return level !== "beginner" || BEGINNER_TABS.includes(tabName);
+  if (level === "beginner") return BEGINNER_TABS.includes(tabName);
+  if (level === "intermediate") return !ADVANCED_TABS.includes(tabName);
+  return true;
 }
 
 // The tab to open on connect when nothing else asks for one.
