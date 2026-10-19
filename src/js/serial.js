@@ -457,6 +457,13 @@ export const serial = {
 
                 if (sendInfo === undefined) {
                     console.log('undefined send error');
+                    // Same as the web backend's send error: disconnect, which
+                    // also empties outputBuffer and clears transmitting. Just
+                    // returning left this item at the head of the queue with
+                    // transmitting still set, so every later send was queued
+                    // behind it and its callback never fired (e.g. the CLI's
+                    // `exit` in CliEngine.close(), hanging whatever awaited it).
+                    self.errorHandler('undefined', 'send');
                     if (_callback) {
                         _callback({
                             bytesSent: 0,
