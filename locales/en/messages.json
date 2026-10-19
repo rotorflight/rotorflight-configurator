@@ -5534,6 +5534,46 @@
         "message": "Detected board: <strong>{{boardName}}</strong>, but no matching target found.",
         "description": "Board detection was successful, but there was no matching target available."
     },
+    "firmwareFlasherBoardDetectionCustom": {
+        "message": "Detected board: <strong>{{boardName}}</strong> ({{mcu}}), but there is no published target for it, so the generic {{mcu}} firmware is selected. Read this board's hardware config (pins, timers, DMA) so it is kept across the flash.",
+        "description": "Board detection found a board with no published target (e.g. a DIY board) whose MCU has a firmware build."
+    },
+    "firmwareFlasherBoardConfigReadCta": {
+        "message": "Read hardware config from board",
+        "description": "Button that reads a DIY board's hardware config over the CLI so it can be flashed with the generic MCU firmware."
+    },
+    "firmwareFlasherBoardConfigReading": {
+        "message": "Reading hardware config from the board…"
+    },
+    "firmwareFlasherBoardConfigReadOk": {
+        "message": "{{boardName}} -- its hardware config was read from the board and will be combined with the {{mcu}} firmware at flash time."
+    },
+    "firmwareFlasherConfigTooLarge": {
+        "message": "The board config is too large to combine with this firmware. Remove unused settings from it, or flash without it and set the board up in the CLI."
+    },
+    "firmwareFlasherFlashFailed": {
+        "message": "Flashing could not start. See the console for details."
+    },
+    "firmwareFlasherBoardConfigEmpty": {
+        "message": "This board has no hardware config to read -- it is running the plain MCU firmware. It will be flashed the same way; set it up in the CLI (or load a .config on the Firmware step)."
+    },
+    "firmwareFlasherBoardConfigReadUnavailableDfu": {
+        "message": "The board is in DFU mode, so its hardware config can't be read. Load a .config file on the Firmware step, or set the board up in the CLI after flashing."
+    },
+    "firmwareFlasherCustomBoardGroup": {
+        "message": "Custom (MCU only, no board config)",
+        "description": "Board dropdown group listing plain MCU firmware builds, for DIY boards with no published target."
+    },
+    "firmwareFlasherCustomBoardLabel": {
+        "message": "Custom ({{mcu}})",
+        "description": "Display name for a Custom MCU-only board selection."
+    },
+    "firmwareFlasherCustomBoardNoConfig": {
+        "message": "This is the generic {{mcu}} firmware with no board config -- no pins, timers or DMA will be set up. Read the config from the board below, load a .config file on the Firmware step, or set the board up in the CLI after flashing."
+    },
+    "firmwareFlasherBoardConfigReadFailed": {
+        "message": "Could not read a hardware config from the board. Without one the board would be flashed with no pins assigned -- try again, or select a board manually."
+    },
     "firmwareFlasherBoardDetectionDescriptionHint": {
         "message": "Detect only works when not in DFU mode and when MSP communication is working. Sometimes you have to retry a few times or even reconnect USB. Try connecting as normal first as you could have forgotten to apply custom defaults. Please reboot after flashing - replug your USB."
     },
