@@ -5548,6 +5548,12 @@
     "firmwareFlasherBoardConfigReadOk": {
         "message": "{{boardName}} -- its hardware config was read from the board and will be combined with the {{mcu}} firmware at flash time."
     },
+    "firmwareFlasherConfigTooLarge": {
+        "message": "The board config is too large to combine with this firmware. Remove unused settings from it, or flash without it and set the board up in the CLI."
+    },
+    "firmwareFlasherFlashFailed": {
+        "message": "Flashing could not start. See the console for details."
+    },
     "firmwareFlasherBoardConfigEmpty": {
         "message": "This board has no hardware config to read -- it is running the plain MCU firmware. It will be flashed the same way; set it up in the CLI (or load a .config on the Firmware step)."
     },

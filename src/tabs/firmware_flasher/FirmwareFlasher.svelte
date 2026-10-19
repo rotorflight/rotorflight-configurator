@@ -695,6 +695,7 @@
   function onBuildTypeChange(index) {
     buildTypeIndex = Number(index);
     selectedBoard = "0";
+    clearCustomDetect();
     firmwareVersionEntries = [];
     selectedVersion = "0";
     loadBuildType(buildTypeIndex);
@@ -703,6 +704,7 @@
   function onClickRefreshReleases() {
     if (releasesLoading || GUI.connect_lock) return;
     selectedBoard = "0";
+    clearCustomDetect();
     firmwareVersionEntries = [];
     selectedVersion = "0";
     loadBuildType(buildTypeIndex, true);
@@ -1499,11 +1501,19 @@
       flashFirmware(parsedHex, backupText, backupPort);
       GUI.saveDefaultTab("status");
     } catch (e) {
-      console.log(`Flashing failed: ${e.message}`);
-      // e.g. ConfigInserter's "Custom defaults area too small" -- most
-      // likely with a config read off a DIY board, which nothing has
-      // size-checked against the firmware the way published targets are.
-      setFlashingMessage(e.message, FLASH_MESSAGE_TYPES.INVALID);
+      console.error("Flashing failed", e);
+      // Most likely ConfigInserter's "Custom defaults area too small", with
+      // a config read off a DIY board -- nothing has size-checked that
+      // against the firmware the way published targets are. Shown as a
+      // localized message rather than e.message, since it renders as HTML.
+      setFlashingMessage(
+        $i18n.t(
+          /Custom defaults area too small/.test(e?.message)
+            ? "firmwareFlasherConfigTooLarge"
+            : "firmwareFlasherFlashFailed",
+        ),
+        FLASH_MESSAGE_TYPES.INVALID,
+      );
     }
   }
 
@@ -1685,6 +1695,17 @@
     customConfigStatus = "idle";
   }
 
+  // For the resets that drop selectedBoard back to "0" without going through
+  // onBoardChange(): a "custom" Detect result would otherwise keep offering
+  // to read a config for a board that's no longer selected.
+  function clearCustomDetect() {
+    clearCustomBoard();
+    if (detectStatus === "custom") {
+      detectStatus = null;
+      detectedBoardName = "";
+    }
+  }
+
   // Reads the detected board's hardware config back over the CLI and uses it
   // as the target config, with the plain MCU build as the firmware -- the
   // same pairing a rotorflight-targets .config and its MCU build make. Only
@@ -1706,6 +1727,11 @@
     let text;
     try {
       text = await readHardwareConfigOverSerial(port, baud);
+    } catch (error) {
+      // Falls through to the failure path below, so Retry stays available
+      // rather than the wizard sitting on "reading" for good.
+      console.warn("Reading hardware config failed", error);
+      text = null;
     } finally {
       GUI.connect_lock = false;
     }
@@ -1757,6 +1783,10 @@
     const builds = {};
     populateBuilds(builds, make || mcu, releases[mcu]);
     showVersions(builds);
+    // showVersions() leaves a loaded local .hex alone (see
+    // onVersionChange()), so it won't undo the setFlashingEnabled(false)
+    // from the start of the read either.
+    if (localFirmwareLoaded) flashingMessageLocal();
 
     customConfigStatus = "ready";
     GUI.log(
