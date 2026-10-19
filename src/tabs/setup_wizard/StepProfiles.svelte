@@ -368,6 +368,7 @@
 
 <section class="card">
   <h3><span class="num">2</span>{$i18n.t("setupWizardProfilesGainTitle")}</h3>
+  <p>{$i18n.t("setupWizardProfilesGainText")}</p>
   <div class="tiles" role="radiogroup">
     {#each ["buttons", "knob", "none"] as value (value)}
       <button
