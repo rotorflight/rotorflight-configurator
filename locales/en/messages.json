@@ -206,7 +206,7 @@
         "message": "Intermediate"
     },
     "userLevelIntermediateHelp": {
-        "message": "Shows every tab, with the detailed settings hidden."
+        "message": "Shows the tabs most pilots use, without the detailed settings that are usually left at their defaults."
     },
     "userLevelAdvanced": {
         "message": "Advanced"
