@@ -941,7 +941,7 @@
         "message": "The swash is now held at 0° on every axis, with each servo arm square."
     },
     "setupWizardLevelTipLinks": {
-        "message": "Adjust the servo links until the swashplate is level, both ways."
+        "message": "Adjust the servo links until the swashplate is level, both ways. A swash leveler (a gauge that clamps on the main shaft) makes this quick and exact; without one, check by eye from the front and from the side."
     },
     "setupWizardLevelTipPitch": {
         "message": "Adjust the upper links until both main blades are at 0° pitch."
@@ -989,7 +989,25 @@
         "message": "Pitch limits"
     },
     "setupWizardPitchLimitsText": {
-        "message": "The most blade pitch the flight controller will command. Typical 3D setups use about 12° collective and 10–12° cyclic."
+        "message": "Hard limits: the most blade pitch the flight controller will ever command, whatever the sticks and the gyro ask for. They are not the pitch you fly with, which is set in the next card; they stop the swash going further than the head can take. Typical 3D setups use about 12° collective and 10–12° cyclic."
+    },
+    "setupWizardPitchFullStickTitle": {
+        "message": "Collective pitch at full stick"
+    },
+    "setupWizardPitchFullStickText": {
+        "message": "The blade pitch you get with the collective stick all the way up or down. It is the collective rate, set here in every rate profile. About 12° is usual for 3D, less for sport flying. Keep it at or below the collective limit above."
+    },
+    "setupWizardPitchFullStickLabel": {
+        "message": "Collective at full stick"
+    },
+    "setupWizardPitchFullStickClipped": {
+        "message": "That is more than the collective limit of $1°, which cuts it short at full stick. Raise the limit or lower this."
+    },
+    "setupWizardPitchFullStickOther": {
+        "message": "The rates type in use doesn't give this as a plain number of degrees. Set the collective rate in the Rates tab."
+    },
+    "setupWizardOpenRates": {
+        "message": "Open the Rates tab"
     },
     "setupWizardPitchLimitsBinding": {
         "message": "Check at full stick that nothing binds: the swash must not hit the frame, and the links must not reach their ends."

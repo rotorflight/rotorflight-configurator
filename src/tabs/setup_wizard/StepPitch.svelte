@@ -5,15 +5,22 @@
 
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
+  import { MSP } from "@/js/msp.svelte.js";
+  import { MSPCodes } from "@/js/msp/MSPCodes.js";
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import { RATE_PROFILE_MASK } from "@/tabs/rates/rateTypes.js";
 
   import PitchArt from "./PitchArt.svelte";
+  import TabButton from "./TabButton.svelte";
   import {
     COLLECTIVE,
     PITCH,
     ROLL,
     calibratedRate,
+    collectiveAtFullStick,
     limitDegrees,
     limitRaw,
+    setCollectiveAtFullStick,
     swashRaw,
   } from "./heli.js";
 
@@ -109,6 +116,46 @@
     FC.MIXER_CONFIG.blade_pitch_limit = limitRaw(totalLimit);
     wiz.sendMixerConfig();
   }
+
+  //// Collective pitch at full stick: the collective rate, in degrees.
+  //// Written to every rate profile on Save, so a rates switch doesn't
+  //// change it.
+
+  let ratesLoaded = $state(false);
+  let fullStick = $state(null);
+  let fullStickChanged = false;
+
+  onMount(async () => {
+    await MSP.promise(MSPCodes.MSP_RC_TUNING);
+    fullStick = collectiveAtFullStick(FC.RC_TUNING);
+    ratesLoaded = true;
+  });
+
+  function changeFullStick() {
+    fullStickChanged = true;
+    wiz.markChanged();
+  }
+
+  wiz.setCommit(async () => {
+    if (!fullStickChanged || fullStick === null) return;
+    const current = FC.CONFIG.rateProfile;
+    const count = FC.CONFIG.numRateProfiles || 1;
+    for (let i = 0; i < count; i++) {
+      await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [i + RATE_PROFILE_MASK]);
+      await MSP.promise(MSPCodes.MSP_RC_TUNING);
+      if (setCollectiveAtFullStick(FC.RC_TUNING, fullStick)) {
+        await MSP.promise(
+          MSPCodes.MSP_SET_RC_TUNING,
+          mspHelper.crunch(MSPCodes.MSP_SET_RC_TUNING),
+        );
+      }
+    }
+    await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [
+      current + RATE_PROFILE_MASK,
+    ]);
+    await MSP.promise(MSPCodes.MSP_RC_TUNING);
+    fullStickChanged = false;
+  });
 </script>
 
 <div class="intro">
@@ -214,6 +261,34 @@
     <span class="muted">°</span>
   </div>
   <p class="muted">{$i18n.t("setupWizardPitchLimitsBinding")}</p>
+</section>
+
+<section class="card">
+  <h3><span class="num">4</span>{$i18n.t("setupWizardPitchFullStickTitle")}</h3>
+  <p>{$i18n.t("setupWizardPitchFullStickText")}</p>
+  {#if ratesLoaded && fullStick === null}
+    <div class="note">{$i18n.t("setupWizardPitchFullStickOther")}</div>
+  {:else if ratesLoaded}
+    <div class="limits">
+      <span>{$i18n.t("setupWizardPitchFullStickLabel")}</span>
+      <NumberInput
+        min="0"
+        max="25"
+        step="0.5"
+        bind:value={fullStick}
+        onchange={changeFullStick}
+      />
+      <span class="muted">°</span>
+    </div>
+    {#if fullStick > collectiveLimit}
+      <div class="note">
+        {$i18n.t("setupWizardPitchFullStickClipped", { 1: collectiveLimit })}
+      </div>
+    {/if}
+  {/if}
+  <div>
+    <TabButton tab="rates">{$i18n.t("setupWizardOpenRates")}</TabButton>
+  </div>
 </section>
 
 <style lang="scss">
