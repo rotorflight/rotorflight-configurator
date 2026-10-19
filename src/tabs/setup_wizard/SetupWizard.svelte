@@ -31,6 +31,7 @@
   import StepMotor from "./StepMotor.svelte";
   import StepPitch from "./StepPitch.svelte";
   import StepProfiles from "./StepProfiles.svelte";
+  import StepRates from "./StepRates.svelte";
   import StepReceiver from "./StepReceiver.svelte";
   import StepSensors from "./StepSensors.svelte";
   import StepServoType from "./StepServoType.svelte";
@@ -56,6 +57,8 @@
     { key: "modes", component: StepModes },
     // Profiles, rates and master gain on switches; fits 8 channels.
     { key: "profiles", component: StepProfiles },
+    // A flying style per rate profile on the profile switch.
+    { key: "rates", component: StepRates },
     { key: "swash", component: StepSwash },
     { key: "servoType", component: StepServoType },
     // Mode and throttle type only; applied by the gate's reboot.

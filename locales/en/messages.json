@@ -457,6 +457,9 @@
     "setupWizardStep_receiver": {
         "message": "Receiver"
     },
+    "setupWizardStep_rates": {
+        "message": "Rates"
+    },
     "setupWizardStep_swash": {
         "message": "Swashplate"
     },
@@ -1005,6 +1008,48 @@
     },
     "setupWizardPitchFullStickOther": {
         "message": "The rates type in use doesn't give this as a plain number of degrees. Set the collective rate in the Rates tab."
+    },
+    "setupWizardRatesIntro": {
+        "message": "How fast the helicopter turns at full stick. Pick a flying style for each rate profile: each is a starting point you can refine later in the Rates tab. Saving sets the $1 rates type with roll, pitch and yaw rates and expo. The collective pitch is left as it is: the Blade pitch step sets it."
+    },
+    "setupWizardRatesSuggest": {
+        "message": "Trainer, Sport and 3D on positions 1, 2 and 3"
+    },
+    "setupWizardRatesPosition": {
+        "message": "Switch position $1 · rate profile $2"
+    },
+    "setupWizardRatesProfile": {
+        "message": "Rate profile $1"
+    },
+    "setupWizardRateStyle_trainer": {
+        "message": "Trainer"
+    },
+    "setupWizardRateStyleHelp_trainer": {
+        "message": "Slow and soft, for learning to hover and first circuits."
+    },
+    "setupWizardRateStyle_sport": {
+        "message": "Sport"
+    },
+    "setupWizardRateStyleHelp_sport": {
+        "message": "The firmware's default rates, for general flying and gentle aerobatics."
+    },
+    "setupWizardRateStyle_3d": {
+        "message": "3D"
+    },
+    "setupWizardRateStyleHelp_3d": {
+        "message": "Fast, for 3D and hard aerobatics."
+    },
+    "setupWizardRatesNumbers": {
+        "message": "Cyclic $1°/s · yaw $2°/s · expo $3 %"
+    },
+    "setupWizardRatesStick": {
+        "message": "stick"
+    },
+    "setupWizardRatesCustom": {
+        "message": "None of the styles matches the rates this profile has now. Picking one replaces them."
+    },
+    "setupWizardRatesMore": {
+        "message": "Response time and acceleration limits stay as they are; they are in the Rates tab."
     },
     "setupWizardOpenRates": {
         "message": "Open the Rates tab"
