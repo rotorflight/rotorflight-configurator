@@ -1121,7 +1121,7 @@
         "message": "DShot 300"
     },
     "setupWizardMotorHelp_DSHOT300": {
-        "message": "Digital, for BLHeli_32, AM32 and Bluejay ESCs."
+        "message": "Digital, for ESCs with DShot input: XDFly, BLHeli_32, AM32, Bluejay and others. Check your ESC's manual."
     },
     "setupWizardMotor_DSHOT600": {
         "message": "DShot 600"
