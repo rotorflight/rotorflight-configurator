@@ -1381,6 +1381,9 @@
     "setupWizardProfilesGainTitle": {
         "message": "Master gain in flight"
     },
+    "setupWizardProfilesGainText": {
+        "message": "Master gain turns all of the flight controller's gains up or down together, as one number. At 100 % the gains are used exactly as set; 120 % makes them all 20 % stronger, 80 % makes them 20 % weaker. There is one for the cyclic (roll and pitch) and one for the yaw. Every helicopter needs a slightly different gain, and the quickest way to find it is in the air: too low feels soft and drifts back slowly after a stick input; too high makes the helicopter wobble or shake quickly, or the tail wag. Raise it until the wobble starts, then come back down a few steps."
+    },
     "setupWizardGain_none": {
         "message": "Not used"
     },
