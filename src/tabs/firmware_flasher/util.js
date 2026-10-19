@@ -20,6 +20,21 @@ export function firmwareDownloadUrl(release, asset) {
   return asset.browser_download_url;
 }
 
+// The board dropdown's "Custom" entries: a plain MCU build with no
+// rotorflight-targets config, for DIY boards. Target ids are always
+// `<make>-<board>` with a 1-4 character make, so this prefix can't collide.
+const CUSTOM_TARGET_PREFIX = "custom:";
+
+export function customTarget(mcu) {
+  return `${CUSTOM_TARGET_PREFIX}${mcu}`;
+}
+
+export function customTargetMcu(target) {
+  return target?.startsWith(CUSTOM_TARGET_PREFIX)
+    ? target.slice(CUSTOM_TARGET_PREFIX.length)
+    : null;
+}
+
 export function hasUnifiedTargetBuild(builds) {
   return Object.keys(builds).some((key) =>
     builds[key].some((target) => supportsUnifiedTargets(target.version)),
@@ -198,6 +213,26 @@ export function cleanUnifiedConfigFile(input) {
     output += line + "\n";
   });
   return output;
+}
+
+// Turns a captured `diff hardware bare` (see readHardwareConfigOverSerial())
+// into a target config, the same shape cleanUnifiedConfigFile() gives a
+// rotorflight-targets .config. The capture opens with the echoed command and
+// a "# version" line, so it's cut to start at the "# Rotorflight / <MCU>"
+// banner that cleanUnifiedConfigFile() and grabBuildNameFromConfig() expect.
+// Returns null when there's no banner, or nothing hardware-specific to carry
+// across the flash (a board running the bare MCU build's own defaults).
+export function hardwareConfigFromCliOutput(text) {
+  const lines = (text ?? "").split(/\r?\n/);
+  const start = lines.findIndex((line) => /^#\s*Rotorflight\s*\//.test(line));
+  if (start < 0) return null;
+
+  const cfg = cleanUnifiedConfigFile(lines.slice(start).join("\n"))
+    // An unset board_name/manufacturer_id prints with no value -- replayed,
+    // that's just a query, not a setting.
+    .replace(/^(board_name|manufacturer_id|board_design)\n/gm, "");
+  if (!/^(resource|timer|dma) /m.test(cfg)) return null;
+  return cfg;
 }
 
 export function grabBuildNameFromConfig(config) {
