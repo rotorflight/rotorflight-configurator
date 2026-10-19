@@ -69,11 +69,13 @@
   <div class="art"><ServoArmArt /></div>
   <div class="text">
     <p>{$i18n.t("setupWizardServosIntro")}</p>
-    <ol class="muted">
-      <li>{$i18n.t("setupWizardServosTipArms")}</li>
-      <li>{$i18n.t("setupWizardServosTipDirection")}</li>
-      <li>{$i18n.t("setupWizardServosTipCentre")}</li>
-    </ol>
+    <div class="note">
+      <ol>
+        <li>{$i18n.t("setupWizardServosTipArms")}</li>
+        <li>{$i18n.t("setupWizardServosTipDirection")}</li>
+        <li>{$i18n.t("setupWizardServosTipCentre")}</li>
+      </ol>
+    </div>
   </div>
 </div>
 
