@@ -22,7 +22,12 @@
     {#if FC.FEATURE_CONFIG.features.DYN_NOTCH}
       <div transition:slide>
         <SubSection>
-          <Field id="dyn-notch-count" label="gyroDynamicNotchCount">
+          <Field
+            expert
+            changed={FC.FILTER_CONFIG.dyn_notch_count !== 6}
+            id="dyn-notch-count"
+            label="gyroDynamicNotchCount"
+          >
             {#snippet tooltip()}
               <Tooltip help="gyroDynamicNotchCountHelp" />
             {/snippet}
@@ -33,7 +38,12 @@
               bind:value={FC.FILTER_CONFIG.dyn_notch_count}
             />
           </Field>
-          <Field id="dyn-notch-q" label="gyroDynamicNotchQ">
+          <Field
+            expert
+            changed={FC.FILTER_CONFIG.dyn_notch_q !== 25}
+            id="dyn-notch-q"
+            label="gyroDynamicNotchQ"
+          >
             {#snippet tooltip()}
               <Tooltip help="gyroDynamicNotchQHelp" />
             {/snippet}
@@ -48,7 +58,13 @@
               }
             />
           </Field>
-          <Field id="dyn-notch-min-hz" label="gyroDynamicNotchMinHz" unit="Hz">
+          <Field
+            expert
+            changed={FC.FILTER_CONFIG.dyn_notch_min_hz !== 20}
+            id="dyn-notch-min-hz"
+            label="gyroDynamicNotchMinHz"
+            unit="Hz"
+          >
             {#snippet tooltip()}
               <Tooltip help="gyroDynamicNotchMinHzHelp" />
             {/snippet}
@@ -59,7 +75,13 @@
               bind:value={FC.FILTER_CONFIG.dyn_notch_min_hz}
             />
           </Field>
-          <Field id="dyn-notch-max-hz" label="gyroDynamicNotchMaxHz" unit="Hz">
+          <Field
+            expert
+            changed={FC.FILTER_CONFIG.dyn_notch_max_hz !== 240}
+            id="dyn-notch-max-hz"
+            label="gyroDynamicNotchMaxHz"
+            unit="Hz"
+          >
             {#snippet tooltip()}
               <Tooltip help="gyroDynamicNotchMaxHzHelp" />
             {/snippet}
