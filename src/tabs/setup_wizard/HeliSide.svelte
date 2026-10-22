@@ -12,6 +12,13 @@
 
   // Lifting the tail swings the rotor up above the usual frame.
   let viewBox = $derived(scene === "tailLift" ? "0 -30 168 106" : "0 0 168 76");
+
+  // Scenes with a rendered picture; the rest are still drawn below.
+  const PHOTOS = {
+    level: "/images/setup_wizard/heli_level.webp",
+    tailLift: "/images/setup_wizard/heli_tail_lift.webp",
+    bladesOff: "/images/setup_wizard/heli_blades_off.webp",
+  };
 </script>
 
 {#snippet heli(blades = true, tailBlades = true)}
@@ -48,35 +55,39 @@
   {/if}
 {/snippet}
 
-<svg {viewBox} class="heli-side" aria-hidden="true" focusable="false">
-  {#if scene !== "flying"}
-    <line class="ground" x1="6" y1={GROUND} x2="164" y2={GROUND} />
-  {/if}
+{#if PHOTOS[scene]}
+  <img class="heli-side photo" src={PHOTOS[scene]} alt="" />
+{:else}
+  <svg {viewBox} class="heli-side" aria-hidden="true" focusable="false">
+    {#if scene !== "flying"}
+      <line class="ground" x1="6" y1={GROUND} x2="164" y2={GROUND} />
+    {/if}
 
-  {#if scene === "level"}
-    <g transform="translate(0 4)">{@render heli()}</g>
-    <rect class="vial" x="16" y="6" width="40" height="11" rx="5.5" />
-    <line class="mark" x1="31" y1="6" x2="31" y2="17" />
-    <line class="mark" x1="41" y1="6" x2="41" y2="17" />
-    <circle class="bubble" cx="36" cy="11.5" r="3.2" />
-  {:else if scene === "tailLift"}
-    <line class="ref" x1="30" y1={GROUND} x2="141" y2={GROUND} />
-    <g transform="rotate(20 141 {GROUND}) translate(0 4)">
+    {#if scene === "level"}
+      <g transform="translate(0 4)">{@render heli()}</g>
+      <rect class="vial" x="16" y="6" width="40" height="11" rx="5.5" />
+      <line class="mark" x1="31" y1="6" x2="31" y2="17" />
+      <line class="mark" x1="41" y1="6" x2="41" y2="17" />
+      <circle class="bubble" cx="36" cy="11.5" r="3.2" />
+    {:else if scene === "tailLift"}
+      <line class="ref" x1="30" y1={GROUND} x2="141" y2={GROUND} />
+      <g transform="rotate(20 141 {GROUND}) translate(0 4)">
+        {@render heli()}
+      </g>
+      <path class="arc" d="M91 {GROUND} A50 50 0 0 1 94 52.9" />
+      <text class="angle" x="72" y="65">20°</text>
+    {:else if scene === "bladesOff"}
+      <g transform="translate(0 4)">{@render heli(false)}</g>
+    {:else if scene === "tailBladesOff"}
+      <g transform="translate(0 4)">{@render heli(true, false)}</g>
+    {:else if scene === "flying"}
       {@render heli()}
-    </g>
-    <path class="arc" d="M91 {GROUND} A50 50 0 0 1 94 52.9" />
-    <text class="angle" x="72" y="65">20°</text>
-  {:else if scene === "bladesOff"}
-    <g transform="translate(0 4)">{@render heli(false)}</g>
-  {:else if scene === "tailBladesOff"}
-    <g transform="translate(0 4)">{@render heli(true, false)}</g>
-  {:else if scene === "flying"}
-    {@render heli()}
-    <line class="speed" x1="4" y1="56" x2="18" y2="56" />
-    <line class="speed" x1="0" y1="64" x2="20" y2="64" />
-    <line class="ref" x1="6" y1="74" x2="164" y2="74" />
-  {/if}
-</svg>
+      <line class="speed" x1="4" y1="56" x2="18" y2="56" />
+      <line class="speed" x1="0" y1="64" x2="20" y2="64" />
+      <line class="ref" x1="6" y1="74" x2="164" y2="74" />
+    {/if}
+  </svg>
+{/if}
 
 <style lang="scss">
   .heli-side {
@@ -85,6 +96,10 @@
     height: auto;
     overflow: visible;
     color: var(--color-text-muted);
+
+    &.photo {
+      border-radius: 6px;
+    }
   }
 
   .body {
