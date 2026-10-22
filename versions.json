@@ -54,6 +54,17 @@
     },
     {
       "type": "pr",
+      "name": "496",
+      "path": "./pr/496/",
+      "branch": "feature/setup-wizard-images",
+      "date": "2026-10-22T08:55:45Z",
+      "number": 496,
+      "title": "Preview: rendered images in the setup wizard (stacked on #491)",
+      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/496",
+      "draft": true
+    },
+    {
+      "type": "pr",
       "name": "491",
       "path": "./pr/491/",
       "branch": "feature/setup-wizard",

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="86 60 340 370" role="img" aria-label="Animated RC switch swinging left to right slowly with pauses">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#08111c"/>
+      <stop offset="100%" stop-color="#050a12"/>
+    </linearGradient>
+    <pattern id="stripePattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="transparent"/>
+      <rect x="0" y="0" width="8" height="20" fill="#0b1522" opacity="0.18"/>
+    </pattern>
+    <linearGradient id="metalGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e8edf4"/>
+      <stop offset="18%" stop-color="#aeb6c0"/>
+      <stop offset="50%" stop-color="#fafcff"/>
+      <stop offset="78%" stop-color="#9ea8b3"/>
+      <stop offset="100%" stop-color="#eef2f7"/>
+    </linearGradient>
+    <linearGradient id="baseGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#181c23"/>
+      <stop offset="100%" stop-color="#090b10"/>
+    </linearGradient>
+    <linearGradient id="innerBezelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d6dde6"/>
+      <stop offset="100%" stop-color="#7e8793"/>
+    </linearGradient>
+    <radialGradient id="knobGrad" cx="38%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#7fe8ff"/>
+      <stop offset="35%" stop-color="#27bbff"/>
+      <stop offset="78%" stop-color="#1570ff"/>
+      <stop offset="100%" stop-color="#0b44c8"/>
+    </radialGradient>
+    <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.00 0 0 0 0 0.78 0 0 0 0 1.00 0 0 0 0.8 0" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+  <rect fill="url(#bgGrad)"/>
+  <rect fill="url(#stripePattern)" opacity="0.55"/>
+  <ellipse cx="256" cy="398" rx="132" ry="18" fill="#041018" opacity="0.65" filter="url(#softShadow)"/>
+  <g filter="url(#softShadow)">
+    <rect x="122" y="278" width="268" height="124" rx="28" fill="url(#baseGrad)" stroke="url(#innerBezelGrad)" stroke-width="7"/>
+    <circle cx="256" cy="340" r="32" fill="#04070d" opacity="0.95"/>
+    <circle cx="256" cy="340" r="23" fill="#0d1118" stroke="url(#innerBezelGrad)" stroke-width="6"/>
+    <circle cx="256" cy="340" r="16" fill="#0b0d12" stroke="#030405" stroke-width="2"/>
+  </g>
+  <g>
+    <g transform="rotate(-35 256 340)">
+      <animateTransform attributeName="transform" type="rotate" values="-35 256 340;-35 256 340;35 256 340;35 256 340;-35 256 340" keyTimes="0;0.15;0.5;0.65;1" dur="3.2s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.42 0 0.58 1;0 0 1 1;0.42 0 0.58 1"/>
+      <rect x="243" y="132" width="26" height="214" rx="13" fill="none" stroke="#16c8ff" stroke-width="6" filter="url(#cyanGlow)"/>
+      <rect x="245" y="136" width="22" height="206" rx="11" fill="url(#metalGrad)"/>
+      <rect x="249" y="142" width="5" height="192" rx="2.5" fill="#ffffff" opacity="0.55"/>
+      <circle cx="256" cy="120" r="40" fill="#11cfff" opacity="0.26" filter="url(#cyanGlow)"/>
+      <circle cx="256" cy="120" r="34" fill="url(#knobGrad)" stroke="#1ee1ff" stroke-width="4"/>
+      <ellipse cx="245" cy="107" rx="11" ry="8" fill="#b8f2ff" opacity="0.65"/>
+    </g>
+  </g>
+</svg>
