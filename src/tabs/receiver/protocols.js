@@ -118,9 +118,13 @@ export const RX_PROTOCOLS = [
     },
   },
   // From API 12.10 the firmware detects FBUS or F.Port2 speed on either id,
-  // so only FBUS is offered. F.PORT2 still shows if a config already has it.
+  // so only FBUS is offered. Id 16 then stays hidden and shows as FBUS if stored.
   {
-    name: "FrSky F.PORT2",
+    get name() {
+      return semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
+        ? "FrSky FBUS"
+        : "FrSky F.PORT2";
+    },
     id: 16,
     feature: "RX_SERIAL",
     get telemetry() {
@@ -134,11 +138,7 @@ export const RX_PROTOCOLS = [
     },
   },
   {
-    get name() {
-      return semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
-        ? "FrSky FBUS / F.PORT2"
-        : "FrSky FBUS";
-    },
+    name: "FrSky FBUS",
     id: 17,
     feature: "RX_SERIAL",
     get telemetry() {
