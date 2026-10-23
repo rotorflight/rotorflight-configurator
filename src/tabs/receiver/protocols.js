@@ -4,6 +4,7 @@ import {
   API_VERSION_12_7,
   API_VERSION_12_8,
   API_VERSION_12_9,
+  API_VERSION_12_10,
 } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte";
 import { createEnum } from "@/js/utils/common.js";
@@ -116,15 +117,24 @@ export const RX_PROTOCOLS = [
       return getSmartportTelemetry();
     },
   },
+  // From API 12.10 the firmware detects FBUS or F.Port2 speed on either id,
+  // so only FBUS is offered. Id 16 then stays hidden and shows as FBUS if stored.
   {
-    name: "FrSky F.PORT2",
+    get name() {
+      return semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
+        ? "FrSky FBUS"
+        : "FrSky F.PORT2";
+    },
     id: 16,
     feature: "RX_SERIAL",
     get telemetry() {
       return getSmartportTelemetry();
     },
     get hide() {
-      return semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_7);
+      return (
+        semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_7) ||
+        semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
+      );
     },
   },
   {
