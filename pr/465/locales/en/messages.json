@@ -1178,7 +1178,7 @@
         "message": "USB DFU not found"
     },
     "stm32UsbDfuNotFoundAfterReboot": {
-        "message": "The board rebooted into the bootloader, but its USB DFU device did not appear. On Windows this usually means the DFU driver is missing: install the WinUSB driver with Zadig (see the <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/flashing-the-firmware\" target=\"_blank\" rel=\"noopener noreferrer\">flashing guide</a>), then unplug and replug the board and flash again. The board stays in the bootloader until it is power-cycled."
+        "message": "The board rebooted into the bootloader, but its USB DFU device did not appear. On Windows this usually means the DFU driver is missing: install the WinUSB driver with Zadig (see the <a href=\"https://doc.rotorflight.org/2.4/getting-started/flashing-the-firmware/\" target=\"_blank\" rel=\"noopener noreferrer\">flashing guide</a>), then unplug and replug the board and flash again. The board stays in the bootloader until it is power-cycled."
     },
     "stm32RebootingToBootloader": {
         "message": "Initiating reboot to bootloader ..."
@@ -1431,7 +1431,7 @@
         "message": "Contributing"
     },
     "defaultContributingText": {
-        "message": "Rotorflight is a open-source community project. Anybody can join in and help to make it better, including:<br /><ul><li>helping other users on Rotorflight Discord or other online forums</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">reporting</a> bugs and issues, and suggesting improvements</li><li>testing new software versions, new features and fixes; and providing feedback</li><li>participating in discussions on new features</li><li>create or update content on <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">our Website</a></li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the software development - fixing bugs, implementing new features and improvements</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain an existing translation</li></ul>"
+        "message": "Rotorflight is a open-source community project. Anybody can join in and help to make it better, including:<br /><ul><li>helping other users on Rotorflight Discord or other online forums</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">reporting</a> bugs and issues, and suggesting improvements</li><li>testing new software versions, new features and fixes; and providing feedback</li><li>participating in discussions on new features</li><li>create or update content on <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">our Website</a></li><li><a href=\"https://doc.rotorflight.org/2.4/contributing/\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the software development - fixing bugs, implementing new features and improvements</li><li><a href=\"https://doc.rotorflight.org/2.4/contributing/#ways-to-help\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain an existing translation</li></ul>"
     },
     "defaultDonateHead": {
         "message": "Supporting Rotorflight"
@@ -1452,7 +1452,7 @@
         "message": "Rotorflight documentation is available in release notes and website.<br /><br />"
     },
     "defaultDocumentation1": {
-        "message": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.3.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        "message": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://doc.rotorflight.org/2.4/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultDocumentation2": {
         "message": "The latest news can be read at the Website Announcements page, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
@@ -1536,7 +1536,7 @@
         "message": "Arming Allowed"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
+        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://doc.rotorflight.org/2.4/getting-started/arming/#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
     },
     "statusArmingDisableFlagsTooltipNO_GYRO": {
         "message": "A gyro was not detected",
@@ -1897,6 +1897,63 @@
     },
     "configurationBoardAlignmentYaw": {
         "message": "Yaw Degrees"
+    },
+    "configurationBoardAutoAlignStart": {
+        "message": "Auto-Align FC"
+    },
+    "configurationBoardAutoAlignHelp": {
+        "message": "Automatically detects the flight controller mounting orientation (90° steps). Place the helicopter level, press Auto-Align, then lift the tail by at least 20° and hold it briefly."
+    },
+    "configurationBoardAutoAlignIdle": {
+        "message": "Place the helicopter level and disarmed, then press Start."
+    },
+    "configurationBoardAutoAlignStarting": {
+        "message": "Procedure started. Lift the tail by at least 20° and hold briefly."
+    },
+    "configurationBoardAutoAlignWaiting": {
+        "message": "Waiting for the tail to lift (at least 20°)."
+    },
+    "configurationBoardAutoAlignDisarmRequired": {
+        "message": "Auto-align is only allowed while disarmed."
+    },
+    "configurationBoardAutoAlignTimeout": {
+        "message": "Auto-align timed out. Start again and lift the tail within 15 seconds."
+    },
+    "configurationBoardAutoAlignNoMatch": {
+        "message": "No valid 90° alignment found yet. Hold the helicopter still before starting, then lift only the tail."
+    },
+    "configurationBoardAutoAlignUnsupported": {
+        "message": "Auto-align is not supported by this firmware."
+    },
+    "configurationBoardAutoAlignUncalibrated": {
+        "message": "The accelerometer has not been calibrated on this board yet. Auto-align needs a calibrated accelerometer for a reliable result. Calibrate now, then try again."
+    },
+    "configurationBoardAutoAlignCalibrating": {
+        "message": "Calibrating accelerometer. Keep the helicopter level and still…"
+    },
+    "configurationBoardAutoAlignWizardTitle": {
+        "message": "Board Auto-Align"
+    },
+    "configurationBoardAutoAlignWizardStep1": {
+        "message": "Step 1 of 3: Start"
+    },
+    "configurationBoardAutoAlignWizardStep2": {
+        "message": "Step 2 of 3: Lift Tail"
+    },
+    "configurationBoardAutoAlignWizardStep3": {
+        "message": "Step 3 of 3: Result"
+    },
+    "configurationBoardAutoAlignSuccessCountdown": {
+        "message": "Detected board alignment: roll $1°, pitch $2°, yaw $3°. Save to keep it, then recalibrate the accelerometer. Closing in $4s."
+    },
+    "configurationBoardAutoAlignWizardRetry": {
+        "message": "Retry"
+    },
+    "configurationBoardAutoAlignWizardCalibrate": {
+        "message": "Calibrate Accelerometer"
+    },
+    "configurationBoardAutoAlignWizardClose": {
+        "message": "Close"
     },
     "configurationSensorAlignmentGyro": {
         "message": "GYRO Alignment"
@@ -2416,6 +2473,48 @@
     "receiverSerialPinSwapHelp": {
         "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
+    "receiverWiringDetectButton": {
+        "message": "Detect Wiring"
+    },
+    "receiverWiringDetectHelp": {
+        "message": "<p>Tries every combination of Inverted / Half-Duplex / Pin Swap for the selected protocol and stops as soon as one produces signal. Nothing is saved until you press Save on this tab.</p><p><strong>Note:</strong> requires no unsaved changes first - it tests whatever protocol/provider is currently saved on the flight controller, not a pending selection.</p><p>Your transmitter must be powered on and bound to the receiver - detection can't find a wiring combination if the receiver has no signal to give it in the first place.</p><p>Only available while disarmed - it cycles the receiver wiring live and could interrupt control input.</p>"
+    },
+    "receiverWiringDetectSaveFirst": {
+        "message": "Save your changes first - this tests whatever is currently saved on the flight controller, not a pending selection."
+    },
+    "receiverWiringDetectArmedFirst": {
+        "message": "Disarm first - wiring detection cycles the receiver connection live and can't run while armed."
+    },
+    "receiverWiringDetectWizardTitle": {
+        "message": "Detect RX Wiring"
+    },
+    "receiverWiringDetectWizardStep1": {
+        "message": "Step 1 of 2: Scanning"
+    },
+    "receiverWiringDetectWizardStep2": {
+        "message": "Step 2 of 2: Result"
+    },
+    "receiverWiringDetectScanning": {
+        "message": "Trying combination $1 of $2…"
+    },
+    "receiverWiringDetectSuccess": {
+        "message": "Signal found — Inverted: $1, Half-Duplex: $2, Pin Swap: $3. Save and reboot to keep it, or Close to discard and restore the previous setting."
+    },
+    "receiverWiringDetectFailed": {
+        "message": "No signal found on any wiring combination for this protocol. Make sure the transmitter is powered on and bound to the receiver, check the protocol selection and connections, then try again."
+    },
+    "receiverWiringDetectRejected": {
+        "message": "Wiring detection was rejected - it needs a serial receiver protocol with an assigned UART, and the aircraft must be disarmed."
+    },
+    "receiverWiringDetectUnsupported": {
+        "message": "Wiring detection is not supported by this firmware build."
+    },
+    "receiverWiringDetectWizardRetry": {
+        "message": "Retry"
+    },
+    "receiverWiringDetectWizardClose": {
+        "message": "Close"
+    },
     "receiverStickCenter": {
         "message": "Stick Center"
     },
@@ -2869,6 +2968,12 @@
     "receiverTelemetrySensor_ADJFUNC": {
         "message": "Adjustment Function"
     },
+    "receiverTelemetrySensor_SYSTEM_STATUS": {
+        "message": "System Status"
+    },
+    "receiverTelemetrySensor_SYSTEM_CONFIG": {
+        "message": "System Config"
+    },
     "receiverTelemetrySensor_DEBUG_0": {
         "message": "Debug 0"
     },
@@ -3009,7 +3114,7 @@
         "message": "AND"
     },
     "adjustmentsHelp": {
-        "message": "Configure adjustment switches. See the 'in-flight adjustments' section of the manual for details. The changes that adjustment functions make are not saved automatically."
+        "message": "Configure adjustment switches. See the 'in-flight adjustments' section of the manual for details. Changes made by adjustment functions take effect immediately and are saved when the flight controller is disarmed."
     },
     "adjustmentSlotsHelp": {
         "message": "There are 4 slots. Each switch used to concurrently make adjustments requires exclusive use of a slot."
@@ -3121,6 +3226,12 @@
     },
     "adjustmentsFunctionHelpBatteryProfile": {
         "message": "Switches the active battery profile (cell count, capacity and warnings)."
+    },
+    "adjustmentsFunctionHelpCyclicMasterGain": {
+        "message": "Scales the roll and pitch P, I, D and Offset gains together, in percent. Feedforward is not scaled. Raise it until the cyclic starts to wobble, then back off."
+    },
+    "adjustmentsFunctionHelpYawMasterGain": {
+        "message": "Scales the tail P, I and D gains together, in percent. Feedforward and precomp are not scaled. Raise it until the tail starts to wag, then back off."
     },
     "adjustmentsFunctionHelpAngleLevelGain": {
         "message": "How aggressively Angle mode tilts the helicopter back to level."
@@ -3370,6 +3481,12 @@
     },
     "adjustmentsFunctionBatteryProfile": {
         "message": "Battery Profile Selection"
+    },
+    "adjustmentsFunctionCyclicMasterGain": {
+        "message": "Cyclic Master Gain"
+    },
+    "adjustmentsFunctionYawMasterGain": {
+        "message": "Yaw Master Gain"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "Pitch Rate"
@@ -3689,11 +3806,14 @@
     "servoTravelLimitedHelp": {
         "message": "Limited by the center ($1): the output can't go past $2 µs."
     },
-    "servoUnusualLimitsWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!"
+    "servoLimitsTooWideWarning": {
+        "message": "<span class=\"message-negative\">Servo $1:</span> a <i>Center</i> of $2 makes this a $3 µs servo, but <i>Min</i>/<i>Max</i> drive it from $4 to $5 µs. A $3 µs servo only covers about $6–$7 µs, so it can hit its end stops, stall and overheat. Set <i>Min</i>/<i>Max</i> to about -$8/$8."
     },
-    "servoUnusualScalesWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Scales</i> are set to unusual values. Please check!"
+    "servoLimitsTooNarrowWarning": {
+        "message": "<span class=\"message-negative\">Servo $1:</span> a <i>Center</i> of $2 makes this a $3 µs servo, but <i>Min</i>/<i>Max</i> of $4/$5 leave it little travel. Set them to about -$6/$6."
+    },
+    "servoScaleUnusualWarning": {
+        "message": "<span class=\"message-negative\">Servo $1:</span> a <i>Center</i> of $2 makes this a $3 µs servo, but <i>Scale</i> is $4/$5. <i>Scale</i> sets how far the servo moves at full stick, and a 760 µs servo needs about half the <i>Scale</i> of a 1520 µs one. Set <i>Scale neg</i>/<i>pos</i> to about $6."
     },
     "servoUnusualRatesWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!"
@@ -4378,6 +4498,48 @@
     },
     "motorsEscTelemetryPinswapHelp": {
         "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
+    },
+    "motorsEscWiringDetectButton": {
+        "message": "Detect Wiring"
+    },
+    "motorsEscWiringDetectHelp": {
+        "message": "<p>Tries every combination of Half-Duplex / Pin Swap for the selected telemetry protocol and stops as soon as one produces a valid frame. Nothing is saved until you press Save on this tab.</p><p><strong>Note:</strong> requires no unsaved changes first - it tests whatever protocol is currently saved on the flight controller, not a pending selection.</p><p>The ESC(s) must be powered and outputting telemetry - detection can't find a wiring combination if nothing is being sent in the first place.</p><p>Only available while disarmed - it cycles the ESC telemetry wiring live while motors could be spinning.</p>"
+    },
+    "motorsEscWiringDetectSaveFirst": {
+        "message": "Save your changes first - this tests whatever is currently saved on the flight controller, not a pending selection."
+    },
+    "motorsEscWiringDetectArmedFirst": {
+        "message": "Disarm first - wiring detection cycles the ESC telemetry connection live and can't run while armed."
+    },
+    "motorsEscWiringDetectWizardTitle": {
+        "message": "Detect ESC Telemetry Wiring"
+    },
+    "motorsEscWiringDetectWizardStep1": {
+        "message": "Step 1 of 2: Scanning"
+    },
+    "motorsEscWiringDetectWizardStep2": {
+        "message": "Step 2 of 2: Result"
+    },
+    "motorsEscWiringDetectScanning": {
+        "message": "Trying combination $1 of $2…"
+    },
+    "motorsEscWiringDetectSuccess": {
+        "message": "Signal found — Half-Duplex: $1, Pin Swap: $2. Save and reboot to keep it, or Close to discard and restore the previous setting."
+    },
+    "motorsEscWiringDetectFailed": {
+        "message": "No valid frame found on any wiring combination for this protocol. Make sure the ESC(s) are powered and outputting telemetry, check the protocol selection and connections, then try again."
+    },
+    "motorsEscWiringDetectRejected": {
+        "message": "Wiring detection was rejected - either it isn't available for this telemetry protocol (Castle Link, F.BUS and SRXL2 ESC telemetry each use their own dedicated connection, not a generic UART), no port is assigned, or the aircraft became armed."
+    },
+    "motorsEscWiringDetectUnsupported": {
+        "message": "Wiring detection is not supported by this firmware build."
+    },
+    "motorsEscWiringDetectWizardRetry": {
+        "message": "Retry"
+    },
+    "motorsEscWiringDetectWizardClose": {
+        "message": "Close"
     },
     "motorsUnsyncedPwm": {
         "message": "Unsynchronised ESC Update"
@@ -5367,7 +5529,7 @@
         "message": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
+        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://doc.rotorflight.org/2.4/getting-started/flashing-the-firmware/\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
     },
     "firmwareFlasherFirmwareNotLoaded": {
         "message": "Firmware not loaded"
@@ -5434,6 +5596,46 @@
     "firmwareFlasherBoardDetectionBoardNotFound": {
         "message": "Detected board: <strong>{{boardName}}</strong>, but no matching target found.",
         "description": "Board detection was successful, but there was no matching target available."
+    },
+    "firmwareFlasherBoardDetectionCustom": {
+        "message": "Detected board: <strong>{{boardName}}</strong> ({{mcu}}), but there is no published target for it, so the generic {{mcu}} firmware is selected. Read this board's hardware config (pins, timers, DMA) so it is kept across the flash.",
+        "description": "Board detection found a board with no published target (e.g. a DIY board) whose MCU has a firmware build."
+    },
+    "firmwareFlasherBoardConfigReadCta": {
+        "message": "Read hardware config from board",
+        "description": "Button that reads a DIY board's hardware config over the CLI so it can be flashed with the generic MCU firmware."
+    },
+    "firmwareFlasherBoardConfigReading": {
+        "message": "Reading hardware config from the board…"
+    },
+    "firmwareFlasherBoardConfigReadOk": {
+        "message": "{{boardName}} -- its hardware config was read from the board and will be combined with the {{mcu}} firmware at flash time."
+    },
+    "firmwareFlasherConfigTooLarge": {
+        "message": "The board config is too large to combine with this firmware. Remove unused settings from it, or flash without it and set the board up in the CLI."
+    },
+    "firmwareFlasherFlashFailed": {
+        "message": "Flashing could not start. See the console for details."
+    },
+    "firmwareFlasherBoardConfigEmpty": {
+        "message": "This board has no hardware config to read -- it is running the plain MCU firmware. It will be flashed the same way; set it up in the CLI (or load a .config on the Firmware step)."
+    },
+    "firmwareFlasherBoardConfigReadUnavailableDfu": {
+        "message": "The board is in DFU mode, so its hardware config can't be read. Load a .config file on the Firmware step, or set the board up in the CLI after flashing."
+    },
+    "firmwareFlasherCustomBoardGroup": {
+        "message": "Custom (MCU only, no board config)",
+        "description": "Board dropdown group listing plain MCU firmware builds, for DIY boards with no published target."
+    },
+    "firmwareFlasherCustomBoardLabel": {
+        "message": "Custom ({{mcu}})",
+        "description": "Display name for a Custom MCU-only board selection."
+    },
+    "firmwareFlasherCustomBoardNoConfig": {
+        "message": "This is the generic {{mcu}} firmware with no board config -- no pins, timers or DMA will be set up. Read the config from the board below, load a .config file on the Firmware step, or set the board up in the CLI after flashing."
+    },
+    "firmwareFlasherBoardConfigReadFailed": {
+        "message": "Could not read a hardware config from the board. Without one the board would be flashed with no pins assigned -- try again, or select a board manually."
     },
     "firmwareFlasherBoardDetectionDescriptionHint": {
         "message": "Detect only works when not in DFU mode and when MSP communication is working. Sometimes you have to retry a few times or even reconnect USB. Try connecting as normal first as you could have forgotten to apply custom defaults. Please reboot after flashing - replug your USB."
@@ -5845,6 +6047,30 @@
     },
     "profilesPidGains": {
         "message": "PID Controller Gains"
+    },
+    "profilesMasterGains": {
+        "message": "Master Gains"
+    },
+    "profilesCyclicMasterGain": {
+        "message": "Cyclic master gain [%]"
+    },
+    "profilesCyclicMasterGainHelp": {
+        "message": "Scales the roll and pitch P, I, D and Offset gains together, keeping the ratios between them. Use it to make the cyclic tighter or softer as a whole, e.g. after a headspeed change: the rotor's control power rises with headspeed, so a higher headspeed usually needs less gain and a lower one more. Feedforward, Boost and the precompensations are not scaled, so the stick response stays as tuned. Changing it in flight does not upset the trim already held by I and Offset; only how fast they build up changes."
+    },
+    "profilesYawMasterGain": {
+        "message": "Yaw master gain [%]"
+    },
+    "profilesYawMasterGainHelp": {
+        "message": "Scales the tail P, I and D gains together, keeping the ratios between them and the CW/CCW stop gain balance. Feedforward, Boost and the collective, cyclic and inertia precompensations are not scaled. Changing it in flight does not upset the anti-torque trim already held by I. If the tail wags or bounces at piro stops, lower it; if it holds loosely or drifts, raise it."
+    },
+    "profilesEffectivePidGains": {
+        "message": "Effective PID Gains"
+    },
+    "profilesEffectiveGainsHelp": {
+        "message": "The gains the controller actually applies. P, I, D and Offset are multiplied by the axis's master gain (cyclic for roll and pitch, yaw for the tail); Feedforward and Boost are not scaled and are shown as set. The values follow in-flight adjustments from the flight controller, and edits on this page show here before they are saved."
+    },
+    "profilesMasterGainTagHelp": {
+        "message": "The master gain now applied to this axis differs from the saved value, e.g. after an in-flight adjustment or an unsaved edit. The gains in this row include it."
     },
     "profilesPidSettings": {
         "message": "PID Controller Settings"
