@@ -49,6 +49,7 @@ export const GuiControl = function () {
         'led_strip',
         'blackbox',
         'crsf_sensors',
+        'fbus_sensors',
         'modes',
         'motors',
         'esc_programming',

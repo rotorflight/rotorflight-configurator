@@ -1045,6 +1045,144 @@
     "remapFcAllocationDma": {
         "message": "DMA"
     },
+    "tabFbusSensors": {
+        "message": "FBUS/S.Port Sensors"
+    },
+    "fbusSensorsDescription": {
+        "message": "Sensors observed on the FBUS/S.Port bus while this board is acting as an FBUS or S.Port master, with live readings from the sensor types the firmware decodes."
+    },
+    "fbusSensorsEmpty": {
+        "message": "No FBUS/S.Port sensors observed yet"
+    },
+    "fbusSensorsNotSupported": {
+        "message": "This firmware does not support the FBUS/S.Port Sensors diagnostic."
+    },
+    "fbusSensorsLearnMore": {
+        "message": "Learn more"
+    },
+    "fbusSensorsForwardingUnavailable": {
+        "message": "Forwarding needs an FrSky-family RX protocol -- set F.Port, F.Port2, or FBUS on the Receiver tab."
+    },
+    "fbusSensorsClear": {
+        "message": "Clear"
+    },
+    "fbusSensorsSlotsFull": {
+        "message": "All 8 forwarding slots are in use -- turn one off first."
+    },
+    "fbusSensorsColPhysicalId": {
+        "message": "Physical ID"
+    },
+    "fbusSensorsColSource": {
+        "message": "Source"
+    },
+    "fbusSensorsColName": {
+        "message": "Sensor Name"
+    },
+    "fbusSensorsColForwarded": {
+        "message": "Forwarded"
+    },
+    "fbusSensorsColAppIds": {
+        "message": "App IDs"
+    },
+    "fbusSensorsColPackets": {
+        "message": "Packets"
+    },
+    "fbusSensorsReadingsTitle": {
+        "message": "Live readings"
+    },
+    "fbusSensorsBadgeReceiving": {
+        "message": "Receiving"
+    },
+    "fbusSensorsBadgeNoData": {
+        "message": "No data"
+    },
+    "fbusSensorsNoData": {
+        "message": "No reading in the last second."
+    },
+    "fbusSensorsVoltage": {
+        "message": "Voltage"
+    },
+    "fbusSensorsCurrent": {
+        "message": "Current"
+    },
+    "fbusSensorsTemperature": {
+        "message": "Temperature"
+    },
+    "fbusSensorsTemperature2": {
+        "message": "Temperature 2"
+    },
+    "fbusSensorsGpsTitle": {
+        "message": "GPS"
+    },
+    "fbusSensorsGpsLat": {
+        "message": "Latitude"
+    },
+    "fbusSensorsGpsLon": {
+        "message": "Longitude"
+    },
+    "fbusSensorsGpsAlt": {
+        "message": "Altitude"
+    },
+    "fbusSensorsGpsSpeed": {
+        "message": "Ground speed"
+    },
+    "fbusSensorsGpsCourse": {
+        "message": "Course"
+    },
+    "fbusSensorsGpsSats": {
+        "message": "Satellites"
+    },
+    "fbusSensorsGpsTime": {
+        "message": "UTC time"
+    },
+    "fbusSensorsGpsDate": {
+        "message": "UTC date"
+    },
+    "fbusSensorsCurrentTitle": {
+        "message": "Current sensor (FAS)"
+    },
+    "fbusSensorsCurrentFine": {
+        "message": "Current (mA resolution)"
+    },
+    "fbusSensorsCellsTitle": {
+        "message": "Cells (FLVSS)"
+    },
+    "fbusSensorsCellsCount": {
+        "message": "Cells"
+    },
+    "fbusSensorsCellsTotal": {
+        "message": "Pack voltage"
+    },
+    "fbusSensorsCellsLowest": {
+        "message": "Lowest cell"
+    },
+    "fbusSensorsCellsSpread": {
+        "message": "Cell spread"
+    },
+    "fbusSensorsCellsChip": {
+        "message": "Cell $1"
+    },
+    "fbusSensorsEscTitle": {
+        "message": "ESC / RPM sensor"
+    },
+    "fbusSensorsEscRpm": {
+        "message": "RPM"
+    },
+    "fbusSensorsEscErpm": {
+        "message": "eRPM"
+    },
+    "fbusSensorsEscRpmOrErpm": {
+        "message": "RPM / eRPM"
+    },
+    "fbusSensorsEscConsumption": {
+        "message": "Consumption"
+    },
+    "fbusSensorsServoTitle": {
+        "message": "XACT servo"
+    },
+    "fbusSensorsServoCaveat": {
+        "message": "With several XACT servos on the bus, this shows whichever one answered last."
+    },
     "tabGroupSetup": {
         "message": "Setup"
     },
