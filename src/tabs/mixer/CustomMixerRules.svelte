@@ -15,6 +15,11 @@
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import {
+    busServoCount,
+    busServosActive,
+    pwmServoCount,
+  } from "@/js/servoLayout.js";
 
   import {
     OP_SET,
@@ -72,12 +77,25 @@
   let groups = $derived(computeRuleGroups(rules, count));
   let builtin = $derived(builtinOutputSet(FC.MIXER_CONFIG));
 
-  let servoCount = $derived(FC.CONFIG.servoCount);
-  let motorCount = $derived(FC.CONFIG.motorCount);
-
-  let hasSpareOutput = $derived(
-    anyOutputAvailable(builtin, servoCount, motorCount),
+  // Which outputs this board actually has. Not just FC.CONFIG.servoCount:
+  // that counts bus servos too once the bus is running, while the three
+  // kinds of output sit at fixed index ranges that a single total can't
+  // describe. See servoLayout.js.
+  let busActive = $derived(
+    busServosActive(FC.CONFIG.apiVersion, FC.SERIAL_CONFIG?.ports),
   );
+
+  let layout = $derived({
+    pwmServos: pwmServoCount(
+      busActive,
+      FC.SERVO_CONFIG?.length ?? 0,
+      FC.CONFIG.servoCount,
+    ),
+    busServos: busServoCount(busActive),
+    motors: FC.CONFIG.motorCount,
+  });
+
+  let hasSpareOutput = $derived(anyOutputAvailable(builtin, layout));
 
   // A trailing blank row is offered whenever there's both a free slot and
   // somewhere for a new rule to point. Editing any field in it commits it.
@@ -90,14 +108,47 @@
   // Which input dropdown is currently open, so only that one shows full
   // labels. A native select renders the selected option's own text when
   // closed - there's no separate display label - so the only way to show
-  // "Channel AUX2" collapsed but "RC Channel AUX2" in the list is to
-  // swap the option text while it has focus.
+  // "Ch Aux 2" collapsed but "RC Channel AUX2" in the list is to swap
+  // the option text while the list is down.
+  //
+  // Driven by mousedown/keydown rather than focus: focus outlives the
+  // open list, so a select left merely focused - which is what it is
+  // right after you pick something - kept showing full names and undid
+  // the abbreviation exactly where the column is tightest. Cleared on
+  // change as well as blur, so making a choice returns it to the short
+  // form straight away.
   let expandedInput = $state(null);
 
-  // "RC " is redundant in a column already headed "Controlled by", and
-  // it's the part that pushes these labels past the column width.
+  // Abbreviations for the closed select only; the open list keeps every
+  // input's full name (see inputSelect). The closed line is the one that
+  // has to fit a column narrow enough to sit beside the config sections,
+  // and "RC Channel"/"Commanded" are pure prefix - the word that
+  // actually identifies the input is the last one.
+  //
+  // Matched against the translated label rather than keyed off the input
+  // index, so a locale whose names don't start with these simply keeps
+  // them in full: wider than ideal, but never wrong or mistranslated.
+  // The stabilized inputs ("Roll", "Collective", ...) carry no prefix
+  // and are already short, so nothing here touches them.
+  const INPUT_ABBREVIATIONS = [
+    [/^RC Channel /, "Ch "],
+    [/^Commanded /, "Cmd "],
+  ];
+
   function shortInput(label) {
-    return label.replace(/^RC /, "");
+    let short = label;
+
+    for (const [prefix, replacement] of INPUT_ABBREVIATIONS) {
+      if (prefix.test(short)) {
+        short = short.replace(prefix, replacement);
+        break;
+      }
+    }
+
+    // "AUX2" -> "Aux 2". The firmware's own all-caps run reads as
+    // shouting beside the abbreviations above, and the digit needs
+    // separating once "Channel" is no longer there to do it.
+    return short.replace(/\bAUX(\d+)\b/, "Aux $1");
   }
 
   let operOptions = $derived(
@@ -105,7 +156,7 @@
   );
 
   function exists(dst) {
-    return isConfiguredOutput(dst, servoCount, motorCount);
+    return isConfiguredOutput(dst, layout);
   }
 
   /**
@@ -123,9 +174,12 @@
       options.push({ value: index, label: $i18n.t(name) });
     });
 
-    // outputNames is sparse (nothing for Servo 9-26), so a rule pointing
-    // into that range has no entry above. Keep it selectable with a
-    // generic label rather than leaving the dropdown with no match.
+    // A guard, not an expected path: outputNames now covers every index
+    // the firmware can report (0-30, bus servos included), so this only
+    // fires for a rule read off an FC that knows an output this build
+    // doesn't. Keeping it selectable with a bare index beats a dropdown
+    // with no matching entry, which would silently show the first
+    // option instead and rewrite the rule on the next edit.
     if (currentDst > 0 && !Mixer.outputNames[currentDst]) {
       options.push({ value: currentDst, label: `#${currentDst}` });
     }
@@ -252,8 +306,12 @@
 {#snippet inputSelect(key, selected, onchange)}
   <select
     value={selected}
-    {onchange}
-    onfocus={() => (expandedInput = key)}
+    onchange={(e) => {
+      expandedInput = null;
+      onchange(e);
+    }}
+    onmousedown={() => (expandedInput = key)}
+    onkeydown={() => (expandedInput = key)}
     onblur={() => (expandedInput = null)}
   >
     {#each inputOptions as option (option.value)}
@@ -419,24 +477,23 @@
 </Section>
 
 <style lang="scss">
-  /* Mirrors %section-header so the custom header is indistinguishable
-     from the ones Section draws for every other panel. */
+  /* Section renders a custom header snippet raw - no wrapper of its own
+     (see its {@render header()}) - so this has to draw the whole bar.
+     @extend rather than a hand-copy of %section-header: the copy that
+     was here had drifted badly from it (32px instead of 38px tall, the
+     wrong weight and size, no bottom border, and still on the old
+     surface colours rather than --color-header-*), leaving this the one
+     card on the tab that didn't match. Extending it means it can't
+     drift again. */
   .section-header {
-    display: flex;
-    align-items: center;
+    @extend %section-header;
+
     gap: 8px;
-    height: 32px;
-    padding: 0 8px;
-    font-size: 1rem;
-    font-weight: 400;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    color: var(--color-text-alt);
-    background-color: var(--color-surface-alt);
   }
 
+  /* Matches Section's own .title. */
   .section-title {
-    font-weight: 600;
+    padding-left: 8px;
   }
 
   .section-help {
@@ -454,6 +511,7 @@
   }
 
   .count {
+    padding-right: 8px;
     font-size: 0.8rem;
     font-variant-numeric: tabular-nums;
     opacity: 0.8;
@@ -465,14 +523,29 @@
     padding: 0 4px 8px;
   }
 
-  /* Seven controls don't compress below about 640px, which is wider
-     than this column's 420px floor. At full pane width the columns
-     collapse to one and there's room; in the band between, scroll the
-     table rather than let it burst out of its panel. */
+  /* No max-width here any more: every column above is now either
+     fixed or capped, so the row can't stretch past ~708px however
+     wide the page is, and it simply stays left-aligned under the
+     headings.
+
+     overflow-x stays as a backstop. Mixer.svelte sizes its column
+     floor from this table so it shouldn't normally be needed, but a
+     long translated label can still outgrow the space, and scrolling
+     beats bursting out of the panel. */
   .table {
     display: flex;
     flex-direction: column;
     overflow-x: auto;
+
+    /* The row below sizes itself against this box rather than the
+       viewport. The same table appears in a half-width column on a
+       wide window and across the whole page on a narrow one, so its
+       own width is the only thing that actually predicts whether the
+       comfortable column sizes fit - the viewport doesn't, and tying
+       the page's breakpoint to this table instead kept the config
+       sections stretched full width to make room for it. */
+    container-type: inline-size;
+    container-name: rules;
   }
 
   /* Offset and Weight are fixed widths: a NumberInput needs room for
@@ -485,16 +558,52 @@
      left over goes to Controlled by via 1fr, since "RC Channel
      Collective" is far and away the longest label here.
 
-     It has to be 1fr rather than a capped minmax: the fixed columns and
-     minima already account for ~620px of this panel, so a capped column
-     never has slack to grow into and sits pinned at its minimum however
-     high the cap is set. */
+     Controlled by is the only flexible one, and it's capped rather
+     than 1fr: as 1fr it swallowed every spare pixel, reaching ~360px
+     across a wide page to show labels needing barely half that. 180px
+     fits the longest collapsed name ("Commanded Collective"); the
+     longer "RC Channel Collective" only appears while the dropdown has
+     focus, where the open list shows it in full anyway.
+
+     Everything else is fixed at what its own content needs: Output at
+     124px, which is "Bus 18 (S26)" with room to spare rather than only
+     just, Rule for "Set"/"Add"/"Mul" plus a
+     chevron, and Offset and Weight matched at 104px - the pair read as
+     one unit, and 96px left a four-digit weight touching its +/-
+     buttons. Those total 504px with the gaps and padding, so the table
+     runs 654-684px. */
   .row {
     display: grid;
-    grid-template-columns: 104px minmax(120px, 1fr) 70px 96px 96px 60px;
+    grid-template-columns: 124px 132px 70px 104px 104px 56px;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     padding: 1px 8px;
+  }
+
+  /* Tight column: trim what can afford it and give Controlled by the
+     remainder. Offset and Weight are deliberately NOT trimmed - they
+     keep the same 104px here as above, because a four-digit value is
+     exactly what they normally hold (a weight of 1000) and clipping
+     that is worse than a shorter name. Names are the one thing allowed
+     to truncate; the dropdown still spells them out in full when open.
+
+     Controlled by takes the squeeze, but only down to Output's own
+     116px - a dropdown narrower than its neighbour reads as broken
+     rather than as tight, and "Cmd Collective" has to stay recognisable
+     from its first word. That is the floor, not a soft minimum: at
+     ~466px of fixed columns the row needs ~582px, and Mixer.svelte
+     gives the card the full page width rather than let it go below.
+
+     Mixer.svelte drops the page to a single column well before that.
+     Its margin has to cover Section's own body padding too, which eats
+     into the column after the grid maths - too tight a margin and the
+     scrollbar came back. */
+  @container rules (max-width: 700px) {
+    .row {
+      grid-template-columns: 116px minmax(116px, 1fr) 58px 104px 104px 42px;
+      gap: 6px;
+      padding: 1px 6px;
+    }
   }
 
   /* Grid items default to min-width: auto, i.e. they refuse to shrink
@@ -593,13 +702,11 @@
     }
   }
 
-  @media only screen and (max-width: 480px) {
-    .row {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .head {
-      display: none;
-    }
-  }
+  /* Deliberately no narrow-viewport override of the grid above.
+     Reflowing the six controls into 1fr 1fr pairs and hiding .head
+     left Offset and Weight as two unlabelled number boxes - the
+     column headings were the only thing naming them. Letting .table
+     scroll instead keeps every value next to its own heading, since
+     .head is inside that same scroll box and shares the template, so
+     the two move together and stay aligned. */
 </style>

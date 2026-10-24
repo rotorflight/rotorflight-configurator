@@ -40,14 +40,27 @@ export const Mixer = {
     // so this has to line up with the firmware's own indices, not just be
     // internally consistent - a densely-packed array (None, Motor1-4,
     // Servo1-8) sends every servo/motor selection at the wrong index,
-    // silently driving the wrong physical output. Indices 9-26
-    // (Servo9-26) are left undefined since this UI never exposes more
-    // than 8 servos.
+    // silently driving the wrong physical output.
+    //
+    // S9-S26 are the 18 bus servo channels (BUS_SERVO_OFFSET is 8, so
+    // bus servo 1 is S9). They're named separately because that's how
+    // the Servos tab presents them -- its own section, numbered from 1
+    // -- and a label of plain "Servo 9" for the thing that tab calls
+    // "Servo 1" is exactly the confusion worth avoiding. Each label
+    // carries the firmware index too, so a rule here can still be
+    // matched against a CLI `mixer rule ... S9`.
+    //
+    // All 18 are named even though the Servos tab only shows
+    // BUS_SERVO_DISPLAY_LIMIT of them: which are *selectable* is
+    // isConfiguredOutput's job, and a rule already pointing at a
+    // hidden one should still read as something better than "#25".
     outputNames: (function () {
         const names = [];
         names[0] = 'mixerOutputNone';
         for (let i = 1; i <= 8; i++)
             names[i] = 'mixerOutputServo' + i;
+        for (let i = 1; i <= 18; i++)
+            names[8 + i] = 'mixerOutputBusServo' + i;
         for (let i = 1; i <= 4; i++)
             names[26 + i] = 'mixerOutputMotor' + i;
         return names;

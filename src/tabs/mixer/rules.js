@@ -1,4 +1,5 @@
 import { Mixer } from "@/js/Mixer.js";
+import { BUS_SERVO_OFFSET } from "@/js/servoLayout.js";
 
 // Firmware's mixer operators (pg/mixer.h). NOP rules are skipped
 // entirely by mixerUpdateRules(), which is what makes it a usable
@@ -303,16 +304,28 @@ export function builtinOutputSet(config) {
 }
 
 /**
- * Whether an output actually exists on this craft, per the counts the FC
- * reports. Worth being strict about: firmware only drives outputs below
- * its own servo/motor count, and the ones above report a steady centre
- * value rather than going silent -- so a rule pointing at one looks like
- * it's working while doing nothing at all.
+ * Whether an output actually exists on this craft, per the layout the FC
+ * reports (see servoLayout.js). Worth being strict about: firmware only
+ * drives outputs below its own servo/motor count, and the ones above
+ * report a steady centre value rather than going silent -- so a rule
+ * pointing at one looks like it's working while doing nothing at all.
+ *
+ * The three ranges are tested separately rather than against one running
+ * total. PWM servos occupy 1-8 whether or not a board wires them all, so
+ * the bus servos after them always start at 9: a board with 5 PWM servos
+ * and the bus on has outputs 1-5 and 9-N, with a real hole at 6-8.
+ * Measuring from a single servo count would both offer that hole and cut
+ * the same number of bus servos off the top.
+ *
+ * @param {number} index - mixer output index.
+ * @param {{pwmServos: number, busServos: number, motors: number}} layout
  */
-export function isConfiguredOutput(index, servoCount, motorCount) {
+export function isConfiguredOutput(index, layout) {
   if (index === 0) return true;
-  if (index >= FIRST_MOTOR) return index - (FIRST_MOTOR - 1) <= motorCount;
-  return index <= servoCount;
+  if (index >= FIRST_MOTOR) return index - (FIRST_MOTOR - 1) <= layout.motors;
+  if (index > BUS_SERVO_OFFSET)
+    return index - BUS_SERVO_OFFSET <= layout.busServos;
+  return index <= layout.pwmServos;
 }
 
 /**
@@ -320,13 +333,13 @@ export function isConfiguredOutput(index, servoCount, motorCount) {
  * both exists and isn't already claimed by the built-in mixing. A craft
  * with no spare servo/motor has nothing a new rule could point at, even
  * though extra Add/Mul rules can still be stacked on an output some rule
- * already drives. Mixer.outputNames is sparse, so some() skips the holes.
+ * already drives.
  */
-export function anyOutputAvailable(builtinOutputs, servoCount, motorCount) {
+export function anyOutputAvailable(builtinOutputs, layout) {
   return Mixer.outputNames.some(
     (name, index) =>
       index !== 0 &&
-      isConfiguredOutput(index, servoCount, motorCount) &&
+      isConfiguredOutput(index, layout) &&
       !builtinOutputs.has(index),
   );
 }

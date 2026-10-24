@@ -15,6 +15,11 @@
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import {
+    busServosActive,
+    pwmServoCount,
+    servoDataIndex,
+  } from "@/js/servoLayout.js";
 
   import OutputIcon from "./OutputIcon.svelte";
   import {
@@ -184,6 +189,21 @@
 
   let groups = $derived(dynamicOverrideGroups(FC.MIXER_RULES));
 
+  // Needed to read a servo's live position back: MSP_SERVO's payload is
+  // packed around the PWM servo count, not indexed by servo number.
+  // See servoDataIndex.
+  let busActive = $derived(
+    busServosActive(FC.CONFIG.apiVersion, FC.SERIAL_CONFIG?.ports),
+  );
+
+  let pwmServos = $derived(
+    pwmServoCount(
+      busActive,
+      FC.SERVO_CONFIG?.length ?? 0,
+      FC.CONFIG.servoCount,
+    ),
+  );
+
   /**
    * A motor can't actually be driven from here: firmware's motorUpdate()
    * only feeds the mixer's motor outputs to the ESCs while ARMED, while
@@ -312,7 +332,9 @@
       await MSP.promise(MSPCodes.MSP_SERVO);
       const next = {};
       for (const dst of groups.keys()) {
-        if (!isSimulated(dst)) next[dst] = FC.SERVO_DATA[dst - 1];
+        if (!isSimulated(dst)) {
+          next[dst] = FC.SERVO_DATA[servoDataIndex(dst, pwmServos)];
+        }
       }
       liveValues = next;
     }, 250);
@@ -661,10 +683,25 @@
       grid-template-columns: 1fr;
     }
 
+    /* The desktop rules put this in column 5, spanning the group's
+       rules via an inline grid-row. Neither survives a single-column
+       grid: grid-column: 5 makes the browser invent implicit columns
+       2-5, quietly restoring a five-column layout far wider than the
+       viewport, and the row span then lays the readout on top of the
+       first rule's controls. !important because that span is set
+       inline (it depends on how many inputs drive the output), and
+       inline styles outrank anything a stylesheet can say otherwise.
+       Reset back to auto flow so it simply stacks under its group. */
     .position {
+      grid-column: auto;
+      grid-row: auto !important;
       width: auto;
       flex-direction: row;
       gap: 8px;
+
+      /* The nudge only exists to clear the desktop slider scales,
+         which aren't beside it once everything is stacked. */
+      transform: none;
     }
   }
 </style>
