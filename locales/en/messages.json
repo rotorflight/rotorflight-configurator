@@ -1645,6 +1645,14 @@
     "statusArmingDisableFlagsTooltipOVERRIDE": {
         "message": "Servo Override or Mixer Override is active"
     },
+    "statusArmingDisableFlagsTooltipNO_NOTCH_FILTER": {
+        "message": "Neither the RPM Filter nor the Dynamic Notch Filter is actively filtering the gyro. Configure a real-time RPM source (RPM Filter) or enable the Dynamic Notch Filter before arming.",
+        "description": "Message that pops up to describe the NO_NOTCH_FILTER arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipBACKUP_RX": {
+        "message": "A backup RX is configured but has not yet linked. Power-cycle range test the backup receiver, or check its wiring, before arming.",
+        "description": "Message that pops up to describe the BACKUP_RX arming disable flag"
+    },
     "statusArmingDisableFlagsTooltipARM_SWITCH": {
         "message": "Arm switch is activated while other arming disable conditions are active",
         "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
