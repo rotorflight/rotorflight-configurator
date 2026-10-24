@@ -13,7 +13,10 @@
   import WarningNote from "@/components/notes/WarningNote.svelte";
 
   import { Mixer } from "@/js/Mixer.js";
-  import { API_VERSION_12_8 } from "@/js/configurator.svelte.js";
+  import {
+    API_VERSION_12_8,
+    API_VERSION_12_9,
+  } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
   import { getTabHelpURL } from "@/js/help.js";
@@ -255,6 +258,11 @@
     // See servoLayout.js.
     await MSP.promise(MSPCodes.MSP_SERIAL_CONFIG);
     await MSP.promise(MSPCodes.MSP_SERVO_CONFIGURATIONS);
+    // Which bus channels follow the mixer rather than passing the RX
+    // through -- a rule can only drive one that does.
+    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+      await MSP.promise(MSPCodes.MSP_BUS_SERVO_CONFIG);
+    }
     await MSP.promise(MSPCodes.MSP_MIXER_CONFIG);
     await MSP.promise(MSPCodes.MSP_MIXER_INPUTS);
     await MSP.promise(MSPCodes.MSP_MIXER_RULES);

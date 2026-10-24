@@ -1,5 +1,5 @@
 import { Mixer } from "@/js/Mixer.js";
-import { BUS_SERVO_OFFSET } from "@/js/servoLayout.js";
+import { BUS_SOURCE_MIXER } from "@/js/servoLayout.js";
 
 // Firmware's mixer operators (pg/mixer.h). NOP rules are skipped
 // entirely by mixerUpdateRules(), which is what makes it a usable
@@ -303,6 +303,25 @@ export function builtinOutputSet(config) {
   return outputs;
 }
 
+// Last servo output in the firmware's numbering (Servo 26). Outputs past
+// the last bus channel never exist; isConfiguredOutput filters them.
+const LAST_SERVO_OUTPUT = 26;
+const MOTOR_OUTPUTS = 4;
+
+function hasPwmPin(index, layout) {
+  return index >= 1 && index <= layout.pwmServos;
+}
+
+function hasBusChannel(index, layout) {
+  return index >= 1 && index <= layout.busServos;
+}
+
+function busChannelFollowsMixer(index, layout) {
+  return (
+    (layout.busSources?.[index - 1] ?? BUS_SOURCE_MIXER) === BUS_SOURCE_MIXER
+  );
+}
+
 /**
  * Whether an output actually exists on this craft, per the layout the FC
  * reports (see servoLayout.js). Worth being strict about: firmware only
@@ -310,12 +329,11 @@ export function builtinOutputSet(config) {
  * report a steady centre value rather than going silent -- so a rule
  * pointing at one looks like it's working while doing nothing at all.
  *
- * The three ranges are tested separately rather than against one running
- * total. PWM servos occupy 1-8 whether or not a board wires them all, so
- * the bus servos after them always start at 9: a board with 5 PWM servos
- * and the bus on has outputs 1-5 and 9-N, with a real hole at 6-8.
- * Measuring from a single servo count would both offer that hole and cut
- * the same number of bus servos off the top.
+ * PWM servos and bus channels share the servo outputs: bus channel N
+ * follows mixer output N, the same one PWM servo N does (see
+ * busServoOutput). So a servo output exists if it has a PWM pin or a bus
+ * channel. A board with 4 PWM servos and FBUS on has outputs 1-16: 1-4
+ * drive both a pin and a bus channel, 5-16 only a bus channel.
  *
  * @param {number} index - mixer output index.
  * @param {{pwmServos: number, busServos: number, motors: number}} layout
@@ -323,9 +341,79 @@ export function builtinOutputSet(config) {
 export function isConfiguredOutput(index, layout) {
   if (index === 0) return true;
   if (index >= FIRST_MOTOR) return index - (FIRST_MOTOR - 1) <= layout.motors;
-  if (index > BUS_SERVO_OFFSET)
-    return index - BUS_SERVO_OFFSET <= layout.busServos;
-  return index <= layout.pwmServos;
+  return hasPwmPin(index, layout) || hasBusChannel(index, layout);
+}
+
+/**
+ * Every output a rule could name, in dropdown order: None, the servo
+ * outputs (PWM and bus share these), then motors.
+ */
+export function allOutputs() {
+  const outputs = [0];
+  for (let i = 1; i <= LAST_SERVO_OUTPUT; i++) outputs.push(i);
+  for (let i = 0; i < MOTOR_OUTPUTS; i++) outputs.push(FIRST_MOTOR + i);
+  return outputs;
+}
+
+/**
+ * Display name for an output, saying what it drives: "Servo 3" for a PWM
+ * pin, "FBUS 10" for a bus-only channel, or "Servo 3 + FBUS 3" when the
+ * bus channel mirrors the PWM servo. "Bus" stands in for the protocol if
+ * both an SBUS and an FBUS port are set up. A servo output that exists
+ * neither way (a rule set up from the CLI) gets its CLI name, "S10".
+ *
+ * @param {object} layout - as isConfiguredOutput, plus busSources and
+ *   busLabel ("SBUS", "FBUS" or "").
+ */
+export function outputLabel(index, layout, t) {
+  if (index >= 1 && index < FIRST_MOTOR) {
+    const pwm = hasPwmPin(index, layout);
+    // A channel that mirrors a PWM pin but passes the RX through isn't
+    // driven by this output, so isn't named.
+    const bus =
+      hasBusChannel(index, layout) &&
+      (!pwm || busChannelFollowsMixer(index, layout));
+
+    const busName = layout.busLabel
+      ? t("mixerOutputBusNamed", { 1: layout.busLabel, 2: index })
+      : t("mixerOutputBus", { 1: index });
+
+    if (pwm && bus) {
+      return t("mixerOutputServoAndBus", {
+        1: t(Mixer.outputNames[index]),
+        2: busName,
+      });
+    }
+    if (bus) return busName;
+    if (!pwm && !Mixer.outputNames[index]) return `S${index}`;
+  }
+
+  const name = Mixer.outputNames[index];
+  return name ? t(name) : `#${index}`;
+}
+
+/**
+ * Bus channels (0-based, as MSP_SET_BUS_SERVO_CONFIG takes them) that a
+ * rule drives but are still passing the RX through, so would ignore it.
+ * Only outputs with no PWM pin count: on one that has a pin the rule is
+ * aimed at the PWM servo, and its bus mirror is left as it was.
+ */
+export function busChannelsNeedingMixer(rules, layout) {
+  const channels = new Set();
+  const visibleCount = visibleRuleCount(rules);
+
+  for (let index = 0; index < visibleCount; index++) {
+    const { dst } = rules[index];
+    if (
+      hasBusChannel(dst, layout) &&
+      !hasPwmPin(dst, layout) &&
+      !busChannelFollowsMixer(dst, layout)
+    ) {
+      channels.add(dst - 1);
+    }
+  }
+
+  return [...channels];
 }
 
 /**
@@ -336,8 +424,8 @@ export function isConfiguredOutput(index, layout) {
  * already drives.
  */
 export function anyOutputAvailable(builtinOutputs, layout) {
-  return Mixer.outputNames.some(
-    (name, index) =>
+  return allOutputs().some(
+    (index) =>
       index !== 0 &&
       isConfiguredOutput(index, layout) &&
       !builtinOutputs.has(index),

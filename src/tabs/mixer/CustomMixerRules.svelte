@@ -16,6 +16,8 @@
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import {
+    BUS_SOURCE_MIXER,
+    busLabelFor,
     busServoCount,
     busServosActive,
     pwmServoCount,
@@ -23,12 +25,15 @@
 
   import {
     OP_SET,
+    allOutputs,
     anyOutputAvailable,
     builtinOutputSet,
+    busChannelsNeedingMixer,
     computeRuleGroups,
     enforceOperInvariant,
     isConfiguredOutput,
     normalizeRuleGroups,
+    outputLabel,
     regroupRule,
     visibleRuleCount,
   } from "./rules.js";
@@ -93,9 +98,19 @@
     ),
     busServos: busServoCount(busActive),
     motors: FC.CONFIG.motorCount,
+    // Which bus channels follow the mixer rather than the RX, and what
+    // to call the bus in labels ("SBUS"/"FBUS", or "" for both).
+    busSources: FC.BUS_SERVO_CONFIG,
+    busLabel: busLabelFor(FC.SERIAL_CONFIG?.ports),
   });
 
   let hasSpareOutput = $derived(anyOutputAvailable(builtin, layout));
+
+  // Bus channels a rule drives that still pass the RX through. Firmware
+  // defaults channels 9-18 -- the ones only the bus has -- to RX, and
+  // nothing else in the UI can change that, so saving switches them to
+  // Mixer (see sendDirty).
+  let busChannelsToSwitch = $derived(busChannelsNeedingMixer(rules, layout));
 
   // A trailing blank row is offered whenever there's both a free slot and
   // somewhere for a new rule to point. Editing any field in it commits it.
@@ -166,21 +181,23 @@
    * both tests, so a rule set up elsewhere is never silently reset.
    */
   function outputOptions(currentDst) {
-    const options = [];
+    const options = allOutputs()
+      .filter(
+        (index) =>
+          index === currentDst || (exists(index) && !builtin.has(index)),
+      )
+      .map((index) => ({
+        value: index,
+        label: outputLabel(index, layout, $i18n.t),
+      }));
 
-    Mixer.outputNames.forEach((name, index) => {
-      if (index !== currentDst && (!exists(index) || builtin.has(index)))
-        return;
-      options.push({ value: index, label: $i18n.t(name) });
-    });
-
-    // A guard, not an expected path: outputNames now covers every index
-    // the firmware can report (0-30, bus servos included), so this only
-    // fires for a rule read off an FC that knows an output this build
-    // doesn't. Keeping it selectable with a bare index beats a dropdown
-    // with no matching entry, which would silently show the first
-    // option instead and rewrite the rule on the next edit.
-    if (currentDst > 0 && !Mixer.outputNames[currentDst]) {
+    // A guard, not an expected path: allOutputs() covers every index the
+    // firmware can report (0-30), so this only fires for a rule read off
+    // an FC that knows an output this build doesn't. Keeping it
+    // selectable beats a dropdown with no matching entry, which would
+    // silently show the first option instead and rewrite the rule on the
+    // next edit.
+    if (!options.some((o) => o.value === currentDst)) {
       options.push({ value: currentDst, label: `#${currentDst}` });
     }
 
@@ -285,6 +302,17 @@
       await new Promise((resolve) => mspHelper.sendMixerRule(index, resolve));
     }
     origRules = Mixer.cloneRules(FC.MIXER_RULES);
+
+    // A bus channel left on RX ignores the mixer, so point it at the
+    // mixer once a rule drives it. Firmware applies this straight away;
+    // the tab's EEPROM write after this keeps it.
+    for (const channel of busChannelsToSwitch) {
+      await MSP.promise(MSPCodes.MSP_SET_BUS_SERVO_CONFIG, [
+        channel,
+        BUS_SOURCE_MIXER,
+      ]);
+      FC.BUS_SERVO_CONFIG[channel] = BUS_SOURCE_MIXER;
+    }
   }
 
   // Re-reads the FC's own copy rather than replaying a local snapshot:
@@ -360,6 +388,11 @@
   {#if anyMissing}
     <div class="note-wrap">
       <WarningNote message="mixerCustomRuleMissingOutputNote" />
+    </div>
+  {/if}
+  {#if busChannelsToSwitch.length > 0}
+    <div class="note-wrap">
+      <InfoNote message="mixerCustomRuleBusSourceNote" />
     </div>
   {/if}
 
@@ -566,15 +599,15 @@
      focus, where the open list shows it in full anyway.
 
      Everything else is fixed at what its own content needs: Output at
-     124px, which is "Bus 18 (S26)" with room to spare rather than only
-     just, Rule for "Set"/"Add"/"Mul" plus a
+     140px, for "Servo 5 + FBUS 5" (a bus channel mirroring a PWM
+     servo), Rule for "Set"/"Add"/"Mul" plus a
      chevron, and Offset and Weight matched at 104px - the pair read as
      one unit, and 96px left a four-digit weight touching its +/-
-     buttons. Those total 504px with the gaps and padding, so the table
-     runs 654-684px. */
+     buttons. Those total 520px with the gaps and padding, so the table
+     runs 670-700px. */
   .row {
     display: grid;
-    grid-template-columns: 124px 132px 70px 104px 104px 56px;
+    grid-template-columns: 140px 132px 70px 104px 104px 56px;
     align-items: center;
     gap: 10px;
     padding: 1px 8px;

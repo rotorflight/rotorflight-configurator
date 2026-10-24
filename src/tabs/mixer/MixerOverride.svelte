@@ -16,6 +16,8 @@
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import {
+    busLabelFor,
+    busServoCount,
     busServosActive,
     pwmServoCount,
     servoDataIndex,
@@ -25,6 +27,7 @@
   import {
     FIRST_MOTOR,
     dynamicOverrideGroups,
+    outputLabel as nameOutput,
     simulateOutputValue,
   } from "./rules.js";
 
@@ -204,6 +207,15 @@
     ),
   );
 
+  // For naming each output by what it drives, as the rules table does.
+  let layout = $derived({
+    pwmServos,
+    busServos: busServoCount(busActive),
+    motors: FC.CONFIG.motorCount,
+    busSources: FC.BUS_SERVO_CONFIG,
+    busLabel: busLabelFor(FC.SERIAL_CONFIG?.ports),
+  });
+
   /**
    * A motor can't actually be driven from here: firmware's motorUpdate()
    * only feeds the mixer's motor outputs to the ESCs while ARMED, while
@@ -304,8 +316,7 @@
   }
 
   function outputLabel(dst) {
-    const name = Mixer.outputNames[dst];
-    return name ? $i18n.t(name) : `#${dst}`;
+    return nameOutput(dst, layout, $i18n.t);
   }
 
   // 1010 rather than 1000 as the spin threshold: the value sits a few us
@@ -333,7 +344,7 @@
       const next = {};
       for (const dst of groups.keys()) {
         if (!isSimulated(dst)) {
-          next[dst] = FC.SERVO_DATA[servoDataIndex(dst, pwmServos)];
+          next[dst] = FC.SERVO_DATA[servoDataIndex(dst, pwmServos, busActive)];
         }
       }
       liveValues = next;

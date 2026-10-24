@@ -42,25 +42,17 @@ export const Mixer = {
     // Servo1-8) sends every servo/motor selection at the wrong index,
     // silently driving the wrong physical output.
     //
-    // S9-S26 are the 18 bus servo channels (BUS_SERVO_OFFSET is 8, so
-    // bus servo 1 is S9). They're named separately because that's how
-    // the Servos tab presents them -- its own section, numbered from 1
-    // -- and a label of plain "Servo 9" for the thing that tab calls
-    // "Servo 1" is exactly the confusion worth avoiding. Each label
-    // carries the firmware index too, so a rule here can still be
-    // matched against a CLI `mixer rule ... S9`.
-    //
-    // All 18 are named even though the Servos tab only shows
-    // BUS_SERVO_DISPLAY_LIMIT of them: which are *selectable* is
-    // isConfiguredOutput's job, and a rule already pointing at a
-    // hidden one should still read as something better than "#25".
+    // S9-S26 have no PWM pin and are deliberately left unnamed here.
+    // They are NOT the bus servos: bus channel N follows mixer output N
+    // (see busServoOutput in servoLayout.js), so channels 1-8 share
+    // S1-S8 with the PWM servos and only channels 9-16 reach S9-S16.
+    // What an output drives depends on the board's PWM count and bus,
+    // so its label comes from outputLabel() in tabs/mixer/rules.js.
     outputNames: (function () {
         const names = [];
         names[0] = 'mixerOutputNone';
         for (let i = 1; i <= 8; i++)
             names[i] = 'mixerOutputServo' + i;
-        for (let i = 1; i <= 18; i++)
-            names[8 + i] = 'mixerOutputBusServo' + i;
         for (let i = 1; i <= 4; i++)
             names[26 + i] = 'mixerOutputMotor' + i;
         return names;

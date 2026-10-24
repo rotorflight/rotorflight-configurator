@@ -57,16 +57,29 @@ export function busServoCount(active) {
   return active ? Math.min(BUS_SERVO_CHANNELS, BUS_SERVO_DISPLAY_LIMIT) : 0;
 }
 
+// A bus channel's source (busServoSourceType_e, pg/bus_servo.h). On RX it
+// passes the receiver straight through and ignores the mixer. Firmware
+// defaults channels 1-8 to Mixer and 9-18 to RX (pg/bus_servo.c).
+export const BUS_SOURCE_MIXER = 0;
+export const BUS_SOURCE_RX = 1;
+
 /**
- * The mixer output index a bus servo drives. Mixer outputs are 1-based
- * (None=0, Servo1-26=1-26, Motor1-4=27-30) over the same servo numbering
- * the firmware uses, so bus servo 0 -- "Bus Servo 1" on screen -- is
- * output 9. Deliberately independent of how many PWM servos the board
- * has: the firmware reserves 0..7 for PWM whether or not they're wired,
- * so the bus always starts at the same place.
+ * The mixer output a bus channel follows. Bus channels read the mixer by
+ * channel number (sbusOutMixerIndex() in drivers/sbus_output.c, and
+ * rotorflight-firmware#516): bus channel 1 follows mixer output 1, the
+ * same output PWM servo 1 follows. So channels 1-8 mirror PWM servos 1-8
+ * and channels 9-16 are outputs only the bus has.
+ *
+ * This is NOT the bus servo's own servo index (BUS_SERVO_OFFSET + i, i.e.
+ * S9 for channel 1). That index only selects the channel's servo
+ * settings -- centre, limits, scale -- on the Servos tab; it isn't what
+ * the mixer drives. A rule on mixer output 9 moves bus channel 9.
+ *
+ * @param {number} busIndex - 0-based bus channel.
+ * @returns {number} mixer output index (1-based).
  */
 export function busServoOutput(busIndex) {
-  return BUS_SERVO_OFFSET + busIndex + 1;
+  return busIndex + 1;
 }
 
 /**
@@ -75,21 +88,29 @@ export function busServoOutput(busIndex) {
  * MSP_SERVO is packed, not indexed by servo number: the firmware sends
  * getServoCount() PWM outputs followed by all BUS_SERVO_CHANNELS bus
  * outputs, skipping the unconfigured PWM slots in between (msp.c,
- * MSP_SERVO). So a bus servo's position in that payload moves with how
- * many PWM servos the board has, even though its own servo index never
- * does -- reading it at `dst - 1` lands on the wrong servo on any board
- * with fewer than BUS_SERVO_OFFSET PWM servos, and past the end of the
- * array for the higher channels.
+ * MSP_SERVO). An output with a PWM pin is read from that pin; one without
+ * is read from the bus channel that follows it, whose place in the
+ * payload moves with how many PWM servos the board has.
  *
  * @param {number} dst - mixer output index (1-based: Servo 1 is 1).
  * @param {number} pwmServos - PWM servos this board has.
+ * @param {boolean} busActive - whether the bus channels are in the payload.
  */
-export function servoDataIndex(dst, pwmServos) {
-  const servoIndex = dst - 1;
-
-  if (servoIndex >= BUS_SERVO_OFFSET) {
-    return pwmServos + (servoIndex - BUS_SERVO_OFFSET);
+export function servoDataIndex(dst, pwmServos, busActive) {
+  if (busActive && dst > pwmServos) {
+    return pwmServos + (dst - 1);
   }
 
-  return servoIndex;
+  return dst - 1;
+}
+
+/**
+ * What to call the bus in output labels: "SBUS" or "FBUS", or "" when
+ * both kinds of output port are set up (or neither).
+ */
+export function busLabelFor(serialPorts = []) {
+  const sbus = serialPorts.some((p) => p.functions.includes("SBUS_OUT"));
+  const fbus = serialPorts.some((p) => p.functions.includes("FBUS_OUT"));
+  if (sbus === fbus) return "";
+  return sbus ? "SBUS" : "FBUS";
 }
