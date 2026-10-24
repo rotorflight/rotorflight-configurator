@@ -7,6 +7,7 @@ import "./configuration.js";
 import "./crsf_sensors.js";
 import "./esc_programming.js";
 import "./failsafe.js";
+import "./fbus_sensors.js";
 import "./firmware_flasher.js";
 import "./governor.js";
 import "./gps.js";

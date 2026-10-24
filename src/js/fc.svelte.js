@@ -25,6 +25,9 @@ class FlightController {
   DEFAULT = $state();
   ESC_SENSOR_CONFIG = $state();
   FAILSAFE_CONFIG = $state();
+  FBUS_MASTER_CONFIG = $state();
+  FBUS_SENSORS = $state();
+  FBUS_SENSORS_STATUS = $state();
   FEATURE_CONFIG = $state();
   FILTER_CONFIG = $state();
   FLIGHT_STATS = $state();
@@ -168,6 +171,18 @@ class FlightController {
       voltageDropRate:            0,
       chargeDropRate:             0,
       sagGain:                    0,
+    };
+
+    this.FBUS_SENSORS = [];
+    this.FBUS_SENSORS_STATUS = {
+      gps:                        null,
+      current:                    null,
+      cells:                      null,
+      esc:                        null,
+      servo:                      null,
+    };
+    this.FBUS_MASTER_CONFIG = {
+      forwardedSensors:            [],
     };
 
     this.ANALOG = {

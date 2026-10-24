@@ -232,4 +232,10 @@ export const MSPCodes = {
     // action: 0 = poll only, 1 = (re)start - detects the board alignment
     // from a level baseline followed by a tail lift.
     MSP2_BOARD_AUTO_ALIGN:              0x5F13,
+    MSP2_GET_FBUS_SENSORS:              0x5F07,
+    MSP2_CLEAR_FBUS_SENSORS:            0x5F08,
+    MSP2_GET_FBUS_MASTER_CONFIG:        0x5F09,
+    MSP2_SET_FBUS_MASTER_CONFIG:        0x5F0A,
+    // 0x5F15: 0x5F0B-0x5F14 are taken upstream and by open PRs.
+    MSP2_GET_FBUS_SENSORS_STATUS:       0x5F15,
 };
