@@ -26,6 +26,7 @@ const MAX_SUPPORTED_MOTORS = 4;
 const MAX_SUPPORTED_PWM_SERVOS = 8;
 const BUS_SERVO_CHANNELS = 18;
 const MAX_SUPPORTED_SERVOS = MAX_SUPPORTED_PWM_SERVOS + BUS_SERVO_CHANNELS;
+const VIRTUAL_PWM_SERVO_COUNT = 4;
 const MIXER_INPUT_COUNT = 29;
 const MIXER_RULE_COUNT = 32;
 const MAX_MODE_ACTIVATION_CONDITION_COUNT = 20;
@@ -438,6 +439,29 @@ export function handleVirtualMessage(code, data) {
       break;
     }
 
+    // An SBUS/FBUS output port turns on bus servos: from then on the FC
+    // reports its PWM servos plus all 18 bus channels (msp.c, MSP_STATUS
+    // and hasBusServosConfigured()).
+    case MSPCodes.MSP_SET_SERIAL_CONFIG: {
+      const hasBusPort =
+        semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) &&
+        FC.SERIAL_CONFIG.ports.some(
+          (port) =>
+            port.functions.includes("SBUS_OUT") ||
+            port.functions.includes("FBUS_OUT"),
+        );
+      FC.CONFIG.servoCount =
+        VIRTUAL_PWM_SERVO_COUNT + (hasBusPort ? BUS_SERVO_CHANNELS : 0);
+      break;
+    }
+
+    // [index, sourceType], as msp.c reads it.
+    case MSPCodes.MSP_SET_BUS_SERVO_CONFIG:
+      if (bytes[0] < BUS_SERVO_CHANNELS) {
+        FC.BUS_SERVO_CONFIG[bytes[0]] = bytes[1];
+      }
+      break;
+
     case MSPCodes.MSP_SET_RESET_CURR_PID:
       pidProfiles[currentPidProfile] = defaultPidProfileBank();
       loadPidProfile(currentPidProfile);
@@ -526,7 +550,7 @@ export function applyVirtualConfig() {
     flightControllerIdentifier: "RTFL",
     apiVersion: CONFIGURATOR.virtualApiVersion,
     motorCount: 1,
-    servoCount: 4,
+    servoCount: VIRTUAL_PWM_SERVO_COUNT,
     sampleRateHz: 4000,
     activeSensors: 63, // activate all sensors
     profile: 0,
@@ -941,7 +965,10 @@ export function applyVirtualConfig() {
   FC.SERVO_DATA = new Array(MAX_SUPPORTED_SERVOS).fill(1500);
   FC.SERVO_OVERRIDE = new Array(MAX_SUPPORTED_SERVOS).fill(SERVO_OVERRIDE_OFF);
 
-  FC.BUS_SERVO_CONFIG = new Array(BUS_SERVO_CHANNELS).fill(0); // BUS_SERVO_SOURCE_MIXER
+  // pg/bus_servo.c: channels 1-8 follow the mixer, 9-18 pass the RX through
+  FC.BUS_SERVO_CONFIG = Array.from({ length: BUS_SERVO_CHANNELS }, (_, i) =>
+    i < 8 ? 0 : 1,
+  ); // BUS_SERVO_SOURCE_MIXER : BUS_SERVO_SOURCE_RX
 
   // Modes, src/main/msp/msp.c: unused slots report ARM on channel 0
   FC.MODE_RANGES = Array.from(
