@@ -4376,6 +4376,60 @@
     "mixerOutputServo8": {
         "message": "Servo 8"
     },
+    "mixerOutputBusServo1": {
+        "message": "Bus 1 (S9)"
+    },
+    "mixerOutputBusServo2": {
+        "message": "Bus 2 (S10)"
+    },
+    "mixerOutputBusServo3": {
+        "message": "Bus 3 (S11)"
+    },
+    "mixerOutputBusServo4": {
+        "message": "Bus 4 (S12)"
+    },
+    "mixerOutputBusServo5": {
+        "message": "Bus 5 (S13)"
+    },
+    "mixerOutputBusServo6": {
+        "message": "Bus 6 (S14)"
+    },
+    "mixerOutputBusServo7": {
+        "message": "Bus 7 (S15)"
+    },
+    "mixerOutputBusServo8": {
+        "message": "Bus 8 (S16)"
+    },
+    "mixerOutputBusServo9": {
+        "message": "Bus 9 (S17)"
+    },
+    "mixerOutputBusServo10": {
+        "message": "Bus 10 (S18)"
+    },
+    "mixerOutputBusServo11": {
+        "message": "Bus 11 (S19)"
+    },
+    "mixerOutputBusServo12": {
+        "message": "Bus 12 (S20)"
+    },
+    "mixerOutputBusServo13": {
+        "message": "Bus 13 (S21)"
+    },
+    "mixerOutputBusServo14": {
+        "message": "Bus 14 (S22)"
+    },
+    "mixerOutputBusServo15": {
+        "message": "Bus 15 (S23)"
+    },
+    "mixerOutputBusServo16": {
+        "message": "Bus 16 (S24)"
+    },
+    "mixerOutputBusServo17": {
+        "message": "Bus 17 (S25)"
+    },
+    "mixerOutputBusServo18": {
+        "message": "Bus 18 (S26)"
+    },
     "mixerOutputMotor1": {
         "message": "Motor 1"
     },
