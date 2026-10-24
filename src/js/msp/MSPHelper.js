@@ -485,6 +485,141 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             }
 
+            case MSPCodes.MSP2_GET_FBUS_SENSORS: {
+                const count = data.readU8();
+                const sensors = [];
+
+                for (let i = 0; i < count; i++) {
+                    const sensor = {
+                        physicalId: data.readU8(),
+                        source: data.readU8(), // 0 = FBUS, 1 = S.Port
+                        forwarded: data.readU8() !== 0,
+                        packetCount: data.readU32(),
+                    };
+
+                    const nameLen = data.readU8();
+                    let name = '';
+                    for (let j = 0; j < nameLen; j++) {
+                        name += String.fromCharCode(data.readU8());
+                    }
+                    sensor.name = name;
+
+                    const appIdCount = data.readU8();
+                    sensor.appIds = [];
+                    for (let j = 0; j < appIdCount; j++) {
+                        sensor.appIds.push(data.readU16());
+                    }
+
+                    sensors.push(sensor);
+                }
+
+                FC.FBUS_SENSORS = sensors;
+                break;
+            }
+
+            case MSPCodes.MSP2_CLEAR_FBUS_SENSORS: {
+                console.log('Observed FBUS/S.Port sensors cleared');
+                break;
+            }
+
+            // Latest decoded value per sensor type (drivers/fbus_sensor.c). Each
+            // block opens with a flags byte; 0 means no fresh data, and the
+            // block's fields are then zero.
+            case MSPCodes.MSP2_GET_FBUS_SENSORS_STATUS: {
+                data.readU8(); // payload version, unused for now
+
+                const gpsFlags = data.readU8();
+                const gpsData = {
+                    hasPosition: (gpsFlags & 0x01) !== 0,
+                    hasAltitude: (gpsFlags & 0x02) !== 0,
+                    hasSpeed: (gpsFlags & 0x04) !== 0,
+                    hasCourse: (gpsFlags & 0x08) !== 0,
+                    hasSatellites: (gpsFlags & 0x10) !== 0,
+                    hasTime: (gpsFlags & 0x20) !== 0,
+                    hasDate: (gpsFlags & 0x40) !== 0,
+                    latitude: data.read32(),
+                    longitude: data.read32(),
+                    altitudeCm: data.read32(),
+                    speedMilliKnots: data.readU32(),
+                    courseDeg10: data.readU16(),
+                    satellites: data.readU8(),
+                    hours: data.readU8(),
+                    minutes: data.readU8(),
+                    seconds: data.readU8(),
+                    day: data.readU8(),
+                    month: data.readU8(),
+                    year: data.readU16(),
+                };
+
+                const currentFlags = data.readU8();
+                const currentData = {
+                    hasCurrent: (currentFlags & 0x01) !== 0,
+                    hasVoltage: (currentFlags & 0x02) !== 0,
+                    hasHighPrecisionCurrent: (currentFlags & 0x04) !== 0,
+                    currentDeciAmps: data.readU32(),
+                    voltageCentiVolts: data.readU32(),
+                    currentMilliAmps: data.readU16(),
+                };
+
+                const cellsFlags = data.readU8();
+                const cellCount = data.readU8();
+                const cellVoltageCentiVolts = [];
+                for (let i = 0; i < cellCount; i++) {
+                    cellVoltageCentiVolts.push(data.readU16());
+                }
+                const cellsData = {
+                    cellCount,
+                    cellVoltageCentiVolts,
+                    totalVoltageCentiVolts: data.readU32(),
+                };
+
+                const escFlags = data.readU8();
+                const escData = {
+                    hasPower: (escFlags & 0x01) !== 0,
+                    hasRpm: (escFlags & 0x02) !== 0,
+                    hasConsumption: (escFlags & 0x04) !== 0,
+                    hasTemperature: (escFlags & 0x08) !== 0,
+                    voltageCentiVolts: data.readU16(),
+                    currentCentiAmps: data.readU16(),
+                    rpm: data.readU32(),
+                    consumptionMah: data.readU16(),
+                    temperature1: data.readU8(),
+                    temperature2: data.readU8(),
+                };
+
+                const servoFlags = data.readU8();
+                const servoData = {
+                    currentDeciAmps: data.readU16(),
+                    voltageDeciVolts: data.readU16(),
+                    temperature: data.readU16(),
+                };
+
+                FC.FBUS_SENSORS_STATUS = {
+                    gps: gpsFlags ? gpsData : null,
+                    current: currentFlags ? currentData : null,
+                    cells: cellsFlags ? cellsData : null,
+                    esc: escFlags ? escData : null,
+                    servo: servoFlags ? servoData : null,
+                };
+                break;
+            }
+
+            case MSPCodes.MSP2_GET_FBUS_MASTER_CONFIG: {
+                data.readU8(); // payload version, unused for now
+                const forwardedSensors = [];
+                // matches FBUS_MASTER_MAX_FORWARDED_SENSORS in pg/fbus_master.h
+                for (let i = 0; i < 8; i++) {
+                    forwardedSensors.push(data.readU8());
+                }
+                FC.FBUS_MASTER_CONFIG.forwardedSensors = forwardedSensors;
+                break;
+            }
+
+            case MSPCodes.MSP2_SET_FBUS_MASTER_CONFIG: {
+                console.log('FBUS master forwarding config saved');
+                break;
+            }
+
             case MSPCodes.MSP_SET_BATTERY_PROFILE: {
                 console.log('Battery profile set');
                 break;
@@ -883,7 +1018,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_FEATURE_CONFIG: {
                 FC.FEATURE_CONFIG.features.bitfield = data.readU32();
-                updateTabList(FC.FEATURE_CONFIG.features);
+                updateTabList();
                 break;
             }
 
@@ -1073,6 +1208,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     };
                     FC.SERIAL_CONFIG.ports.push(serialPort);
                 }
+                updateTabList();
                 break;
             }
 
@@ -2162,6 +2298,14 @@ MspHelper.prototype.crunch = function(code) {
                   .push8(FC.SMARTFUEL_CONFIG.voltageDropRate)
                   .push8(FC.SMARTFUEL_CONFIG.chargeDropRate)
                   .push8(FC.SMARTFUEL_CONFIG.sagGain);
+            break;
+        }
+
+        case MSPCodes.MSP2_SET_FBUS_MASTER_CONFIG: {
+            // matches FBUS_MASTER_MAX_FORWARDED_SENSORS in pg/fbus_master.h
+            for (let i = 0; i < 8; i++) {
+                buffer.push8(FC.FBUS_MASTER_CONFIG.forwardedSensors[i] ?? 0xFF);
+            }
             break;
         }
 

@@ -8,6 +8,7 @@ import {
 } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { mspHelper } from "@/js/msp/MSPHelper.js";
 import {
   BUS_SERVO_OFFSET,
   clampServoConfig,
@@ -383,6 +384,117 @@ function reply(code, buffer = new ArrayBuffer(0)) {
   };
 }
 
+// Sensors on the virtual FBUS bus, as fbusSensorGetName() names them. A
+// real sensor answers its poll a few times a second; packet counts grow with
+// time from connect (or the last clear) so the page looks live.
+const VIRTUAL_FBUS_SENSORS = [
+  { physicalId: 0x01, name: "FLVSS", appIds: [0x0300], rate: 4 },
+  {
+    physicalId: 0x03,
+    name: "GPS",
+    appIds: [0x0800, 0x0820, 0x0830, 0x0840, 0x0850, 0x0860],
+    rate: 6,
+  },
+  {
+    physicalId: 0x07,
+    name: "FAS_150S",
+    appIds: [0x0200, 0x0210, 0x0220],
+    rate: 5,
+  },
+  { physicalId: 0x0a, name: "ESC", appIds: [0x0b50, 0x0b60, 0x0b70], rate: 5 },
+];
+
+let virtualFbusClearedAt = Date.now();
+
+// MSP2_GET_FBUS_SENSORS: count, then per sensor physical ID, source,
+// forwarded, packet count, name and app IDs.
+function encodeFbusSensors() {
+  const seconds = (Date.now() - virtualFbusClearedAt) / 1000;
+  const forwarded = FC.FBUS_MASTER_CONFIG?.forwardedSensors ?? [];
+  const buffer = [];
+  buffer.push8(VIRTUAL_FBUS_SENSORS.length);
+  for (const sensor of VIRTUAL_FBUS_SENSORS) {
+    buffer.push8(sensor.physicalId);
+    buffer.push8(0); // source: FBUS
+    buffer.push8(forwarded.includes(sensor.physicalId) ? 1 : 0);
+    buffer.push32(Math.floor(seconds * sensor.rate * sensor.appIds.length));
+    buffer.push8(sensor.name.length);
+    for (const char of sensor.name) buffer.push8(char.charCodeAt(0));
+    buffer.push8(sensor.appIds.length);
+    for (const appId of sensor.appIds) buffer.push16(appId);
+  }
+  return Uint8Array.from(buffer);
+}
+
+// MSP2_GET_FBUS_SENSORS_STATUS, for the sensors above: a 6S pack on a
+// FAS-150S and FLVSS, a GPS with a fix and an idling ESC. Values drift a
+// little so the page shows them updating. The XACT servo block reports no data.
+function encodeFbusSensorsStatus() {
+  const now = new Date();
+  const t = now.getTime() / 1000;
+  const wobble = (amplitude, period) =>
+    Math.round(amplitude * Math.sin((2 * Math.PI * t) / period));
+  const cells = [415, 414, 416, 415, 413, 415].map(
+    (cell, i) => cell + wobble(1, 7 + i),
+  );
+  const pack = cells.reduce((sum, cell) => sum + cell, 0);
+
+  const buffer = [];
+  buffer.push8(1); // payload version
+
+  buffer.push8(0x6f); // GPS: position, altitude, speed, course, time, date
+  buffer.push32(-337_867_000 + wobble(20, 11)); // latitude, deg * 1e7
+  buffer.push32(1_511_234_000 + wobble(20, 13)); // longitude, deg * 1e7
+  buffer.push32(4_520 + wobble(30, 9)); // altitude, cm
+  buffer.push32(1_200 + wobble(300, 5)); // speed, knots * 1000
+  buffer.push16(1_850 + wobble(20, 8)); // course, deg * 10
+  buffer.push8(0); // satellites, not decoded by the RF firmware
+  buffer.push8(now.getUTCHours());
+  buffer.push8(now.getUTCMinutes());
+  buffer.push8(now.getUTCSeconds());
+  buffer.push8(now.getUTCDate());
+  buffer.push8(now.getUTCMonth() + 1);
+  buffer.push16(now.getUTCFullYear());
+
+  buffer.push8(0x07); // current: current, voltage, high-precision current
+  buffer.push32(35 + wobble(3, 4)); // 0.1 A
+  buffer.push32(pack - 4); // 0.01 V, a little under the cells' sum
+  buffer.push16(3_480 + wobble(250, 4)); // 0.001 A
+
+  buffer.push8(0x01); // FLVSS
+  buffer.push8(cells.length);
+  for (const cell of cells) buffer.push16(cell);
+  buffer.push32(pack);
+
+  buffer.push8(0x0f); // ESC: power, RPM, consumption, temperature
+  buffer.push16(pack - 10); // 0.01 V
+  buffer.push16(340 + wobble(25, 4)); // 0.01 A
+  buffer.push32(4_200 + wobble(50, 6)); // RPM
+  buffer.push16(127); // mAh
+  buffer.push8(38);
+  buffer.push8(0); // second temperature, not decoded
+
+  buffer.push8(0); // XACT servo: no data
+  buffer.push16(0);
+  buffer.push16(0);
+  buffer.push16(0);
+
+  return Uint8Array.from(buffer);
+}
+
+// Runs a virtual reply through the real decoder, so FC is updated exactly as it
+// would be by hardware (and a payload that drifts from the wire format shows up
+// here), and returns it as the tab's reply.
+function decodedReply(code, payload) {
+  mspHelper.process_data({
+    code,
+    dataView: new DataView(payload.buffer),
+    crcError: false,
+    callbacks: [],
+  });
+  return reply(code, payload.buffer);
+}
+
 /**
  * Apply the side effects the firmware has for an MSP request, and return the
  * reply as MSP.send_message callbacks receive it. Replies carry no payload
@@ -528,6 +640,17 @@ export function handleVirtualMessage(code, data) {
       }
       break;
     }
+
+    case MSPCodes.MSP2_GET_FBUS_SENSORS:
+      return decodedReply(code, encodeFbusSensors());
+
+    case MSPCodes.MSP2_GET_FBUS_SENSORS_STATUS:
+      return decodedReply(code, encodeFbusSensorsStatus());
+
+    // The sensors keep answering, so they show again at once with fresh counts
+    case MSPCodes.MSP2_CLEAR_FBUS_SENSORS:
+      virtualFbusClearedAt = Date.now();
+      break;
 
     case MSPCodes.MSP_SET_ESC_PARAMETERS:
       if (virtualEscManufacturerId && data) {
