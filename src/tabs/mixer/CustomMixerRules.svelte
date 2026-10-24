@@ -318,12 +318,18 @@
   // Re-reads the FC's own copy rather than replaying a local snapshot:
   // edits here are only ever staged, so whatever the FC still holds is
   // by definition the state being reverted to.
+  //
+  // Same order as on load: snapshot the FC's raw copy first, then
+  // normalise. Returns whether normalising changed anything, in which
+  // case the FC still differs from the editor and the tab must stay
+  // dirty so the fix-up can be saved.
   export async function revert() {
     await MSP.promise(MSPCodes.MSP_MIXER_RULES);
     padToCapacity();
-    normalizeRuleGroups(FC.MIXER_RULES);
-    enforceOperInvariant(FC.MIXER_RULES);
     origRules = Mixer.cloneRules(FC.MIXER_RULES);
+    const regrouped = normalizeRuleGroups(FC.MIXER_RULES);
+    const reopered = enforceOperInvariant(FC.MIXER_RULES);
+    return regrouped || reopered;
   }
 </script>
 

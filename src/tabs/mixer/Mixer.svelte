@@ -329,8 +329,7 @@
     FC.MIXER_CONFIG = Mixer.cloneConfig(origConfig);
     FC.MIXER_INPUTS = Mixer.cloneInputs(origInputs);
     await sendDirtyConfig();
-    await customRules?.revert();
-    needSave = false;
+    needSave = (await customRules?.revert()) ?? false;
     needReboot = false;
     dataToForm();
   }
