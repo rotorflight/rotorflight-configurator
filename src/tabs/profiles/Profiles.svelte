@@ -27,6 +27,7 @@
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
 
+  import EffectivePidGains from "./EffectivePidGains.svelte";
   import Governor from "./Governor.svelte";
   import {
     AXES,
@@ -55,6 +56,13 @@
   let form = $state({});
   let initialForm = $state(null);
 
+  // The FC's current gains, polled so the effective gains follow in-flight
+  // adjustments. Null until master gains are supported.
+  let live = $state(null);
+  let livePoller;
+  let livePoll = null;
+  let saving = false;
+
   let mountedProfile;
   let statusPoller;
   let profileChangeDialogOpen = false;
@@ -74,6 +82,7 @@
   // Passthrough (0) and custom (>4) PID modes have no PID settings to edit.
   let showPidConfig = $derived(pidMode > 0 && pidMode <= 4);
   let showHsi = $derived(pidMode >= 3);
+  let showMasterGain = $derived(!!live);
 
   let numProfiles = $derived(
     Math.min(FC.CONFIG.numProfiles || PROFILE_COUNT, PROFILE_COUNT),
@@ -183,8 +192,36 @@
 
     formFromFc();
     initialForm = $state.snapshot(form);
+    liveFromFc();
     govChanged = false;
     reloadKey++;
+  }
+
+  function liveFromFc() {
+    if (!FC.PID_PROFILE.hasMasterGain) {
+      live = null;
+      return;
+    }
+    live = {
+      pids: AXES.map((_, axis) => FC.PIDS[axis].map(Number)),
+      cyclicMasterGain: Number(FC.PID_PROFILE.cyclicMasterGain),
+      yawMasterGain: Number(FC.PID_PROFILE.yawMasterGain),
+    };
+  }
+
+  // The poll rewrites FC.PIDS and FC.PID_PROFILE, so it never runs while a
+  // save is sending them.
+  function pollLive() {
+    if (!live || saving || livePoll) {
+      return;
+    }
+    livePoll = (async () => {
+      await MSP.promise(MSPCodes.MSP_PID_TUNING);
+      await MSP.promise(MSPCodes.MSP_PID_PROFILE);
+      if (!saving) {
+        liveFromFc();
+      }
+    })().finally(() => (livePoll = null));
   }
 
   onMount(async () => {
@@ -213,9 +250,14 @@
         }
       }
     }, 250);
+
+    livePoller = setInterval(pollLive, 1000);
   });
 
-  onDestroy(() => clearInterval(statusPoller));
+  onDestroy(() => {
+    clearInterval(statusPoller);
+    clearInterval(livePoller);
+  });
 
   function activateProfile(index) {
     FC.CONFIG.profile = index;
@@ -272,21 +314,28 @@
   }
 
   export async function onSave() {
-    formToFc();
-    for (const code of [
-      MSPCodes.MSP_SET_PID_TUNING,
-      MSPCodes.MSP_SET_PID_PROFILE,
-      MSPCodes.MSP_SET_RESCUE_PROFILE,
-      MSPCodes.MSP_SET_GOVERNOR_PROFILE,
-      MSPCodes.MSP_SET_GOVERNOR_CONFIG,
-    ]) {
-      await MSP.promise(code, mspHelper.crunch(code));
+    saving = true;
+    try {
+      await livePoll;
+      formToFc();
+      for (const code of [
+        MSPCodes.MSP_SET_PID_TUNING,
+        MSPCodes.MSP_SET_PID_PROFILE,
+        MSPCodes.MSP_SET_RESCUE_PROFILE,
+        MSPCodes.MSP_SET_GOVERNOR_PROFILE,
+        MSPCodes.MSP_SET_GOVERNOR_CONFIG,
+      ]) {
+        await MSP.promise(code, mspHelper.crunch(code));
+      }
+      await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
+      GUI.log($i18n.t("eepromSaved"));
+      profileState.savedProfile = FC.CONFIG.profile;
+      initialForm = $state.snapshot(form);
+      liveFromFc();
+      govChanged = false;
+    } finally {
+      saving = false;
     }
-    await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
-    GUI.log($i18n.t("eepromSaved"));
-    profileState.savedProfile = FC.CONFIG.profile;
-    initialForm = $state.snapshot(form);
-    govChanged = false;
   }
 
   export async function onRevert() {
@@ -376,6 +425,15 @@
       <div class="columns">
         <div class="column">
           {#if showPidConfig}
+            {#if showMasterGain && initialForm}
+              <EffectivePidGains
+                {form}
+                initial={initialForm}
+                {live}
+                showOffset={showHsi}
+              />
+            {/if}
+
             <Section label="profilesPidGains">
               <div class="pid-wrap">
                 <div class="pid-table" style:--pid-rows={GAINS.length + 1}>
@@ -402,6 +460,21 @@
                 </div>
               </div>
             </Section>
+
+            {#if showMasterGain}
+              <Section label="profilesMasterGains">
+                {@render num(
+                  "cyclicMasterGain",
+                  "profilesCyclicMasterGain",
+                  "profilesCyclicMasterGainHelp",
+                )}
+                {@render num(
+                  "yawMasterGain",
+                  "profilesYawMasterGain",
+                  "profilesYawMasterGainHelp",
+                )}
+              </Section>
+            {/if}
 
             <Section label="profilesPidSettings">
               {#if !api.v129}

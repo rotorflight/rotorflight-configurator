@@ -222,4 +222,14 @@ export const MSPCodes = {
     MSP2_SET_SMARTFUEL_CONFIG:          0x4001,
 
     MSP2_GET_CRSF_SENSORS_STATUS:       0x5F0B,
+
+    // action: 0 = poll only, 1 = (re)start a scan, 2 = stop/cancel - cycles
+    // the live wiring options for the already-configured protocol and reports
+    // which combo (if any) works. RX: serialrx_inverted/halfDuplex/pinSwap.
+    // ESC telemetry: halfDuplex/pinSwap (no `inverted` - it never inverts).
+    MSP2_ESC_SENSOR_TRIAL:              0x5F0C,
+    MSP2_RX_SERIAL_TRIAL:               0x5F12,
+    // action: 0 = poll only, 1 = (re)start - detects the board alignment
+    // from a level baseline followed by a tail lift.
+    MSP2_BOARD_AUTO_ALIGN:              0x5F13,
 };

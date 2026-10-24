@@ -49,6 +49,8 @@ export const PID_PROFILE_FIELDS = {
   yaw_inertia_precomp_gain: n(0, 250),
   yaw_inertia_precomp_cutoff: { ...n(0, 25, 0.1), scale: 10 },
   cyclicCrossCouplingRatio: n(0, 200),
+  cyclicMasterGain: n(25, 200),
+  yawMasterGain: n(25, 200),
   acroTrainerGain: n(25, 255),
   acroTrainerLimit: n(10, 80),
   levelAngleStrength: n(0, 200),

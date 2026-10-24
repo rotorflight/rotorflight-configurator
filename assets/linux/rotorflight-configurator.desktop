@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Rotorflight Configurator
+Name={{name}}
 Comment=Crossplatform configuration tool for the Rotorflight flight control system
-Exec=/opt/rotorflight/rotorflight-configurator/rotorflight-configurator
-Icon=/opt/rotorflight/rotorflight-configurator/icon/rf_icon.png
+Exec={{installdir}}/rotorflight-configurator
+Icon={{installdir}}/icon/rf_icon.png
 Terminal=false
 Type=Application
 Categories=Utility
