@@ -219,6 +219,10 @@ function defaultPidProfile() {
     btermCutoffYaw: 20,
     yaw_inertia_precomp_gain: 0,
     yaw_inertia_precomp_cutoff: 25,
+    error_decay_gain_cyclic: 0,
+    hasMasterGain: true,
+    cyclicMasterGain: 100,
+    yawMasterGain: 100,
 
     rescueMode: 0,
     rescueFlipMode: 1,
@@ -662,8 +666,8 @@ export function applyVirtualConfig() {
     capacity: 10000,
     capacities: [10000, 0, 0, 0, 0, 0],
     cellCount: 0,
-    voltageMeterSource: 1,
-    currentMeterSource: 1,
+    voltageMeterSource: 2, // ESC, the firmware default
+    currentMeterSource: 2, // ESC, the firmware default
     vbatmincellvoltage: 3.3,
     vbatmaxcellvoltage: 4.3,
     vbatfullcellvoltage: 4.1,

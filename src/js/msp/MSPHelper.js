@@ -1346,6 +1346,15 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.PID_PROFILE.yaw_inertia_precomp_gain  = data.readU8();
                     FC.PID_PROFILE.yaw_inertia_precomp_cutoff= data.readU8();
                 }
+                if (data.remaining() >= 1) {
+                    FC.PID_PROFILE.error_decay_gain_cyclic   = data.readU8();
+                }
+                // Master gains //
+                FC.PID_PROFILE.hasMasterGain = data.remaining() >= 2;
+                if (FC.PID_PROFILE.hasMasterGain) {
+                    FC.PID_PROFILE.cyclicMasterGain          = data.readU8();
+                    FC.PID_PROFILE.yawMasterGain             = data.readU8();
+                }
                 break;
             }
 
@@ -2362,6 +2371,13 @@ MspHelper.prototype.crunch = function(code) {
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                 buffer.push8(FC.PID_PROFILE.yaw_inertia_precomp_gain)
                     .push8(FC.PID_PROFILE.yaw_inertia_precomp_cutoff);
+            }
+            // Only sent back to firmware that reported them, so an older
+            // error_decay_gain_cyclic is never overwritten with a default.
+            if (FC.PID_PROFILE.hasMasterGain) {
+                buffer.push8(FC.PID_PROFILE.error_decay_gain_cyclic)
+                    .push8(FC.PID_PROFILE.cyclicMasterGain)
+                    .push8(FC.PID_PROFILE.yawMasterGain);
             }
             break;
         }

@@ -621,6 +621,10 @@ class FlightController {
       rescueMaxAccel:             0,
       yaw_inertia_precomp_gain:   0,
       yaw_inertia_precomp_cutoff: 0,
+      error_decay_gain_cyclic:    0,
+      hasMasterGain:              false,
+      cyclicMasterGain:           100,
+      yawMasterGain:              100,
     };
 
     this.GOVERNOR = {

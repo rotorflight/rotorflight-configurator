@@ -13,7 +13,7 @@ import { computeLayout, writeRawField, buildPayload } from "../engine.js";
 import { registerManufacturer } from "./registry.js";
 
 const motorDirection = ["Normal", "Reversed"];
-const timingAdvanceLabels = ["0°", "7.5°", "15°", "22.5°"];
+const timingAdvanceLabels = ["0°", "7.5°", "15°", "22.5°", "30°"];
 const onOff = ["Off", "On"];
 const protocolEnum = ["Auto", "Dshot 300-600", "Servo 1-2ms", "Serial", "BF Safe Arming"];
 const brakeOnStop = ["Off", "Brake", "Active Brake"];
@@ -126,12 +126,13 @@ function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
 }
 
-// raw 10-42 => "new" encoding (n*8+10), raw 0-3 => "legacy" encoding (direct index). The
-// encoding actually in use is auto-detected from the read value and must be reused on write.
+// raw 10-42 => "new" encoding (n*8+10, raw 42 = 30°), raw 0-3 => "legacy" encoding (direct
+// index, no 30° option). The encoding actually in use is auto-detected from the read value and
+// must be reused on write.
 function normalizeTimingAdvance(raw) {
     if (raw == null) return { display: undefined, encoding: "unknown" };
     if (raw >= 10 && raw <= 42) {
-        return { display: clamp(Math.round((raw - 10) / 8), 0, 3), encoding: "new" };
+        return { display: clamp(Math.round((raw - 10) / 8), 0, 4), encoding: "new" };
     }
     if (raw >= 0 && raw <= 3) {
         return { display: raw, encoding: "legacy" };
@@ -140,7 +141,7 @@ function normalizeTimingAdvance(raw) {
 }
 
 function encodeTimingAdvance(display, encoding) {
-    const n = clamp(Math.round(display ?? 0), 0, 3);
+    const n = clamp(Math.round(display ?? 0), 0, encoding === "new" ? 4 : 3);
     return encoding === "new" ? 10 + n * 8 : n;
 }
 
@@ -148,8 +149,10 @@ const TIMING_ENCODING_KEY = "__am32_timing_advance_encoding";
 
 const customFields = {
     timing_advance: {
-        toDisplay: (raw) => normalizeTimingAdvance(raw).display,
-        toRaw: (display, context) => encodeTimingAdvance(display, context.timingAdvanceEncoding),
+        // The Select holds enum labels, so convert between label and index at the boundary.
+        toDisplay: (raw) => timingAdvanceLabels[normalizeTimingAdvance(raw).display],
+        toRaw: (display, context) =>
+            encodeTimingAdvance(timingAdvanceLabels.indexOf(display), context.timingAdvanceEncoding),
     },
     motor_kv: {
         toDisplay: (raw) => raw * 40 + 20,
