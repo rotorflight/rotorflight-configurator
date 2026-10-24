@@ -26,10 +26,15 @@
   ];
 
   // `form`/`initial` are the page's edited and last loaded values, `live`
-  // the FC's current ones (they follow in-flight adjustments).
-  let { form, initial, live, showOffset } = $props();
+  // the FC's current ones (they follow in-flight adjustments). showBoost
+  // follows the gains table's Boost column.
+  let { form, initial, live, showOffset, showBoost = true } = $props();
 
-  let columns = $derived(COLUMNS.filter((c) => showOffset || c.key !== "O"));
+  let columns = $derived(
+    COLUMNS.filter(
+      (c) => (showOffset || c.key !== "O") && (showBoost || c.key !== "B"),
+    ),
+  );
 
   // A value edited on the page wins; an untouched one follows the FC.
   function current(formValue, initialValue, liveValue) {

@@ -7,6 +7,7 @@
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
+  import { CHANNEL_PRESETS } from "../channelPresets.js";
   import ChannelBar from "./ChannelBar.svelte";
 
   const channelNames = [
@@ -76,12 +77,7 @@
     { value: 32, text: "controlAxisAux27" },
   ];
 
-  const presets = [
-    { label: "ELRS", map: [0, 1, 3, 2, 5, 4, 6, 7] },
-    { label: "FrSky", map: [0, 1, 3, 4, 2, 5, 6, 7] },
-    { label: "Futaba / Hitec", map: [0, 1, 3, 5, 2, 4, 6, 7] },
-    { label: "Spektrum / Graupner / JR", map: [1, 2, 3, 5, 0, 4, 6, 7] },
-  ];
+  const presets = CHANNEL_PRESETS;
 
   let selectedPreset = $derived.by(() => {
     // check if FC.RC_MAP matches a preset map
