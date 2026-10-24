@@ -201,6 +201,16 @@
     row-gap: 8px;
     align-items: center;
     padding: 4px;
+
+    /* Each row's 3rd cell is now two stacked meters (ChannelBar's own
+       .channel-meters), taller than a single meter used to be - align the
+       index/dropdown to the top of that combined height rather than
+       centering them across it, so they line up with the primary (top)
+       meter specifically. */
+    > select,
+    > .channel-index {
+      align-self: start;
+    }
   }
 
   .channel-index {
