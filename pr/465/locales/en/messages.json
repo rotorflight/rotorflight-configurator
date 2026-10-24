@@ -3860,6 +3860,9 @@
     "mixerCustomRuleMissingOutputNote": {
         "message": "<span class=\"message-negative\">Warning:</span> One or more rules below drive an output this flight controller doesn't have. Those rules are kept, but they have no effect - the output reports a constant centre value rather than moving, which looks the same as a rule that simply isn't working."
     },
+    "mixerCustomRuleBusSourceNote": {
+        "message": "One or more rules below drive a bus channel whose <i>Source</i> is <i>RX</i>, so it currently passes the receiver straight through. Saving sets that channel's source to <i>Mixer</i> so it follows these rules."
+    },
     "mixerRuleIndex": {
         "message": "#"
     },
@@ -4376,59 +4379,17 @@
     "mixerOutputServo8": {
         "message": "Servo 8"
     },
-    "mixerOutputBusServo1": {
-        "message": "Bus 1 (S9)"
+    "mixerOutputBusNamed": {
+        "message": "$1 $2",
+        "description": "Mixer output on an SBUS/FBUS channel. $1 is the bus (SBUS or FBUS), $2 the channel number"
     },
-    "mixerOutputBusServo2": {
-        "message": "Bus 2 (S10)"
+    "mixerOutputBus": {
+        "message": "Bus $1",
+        "description": "Mixer output on a bus channel when both an SBUS and an FBUS output port are set up. $1 is the channel number"
     },
-    "mixerOutputBusServo3": {
-        "message": "Bus 3 (S11)"
-    },
-    "mixerOutputBusServo4": {
-        "message": "Bus 4 (S12)"
-    },
-    "mixerOutputBusServo5": {
-        "message": "Bus 5 (S13)"
-    },
-    "mixerOutputBusServo6": {
-        "message": "Bus 6 (S14)"
-    },
-    "mixerOutputBusServo7": {
-        "message": "Bus 7 (S15)"
-    },
-    "mixerOutputBusServo8": {
-        "message": "Bus 8 (S16)"
-    },
-    "mixerOutputBusServo9": {
-        "message": "Bus 9 (S17)"
-    },
-    "mixerOutputBusServo10": {
-        "message": "Bus 10 (S18)"
-    },
-    "mixerOutputBusServo11": {
-        "message": "Bus 11 (S19)"
-    },
-    "mixerOutputBusServo12": {
-        "message": "Bus 12 (S20)"
-    },
-    "mixerOutputBusServo13": {
-        "message": "Bus 13 (S21)"
-    },
-    "mixerOutputBusServo14": {
-        "message": "Bus 14 (S22)"
-    },
-    "mixerOutputBusServo15": {
-        "message": "Bus 15 (S23)"
-    },
-    "mixerOutputBusServo16": {
-        "message": "Bus 16 (S24)"
-    },
-    "mixerOutputBusServo17": {
-        "message": "Bus 17 (S25)"
-    },
-    "mixerOutputBusServo18": {
-        "message": "Bus 18 (S26)"
+    "mixerOutputServoAndBus": {
+        "message": "$1 + $2",
+        "description": "Mixer output that drives both a PWM servo ($1) and the bus channel that mirrors it ($2)"
     },
     "mixerOutputMotor1": {
         "message": "Motor 1"
