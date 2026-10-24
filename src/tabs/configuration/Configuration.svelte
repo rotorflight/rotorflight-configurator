@@ -42,6 +42,7 @@
   let boardAlignmentRef;
   let yawFix = $state(0);
   let fastInterval;
+  let modelPollingPaused = false;
 
   let hasModelId = $derived(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7));
   let hasFlightStats = $derived(
@@ -143,6 +144,7 @@
     await tick();
 
     fastInterval = setInterval(async () => {
+      if (modelPollingPaused) return;
       await MSP.promise(MSPCodes.MSP_ATTITUDE);
       renderModelTick();
     }, 50);
@@ -204,6 +206,13 @@
 
     updateTabList(FC.FEATURE_CONFIG.features);
     boardAlignmentRef?.cleanup();
+
+    // Board auto-align applies its result on the FC straight away, so push
+    // the reverted alignment back rather than leave the detected one live.
+    await MSP.promise(
+      MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG,
+      mspHelper.crunch(MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG),
+    );
   }
 
   export function isDirty() {
@@ -440,6 +449,7 @@
         <BoardAlignment
           bind:this={boardAlignmentRef}
           magHardwareEnabled={FC.SENSOR_CONFIG.mag_hardware !== 1}
+          onModelPollingPausedChange={(paused) => (modelPollingPaused = paused)}
         />
       </Section>
 

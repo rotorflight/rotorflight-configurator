@@ -1,4 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  SETTINGS_NAMESPACE,
+  findSettingsToImport,
+  mirrorSettings,
+} from "./configImport.ts";
 
 // Increment when making incompatible config schema changes
 // e.g. changing the type of a field
@@ -11,9 +16,8 @@ function isKeyOf<T extends Record<string, unknown>>(
   return key in obj;
 }
 
-// The web builds of every version share one origin, and so one
-// localStorage. 2.x saves each setting as { [prop]: value }; read those as the
-// bare value so a setting changed there doesn't come back here as an object.
+// 2.x saves each setting as { [prop]: value }. Its web build shares this
+// origin, so a new release line imports those as the bare value.
 function unwrapLegacy(prop: string, value: unknown) {
   if (value && typeof value === "object" && !Array.isArray(value)) {
     const wrapped = value as Record<string, unknown>;
@@ -25,22 +29,11 @@ function unwrapLegacy(prop: string, value: unknown) {
   return value;
 }
 
-function isLegacyWrapped(prop: string) {
-  try {
-    const value = JSON.parse(
-      globalThis.localStorage.getItem(prop) ?? "null",
-    ) as unknown;
-    return unwrapLegacy(prop, value) !== value;
-  } catch {
-    return false;
-  }
-}
-
 function get(prop: string) {
   try {
-    const value = globalThis.localStorage.getItem(prop);
+    const value = globalThis.localStorage.getItem(SETTINGS_NAMESPACE + prop);
     if (value) {
-      return unwrapLegacy(prop, JSON.parse(value) as unknown);
+      return JSON.parse(value) as unknown;
     }
   } catch {
     //
@@ -48,7 +41,10 @@ function get(prop: string) {
 }
 
 function set(prop: string, value: any) {
-  globalThis.localStorage.setItem(prop, JSON.stringify(value));
+  globalThis.localStorage.setItem(
+    SETTINGS_NAMESPACE + prop,
+    JSON.stringify(value),
+  );
 }
 
 export type Config = {
@@ -138,6 +134,7 @@ const handler: ProxyHandler<Config> = {
       set(prop, value);
       /* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
       (obj as any)[prop] = value;
+      mirrorSettings(snapshot);
       return true;
     }
 
@@ -147,21 +144,35 @@ const handler: ProxyHandler<Config> = {
 
 export const config = new Proxy(_config, handler);
 
+function snapshot() {
+  return Object.fromEntries(
+    Object.keys(_config).map((prop) => [prop, config[prop as keyof Config]]),
+  );
+}
+
 /*
- * Reset configuration to defaults when on an unknown version
+ * Reset configuration to defaults when on an unknown version. A release line
+ * that starts for the first time takes the settings of the one before it.
  */
 if (config.configVersion !== CONFIG_VERSION) {
+  const firstStart = config.configVersion === null;
   if (__BACKEND__ === "web") {
-    // Only this version's settings: the other versions deployed to the same
+    // Only this line's settings: the other versions deployed to the same
     // origin keep their own settings and caches in this localStorage too.
-    // A setting in the 2.x format belongs to 2.x, so leave it (and read it).
     for (const prop of Object.keys(_config)) {
-      if (!isLegacyWrapped(prop)) {
-        globalThis.localStorage.removeItem(prop);
-      }
+      globalThis.localStorage.removeItem(SETTINGS_NAMESPACE + prop);
     }
   } else {
     globalThis.localStorage.clear();
+  }
+  if (firstStart) {
+    const props = Object.keys(_config);
+    const imported = findSettingsToImport(props, CONFIG_VERSION, unwrapLegacy);
+    for (const [prop, value] of Object.entries(imported ?? {})) {
+      if (prop !== "configVersion" && props.includes(prop) && value != null) {
+        set(prop, value);
+      }
+    }
   }
   config.configVersion = CONFIG_VERSION;
 }

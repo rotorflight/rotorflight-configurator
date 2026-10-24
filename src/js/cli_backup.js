@@ -21,6 +21,16 @@ const BACKUP_COMMANDS = {
   [BACKUP_TYPES.DUMP]: "dump all",
 };
 
+// What a board with no published target (a DIY build, say) needs carried
+// across a flash in place of one: its pins, timers, DMA and other hardware
+// settings. `bare` diffs against the plain MCU build's defaults rather than
+// whatever custom defaults the board was last flashed with -- otherwise a
+// board that already carries its config as custom defaults would diff as
+// empty. It also skips the `batch start`/`batch end` wrapper, so the output
+// reads like a rotorflight-targets .config. A diff rather than a dump, since
+// it has to fit the custom defaults area (6K on F405/F411/F722).
+const HARDWARE_CONFIG_COMMAND = "diff hardware bare";
+
 // Both `dump all` and `diff all` open with cli.c's printVersion() banner --
 // "# Rotorflight / <target> (...) <version> ...". A board running Betaflight
 // or anything else prints its own firmware name there instead, which is what
@@ -127,7 +137,11 @@ function closeSerial() {
  * `cliEngine` and resolves with the captured output once it settles.
  */
 export async function runBackupCommand(cliEngine, backupType) {
-  cliEngine.sendLine(BACKUP_COMMANDS[backupType]);
+  return runCliCommand(cliEngine, BACKUP_COMMANDS[backupType]);
+}
+
+async function runCliCommand(cliEngine, command) {
+  cliEngine.sendLine(command);
   await waitForIdle(cliEngine, CLI_IDLE_MS);
   return cliEngine.outputHistory;
 }
@@ -206,6 +220,19 @@ export async function replayBackup(cliEngine, commandsText) {
  * to show live status.
  */
 export async function backupOverSerial(port, baud, backupType, onStatus) {
+  return captureOverSerial(port, baud, BACKUP_COMMANDS[backupType], onStatus);
+}
+
+/**
+ * Same as backupOverSerial(), but captures the board's hardware config (see
+ * HARDWARE_CONFIG_COMMAND above) instead of a full backup -- for flashing a
+ * board that has no published target.
+ */
+export async function readHardwareConfigOverSerial(port, baud, onStatus) {
+  return captureOverSerial(port, baud, HARDWARE_CONFIG_COMMAND, onStatus);
+}
+
+async function captureOverSerial(port, baud, command, onStatus) {
   CONFIGURATOR.cliEngineValid = false;
   onStatus?.("connecting");
 
@@ -226,7 +253,7 @@ export async function backupOverSerial(port, baud, backupType, onStatus) {
   }
 
   onStatus?.("running");
-  const text = await runBackupCommand(cliEngine, backupType);
+  const text = await runCliCommand(cliEngine, command);
 
   // Leaving CLI mode (however we do it) reboots the flight controller -- see
   // CLI_REBOOT_WAIT_MS above -- so disconnect first and then wait, rather
