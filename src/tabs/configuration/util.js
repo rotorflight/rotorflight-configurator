@@ -72,6 +72,7 @@ export const PORT_FUNCTIONS = [
   { id: 1048576, excl: 1048576, name: "SPORT_MASTER", type: PORT_TYPES.AUTO },
   { id: 2097152, excl: 2097152, name: "SRXL2_ESC", type: PORT_TYPES.AUTO },
   { id: 4194304, excl: 4194304, name: "CRSF_SENSORS", type: PORT_TYPES.AUTO },
+  { id: 8388608, excl: 8388608, name: "RX_INPUT_BACKUP", type: PORT_TYPES.AUTO },
   { id: 4, excl: 4668, name: "TELEMETRY_FRSKY", type: PORT_TYPES.TELEM },
   { id: 32, excl: 4668, name: "TELEMETRY_SMARTPORT", type: PORT_TYPES.TELEM },
   { id: 4096, excl: 4668, name: "TELEMETRY_IBUS", type: PORT_TYPES.TELEM },

@@ -24,6 +24,9 @@
     onSaveRequested,
     hasUnsavedChanges,
     armed,
+    mainLinkUp,
+    hasBackupRxPort,
+    backupActive,
   } = $props();
 
   let wizardDisabled = $state(false);
@@ -106,7 +109,28 @@
   </div>
 {/snippet}
 
-<Section label="receiverSelection">
+{#snippet header()}
+  <div class="section-header">
+    <span class="title">{$i18n.t("receiverSelection")}</span>
+    <div class="grow"></div>
+    {#if mainLinkUp !== null}
+      <span class="badge" class:up={mainLinkUp} class:down={!mainLinkUp}>
+        {mainLinkUp
+          ? $i18n.t("rxInputBackupStatusLinkUp")
+          : $i18n.t("rxInputBackupStatusLinkDown")}
+      </span>
+      {#if hasBackupRxPort}
+        <span class="badge" class:active={backupActive}>
+          {backupActive
+            ? $i18n.t("rxInputBackupStatusActiveBackup")
+            : $i18n.t("rxInputBackupStatusActiveMain")}
+        </span>
+      {/if}
+    {/if}
+  </div>
+{/snippet}
+
+<Section {header}>
   <SubSection>
     <Field id="receiver-protocol" label="receiverProtocol">
       <select
@@ -185,5 +209,43 @@
     @extend %button;
 
     padding: 4px 8px;
+  }
+
+  /* Custom Section header (badges live here, not in the body) - replicates
+     %section-header (_global.scss) plus a right-aligned badge row, kept
+     compact rather than adding a separate summary line below the title.
+     Mirrors Receiver.svelte's own identical block for the RX #2 header. */
+  .section-header {
+    @extend %section-header;
+
+    padding-right: 8px;
+    gap: 8px;
+  }
+
+  .title {
+    padding-left: 8px;
+  }
+
+  .badge {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+  }
+
+  .badge.up {
+    color: var(--color-border-accent);
+    border-color: var(--color-border-accent);
+  }
+
+  /* "active" here means the backup link is the one currently driving the
+     aircraft (main link down) -- worth calling out the same way "down" is. */
+  .badge.down,
+  .badge.active {
+    color: var(--color-danger, var(--color-border-accent));
+    border-color: var(--color-danger, var(--color-border-accent));
   }
 </style>
