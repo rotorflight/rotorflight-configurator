@@ -40,6 +40,7 @@
   },
   "author": "The Rotorflight open source project.",
   "license": "GPL-3.0",
+  "packageManager": "pnpm@11.25.0",
   "devEngines": {
     "runtime": {
       "name": "node",
