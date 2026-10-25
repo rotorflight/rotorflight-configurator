@@ -235,4 +235,10 @@ export const MSPCodes = {
     // action: 0 = read, 1 = tail pin to SERVO 4, 2 = tail pin to MOTOR 2.
     // Replies where the pin is and the result (see tail_motor.js).
     MSP2_TAIL_MOTOR_OUTPUT:             0x5F14,
+    MSP2_GET_FBUS_SENSORS:              0x5F07,
+    MSP2_CLEAR_FBUS_SENSORS:            0x5F08,
+    MSP2_GET_FBUS_MASTER_CONFIG:        0x5F09,
+    MSP2_SET_FBUS_MASTER_CONFIG:        0x5F0A,
+    // 0x5F15: 0x5F0B-0x5F14 are taken upstream and by open PRs.
+    MSP2_GET_FBUS_SENSORS_STATUS:       0x5F15,
 };

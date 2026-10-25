@@ -13,7 +13,10 @@
   import WarningNote from "@/components/notes/WarningNote.svelte";
 
   import { Mixer } from "@/js/Mixer.js";
-  import { API_VERSION_12_8 } from "@/js/configurator.svelte.js";
+  import {
+    API_VERSION_12_8,
+    API_VERSION_12_9,
+  } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
   import { getTabHelpURL } from "@/js/help.js";
@@ -33,6 +36,7 @@
     tailOutputMatches,
   } from "@/js/tail_motor.js";
 
+  import CustomMixerRules from "./CustomMixerRules.svelte";
   import MixerOverride from "./MixerOverride.svelte";
 
   const TAIL_VARIABLE_PITCH = 0;
@@ -50,11 +54,14 @@
   let origInputs;
 
   let customConfig = $state(false);
-  let customRules = $state(false);
   let hasTiltCorrection = $state(false);
   let hasPassthrough = $state(false);
 
   let form = $state({});
+
+  // Bound to the rules table so its staged edits can join this tab's own
+  // save/revert cycle rather than running a second one of their own.
+  let customRules;
 
   let motorised = $derived(form.tailMode > TAIL_VARIABLE_PITCH);
 
@@ -169,7 +176,6 @@
       inputs[1].max !== -inputs[1].min ||
       inputs[2].max !== -inputs[2].min ||
       inputs[4].max !== -inputs[4].min;
-    customRules = !Mixer.isNullMixer(FC.MIXER_RULES);
   }
 
   function markDirty(group) {
@@ -268,6 +274,19 @@
   onMount(async () => {
     await MSP.promise(MSPCodes.MSP_STATUS);
     await MSP.promise(MSPCodes.MSP_FEATURE_CONFIG);
+    // Both are read for the custom rules table's output list, not for
+    // anything on this tab's own form: working out which servos exist
+    // needs the serial config (bus servos only run with an FBUS/SBUS
+    // output) and the servo config's length (the only reliable PWM
+    // count once FC.CONFIG.servoCount starts including bus servos).
+    // See servoLayout.js.
+    await MSP.promise(MSPCodes.MSP_SERIAL_CONFIG);
+    await MSP.promise(MSPCodes.MSP_SERVO_CONFIGURATIONS);
+    // Which bus channels follow the mixer rather than passing the RX
+    // through -- a rule can only drive one that does.
+    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+      await MSP.promise(MSPCodes.MSP_BUS_SERVO_CONFIG);
+    }
     await MSP.promise(MSPCodes.MSP_MIXER_CONFIG);
     await MSP.promise(MSPCodes.MSP_MIXER_INPUTS);
     await MSP.promise(MSPCodes.MSP_MIXER_RULES);
@@ -313,7 +332,17 @@
     }
   }
 
-  async function sendDirty() {
+  // Config and inputs only -- deliberately not the rules table.
+  //
+  // The two halves of this tab have different save models. Config and
+  // inputs are sent to the FC as they're edited, so both saving and
+  // reverting work by (re-)sending whichever groups are dirty; revert
+  // gets its effect by restoring origConfig/origInputs first. The rules
+  // table stages its edits instead and sends nothing until save, so
+  // flushing it from here would make revert write out the very edits it
+  // was asked to discard -- and customRules.revert() would then read
+  // them back off the FC as the new original.
+  async function sendDirtyConfig() {
     if (dirtyGroups.config) {
       await MSP.promise(
         MSPCodes.MSP_SET_MIXER_CONFIG,
@@ -331,7 +360,8 @@
   }
 
   export async function onSave() {
-    await sendDirty();
+    await sendDirtyConfig();
+    await customRules?.sendDirty();
     await applyTailMotor();
     if (needSave) {
       await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
@@ -353,8 +383,8 @@
   export async function onRevert() {
     FC.MIXER_CONFIG = Mixer.cloneConfig(origConfig);
     FC.MIXER_INPUTS = Mixer.cloneInputs(origInputs);
-    await sendDirty();
-    needSave = false;
+    await sendDirtyConfig();
+    needSave = (await customRules?.revert()) ?? false;
     needReboot = false;
     dataToForm();
   }
@@ -421,9 +451,6 @@
     {#if customConfig}
       <WarningNote message="mixerCustomNote" />
     {/if}
-    {#if customRules}
-      <InfoNote message="mixerRulesNote" />
-    {/if}
     {#if form.tailMode === TAIL_BIDIRECTIONAL}
       <WarningNote message="mixerBidirNote" />
     {/if}
@@ -432,278 +459,291 @@
     {/if}
   </div>
 
-  <div class="columns">
-    <div class="column">
-      <Section label="mixerMainRotorSettings">
-        {@render selectField(
-          "mixer-swash-type",
-          "mixerSwashType",
-          "mixerSwashTypeHelp",
-          "swashType",
-          swashTypeOptions,
-          onRebootChange,
-        )}
-        <SwashServoDiagram
-          swashType={form.swashType}
-          tailServo={form.tailMode === TAIL_VARIABLE_PITCH}
-        />
-        {@render selectField(
-          "mixer-rotor-dir",
-          "mixerMainRotorDirection",
-          "mixerMainRotorDirectionHelp",
-          "mainRotorDir",
-          rotorDirectionOptions,
-          applyConfig,
-        )}
-        {@render selectField(
-          "mixer-ail-dir",
-          "mixerAileronDirection",
-          "mixerAileronDirectionHelp",
-          "ailDir",
-          dirOptions,
-          applyInput1,
-        )}
-        {@render selectField(
-          "mixer-elev-dir",
-          "mixerElevatorDirection",
-          "mixerElevatorDirectionHelp",
-          "elevDir",
-          dirOptions,
-          applyInput2,
-        )}
-        {@render selectField(
-          "mixer-coll-dir",
-          "mixerCollectiveDirection",
-          "mixerCollectiveDirectionHelp",
-          "collDir",
-          dirOptions,
-          applyInput4,
-        )}
-      </Section>
+  <div class="columns-wrap">
+    <div class="columns">
+      <div class="column">
+        <Section label="mixerMainRotorSettings">
+          {@render selectField(
+            "mixer-swash-type",
+            "mixerSwashType",
+            "mixerSwashTypeHelp",
+            "swashType",
+            swashTypeOptions,
+            onRebootChange,
+          )}
+          <SwashServoDiagram
+            swashType={form.swashType}
+            tailServo={form.tailMode === TAIL_VARIABLE_PITCH}
+          />
+          {@render selectField(
+            "mixer-rotor-dir",
+            "mixerMainRotorDirection",
+            "mixerMainRotorDirectionHelp",
+            "mainRotorDir",
+            rotorDirectionOptions,
+            applyConfig,
+          )}
+          {@render selectField(
+            "mixer-ail-dir",
+            "mixerAileronDirection",
+            "mixerAileronDirectionHelp",
+            "ailDir",
+            dirOptions,
+            applyInput1,
+          )}
+          {@render selectField(
+            "mixer-elev-dir",
+            "mixerElevatorDirection",
+            "mixerElevatorDirectionHelp",
+            "elevDir",
+            dirOptions,
+            applyInput2,
+          )}
+          {@render selectField(
+            "mixer-coll-dir",
+            "mixerCollectiveDirection",
+            "mixerCollectiveDirectionHelp",
+            "collDir",
+            dirOptions,
+            applyInput4,
+          )}
+        </Section>
 
-      <Section label="mixerSwashLinkTrim">
-        {@render numberField(
-          "mixer-trim-roll",
-          "mixerSwashRollTrim",
-          "mixerSwashTrimHelp",
-          "trimRoll",
-          { min: -100, max: 100, step: 0.1 },
-          applyConfig,
-        )}
-        {@render numberField(
-          "mixer-trim-pitch",
-          "mixerSwashPitchTrim",
-          null,
-          "trimPitch",
-          { min: -100, max: 100, step: 0.1 },
-          applyConfig,
-        )}
-        {@render numberField(
-          "mixer-trim-coll",
-          "mixerSwashCollectiveTrim",
-          null,
-          "trimCollective",
-          { min: -100, max: 100, step: 0.1 },
-          applyConfig,
-        )}
-      </Section>
-
-      <Section label="mixerTailRotorSettings">
-        {@render selectField(
-          "mixer-tail-mode",
-          "mixerTailRotorMode",
-          "mixerTailRotorModeHelp",
-          "tailMode",
-          tailModeOptions,
-          onTailModeChange,
-        )}
-        {#if tailPinNote}
-          {#if tailPinNote === "tailOutputNoPin"}
-            <WarningNote message={tailPinNote} />
-          {:else}
-            <InfoNote message={tailPinNote} />
-          {/if}
-        {/if}
-        {#if motorised !== origMotorised}
-          <InfoNote message={motorised ? "tailTtaOn" : "tailTtaOff"} />
-        {/if}
-        {@render selectField(
-          "mixer-tail-dir",
-          "mixerTailRotorDirection",
-          "mixerTailRotorDirectionHelp",
-          "tailDir",
-          dirOptions,
-          applyInput3,
-        )}
-        {#if motorised}
+        <Section label="mixerSwashLinkTrim">
           {@render numberField(
-            "mixer-tail-motor-trim",
-            "mixerTailMotorCenterTrim",
-            "mixerTailMotorCenterTrimHelp",
-            "tailMotorCenterTrim",
-            { min: -50, max: 50, step: 0.1 },
-            applyConfig,
-            undefined,
-            { changed: FC.MIXER_CONFIG.tail_center_trim !== 0 },
-          )}
-        {:else}
-          {@render numberField(
-            "mixer-tail-rotor-trim",
-            "mixerTailRotorCenterTrim",
-            "mixerTailRotorCenterTrimHelp",
-            "tailRotorCenterTrim",
-            { min: -25, max: 25, step: 0.1 },
+            "mixer-trim-roll",
+            "mixerSwashRollTrim",
+            "mixerSwashTrimHelp",
+            "trimRoll",
+            { min: -100, max: 100, step: 0.1 },
             applyConfig,
           )}
-        {/if}
-        {#if showTailCalibrationNote}
-          <InfoNote message="mixerMotorisedTailCalibrationNote" />
-        {/if}
-        {@render numberField(
-          "mixer-tail-cal",
-          "mixerTailRotorCalibration",
-          "mixerTailRotorCalibrationHelp",
-          "tailCal",
-          { min: 10, max: 500, step: 0.1 },
-          applyInput3,
-        )}
-        {#if motorised}
           {@render numberField(
-            "mixer-tail-motor-min",
-            "mixerTailMotorMinYaw",
-            "mixerTailMotorMinYawHelp",
-            "tailMotorMinYaw",
-            { min: 0, max: 200, step: 1 },
-            applyInput3,
-            undefined,
-            { changed: FC.MIXER_INPUTS[3].min !== -1250 },
-          )}
-          {@render numberField(
-            "mixer-tail-motor-max",
-            "mixerTailMotorMaxYaw",
-            "mixerTailMotorMaxYawHelp",
-            "tailMotorMaxYaw",
-            { min: 0, max: 200, step: 1 },
-            applyInput3,
-            undefined,
-            { changed: FC.MIXER_INPUTS[3].max !== 1250 },
-          )}
-          {@render numberField(
-            "mixer-tail-motor-idle",
-            "mixerTailMotorIdle",
-            "mixerTailMotorIdleHelp",
-            "tailMotorIdle",
-            { min: 0, max: 25, step: 0.1 },
-            applyConfig,
-            undefined,
-            { changed: FC.MIXER_CONFIG.tail_motor_idle !== 0 },
-          )}
-        {:else}
-          {@render numberField(
-            "mixer-tail-rotor-min",
-            "mixerTailRotorMinYaw",
-            "mixerTailRotorMinYawHelp",
-            "tailRotorMinYaw",
-            { min: 0, max: 60, step: 0.1 },
-            applyInput3,
-          )}
-          {@render numberField(
-            "mixer-tail-rotor-max",
-            "mixerTailRotorMaxYaw",
-            "mixerTailRotorMaxYawHelp",
-            "tailRotorMaxYaw",
-            { min: 0, max: 60, step: 0.1 },
-            applyInput3,
-          )}
-        {/if}
-      </Section>
-    </div>
-
-    <div class="column">
-      <Section label="mixerGeometrySettings">
-        {@render numberField(
-          "mixer-cyclic-cal",
-          "mixerCyclicCalibration",
-          "mixerCyclicCalibrationHelp",
-          "cyclicCal",
-          { min: 20, max: 200, step: 0.1 },
-          applyInputs12,
-        )}
-        {@render numberField(
-          "mixer-coll-cal",
-          "mixerCollectiveCalibration",
-          "mixerCollectiveCalibrationHelp",
-          "collectiveCal",
-          { min: 20, max: 200, step: 0.1 },
-          applyInput4,
-        )}
-        {@render numberField(
-          "mixer-coll-geo",
-          "mixerCollectiveGeoCorrection",
-          "mixerCollectiveGeoCorrectionHelp",
-          "collGeoCorrection",
-          { min: -25, max: 25, step: 0.2 },
-          applyConfig,
-          undefined,
-          { changed: FC.MIXER_CONFIG.coll_geo_correction !== 0 },
-        )}
-        {@render numberField(
-          "mixer-cyclic-limit",
-          "mixerCyclicLimit",
-          "mixerCyclicLimitHelp",
-          "cyclicLimit",
-          { min: 0, max: 20, step: 0.1 },
-          applyInputs12,
-        )}
-        {@render numberField(
-          "mixer-coll-limit",
-          "mixerCollectiveLimit",
-          "mixerCollectiveLimitHelp",
-          "collectiveLimit",
-          { min: 0, max: 20, step: 0.1 },
-          applyInput4,
-        )}
-        {@render numberField(
-          "mixer-total-limit",
-          "mixerTotalPitchLimit",
-          "mixerTotalPitchLimitHelp",
-          "totalPitchLimit",
-          { min: 0, max: 36, step: 0.1 },
-          applyConfig,
-        )}
-        {@render numberField(
-          "mixer-swash-phase",
-          "mixerSwashPhase",
-          "mixerSwashPhaseHelp",
-          "swashPhase",
-          { min: -180, max: 180, step: 0.1 },
-          applyConfig,
-          undefined,
-          { changed: FC.MIXER_CONFIG.swash_phase !== 0 },
-        )}
-        {#if hasTiltCorrection}
-          {@render numberField(
-            "mixer-tilt-pos",
-            "mixerCollectiveTiltCorrectionPos",
-            "mixerCollectiveTiltCorrectionHelp",
-            "tiltPos",
-            { min: -100, max: 100, step: 1 },
-            applyConfig,
-            "%",
-            { changed: FC.MIXER_CONFIG.coll_tilt_correction_pos !== 0 },
-          )}
-          {@render numberField(
-            "mixer-tilt-neg",
-            "mixerCollectiveTiltCorrectionNeg",
+            "mixer-trim-pitch",
+            "mixerSwashPitchTrim",
             null,
-            "tiltNeg",
-            { min: -100, max: 100, step: 1 },
+            "trimPitch",
+            { min: -100, max: 100, step: 0.1 },
             applyConfig,
-            "%",
-            { changed: FC.MIXER_CONFIG.coll_tilt_correction_neg !== 10 },
           )}
-        {/if}
-      </Section>
+          {@render numberField(
+            "mixer-trim-coll",
+            "mixerSwashCollectiveTrim",
+            null,
+            "trimCollective",
+            { min: -100, max: 100, step: 0.1 },
+            applyConfig,
+          )}
+        </Section>
+
+        <Section label="mixerTailRotorSettings">
+          {@render selectField(
+            "mixer-tail-mode",
+            "mixerTailRotorMode",
+            "mixerTailRotorModeHelp",
+            "tailMode",
+            tailModeOptions,
+            onTailModeChange,
+          )}
+          {#if tailPinNote}
+            {#if tailPinNote === "tailOutputNoPin"}
+              <WarningNote message={tailPinNote} />
+            {:else}
+              <InfoNote message={tailPinNote} />
+            {/if}
+          {/if}
+          {#if motorised !== origMotorised}
+            <InfoNote message={motorised ? "tailTtaOn" : "tailTtaOff"} />
+          {/if}
+          {@render selectField(
+            "mixer-tail-dir",
+            "mixerTailRotorDirection",
+            "mixerTailRotorDirectionHelp",
+            "tailDir",
+            dirOptions,
+            applyInput3,
+          )}
+          {#if motorised}
+            {@render numberField(
+              "mixer-tail-motor-trim",
+              "mixerTailMotorCenterTrim",
+              "mixerTailMotorCenterTrimHelp",
+              "tailMotorCenterTrim",
+              { min: -50, max: 50, step: 0.1 },
+              applyConfig,
+              undefined,
+              { changed: FC.MIXER_CONFIG.tail_center_trim !== 0 },
+            )}
+          {:else}
+            {@render numberField(
+              "mixer-tail-rotor-trim",
+              "mixerTailRotorCenterTrim",
+              "mixerTailRotorCenterTrimHelp",
+              "tailRotorCenterTrim",
+              { min: -25, max: 25, step: 0.1 },
+              applyConfig,
+            )}
+          {/if}
+          {#if showTailCalibrationNote}
+            <InfoNote message="mixerMotorisedTailCalibrationNote" />
+          {/if}
+          {@render numberField(
+            "mixer-tail-cal",
+            "mixerTailRotorCalibration",
+            "mixerTailRotorCalibrationHelp",
+            "tailCal",
+            { min: 10, max: 500, step: 0.1 },
+            applyInput3,
+          )}
+          {#if motorised}
+            {@render numberField(
+              "mixer-tail-motor-min",
+              "mixerTailMotorMinYaw",
+              "mixerTailMotorMinYawHelp",
+              "tailMotorMinYaw",
+              { min: 0, max: 200, step: 1 },
+              applyInput3,
+              undefined,
+              { changed: FC.MIXER_INPUTS[3].min !== -1250 },
+            )}
+            {@render numberField(
+              "mixer-tail-motor-max",
+              "mixerTailMotorMaxYaw",
+              "mixerTailMotorMaxYawHelp",
+              "tailMotorMaxYaw",
+              { min: 0, max: 200, step: 1 },
+              applyInput3,
+              undefined,
+              { changed: FC.MIXER_INPUTS[3].max !== 1250 },
+            )}
+            {@render numberField(
+              "mixer-tail-motor-idle",
+              "mixerTailMotorIdle",
+              "mixerTailMotorIdleHelp",
+              "tailMotorIdle",
+              { min: 0, max: 25, step: 0.1 },
+              applyConfig,
+              undefined,
+              { changed: FC.MIXER_CONFIG.tail_motor_idle !== 0 },
+            )}
+          {:else}
+            {@render numberField(
+              "mixer-tail-rotor-min",
+              "mixerTailRotorMinYaw",
+              "mixerTailRotorMinYawHelp",
+              "tailRotorMinYaw",
+              { min: 0, max: 60, step: 0.1 },
+              applyInput3,
+            )}
+            {@render numberField(
+              "mixer-tail-rotor-max",
+              "mixerTailRotorMaxYaw",
+              "mixerTailRotorMaxYawHelp",
+              "tailRotorMaxYaw",
+              { min: 0, max: 60, step: 0.1 },
+              applyInput3,
+            )}
+          {/if}
+        </Section>
+      </div>
+
+      <div class="column">
+        <Section label="mixerGeometrySettings">
+          {@render numberField(
+            "mixer-cyclic-cal",
+            "mixerCyclicCalibration",
+            "mixerCyclicCalibrationHelp",
+            "cyclicCal",
+            { min: 20, max: 200, step: 0.1 },
+            applyInputs12,
+          )}
+          {@render numberField(
+            "mixer-coll-cal",
+            "mixerCollectiveCalibration",
+            "mixerCollectiveCalibrationHelp",
+            "collectiveCal",
+            { min: 20, max: 200, step: 0.1 },
+            applyInput4,
+          )}
+          {@render numberField(
+            "mixer-coll-geo",
+            "mixerCollectiveGeoCorrection",
+            "mixerCollectiveGeoCorrectionHelp",
+            "collGeoCorrection",
+            { min: -25, max: 25, step: 0.2 },
+            applyConfig,
+            undefined,
+            { changed: FC.MIXER_CONFIG.coll_geo_correction !== 0 },
+          )}
+          {@render numberField(
+            "mixer-cyclic-limit",
+            "mixerCyclicLimit",
+            "mixerCyclicLimitHelp",
+            "cyclicLimit",
+            { min: 0, max: 20, step: 0.1 },
+            applyInputs12,
+          )}
+          {@render numberField(
+            "mixer-coll-limit",
+            "mixerCollectiveLimit",
+            "mixerCollectiveLimitHelp",
+            "collectiveLimit",
+            { min: 0, max: 20, step: 0.1 },
+            applyInput4,
+          )}
+          {@render numberField(
+            "mixer-total-limit",
+            "mixerTotalPitchLimit",
+            "mixerTotalPitchLimitHelp",
+            "totalPitchLimit",
+            { min: 0, max: 36, step: 0.1 },
+            applyConfig,
+          )}
+          {@render numberField(
+            "mixer-swash-phase",
+            "mixerSwashPhase",
+            "mixerSwashPhaseHelp",
+            "swashPhase",
+            { min: -180, max: 180, step: 0.1 },
+            applyConfig,
+            undefined,
+            { changed: FC.MIXER_CONFIG.swash_phase !== 0 },
+          )}
+          {#if hasTiltCorrection}
+            {@render numberField(
+              "mixer-tilt-pos",
+              "mixerCollectiveTiltCorrectionPos",
+              "mixerCollectiveTiltCorrectionHelp",
+              "tiltPos",
+              { min: -100, max: 100, step: 1 },
+              applyConfig,
+              "%",
+              { changed: FC.MIXER_CONFIG.coll_tilt_correction_pos !== 0 },
+            )}
+            {@render numberField(
+              "mixer-tilt-neg",
+              "mixerCollectiveTiltCorrectionNeg",
+              null,
+              "tiltNeg",
+              { min: -100, max: 100, step: 1 },
+              applyConfig,
+              "%",
+              { changed: FC.MIXER_CONFIG.coll_tilt_correction_neg !== 10 },
+            )}
+          {/if}
+        </Section>
+
+        <!-- Directly under Main Rotor Geometry, in the same column. When
+           the column is too narrow for its table, the container query
+           in the styles below drops the whole page to one column so
+           this gets the full width - rather than this card alone
+           breaking out, which left it floating clear of the card
+           above. -->
+        <CustomMixerRules
+          bind:this={customRules}
+          onchange={() => (needSave = true)}
+        />
+      </div>
     </div>
   </div>
 
@@ -738,6 +778,23 @@
     }
   }
 
+  /* container-type so the rules card's own width decides the layout.
+     That is the only honest signal: display scaling, browser zoom, the
+     sidebar and the scrollbar all sit between the viewport and the
+     width these columns actually get, and every breakpoint tried
+     against the viewport was wrong on the machine it mattered on.
+
+     It lives on a wrapper rather than on .columns because an element
+     cannot query itself - the query below restyles .columns, so the
+     container has to be its parent. */
+  .columns-wrap {
+    container-type: inline-size;
+    container-name: mixerpage;
+  }
+
+  /* 420px is what the config sections themselves want: a label and its
+     control stop reading as a pair much past this, with the control
+     stranded at the far right. */
   .columns {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
@@ -745,7 +802,17 @@
     column-gap: var(--section-gap);
   }
 
-  @media only screen and (max-width: 480px) {
+  /* One column once a track would be too narrow for the rules table.
+     A track is about (this width - the gap) / 2, and the table needs
+     ~582px plus Section's own padding, so two of them stop fitting
+     below ~1220px here.
+
+     The whole page drops rather than just that card: the card sits
+     inside the right-hand column so it stays directly under Main Rotor
+     Geometry, and letting it alone span out left it floating clear of
+     the card above (a grid item spanning two rows hands its extra
+     height to both of them). */
+  @container mixerpage (max-width: 1219px) {
     .columns {
       grid-template-columns: 1fr;
     }

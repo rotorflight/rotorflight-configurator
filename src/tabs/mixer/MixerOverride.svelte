@@ -1,14 +1,35 @@
 <script>
+  import { onDestroy, onMount } from "svelte";
+
+  import HoverTooltip from "@/components/HoverTooltip.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
   import Slider from "@/components/Slider.svelte";
   import Switch from "@/components/Switch.svelte";
+  import Tooltip from "@/components/Tooltip.svelte";
   import InfoNote from "@/components/notes/InfoNote.svelte";
 
   import { Mixer } from "@/js/Mixer.js";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
+  import { MSP } from "@/js/msp.svelte.js";
+  import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import {
+    busLabelFor,
+    busServoCount,
+    busServosActive,
+    pwmServoCount,
+    servoDataIndex,
+  } from "@/js/servoLayout.js";
+
+  import OutputIcon from "./OutputIcon.svelte";
+  import {
+    FIRST_MOTOR,
+    dynamicOverrideGroups,
+    outputLabel as nameOutput,
+    simulateOutputValue,
+  } from "./rules.js";
 
   let { motorised, hasPassthrough } = $props();
 
@@ -112,6 +133,14 @@
     for (const def of axes) {
       setEnabled(def, checked);
     }
+    // The rule-input rows are hidden along with everything else once
+    // the master switch is off, so clear their overrides too - nothing
+    // would be left to switch them off otherwise.
+    if (!checked) {
+      for (const src of dynSources) {
+        clearDynOverride(src);
+      }
+    }
   }
 
   function onPassthroughSwitch(checked) {
@@ -149,11 +178,273 @@
       pips: { mode: "values", values: def.pips, density: 100 },
     };
   }
+
+  // ---------------------------------------------------------------
+  // Per-output rows for the custom mixer rules
+  // ---------------------------------------------------------------
+
+  const DYN_PIPS = [1000, 1250, 1500, 1750, 2000];
+
+  // One override value per input, in raw override units - what the
+  // firmware and the simulation both work in. An input can drive more
+  // than one output, so this is the single source of truth and each
+  // row's microsecond display below is derived from it.
+  let dynRaw = $state({});
+
+  // Displayed value per row (output + input), in microseconds. Shared
+  // state rather than a value computed per render: NumberInput and
+  // Slider both declare value as $bindable and assign to it on
+  // interaction, so a one-way prop leaves their copy drifting from
+  // ours - the slider ends up somewhere the number field disagrees
+  // with, and stops tracking. Binding both to the same entry keeps the
+  // two in step by construction. Per row rather than per input because
+  // a motor row and a servo row map the same raw value to different
+  // microseconds.
+  let dynUs = $state({});
+
+  function rowKey(dst, src) {
+    return `${dst}:${src}`;
+  }
+
+  // Live physical output, polled from the FC. Motors are excluded -
+  // see isSimulated below.
+  let liveValues = $state({});
+
+  let groups = $derived(dynamicOverrideGroups(FC.MIXER_RULES));
+
+  let dynSources = $derived(
+    new Set([...groups.values()].flatMap((s) => [...s])),
+  );
+
+  // Needed to read a servo's live position back: MSP_SERVO's payload is
+  // packed around the PWM servo count, not indexed by servo number.
+  // See servoDataIndex.
+  let busActive = $derived(
+    busServosActive(FC.CONFIG.apiVersion, FC.SERIAL_CONFIG?.ports),
+  );
+
+  let pwmServos = $derived(
+    pwmServoCount(
+      busActive,
+      FC.SERVO_CONFIG?.length ?? 0,
+      FC.CONFIG.servoCount,
+    ),
+  );
+
+  // For naming each output by what it drives, as the rules table does.
+  let layout = $derived({
+    pwmServos,
+    busServos: busServoCount(busActive),
+    motors: FC.CONFIG.motorCount,
+    busSources: FC.BUS_SERVO_CONFIG,
+    busLabel: busLabelFor(FC.SERIAL_CONFIG?.ports),
+  });
+
+  /**
+   * A motor can't actually be driven from here: firmware's motorUpdate()
+   * only feeds the mixer's motor outputs to the ESCs while ARMED, while
+   * mixerSetInput() only honours an input override while DISARMED. So
+   * the override can never reach a motor - those rows are simulated
+   * instead, computed from the rules rather than sent and read back.
+   */
+  function isSimulated(dst) {
+    return dst >= FIRST_MOTOR;
+  }
+
+  /**
+   * A motor's travel is one-sided: 1000us is off and 2000us is full, so
+   * the whole slider maps to 0-100% throttle with zero at the bottom. A
+   * servo is bipolar, so zero sits at mid-stick with +-500us either
+   * side. That changes both where zero is and how much output a
+   * microsecond buys - without the wider scale, the top half of a
+   * motor's slider would run past its input's own limit.
+   */
+  function dynDef(src, dst) {
+    const input = FC.MIXER_INPUTS[src];
+    const limit = Math.max(Math.abs(input.min), Math.abs(input.max)) || 1000;
+    const motor = isSimulated(dst);
+
+    return {
+      src,
+      dst,
+      motor,
+      center: motor ? 1000 : 1500,
+      scale: (motor ? 1000 : 500) / limit,
+    };
+  }
+
+  function usFromRaw(def, raw) {
+    return Math.round(def.center + raw * def.scale);
+  }
+
+  function dynEnabled(src) {
+    return Mixer.overrideEnabled(FC.MIXER_OVERRIDE[src]);
+  }
+
+  // An override the FC already holds (left on from an earlier visit)
+  // seeds the input's value, so the control shows where the servo
+  // actually is. Otherwise every input starts at raw 0: mid-stick for a
+  // servo, idle for a motor, which is not a throttle to hand out by
+  // default.
+  function initialRaw(src) {
+    const raw = FC.MIXER_OVERRIDE[src];
+    return dynEnabled(src) && !Mixer.passthroughEnabled(raw) ? raw : 0;
+  }
+
+  // Sets an input's value and moves every row it drives to match.
+  function setDynRaw(src, raw) {
+    dynRaw[src] = raw;
+    for (const [dst, srcs] of groups) {
+      if (srcs.has(src)) {
+        dynUs[rowKey(dst, src)] = usFromRaw(dynDef(src, dst), raw);
+      }
+    }
+  }
+
+  // What the last run saw, to tell which rows and inputs have gone.
+  // Plain values: only this effect reads them.
+  let lastKeys = [];
+  let lastSources = [];
+
+  $effect(() => {
+    const keys = [];
+    for (const [dst, srcs] of groups) {
+      for (const src of srcs) {
+        if (dynRaw[src] === undefined) {
+          dynRaw[src] = initialRaw(src);
+        }
+        const key = rowKey(dst, src);
+        keys.push(key);
+        if (dynUs[key] === undefined) {
+          dynUs[key] = usFromRaw(dynDef(src, dst), dynRaw[src]);
+        }
+      }
+    }
+
+    // Forget rows that are gone, so one that comes back starts from its
+    // input's current value rather than a stale display.
+    for (const key of lastKeys) {
+      if (!keys.includes(key)) dynUs[key] = undefined;
+    }
+    lastKeys = keys;
+
+    // An input that no longer feeds any rule (deleted or re-pointed)
+    // loses its row and with it the switch to clear its override, so
+    // clear it here.
+    for (const src of lastSources) {
+      if (!dynSources.has(src)) {
+        clearDynOverride(src);
+        dynRaw[src] = undefined;
+      }
+    }
+    lastSources = [...dynSources];
+  });
+
+  function sendDyn(def) {
+    const raw = Math.round(
+      (dynUs[rowKey(def.dst, def.src)] - def.center) / def.scale,
+    );
+    setDynRaw(def.src, raw);
+
+    // Only inputs with an active override go to the FC. A row that
+    // drives only motors is simulated (nothing on the FC side would act
+    // on it) and has no switch, so its override is never on. If the
+    // same input also drives a servo whose override is on, the motor
+    // row sends too, so the servo follows the value shown.
+    if (dynEnabled(def.src)) {
+      FC.MIXER_OVERRIDE[def.src] = raw;
+      mspHelper.sendMixerOverride(def.src);
+    }
+  }
+
+  function clearDynOverride(src) {
+    if (!dynEnabled(src)) return;
+    FC.MIXER_OVERRIDE[src] = Mixer.OVERRIDE_OFF;
+    mspHelper.sendMixerOverride(src);
+  }
+
+  function setDynEnabled(def, enabled) {
+    if (enabled) {
+      // Park at neutral on enable rather than jumping to wherever the
+      // slider was left.
+      setDynRaw(def.src, 0);
+      FC.MIXER_OVERRIDE[def.src] = 0;
+    } else {
+      FC.MIXER_OVERRIDE[def.src] = Mixer.OVERRIDE_OFF;
+    }
+    mspHelper.sendMixerOverride(def.src);
+  }
+
+  /**
+   * The output's actual position, in microseconds. Servos are read back
+   * from the FC; motors are computed, since their readback is stuck at
+   * idle while disarmed no matter what the mixer says.
+   */
+  function outputValue(dst) {
+    if (isSimulated(dst)) {
+      return simulateOutputValue(FC.MIXER_RULES, FC.MIXER_INPUTS, dynRaw, dst);
+    }
+    return liveValues[dst] ?? 1500;
+  }
+
+  function outputLabel(dst) {
+    return nameOutput(dst, layout, $i18n.t);
+  }
+
+  // 1010 rather than 1000 as the spin threshold: the value sits a few us
+  // off exactly 1000 often enough that "> 1000" would leave a stopped
+  // motor visibly creeping.
+  function isSpinning(value) {
+    return value > 1010;
+  }
+
+  function spinSpeed(value) {
+    const throttle = Math.min(1, Math.max(0, (value - 1000) / 1000));
+    return (1.1 - throttle).toFixed(2);
+  }
+
+  function armAngle(value) {
+    return Math.min(60, Math.max(-60, ((value - 1500) / 500) * 60));
+  }
+
+  let poller;
+  let polling = false;
+
+  onMount(() => {
+    poller = setInterval(async () => {
+      // Only while the readout is shown, and never more than one
+      // request in flight - a slow link would otherwise stack them up
+      // against save and config traffic.
+      if (!overrideEnabled || groups.size === 0 || polling) return;
+      polling = true;
+      try {
+        await MSP.promise(MSPCodes.MSP_SERVO);
+        const next = {};
+        for (const dst of groups.keys()) {
+          if (!isSimulated(dst)) {
+            next[dst] =
+              FC.SERVO_DATA[servoDataIndex(dst, pwmServos, busActive)];
+          }
+        }
+        liveValues = next;
+      } catch (e) {
+        console.warn("MSP_SERVO poll failed", e);
+      } finally {
+        polling = false;
+      }
+    }, 250);
+  });
+
+  onDestroy(() => clearInterval(poller));
 </script>
 
 <Section label="mixerOverride" summary="mixerOverrideHelp">
-  <div class="note">
-    <InfoNote message="mixerOverrideNote" />
+  <!-- mixerOverrideEnableSwitchText rather than mixerOverrideNote: the
+       two said almost the same thing, one in the note and one as a
+       paragraph under the switches, and this is the fuller of the pair
+       (it covers what Passthrough does). -->
+  <div class="note-wrap">
+    <InfoNote message="mixerOverrideEnableSwitchText" />
   </div>
 
   <div class="switches">
@@ -178,58 +469,139 @@
       </label>
     {/if}
   </div>
-  <p class="description">{$i18n.t("mixerOverrideEnableSwitchText")}</p>
 
   {#if overrideEnabled}
-    <div class="rows">
-      {#each axes as def (def.axis)}
-        {@const row = rows[def.axis]}
-        {@const mutable = row.enabled && !row.passthrough}
-        <div class="row">
-          <div class="name">{$i18n.t(Mixer.inputNames[def.axis])}</div>
-          <div class="toggles">
-            <label title={$i18n.t("mixerOverrideEnable")}>
-              <Switch
-                checked={row.enabled}
-                onchange={(e) => setEnabled(def, e.target.checked)}
-              />
-            </label>
-            {#if hasPassthrough}
-              <label title={$i18n.t("mixerPassthroughEnable")}>
+    <div class="override-grid">
+      <div class="rows">
+        {#each axes as def (def.axis)}
+          {@const row = rows[def.axis]}
+          {@const mutable = row.enabled && !row.passthrough}
+          <div class="row">
+            <div class="name">{$i18n.t(Mixer.inputNames[def.axis])}</div>
+            <div class="toggles">
+              <label title={$i18n.t("mixerOverrideEnable")}>
                 <Switch
-                  checked={row.passthrough}
-                  onchange={(e) => setPassthrough(def, e.target.checked)}
+                  checked={row.enabled}
+                  onchange={(e) => setEnabled(def, e.target.checked)}
                 />
               </label>
-            {/if}
-          </div>
-          <div class="value">
-            <NumberInput
-              min={def.min}
-              max={def.max}
-              step={def.step}
-              disabled={!mutable}
-              bind:value={row.value}
-              onchange={() => send(def)}
-            />
-          </div>
-          <div class="slider" class:disabled={!mutable}>
-            <span class="end">
-              {$i18n.t(`mixerOverrideSliderLeftLabel${def.axis}`)}
-            </span>
-            <div class="track">
-              {#key `${def.axis}-${def.max}`}
-                <Slider
-                  bind:value={row.value}
-                  opts={sliderOpts(def)}
-                  changeOnSlide={false}
-                  onchange={() => send(def)}
-                />
-              {/key}
+              {#if hasPassthrough}
+                <label title={$i18n.t("mixerPassthroughEnable")}>
+                  <Switch
+                    checked={row.passthrough}
+                    onchange={(e) => setPassthrough(def, e.target.checked)}
+                  />
+                </label>
+              {/if}
             </div>
-            <span class="end">
-              {$i18n.t(`mixerOverrideSliderRightLabel${def.axis}`)}
-            </span>
+            <div class="value">
+              <NumberInput
+                min={def.min}
+                max={def.max}
+                step={def.step}
+                disabled={!mutable}
+                bind:value={row.value}
+                onchange={() => send(def)}
+              />
+            </div>
+            <div class="slider" class:disabled={!mutable}>
+              <span class="end">
+                {$i18n.t(`mixerOverrideSliderLeftLabel${def.axis}`)}
+              </span>
+              <div class="track">
+                {#key `${def.axis}-${def.max}`}
+                  <Slider
+                    bind:value={row.value}
+                    opts={sliderOpts(def)}
+                    changeOnSlide={false}
+                    onchange={() => send(def)}
+                  />
+                {/key}
+              </div>
+              <span class="end">
+                {$i18n.t(`mixerOverrideSliderRightLabel${def.axis}`)}
+              </span>
+            </div>
+            <!-- Keeps the stabilized rows on the same column template as
+               the rule rows below, which use this last column for the
+               live position readout. -->
+            <span class="position-spacer"></span>
+          </div>
+        {/each}
+      </div>
+
+      <!-- One block per output driven by custom rules, so it's clear which
+         rules combine to drive a given servo/motor and each can be
+         tested on its own against the live position. -->
+      {#each [...groups] as [dst, srcs] (dst)}
+        {@const value = outputValue(dst)}
+        {@const motor = isSimulated(dst)}
+        <div class="group">
+          {#each [...srcs] as src (src)}
+            {@const def = dynDef(src, dst)}
+            {@const enabled = motor || dynEnabled(src)}
+            <div class="row dyn">
+              <div class="name">{$i18n.t(Mixer.inputNames[src])}</div>
+              <div class="toggles">
+                {#if motor}
+                  <HoverTooltip tooltip={simulatedTip}>
+                    <span class="simulated">&#9888;</span>
+                  </HoverTooltip>
+                  {#snippet simulatedTip()}
+                    <Tooltip help="mixerOverrideSimulatedHelp" />
+                  {/snippet}
+                {:else}
+                  <label title={$i18n.t("mixerOverrideEnable")}>
+                    <Switch
+                      checked={enabled}
+                      onchange={(e) => setDynEnabled(def, e.target.checked)}
+                    />
+                  </label>
+                {/if}
+              </div>
+              <div class="value">
+                <NumberInput
+                  min={1000}
+                  max={2000}
+                  step={1}
+                  disabled={!enabled}
+                  bind:value={dynUs[rowKey(dst, src)]}
+                  onchange={() => sendDyn(def)}
+                />
+              </div>
+              <div class="slider" class:disabled={!enabled}>
+                <!-- Empty stand-ins for the stabilized rows' direction
+                     labels, so both kinds of slider track start and end
+                     on the same pixel. -->
+                <span class="end"></span>
+                <div class="track">
+                  <Slider
+                    bind:value={dynUs[rowKey(dst, src)]}
+                    opts={{
+                      range: { min: 1000, max: 2000 },
+                      start: def.center,
+                      step: 1,
+                      behaviour: "snap-drag",
+                      pips: { mode: "values", values: DYN_PIPS, density: 5 },
+                    }}
+                    changeOnSlide={false}
+                    onchange={() => sendDyn(def)}
+                  />
+                </div>
+                <span class="end"></span>
+              </div>
+            </div>
+          {/each}
+
+          <div class="position" style:grid-row="1 / span {srcs.size}">
+            <OutputIcon
+              {motor}
+              angle={armAngle(value)}
+              spinning={motor && isSpinning(value)}
+              speed={spinSpeed(value)}
+            />
+            <span class="position-label">{outputLabel(dst)}</span>
+            <span class="position-value">{Math.round(value)}</span>
           </div>
         </div>
       {/each}
@@ -238,7 +610,10 @@
 </Section>
 
 <style lang="scss">
-  .note {
+  /* Not called "note": main.css styles that class globally as a legacy
+     callout (tinted panel, yellow leading edge), which would wrap this
+     one in a second box around InfoNote's own. */
+  .note-wrap {
     padding: 0 4px;
   }
 
@@ -256,26 +631,35 @@
     font-weight: 600;
   }
 
-  .description {
-    margin: 0;
-    padding: 0 8px;
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-  }
-
   .rows {
     display: flex;
     flex-direction: column;
     gap: 4px;
   }
 
-  .row {
+  /* One column template shared by the stabilized-axis rows and the
+     per-output rule rows, so the toggles, value fields and slider
+     tracks line up down the whole section. The toggle column is a fixed
+     width rather than auto because the two row types hold a different
+     number of switches (passthrough is stabilized-only) and auto would
+     size them differently. It's wider than the switches actually need
+     so that the trailing space keeps them clear of the value field:
+     the switches sit at the left of the track, and the slack falls
+     between them and the control box. The last column is the live
+     position readout, which only the rule rows fill. */
+  .row,
+  .group {
     display: grid;
-    grid-template-columns: minmax(140px, 1fr) auto 120px minmax(320px, 4fr);
+    grid-template-columns:
+      minmax(140px, 1fr) 104px 120px
+      minmax(296px, 4fr) 110px;
     align-items: center;
     gap: 12px;
-    min-height: 56px;
     padding: 0 8px;
+  }
+
+  .row {
+    min-height: 56px;
     border-top: 1px solid var(--color-border-soft);
   }
 
@@ -305,9 +689,12 @@
     min-width: 0;
   }
 
+  /* Sized to the longest direction label ("Backward") and no more:
+     this cell is empty on the rule rows, so every pixel of it is dead
+     space between the track and the position readout. */
   .end {
     flex: none;
-    width: 96px;
+    width: 64px;
     padding-top: 18px;
     font-size: 0.7rem;
     color: var(--color-text-muted);
@@ -317,7 +704,79 @@
     }
   }
 
-  @media only screen and (max-width: 480px) {
+  /* An output and the rules feeding it read as one block: the rules
+     stacked on the left, the live position for the output they all
+     drive on the right. */
+  .group {
+    border-top: 1px solid var(--color-border-soft);
+  }
+
+  /* display: contents lifts each rule row's cells into the group's own
+     grid, so they land in the shared columns above instead of being
+     laid out inside a nested box of their own. That's what lets the
+     position cell span the whole group down the last column. */
+  .row.dyn {
+    display: contents;
+  }
+
+  /* No separator between rules inside a group - the group's own top
+     border is what sets it apart from its neighbours. */
+  .row.dyn {
+    border-top: none;
+  }
+
+  /* Sits in the shared template's last column, spanning every rule in
+     the group (the span count is set inline, since it depends on how
+     many inputs drive the output). */
+  .position {
+    grid-column: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 0;
+
+    /* Nudges the icon (and the label/value under it) left so the arm
+       sits just clear of the slider scales. A transform rather than a
+       margin on purpose: it shifts only what's drawn, so the column
+       keeps its width and nothing else on the row moves. */
+    transform: translateX(-36px);
+  }
+
+  .position-spacer {
+    display: block;
+  }
+
+  .position-label {
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  .position-value {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Stands in for the enable toggle on a simulated (motor) row. */
+  .simulated {
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: help;
+    color: var(--color-yellow-500, orange);
+  }
+
+  /* The section's own width, not the viewport's, decides when to stack:
+     the side menu and the tab's other columns take a varying share of
+     the window. */
+  .override-grid {
+    container: override / inline-size;
+  }
+
+  /* The desktop template's minimums add up to 834px: 770px of columns,
+     four 12px gaps and 8px padding each side. Below that it would
+     overflow, so stack instead. */
+  @container override (max-width: 833.98px) {
     .row {
       grid-template-columns: 1fr auto;
     }
@@ -325,6 +784,31 @@
     .value,
     .slider {
       grid-column: 1 / -1;
+    }
+
+    .group {
+      grid-template-columns: 1fr;
+    }
+
+    /* The desktop rules put this in column 5, spanning the group's
+       rules via an inline grid-row. Neither survives a single-column
+       grid: grid-column: 5 makes the browser invent implicit columns
+       2-5, quietly restoring a five-column layout far wider than the
+       viewport, and the row span then lays the readout on top of the
+       first rule's controls. !important because that span is set
+       inline (it depends on how many inputs drive the output), and
+       inline styles outrank anything a stylesheet can say otherwise.
+       Reset back to auto flow so it simply stacks under its group. */
+    .position {
+      grid-column: auto;
+      grid-row: auto !important;
+      width: auto;
+      flex-direction: row;
+      gap: 8px;
+
+      /* The nudge only exists to clear the desktop slider scales,
+         which aren't beside it once everything is stacked. */
+      transform: none;
     }
   }
 </style>
