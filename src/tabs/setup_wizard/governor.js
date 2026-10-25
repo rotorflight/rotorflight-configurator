@@ -7,9 +7,10 @@ import motorState from "@/tabs/motors/state.svelte.js";
 // and only arm with a fast RPM signal: an RPM sensor or bidirectional
 // DShot (isMotorFastRpmSourceActive, flight/motors.c). Serial ESC
 // telemetry is too slow. Read from the config, so it can be shown before
-// the reboot; the sensor's pin is not checked.
+// the reboot; the sensor's pin is not checked. DShot150 has no
+// bidirectional RPM.
 export function hasFastRpm() {
   if (!FC.MOTOR_CONFIG.motor_poles?.[0]) return false;
   if (FC.FEATURE_CONFIG.features.FREQ_SENSOR) return true;
-  return motorState.isDshot && !!FC.MOTOR_CONFIG.use_dshot_telemetry;
+  return motorState.bidirCapable && !!FC.MOTOR_CONFIG.use_dshot_telemetry;
 }

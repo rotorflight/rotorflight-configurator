@@ -55,6 +55,11 @@
   function setProtocol(index) {
     if (FC.MOTOR_CONFIG.motor_pwm_protocol === index) return;
     FC.MOTOR_CONFIG.motor_pwm_protocol = index;
+    // No bidirectional DShot on DShot150, and an ESC that doesn't answer
+    // the request may not arm.
+    if (motorState.throttleProtocols[index] === "DSHOT150") {
+      FC.MOTOR_CONFIG.use_dshot_telemetry = false;
+    }
     markChanged();
   }
 
@@ -111,6 +116,8 @@
   </div>
   {#if protocolName === "DISABLED"}
     <div class="note">{$i18n.t("setupWizardMotorDisabled")}</div>
+  {:else if protocolName === "DSHOT150"}
+    <div class="note">{$i18n.t("setupWizardMotorDshot150NoRpm")}</div>
   {/if}
 </section>
 

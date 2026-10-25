@@ -53,6 +53,12 @@ class State {
       this.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol];
     return protoName.startsWith("DSHOT") || protoName === "PROSHOT";
   });
+  // DShot150 ESCs don't send bidirectional DShot RPM.
+  bidirCapable = $derived.by(() => {
+    const protoName =
+      this.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol];
+    return this.isDshot && protoName !== "DSHOT150";
+  });
   isCastleLink = $derived(
     this.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol] === "CASTLE",
   );
