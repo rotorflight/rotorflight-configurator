@@ -12,14 +12,16 @@
   import LiveBar from "./LiveBar.svelte";
   import TabButton from "./TabButton.svelte";
   import TailArt from "./TailArt.svelte";
+  import TailFoldArt from "./TailFoldArt.svelte";
   import TailMotorTest from "./TailMotorTest.svelte";
   import { YAW, limitDegrees, limitRaw, tailRaw } from "./heli.js";
 
   const wiz = getContext("setupWizard");
 
   // Variable pitch tail, as in the Mixer Setup docs: centre at 0°,
-  // calibrate at 22°, find the end stops at 60°.
-  const CAL_DEGREES = 22;
+  // calibrate at 22.5° (the blades then open to 45°, a square of paper
+  // folded corner to corner), find the end stops at 60°.
+  const CAL_DEGREES = 22.5;
   const LIMIT_DEGREES = 60;
   const POLL_MS = 100;
 
@@ -194,6 +196,10 @@
       <span class="pill">{calPercent.toFixed(1)} %</span>
     </h3>
     <p>{$i18n.t("setupWizardTailCalText", { 1: CAL_DEGREES })}</p>
+    <div class="with-art">
+      <div class="art"><TailFoldArt /></div>
+      <div class="text note">{$i18n.t("setupWizardTailCalFold")}</div>
+    </div>
     <div class="actions">
       {#each [CAL_DEGREES, -CAL_DEGREES] as deg (deg)}
         <button
