@@ -1156,6 +1156,9 @@
     "setupWizardTailCalText": {
         "message": "Hold the tail at $1° each way and measure the tail blade pitch. Adjust the calibration until it reads about the same both ways."
     },
+    "setupWizardTailCalFold": {
+        "message": "No pitch gauge? Fold a square of paper corner to corner to get 45°. Look along the tail blades from the tip and fit the fold into the gap between them. At 22.5° each way it sits flush against both blades. Adjust the calibration until it does both ways."
+    },
     "setupWizardTailHoldCw": {
         "message": "Hold $1° CW"
     },
