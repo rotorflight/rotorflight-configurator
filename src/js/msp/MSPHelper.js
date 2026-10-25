@@ -201,6 +201,22 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             }
 
+            case MSPCodes.MSP_FREQ_SENSOR_STATUS: {
+                const portCount = data.readU8();
+                const ports = [];
+                for (let i = 0; i < portCount; i++) {
+                    const flags = data.readU8();
+                    ports.push({
+                        active: (flags & 1) !== 0,
+                        pinHigh: (flags & 2) !== 0,
+                        edges: data.readU16(),                                     // wraps at 65536
+                    });
+                }
+                FC.FREQ_SENSOR_STATUS.ports = ports;
+                FC.FREQ_SENSOR_STATUS.supported = true;
+                break;
+            }
+
             case MSPCodes.MSP_RC: {
                 FC.RC.active_channels = data.byteLength / 2;
                 for (let i = 0; i < FC.RC.active_channels; i++) {
