@@ -18,7 +18,8 @@
   const wiz = getContext("setupWizard");
 
   // The usual heli ESC protocols as tiles; anything else from the list.
-  const COMMON = ["PWM", "DSHOT300", "DSHOT600", "CASTLE"];
+  // DShot600 stays in the list: it is fussy about long, noisy ESC leads.
+  const COMMON = ["PWM", "DSHOT150", "DSHOT300"];
 
   let changed = $state(false);
 

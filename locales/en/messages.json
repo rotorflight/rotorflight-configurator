@@ -1180,23 +1180,17 @@
     "setupWizardMotorHelp_PWM": {
         "message": "Any ESC. The wizard calibrates its throttle range later."
     },
+    "setupWizardMotor_DSHOT150": {
+        "message": "DShot 150"
+    },
+    "setupWizardMotorHelp_DSHOT150": {
+        "message": "Digital, and the most tolerant of long ESC leads. For ESCs with DShot input."
+    },
     "setupWizardMotor_DSHOT300": {
         "message": "DShot 300"
     },
     "setupWizardMotorHelp_DSHOT300": {
         "message": "Digital, for ESCs with DShot input: XDFly, BLHeli_32, AM32, Bluejay and others. Check your ESC's manual."
-    },
-    "setupWizardMotor_DSHOT600": {
-        "message": "DShot 600"
-    },
-    "setupWizardMotorHelp_DSHOT600": {
-        "message": "Faster DShot, for short ESC wires."
-    },
-    "setupWizardMotor_CASTLE": {
-        "message": "Castle Link"
-    },
-    "setupWizardMotorHelp_CASTLE": {
-        "message": "Castle ESCs, with telemetry on the throttle wire."
     },
     "setupWizardMotorOther": {
         "message": "Other"
