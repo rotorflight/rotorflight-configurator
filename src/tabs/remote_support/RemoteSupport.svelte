@@ -62,7 +62,7 @@
       // Ask for a port now, while the click still counts as a gesture.
       await allowPort();
     }
-    startSharing();
+    await startSharing();
   }
 
   function join() {

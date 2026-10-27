@@ -92,8 +92,25 @@ export function startSession(code) {
     RemoteSupport.joinSession(code);
 }
 
-export function startSharing() {
+/**
+ * Starts sharing. A board this configurator is connected to is let go of
+ * first: the port can only be open once, so the supporter could not open it
+ * otherwise.
+ */
+export async function startSharing() {
+    await disconnect();
     RemoteSupport.shareSession();
+}
+
+/** Disconnects (or cancels connecting) and waits until the port is closed. */
+async function disconnect() {
+    if (GUI.connected_to || GUI.connecting_to) {
+        document.querySelector('div#connectbutton a.connect')?.click();
+    }
+    const deadline = Date.now() + 4000;
+    while ((GUI.connected_to || GUI.disconnect_in_progress) && Date.now() < deadline) {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+    }
 }
 
 export function stopSession() {
@@ -113,13 +130,7 @@ export function openRemoteSupportTab() {
  */
 export async function killSession() {
     if (remote.role === 'join' && serial.connectionType === 'remote') {
-        if (GUI.connected_to || GUI.connecting_to) {
-            document.querySelector('div#connectbutton a.connect')?.click();
-        }
-        const deadline = Date.now() + 4000;
-        while ((GUI.connected_to || GUI.disconnect_in_progress) && Date.now() < deadline) {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-        }
+        await disconnect();
     }
     stopSession();
 }
