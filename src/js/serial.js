@@ -325,8 +325,8 @@ export const serial = {
             self.bytesSent = 0;
             self.failed = 0;
 
+            // dispatch() counts bytesReceived.
             RemoteSupport.onSerialData = (data) => {
-                self.bytesReceived += data.byteLength;
                 self.onReceive.dispatch({ connectionId: self.connectionId, data: data });
             };
             RemoteSupport.onSerialClosed = (reason) => {
@@ -618,7 +618,7 @@ export const serial = {
                 }
             }
         },
-        // Web backend only: protocols/Web*.js deliver events through this.
+        // Web backend (protocols/Web*.js) and remote connections deliver events through this.
         dispatch: function (info) {
             serial.bytesReceived += info.data.byteLength;
             this.listeners.forEach((listener) => listener(info));
