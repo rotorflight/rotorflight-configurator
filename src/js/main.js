@@ -10,6 +10,7 @@ import { i18n } from "@/js/localization.js";
 import { mspHelper } from "@/js/msp/MSPHelper.js";
 import { releaseOverrides, waitUntilQuiet } from "@/js/msp/release_overrides.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
+import { REMOTE_SUPPORT_AVAILABLE, RemoteSupport } from "@/js/protocols/RemoteSupport.js";
 import { ReleaseChecker } from "@/js/release_checker.js";
 import { serial } from "@/js/serial.js";
 import { handleConnectClick, initializeSerialBackend } from "@/js/serial_backend.js";
@@ -105,8 +106,9 @@ function closeWindow() {
     }
 
     // Closing the window ends this script, so wait (hidden) until the FC got
-    // its stop sequence.
-    const closed = closeSerial();
+    // its stop sequence: our own connection's, and, while sharing it in a
+    // remote support session, the shared one's.
+    const closed = Promise.allSettled([closeSerial(), RemoteSupport.shutdown()]);
     const timeout = new Promise((resolve) => setTimeout(resolve, CLOSE_TIMEOUT));
     Promise.race([closed, timeout]).finally(() => {
         if (!GUI.isCordova()) {
@@ -172,6 +174,12 @@ export function startProcess() {
     UI_PHONES.init();
 
     const ui_tabs = $('#tabs > ul');
+
+    // The Remote Support tab sits in the menu's mode-always list, usable
+    // connected or not. Hidden where remote support can't run.
+    if (!REMOTE_SUPPORT_AVAILABLE) {
+        $('#tabs li.tab_remote_support').hide();
+    }
 
     $('a', ui_tabs).click(function () {
         if ($(this).parent().hasClass('active') === false && !GUI.tab_switch_in_progress) { // only initialize when the tab isn't already active

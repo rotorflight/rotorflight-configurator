@@ -1638,6 +1638,28 @@ li.active .ic_help {
     background-image: url(/images/icons/cf_icon_help_white.svg);
 }
 
+.ic_support {
+    background-image: url(/images/icons/cf_icon_support_grey.svg);
+}
+
+.ic_support:hover {
+    background-image: url(/images/icons/cf_icon_support_white.svg);
+}
+
+li.active .ic_support {
+    background-image: url(/images/icons/cf_icon_support_white.svg);
+}
+
+/* Remote support session running: the menu entry stays lit. */
+#tabs li a.remote-support-active.ic_support {
+    background-image: url(/images/icons/cf_icon_support_active.svg);
+    color: var(--color-status-good);
+}
+
+#tabs ul.mode-always {
+    margin-top: 14px;
+}
+
 .ic_flasher {
     background-image: url(/images/icons/cf_icon_flasher_grey.svg);
 }

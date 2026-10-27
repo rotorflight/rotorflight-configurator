@@ -6,6 +6,7 @@ import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { MSPConnectorImpl } from '@/js/msp/MSPConnector.js';
 import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
+import { REMOTE_PORT_PREFIX } from "@/js/protocols/RemoteSupport.js";
 import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
 import { serial } from "@/js/serial.js";
 import { bit_check } from "@/js/serial_backend.js";
@@ -145,10 +146,15 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
                     // removing can fail the device or hang the app. On web, an
                     // unauthorized DFU device never shows up, so ask for
                     // permission sooner.
-                    const maxAttempts = (__BACKEND__ === "web") ? DFU_WAIT_ATTEMPTS_WEB : DFU_WAIT_ATTEMPTS;
+                    // A board shared in a remote support session is never
+                    // this browser's to ask permission for: wait as long as
+                    // the desktop app does, then give up.
+                    const remote = self.port.startsWith(REMOTE_PORT_PREFIX);
+                    const askWebPermission = __BACKEND__ === "web" && !remote;
+                    const maxAttempts = askWebPermission ? DFU_WAIT_ATTEMPTS_WEB : DFU_WAIT_ATTEMPTS;
                     if (!portPresent && attempt < maxAttempts) {
                         setTimeout(() => startFlashing(attempt + 1), DFU_WAIT_INTERVAL_MS);
-                    } else if (!portPresent && __BACKEND__ !== "web") {
+                    } else if (!portPresent && !askWebPermission) {
                         giveUp(i18n.getMessage('stm32UsbDfuNotFoundAfterReboot'));
                     } else if (portPresent && attempt < SERIAL_SETTLE_ATTEMPTS) {
                         // A USB-VCP board's port can still be listed just
