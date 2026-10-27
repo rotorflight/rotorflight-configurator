@@ -8,6 +8,7 @@ import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
 import { mspHelper } from "@/js/msp/MSPHelper.js";
+import { releaseOverrides, waitUntilQuiet } from "@/js/msp/release_overrides.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
 import { ReleaseChecker } from "@/js/release_checker.js";
 import { serial } from "@/js/serial.js";
@@ -55,58 +56,33 @@ export function appReady() {
     });
 }
 
-function closeSerial() {
-    // automatically close the port when application closes
-    const connectionId = serial.connectionId;
-
-    if (connectionId && CONFIGURATOR.connectionValid && !CONFIGURATOR.virtualMode) {
-        // code below is handmade MSP message (without pretty JS wrapper), it behaves exactly like MSP.send_message
-        // sending exit command just in case the cli tab was open.
-        // reset motors to default (mincommand)
-
-        let bufferOut = new ArrayBuffer(5),
-        bufView = new Uint8Array(bufferOut);
-
-        bufView[0] = 0x65; // e
-        bufView[1] = 0x78; // x
-        bufView[2] = 0x69; // i
-        bufView[3] = 0x74; // t
-        bufView[4] = 0x0D; // enter
-
-        const sendFn = (serial.connectionType === 'serial' ? chrome.serial.send : chrome.sockets.tcp.send);
-        sendFn(connectionId, bufferOut, function () {
-            console.log('Send exit');
+// The app is closing: leave the FC safe. Resolves once the port is closed.
+async function closeSerial() {
+    // Close the tab as Disconnect does: it releases what it drives and stops
+    // its own timers, so nothing re-asserts an override after the release
+    // below and the board's answers to polling don't keep the port busy
+    // (see waitUntilQuiet()).
+    await new Promise((resolve) => {
+        const timer = setTimeout(resolve, 1000);
+        GUI.tab_switch_cleanup(() => {
+            clearTimeout(timer);
+            resolve();
         });
-
-        setTimeout(function() {
-            bufferOut = new ArrayBuffer(22);
-            bufView = new Uint8Array(bufferOut);
-            let checksum;
-
-            bufView[0] = 36; // $
-            bufView[1] = 77; // M
-            bufView[2] = 60; // <
-            bufView[3] = 16; // data length
-            bufView[4] = 214; // MSP_SET_MOTOR
-
-            checksum = bufView[3] ^ bufView[4];
-
-            for (let i = 0; i < 16; i += 2) {
-                bufView[i + 5] = FC.MOTOR_CONFIG.mincommand & 0x00FF;
-                bufView[i + 6] = FC.MOTOR_CONFIG.mincommand >> 8;
-
-                checksum ^= bufView[i + 5];
-                checksum ^= bufView[i + 6];
-            }
-
-            bufView[5 + 16] = checksum;
-
-            sendFn(connectionId, bufferOut, function () {
-                serial.disconnect();
-            });
-        }, 100);
-    } else if (connectionId) {
-        serial.disconnect();
+    });
+    GUI.interval_kill_all();
+    GUI.timeout_kill_all();
+    if (serial.connectionId && CONFIGURATOR.connectionValid && !CONFIGURATOR.virtualMode) {
+        // In case the CLI tab was open: `exit` leaves CLI mode (rebooting the
+        // board, which clears everything). In MSP mode the board ignores it.
+        serial.send(new TextEncoder().encode('exit\r').buffer);
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        // Stop the motors and release every override, and wait until the
+        // board has worked through all of it before the port closes.
+        await releaseOverrides();
+        await waitUntilQuiet(2500);
+    }
+    if (serial.connectionId) {
+        await new Promise((resolve) => serial.disconnect(resolve));
     }
 }
 
@@ -120,16 +96,23 @@ function closeHandler() {
     closeWindow.call(this);
 }
 
+// The longest the app waits for the FC to be made safe before it closes.
+const CLOSE_TIMEOUT = 3000;
+
 function closeWindow() {
     if (!GUI.isCordova()) {
         this.hide();
     }
 
-    closeSerial();
-
-    if (!GUI.isCordova()) {
-        this.close(true);
-    }
+    // Closing the window ends this script, so wait (hidden) until the FC got
+    // its stop sequence.
+    const closed = closeSerial();
+    const timeout = new Promise((resolve) => setTimeout(resolve, CLOSE_TIMEOUT));
+    Promise.race([closed, timeout]).finally(() => {
+        if (!GUI.isCordova()) {
+            this.close(true);
+        }
+    });
 }
 
 //Process to execute to real start the app
@@ -189,6 +172,7 @@ export function startProcess() {
     UI_PHONES.init();
 
     const ui_tabs = $('#tabs > ul');
+
     $('a', ui_tabs).click(function () {
         if ($(this).parent().hasClass('active') === false && !GUI.tab_switch_in_progress) { // only initialize when the tab isn't already active
             const self = this;
