@@ -19,8 +19,8 @@ import { serial } from '@/js/serial.js';
     a supporter run code in the pilot's configurator (and through NW.js, on
     their computer). Instead the supporter sends each visible canvas as a
     small image a few times a second when it changed (an rrweb custom
-    event), and the viewer draws it onto the replayed canvas from outside the
-    script-free iframe.
+    event), and the viewer shows it as an image inside the replayed canvas
+    (see drawCanvasFrame()).
 
     The pilot starts and stops the stream (VIEW_REQUEST), so nothing is
     recorded or sent unless someone is watching. The supporter's dialog shows
@@ -205,6 +205,8 @@ function sendEvent(event) {
     }
     if (outbox.length > MAX_QUEUED_FRAGMENTS) {
         outbox.length = 0;
+        // A fresh snapshot has empty canvases; send them all again.
+        canvasFrames = {};
         record.takeFullSnapshot(true);
     }
     pump();
@@ -222,8 +224,8 @@ function startRecording() {
             sampling: { mousemove: 50, scroll: 100, input: 'last' },
             // Replaying canvases needs a script-enabled, same-origin iframe,
             // which would let a supporter run code in the pilot's
-            // configurator (and through NW.js, on their computer). So the
-            // 3D model and graphs stay blank in the viewer.
+            // configurator (and through NW.js, on their computer). The 3D
+            // model and graphs are sent as images instead (captureCanvases()).
             recordCanvas: false,
             maskInputOptions: { password: true },
         });
@@ -340,14 +342,18 @@ function drawCanvasFrame({ id, data } = {}) {
     if (canvas?.nodeName !== 'CANVAS') {
         return;
     }
-    const image = new Image();
-    image.onload = () => {
-        const context = canvas.getContext('2d');
-        if (context) {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            context.drawImage(image, 0, 0, canvas.width, canvas.height);
-        }
-    };
+    // The viewer's sandbox has scripting disabled, and a canvas in such a
+    // document shows its fallback content instead of its bitmap: drawing
+    // into it would show nothing. Show the picture as an image inside it.
+    let image = canvas.firstElementChild;
+    if (image?.nodeName !== 'IMG') {
+        image = canvas.ownerDocument.createElement('img');
+        canvas.replaceChildren(image);
+    }
+    const style = canvas.ownerDocument.defaultView.getComputedStyle(canvas);
+    const width = style.width === 'auto' ? `${canvas.width}px` : style.width;
+    const height = style.height === 'auto' ? `${canvas.height}px` : style.height;
+    image.style.cssText = `display: block; width: ${width}; height: ${height};`;
     image.src = data;
 }
 
