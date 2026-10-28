@@ -90,7 +90,7 @@ function control(text) {
 export class RemoteSession {
     /**
      * @param {object} options
-     * @param {string} options.relayUrl e.g. wss://remote.wingflight.org
+     * @param {string} options.relayUrl e.g. wss://remote.rotorflight.org
      * @param {'share'|'join'} options.role
      * @param {string} [options.code] join only: the session code
      */

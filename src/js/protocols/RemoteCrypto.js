@@ -8,7 +8,8 @@ import { sha256 } from '@noble/hashes/sha2.js';
     so the relay can neither read nor change what passes through it. This is
     a port of crypto.rs in the Wingflight remote support tool
     (https://github.com/WingFlight/wingflight-remote-support), whose
-    PROTOCOL.md describes the protocol; the relay is shared with it.
+    PROTOCOL.md describes the protocol. Rotorflight has its own relay domain
+    and its own protocol labels (below), so it never pairs with Wingflight.
 
     The pilot's side makes up a 4-digit PIN that is shown next to the session
     ID but never sent anywhere. Both sides run SPAKE2 (as the Rust `spake2`
@@ -30,13 +31,14 @@ const HANDSHAKE = 0x01;
 const VERSION = 1;
 
 const encoder = new TextEncoder();
-// Labels fixed by the protocol (they go into the key exchange and key
-// derivation), not product names: both ends must use exactly these bytes.
-const CONFIRM_PLAINTEXT = encoder.encode('wingflight-remote confirm v1');
-const ID_SHARE = encoder.encode('wingflight-remote share');
-const ID_JOIN = encoder.encode('wingflight-remote join');
-const INFO_SHARE_TO_JOIN = encoder.encode('wingflight-remote v1 share->join');
-const INFO_JOIN_TO_SHARE = encoder.encode('wingflight-remote v1 join->share');
+// Labels that go into the key exchange and key derivation: both ends must
+// use exactly these bytes. Wingflight uses `wingflight-remote …` instead, so
+// a Rotorflight and a Wingflight end derive different keys and fail CONFIRM.
+const CONFIRM_PLAINTEXT = encoder.encode('rotorflight-remote confirm v1');
+const ID_SHARE = encoder.encode('rotorflight-remote share');
+const ID_JOIN = encoder.encode('rotorflight-remote join');
+const INFO_SHARE_TO_JOIN = encoder.encode('rotorflight-remote v1 share->join');
+const INFO_JOIN_TO_SHARE = encoder.encode('rotorflight-remote v1 join->share');
 
 export const SIDE = { SHARE: 'share', JOIN: 'join' };
 

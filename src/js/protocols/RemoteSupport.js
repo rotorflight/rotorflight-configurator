@@ -47,9 +47,10 @@ export function canShareDevices() {
     return __BACKEND__ === 'web' && getSerialProvider() !== null;
 }
 
-// Shared with Wingflight: it only passes on encrypted messages between the
-// two ends of a session.
-const RELAY_URL = 'wss://remote.wingflight.org';
+// Only passes on encrypted messages between the two ends of a session. Runs
+// on the same server as Wingflight's relay, but sessions are kept apart by
+// domain: a Wingflight session ID is unknown here.
+const RELAY_URL = 'wss://remote.rotorflight.org';
 // Longer than a device host's own 10 s USB transfer timeout, so a slow
 // transfer reports its real error instead of this one.
 const REQUEST_TIMEOUT = 15000;
