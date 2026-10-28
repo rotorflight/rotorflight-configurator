@@ -291,6 +291,10 @@ export function startWatching(container) {
         showWarning: false,
         // Keep rrweb's default sandbox (no scripts): see startRecording().
         UNSAFE_replayCanvas: false,
+        // The supporter's page has its own session frame and badge
+        // (RemoteSupportOverlay.svelte). The pilot already has theirs around
+        // the viewer, so don't show a second one inside it.
+        insertStyleRules: ['.session-frame { display: none !important; }'],
     });
     replayer.on('resize', (size) => {
         viewerSize = size;
