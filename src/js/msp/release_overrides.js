@@ -15,13 +15,13 @@ const POLL_INTERVAL = 50;
  * connected FC (see safe_stop.js). For a tab that set overrides without a
  * timeout, and for anything that lets go of the FC: otherwise the servos
  * stay where they were left, and arming stays blocked, until the board
- * reboots.
+ * reboots. `disarm`: also disarm first (see safeStopGroups()).
  */
-export async function releaseOverrides() {
+export async function releaseOverrides({ disarm = false } = {}) {
   if (CONFIGURATOR.virtualMode || !serial.connected) {
     return;
   }
-  for (const group of safeStopGroups()) {
+  for (const group of safeStopGroups({ disarm })) {
     serial.send(group.buffer);
     await new Promise((resolve) => setTimeout(resolve, GROUP_PAUSE));
   }

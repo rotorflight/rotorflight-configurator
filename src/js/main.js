@@ -77,9 +77,10 @@ async function closeSerial() {
         // board, which clears everything). In MSP mode the board ignores it.
         serial.send(new TextEncoder().encode('exit\r').buffer);
         await new Promise((resolve) => setTimeout(resolve, 100));
-        // Stop the motors and release every override, and wait until the
-        // board has worked through all of it before the port closes.
-        await releaseOverrides();
+        // Disarm, stop the motors and release every override, and wait
+        // until the board has worked through all of it before the port
+        // closes. Arming is enabled again at the end, as on Disconnect.
+        await releaseOverrides({ disarm: true });
         await waitUntilQuiet(2500);
     }
     if (serial.connectionId) {
