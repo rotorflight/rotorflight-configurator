@@ -50,7 +50,7 @@
   // FC.ESC_SENSOR_CONFIG.protocol is one of its escSensorProtocolIds (same id space as the
   // Motors tab's telemetryProtocols index -- e.g. Scorpion=4, OMP=6, ZTW=7, YGE=9,
   // FlyRotor=10, XDFly=12). AM32/BLHeli_S/Bluejay share id 1 (BLHeli32), since telemetry
-  // can't distinguish them. Protocol 0 (disabled) matches nothing, so every button is off.
+  // can't distinguish them; AM32 also accepts 16 (Goosky, an alias of BLHeli32). Protocol 0 (disabled) matches nothing, so every button is off.
   // Virtual mode skips the check, like the Lua guard does in simulation.
   let telemetryDisabled = $derived(
     !CONFIGURATOR.virtualMode && !FC.ESC_SENSOR_CONFIG.protocol,

@@ -42,7 +42,11 @@ class State {
     ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)
       ? ["FrSky F.BUS"]
       : []),
-    ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10) ? ["SRXL2"] : []),
+    // 15 is the firmware's RECORD debug protocol, not offered here. Goosky ESCs
+    // run AM32 and use BLHeli32 telemetry; the firmware treats 16 as an alias.
+    ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
+      ? ["SRXL2", undefined, "Goosky (AM32)"]
+      : []),
   ]);
 
   throttleEnabled = $derived(
