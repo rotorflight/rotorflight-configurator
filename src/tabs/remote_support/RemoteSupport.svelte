@@ -34,9 +34,10 @@
       return;
     }
     try {
-      allowedPorts = (await serial.loadWebSerialPorts()).map(
-        (p) => p.displayName,
-      );
+      allowedPorts = (await serial.loadWebSerialPorts()).map((p) => ({
+        path: p.path,
+        displayName: p.displayName,
+      }));
     } catch {
       allowedPorts = [];
     }
@@ -114,8 +115,8 @@
               <h3>{$i18n.t("remoteSupportAllowedPorts")}</h3>
               {#if allowedPorts.length}
                 <ul>
-                  {#each allowedPorts as name (name)}
-                    <li>{name}</li>
+                  {#each allowedPorts as port (port.path)}
+                    <li>{port.displayName}</li>
                   {/each}
                 </ul>
               {:else}
