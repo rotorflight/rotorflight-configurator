@@ -55,6 +55,16 @@ class FakePort {
         this.controller.enqueue(Uint8Array.from(bytes));
     }
 
+    /** A recoverable error: Web Serial errors the stream and puts a new one in its place. */
+    overrun() {
+        this.controller.error(new DOMException('Buffer overrun', 'BufferOverrunError'));
+        this.readable = new ReadableStream({
+            start: (controller) => {
+                this.controller = controller;
+            },
+        });
+    }
+
     /** The board goes away (reboot, cable pulled). */
     lose() {
         this.controller.error(new DOMException('The device has been lost.', 'NetworkError'));
@@ -247,6 +257,26 @@ test('tells the supporter when the port is lost, with nothing to make safe', asy
     assert.deepEqual(port.written, []);
     assert.equal(port.closed, 1);
     assert.equal(devices.at(-1), null);
+});
+
+test('keeps reading after a recoverable error, and still stops the board on close', async () => {
+    const port = new FakePort({ usbVendorId: 1155, usbProductId: 22336 });
+    const { host, sent } = makeHost({ port });
+
+    host.handle(serialOpen(7, PORT_PATH));
+    await host.queue;
+    port.overrun();
+    await delay(20);
+    port.feed([1, 2, 3]);
+    await delay(20);
+
+    assert.ok(!sent.some((m) => m[0] === MSG.SERIAL_CLOSED), 'no SERIAL_CLOSED');
+    assert.ok(sent.some((m) => m[0] === MSG.SERIAL_DATA && hex(m.subarray(1)) === '010203'));
+
+    host.handle(withReq(MSG.SERIAL_CLOSE, 8));
+    await host.queue;
+    assert.equal(port.written.length, safeStopGroups({ disarm: true }).length);
+    assert.equal(port.closed, 1);
 });
 
 test('drives a DFU device like the desktop host', async () => {

@@ -299,31 +299,33 @@ export class WebRemoteDeviceHost {
 
     /** Forwards what the board sends until the port is closed or lost. */
     async readLoop(link) {
-        try {
-            while (link.port.readable && !link.closed) {
-                const reader = link.port.readable.getReader();
-                link.reader = reader;
-                try {
-                    for (;;) {
-                        const { value, done } = await reader.read();
-                        if (done) {
-                            break;
-                        }
-                        link.lastReceive = Date.now();
-                        // Once closing has begun, the board's answers only
-                        // serve to tell when it has gone quiet.
-                        if (value?.length && !link.settling && this.serial === link) {
-                            this.send(concat(Uint8Array.of(MSG.SERIAL_DATA), value));
-                        }
+        while (link.port.readable && !link.closed) {
+            const reader = link.port.readable.getReader();
+            link.reader = reader;
+            try {
+                for (;;) {
+                    const { value, done } = await reader.read();
+                    if (done) {
+                        break;
                     }
-                } finally {
-                    reader.releaseLock();
-                    link.reader = null;
+                    link.lastReceive = Date.now();
+                    // Once closing has begun, the board's answers only
+                    // serve to tell when it has gone quiet.
+                    if (value?.length && !link.settling && this.serial === link) {
+                        this.send(concat(Uint8Array.of(MSG.SERIAL_DATA), value));
+                    }
                 }
-            }
-        } catch (err) {
-            if (!link.closed) {
-                this.serialError(link, err);
+            } catch (err) {
+                // Overrun, break, framing and parity errors leave a new
+                // port.readable behind: keep reading. Only a lost port ends
+                // the link.
+                if (!link.closed && (err?.name === 'NetworkError' || !link.port.readable)) {
+                    this.serialError(link, err);
+                    return;
+                }
+            } finally {
+                reader.releaseLock();
+                link.reader = null;
             }
         }
     }
