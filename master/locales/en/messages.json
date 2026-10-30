@@ -126,6 +126,10 @@
         "message": "--- I can't find my DFU device ---",
         "description": "Web version only: port picker entry that opens the browser's USB (DFU) device chooser"
     },
+    "portsRemoteDevice": {
+        "message": "Remote - $1",
+        "description": "A serial port or DFU device on the other computer of a remote support session; $1 is the device name"
+    },
     "portsSelectVirtual": {
         "message": "Virtual Mode (Demo)",
         "description": "Demo the configurator against a simulated flight controller - no hardware needed, and nothing is written to a real FC."
@@ -9749,5 +9753,160 @@
     },
     "firmwareFlasherFlashFirmwareShort": {
         "message": "Flash"
+    },
+    "remoteSupportMenu": {
+        "message": "Remote Support",
+        "description": "Left menu entry that opens the remote support panel"
+    },
+    "initialSetupButtonRemoteSupport": {
+        "message": "Remote support"
+    },
+    "defaultRemoteSupportText": {
+        "message": "Stuck, or can't connect to your flight controller? Someone can help you over the internet: you share your flight controller and give them a session code, and they work on it from their own configurator. Helping someone? Join their session here."
+    },
+    "initialSetupRemoteSupportText": {
+        "message": "Let someone help you over the internet. They see and change your flight controller's settings from their own configurator while you watch their screen. You give them a session code to join."
+    },
+    "remoteSupportTitle": {
+        "message": "Remote support"
+    },
+    "remoteSupportShareTitle": {
+        "message": "I need help"
+    },
+    "remoteSupportShareChoice": {
+        "message": "Share your flight controller with someone who helps you.",
+        "description": "Subtitle of the 'I need help' choice in the remote support panel"
+    },
+    "remoteSupportJoinChoice": {
+        "message": "Join a session with the code the pilot gives you.",
+        "description": "Subtitle of the 'I'm helping someone' choice in the remote support panel"
+    },
+    "remoteSupportShareStep1": {
+        "message": "This configurator lets go of the flight controller, and the supporter uses it from theirs."
+    },
+    "remoteSupportShareStep2": {
+        "message": "You watch the supporter's screen until the session ends."
+    },
+    "remoteSupportBeforeShare": {
+        "message": "Before you share",
+        "description": "Heading of the safety note shown to the pilot"
+    },
+    "remoteSupportBeforeJoin": {
+        "message": "Before you join",
+        "description": "Heading of the safety note shown to the supporter"
+    },
+    "remoteSupportShare": {
+        "message": "Share my flight controller"
+    },
+    "remoteSupportJoinTitle": {
+        "message": "I'm helping someone"
+    },
+    "remoteSupportCodePlaceholder": {
+        "message": "Session code, e.g. 123 456 789 - 0427"
+    },
+    "remoteSupportJoin": {
+        "message": "Join"
+    },
+    "remoteSupportCode": {
+        "message": "Session code"
+    },
+    "remoteSupportWaitingSupporter": {
+        "message": "Waiting for the supporter..."
+    },
+    "remoteSupportSupporterConnected": {
+        "message": "The supporter is connected."
+    },
+    "remoteSupportConnectedPilot": {
+        "message": "Connected to the pilot's computer. Choose the remote port in the port list and connect."
+    },
+    "remoteSupportDevice": {
+        "message": "Device in use: $1"
+    },
+    "remoteSupportBeingWatched": {
+        "message": "The pilot is watching your screen."
+    },
+    "remoteSupportNotWatched": {
+        "message": "The pilot is not watching your screen. Nothing is sent unless they do."
+    },
+    "remoteSupportWatching": {
+        "message": "Supporter's screen (read-only)"
+    },
+    "remoteSupportWatchWaiting": {
+        "message": "The supporter is connected. Waiting for their screen..."
+    },
+    "remoteSupportFrameWaiting": {
+        "message": "Remote support: waiting for the supporter",
+        "description": "Banner on the frame around the pilot's window while sharing, before a supporter has joined"
+    },
+    "remoteSupportFrameConnected": {
+        "message": "Remote support session in progress",
+        "description": "Banner on the frame around the pilot's window while a supporter is connected"
+    },
+    "remoteSupportSafetyPilot1": {
+        "message": "Remove the propellers and secure the model.",
+        "description": "Safety note shown to the pilot before sharing their flight controller, first point"
+    },
+    "remoteSupportSafetyPilot2": {
+        "message": "Start an audio call with the supporter and keep it open the whole time, so you can tell them at once about any unexpected movement or danger."
+    },
+    "remoteSupportSafetyPilot3": {
+        "message": "Kill connection ends the session at any time: motors are stopped and actuators return to neutral."
+    },
+    "remoteSupportSafetySupporter1": {
+        "message": "You are working on a real model on someone else's bench, and you are responsible for it.",
+        "description": "Safety note shown to the supporter before joining a session, first point"
+    },
+    "remoteSupportSafetySupporter2": {
+        "message": "Never spin up motors."
+    },
+    "remoteSupportSafetySupporter3": {
+        "message": "Move actuators only after the pilot has confirmed it is safe."
+    },
+    "remoteSupportSafetySupporter4": {
+        "message": "Start an audio call with the pilot and keep it open the whole time, so they can report any unexpected movement or danger right away."
+    },
+    "remoteSupportSafetyAck": {
+        "message": "I have read this and will follow it"
+    },
+    "remoteSupportSafetyReminder": {
+        "message": "Never spin up motors. Keep the audio call with the pilot open.",
+        "description": "Reminder shown to the supporter during a session"
+    },
+    "remoteSupportSafetyReminderPilot": {
+        "message": "Keep the audio call open and report anything unexpected at once.",
+        "description": "Reminder in the bar of the pilot's view of the supporter's screen"
+    },
+    "remoteSupportViewerCodeHint": {
+        "message": "Give the supporter this session code:"
+    },
+    "remoteSupportKill": {
+        "message": "Kill connection"
+    },
+    "remoteSupportShareUnsupported": {
+        "message": "Needs Chrome, Edge or the desktop configurator; this browser can't reach the flight controller.",
+        "description": "Subtitle of the disabled 'I need help' choice in browsers without Web Serial or WebUSB"
+    },
+    "remoteSupportWebShareHint": {
+        "message": "The browser asks which port to share. The supporter can only use what you allow, and you can allow more during the session.",
+        "description": "Extra point for pilots sharing from the web configurator"
+    },
+    "remoteSupportAllowPort": {
+        "message": "Allow a port...",
+        "description": "Button for the pilot to grant the browser access to another serial port during a session"
+    },
+    "remoteSupportAllowDfu": {
+        "message": "Allow a DFU device...",
+        "description": "Button for the pilot to grant the browser access to a board in bootloader mode during a session"
+    },
+    "remoteSupportAllowedPorts": {
+        "message": "Ports the browser may share",
+        "description": "Heading of the list of serial ports the pilot has granted the web configurator access to"
+    },
+    "remoteSupportNoAllowedPorts": {
+        "message": "None yet. The browser asks for one when you share."
+    },
+    "remoteSupportFrameJoined": {
+        "message": "Remote support: working on the pilot's flight controller",
+        "description": "Banner on the frame around the supporter's window while joined to a session"
     }
 }
