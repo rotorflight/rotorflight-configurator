@@ -4646,7 +4646,7 @@
         "message": "Telemetry Protocol"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab.<br>Goosky ESCs run AM32 firmware: select <i>Goosky (AM32)</i> or <i>BLHeli32</i>, both use the same telemetry."
+        "message": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab.<br>Goosky ESCs run AM32 firmware: select <i>Goosky</i> or <i>BLHeli32</i>, both use the same telemetry."
     },
     "motorsEscTelemetryHalfDuplex": {
         "message": "Half-Duplex"
