@@ -23,6 +23,9 @@ export const MSG = {
     USB_CTRL_IN:   0x35,
     USB_CTRL_OUT:  0x36,
     RESULT:        0x40,
+    // Screen mirroring (RemoteView.svelte.js), not for the device hosts.
+    VIEW_DATA:     0x50,
+    VIEW_REQUEST:  0x51,
 };
 
 export const RESULT_OK = 0;

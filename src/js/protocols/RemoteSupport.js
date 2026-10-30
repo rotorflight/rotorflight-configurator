@@ -1,6 +1,14 @@
 import { i18n } from '@/js/localization.js';
 import { SIDE } from '@/js/protocols/RemoteCrypto.js';
 import { RemoteDeviceHost, releaseAbandonedSerialConnections } from '@/js/protocols/RemoteDeviceHost.js';
+import {
+    MSG,
+    RESULT_OK,
+    RESULT_STALL,
+    concat,
+    textDecoder,
+    textEncoder,
+} from '@/js/protocols/RemoteDeviceProtocol.js';
 import { WebRemoteDeviceHost } from '@/js/protocols/WebRemoteDeviceHost.js';
 import { RemoteSession } from '@/js/protocols/RemoteSession.js';
 import { getSerialProvider } from '@/js/protocols/WebSerial.js';
@@ -30,8 +38,7 @@ import { getSerialProvider } from '@/js/protocols/WebSerial.js';
 */
 
 export const REMOTE_PORT_PREFIX = 'remote:';
-export const VIEW_DATA = 0x50;
-export const VIEW_REQUEST = 0x51;
+export const { VIEW_DATA, VIEW_REQUEST } = MSG;
 
 // Where remote support runs: the desktop app and the browser.
 export const REMOTE_SUPPORT_AVAILABLE = __BACKEND__ === 'nwjs' || __BACKEND__ === 'web';
@@ -57,45 +64,8 @@ const REQUEST_TIMEOUT = 15000;
 // Keeps a large write (e.g. a CLI paste) to messages of a sensible size.
 const SERIAL_WRITE_CHUNK = 8192;
 
-const MSG = {
-    LIST_DEVICES:   0x10,
-    DEVICE_LIST:    0x11,
-    SERIAL_OPEN:    0x20,
-    SERIAL_CLOSE:   0x21,
-    SERIAL_WRITE:   0x22,
-    SERIAL_DATA:    0x23,
-    SERIAL_CLOSED:  0x24,
-    USB_OPEN:       0x30,
-    USB_CLOSE:      0x31,
-    USB_CLAIM:      0x32,
-    USB_RELEASE:    0x33,
-    USB_RESET:      0x34,
-    USB_CTRL_IN:    0x35,
-    USB_CTRL_OUT:   0x36,
-    RESULT:         0x40,
-    VIEW_DATA:      0x50,
-    VIEW_REQUEST:   0x51,
-};
-
-const RESULT_OK = 0;
-const RESULT_STALL = 1;
-
 const REQUEST_TYPES = { standard: 0x00, class: 0x20, vendor: 0x40 };
 const RECIPIENTS = { device: 0x00, interface: 0x01, endpoint: 0x02, other: 0x03 };
-
-const textEncoder = new TextEncoder();
-const textDecoder = new TextDecoder();
-
-function concat(...parts) {
-    const length = parts.reduce((sum, part) => sum + part.length, 0);
-    const out = new Uint8Array(length);
-    let offset = 0;
-    for (const part of parts) {
-        out.set(part, offset);
-        offset += part.length;
-    }
-    return out;
-}
 
 function header(type, req, extraLength = 0) {
     const bytes = new Uint8Array(5 + extraLength);
