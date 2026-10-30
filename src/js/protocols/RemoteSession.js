@@ -265,9 +265,10 @@ export class RemoteSession {
                 switch (link.state) {
                     case 'handshake':
                         try {
-                            const channel = link.handshake.finish(data);
-                            this.ws.send(channel.confirm());
-                            link = { state: 'confirm', channel };
+                            // Our confirm only goes out once theirs checks
+                            // out: sent earlier, it would let a supporter
+                            // test a PIN guess offline and leave.
+                            link = { state: 'confirm', channel: link.handshake.finish(data) };
                         } catch {
                             failedAttempts++;
                             link = { state: 'idle' };
@@ -275,6 +276,7 @@ export class RemoteSession {
                         break;
                     case 'confirm':
                         if (link.channel.checkConfirm(data)) {
+                            this.ws.send(link.channel.confirm());
                             this.channel = link.channel;
                             link = { state: 'ready' };
                             this.setStatus({ peerConnected: true });
@@ -298,13 +300,14 @@ export class RemoteSession {
                     }
                     // idle: a supporter whose code was wrong; ignore them.
                 }
-                if (failedAttempts >= MAX_FAILED_ATTEMPTS) {
-                    throw new SessionEnd(
-                        `Someone tried to join with a wrong session code ${MAX_FAILED_ATTEMPTS} times, ` +
-                            'so the session was ended. Share again to get a new code.',
-                    );
-                }
+                this.checkFailedAttempts(failedAttempts);
             } else if (event.kind === 'text' && event.value.type === 'peer_joined') {
+                // Someone who leaves (or is replaced) mid-handshake has had
+                // a go at the PIN, so it counts as a failed attempt.
+                if (link.state === 'handshake' || link.state === 'confirm') {
+                    failedAttempts++;
+                    this.checkFailedAttempts(failedAttempts);
+                }
                 const handshake = new Handshake(SIDE.SHARE, this.status.sessionId, this.status.pin);
                 link = { state: 'handshake', handshake };
                 this.ws.send(handshake.frame);
@@ -319,10 +322,23 @@ export class RemoteSession {
                     );
                 }
                 // Someone who never got past the handshake.
+                if (link.state === 'handshake' || link.state === 'confirm') {
+                    failedAttempts++;
+                }
                 link = { state: 'idle' };
+                this.checkFailedAttempts(failedAttempts);
             } else {
                 this.handleCommon(event);
             }
+        }
+    }
+
+    checkFailedAttempts(failedAttempts) {
+        if (failedAttempts >= MAX_FAILED_ATTEMPTS) {
+            throw new SessionEnd(
+                `Someone tried to join with a wrong session code ${MAX_FAILED_ATTEMPTS} times, ` +
+                    'so the session was ended. Share again to get a new code.',
+            );
         }
     }
 
