@@ -65,17 +65,6 @@
     },
     {
       "type": "pr",
-      "name": "501",
-      "path": "./pr/501/",
-      "branch": "feature/remote-support",
-      "date": "2026-10-30T20:59:13Z",
-      "number": 501,
-      "title": "Add remote support: help a pilot with their flight controller remotely",
-      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/501",
-      "draft": false
-    },
-    {
-      "type": "pr",
       "name": "491",
       "path": "./pr/491/",
       "branch": "feature/setup-wizard",
