@@ -1,5 +1,6 @@
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
+import { RemoteSupport } from "@/js/protocols/RemoteSupport.js";
 import { TABS } from "@/js/tabs/tabs.js";
 import { checkChromeRuntimeError } from "@/js/utils/common.js";
 
@@ -21,7 +22,7 @@ var STM32DFU_protocol = function () {
     this.verify_hex = [];
 
     this.handle = null; // connection handle
-    this.useWebUsb = __BACKEND__ === "web"; // WebUSB USBDevice handle rather than chrome.usb
+    this.useWebUsb = __BACKEND__ === "web"; // WebUSB-style handle (web backend, or a remote device)
 
     this.request = {
         DETACH:     0x00, // OUT, Requests the device to leave DFU mode and enter the application.
@@ -92,12 +93,24 @@ STM32DFU_protocol.prototype.connect = function (device, hex, options, callback) 
     self.verify_hex = [];
 
     // The descriptor caches belong to one device; a new connect may well be
-    // a different board.
+    // a different board (or a remote one instead of a local one).
     self._webUsbConfigDescriptor = null;
     self._webUsbLangId = undefined;
 
     // reset progress bar to initial state
     TABS.firmware_flasher.flashingMessage(null, TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL).flashProgress(0);
+
+    // A DFU device on the far end of a remote support session (see
+    // RemoteSupport.js) implements the WebUSB USBDevice interface, so it goes
+    // through the same code path as WebUSB, in any backend.
+    const remoteDevice = RemoteSupport.findDfuDevice(device.filters);
+    self.useWebUsb = __BACKEND__ === "web" || remoteDevice !== null;
+
+    if (remoteDevice) {
+        console.log('Remote USB DFU detected: ' + (remoteDevice.productName || remoteDevice.id));
+        self.openDevice(remoteDevice);
+        return;
+    }
 
     if (__BACKEND__ === "web") {
         self.connectWebUsb(device);

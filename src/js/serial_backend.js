@@ -9,6 +9,7 @@ import { i18n } from "@/js/localization.js";
 import { updateTabList } from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { releaseOverrides } from "@/js/msp/release_overrides.js";
 import { mspHelper, resetMspHelper } from "@/js/msp/MSPHelper.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
 import { PortHandler, usbDevices } from "@/js/port_handler.js";
@@ -264,6 +265,9 @@ export async function handleConnectClick({ openLanding = true } = {}) {
                     await callbackOrTimeout((done) => GUI.tab_switch_cleanup(done), 2000);
                     GUI.tab_switch_in_progress = false;
 
+                    // Whatever the tab left behind: stop the motors and
+                    // release every override before letting go of the FC.
+                    await releaseOverrides();
                     await callbackOrTimeout((done) => mspHelper.setArmingEnabled(true, done), 1000);
 
                     // Wait for the port to actually finish closing before letting the

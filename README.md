@@ -79,6 +79,21 @@ To add this access right type the following command in a terminal, then log out 
 sudo usermod -aG dialout ${USER}
 ```
 
+#### Remote Support
+
+The **Remote Support** tab (bottom of the menu) lets someone help you with a flight controller
+plugged into your computer, from their own configurator: settings, the CLI and flashing.
+
+- **I need help:** share your flight controller. You get a session code to give the person
+  helping you, and you watch their screen until the session ends. **Kill connection** ends it at
+  any time; motors are stopped and actuators returned to neutral.
+- **I'm helping someone:** join with the pilot's code. Their ports then appear in the port list
+  as `Remote - …`, and you connect as usual.
+
+It works in the desktop app and the web app. Sharing from the web app needs Chrome or Edge (Web
+Serial / WebUSB); joining works in any browser. Sessions are end-to-end encrypted and pass through
+a relay shared with Wingflight, which cannot read them.
+
 #### Graphics Issues
 
 If you experience graphics display problems or smudged/dithered fonts display issues in Rotorflight Configurator, try invoking the `rotorflight-configurator` executable file with the `--disable-gpu` command line switch. This will switch off hardware graphics acceleration. Likewise, setting your graphics card antialiasing option to OFF (e.g. FXAA parameter on NVidia graphics cards) might be a remedy as well.

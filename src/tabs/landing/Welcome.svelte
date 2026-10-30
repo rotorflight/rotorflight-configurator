@@ -1,6 +1,8 @@
 <script>
   import { i18n } from "@/js/i18n.js";
   import { i18n as legacyI18n } from "@/js/localization.js";
+  import { REMOTE_SUPPORT_AVAILABLE as remoteSupportSupported } from "@/js/protocols/RemoteSupport.js";
+  import { openRemoteSupportTab } from "@/js/protocols/RemoteView.svelte.js";
 
   let selectedLanguage = $state(legacyI18n.selectedLanguage);
   const languages = legacyI18n.getLanguagesAvailables();
@@ -56,6 +58,17 @@
         <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         <div>{@html $i18n.t("defaultContributingText")}</div>
       </section>
+
+      {#if remoteSupportSupported}
+        <section>
+          <h2>{$i18n.t("remoteSupportTitle")}</h2>
+          <p>{$i18n.t("defaultRemoteSupportText")}</p>
+          <button class="btn remote-btn" onclick={openRemoteSupportTab}>
+            <span class="fas fa-headset"></span>
+            {$i18n.t("initialSetupButtonRemoteSupport")}
+          </button>
+        </section>
+      {/if}
     </div>
 
     <div class="column">
@@ -154,6 +167,14 @@
       var(--color-accent-500),
       transparent 55%
     );
+  }
+
+  .btn {
+    @extend %button;
+  }
+
+  .remote-btn {
+    margin-top: 10px;
   }
 
   .logo {
