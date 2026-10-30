@@ -43,6 +43,9 @@ const REQUEST_RETRY_INTERVAL = 2000;
 const CANVAS_EVENT = 'remote-support-canvas';
 const CANVAS_INTERVAL = 200;
 const CANVAS_MAX_WIDTH = 640;
+// Disconnect waits up to 2 s for the tab's cleanup and 1 s for re-enabling
+// arming, then closes the port.
+const DISCONNECT_TIMEOUT = 8000;
 
 const KIND = { WHOLE: 0, FIRST: 1, MIDDLE: 2, LAST: 3 };
 const REQUEST = { START: 1, STOP: 2 };
@@ -98,19 +101,33 @@ export function startSession(code) {
  * otherwise.
  */
 export async function startSharing() {
-    await disconnect();
+    if (!(await disconnect())) {
+        RemoteSupport.applyStatus(false, false, {
+            role: null,
+            code: null,
+            device: null,
+            message: 'Could not disconnect from the flight controller, so it was not shared. Disconnect and try again.',
+            error: true,
+        });
+        return;
+    }
     RemoteSupport.shareSession();
 }
 
-/** Disconnects (or cancels connecting) and waits until the port is closed. */
+/**
+ * Disconnects (or cancels connecting) and waits until the port is closed.
+ * False if it is still open after DISCONNECT_TIMEOUT.
+ */
 async function disconnect() {
     if (GUI.connected_to || GUI.connecting_to) {
         document.querySelector('div#connectbutton a.connect')?.click();
     }
-    const deadline = Date.now() + 4000;
-    while ((GUI.connected_to || GUI.disconnect_in_progress) && Date.now() < deadline) {
+    const deadline = Date.now() + DISCONNECT_TIMEOUT;
+    const busy = () => GUI.connected_to || GUI.disconnect_in_progress;
+    while (busy() && Date.now() < deadline) {
         await new Promise((resolve) => setTimeout(resolve, 100));
     }
+    return !busy();
 }
 
 export function stopSession() {
