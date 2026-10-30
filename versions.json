@@ -54,6 +54,17 @@
     },
     {
       "type": "pr",
+      "name": "503",
+      "path": "./pr/503/",
+      "branch": "feature/goosky-esc-alias",
+      "date": "2026-10-30T11:40:25Z",
+      "number": 503,
+      "title": "Add Goosky to the ESC telemetry protocols",
+      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/503",
+      "draft": false
+    },
+    {
+      "type": "pr",
       "name": "501",
       "path": "./pr/501/",
       "branch": "feature/remote-support",
