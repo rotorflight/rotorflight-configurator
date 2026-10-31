@@ -232,7 +232,7 @@ const am32 = {
     name: "AM32",
     group: "bridged",
     signature: 0xC2,
-    escSensorProtocolIds: [1],
+    escSensorProtocolIds: [1, 16],
     minApiVersion: API_VERSION_12_9,
     fields,
     pages,

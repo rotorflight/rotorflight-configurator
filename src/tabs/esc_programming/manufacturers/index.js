@@ -7,6 +7,7 @@ import "./am32.js";
 import "./blheli_s.js";
 import "./bluejay.js";
 import "./flyrotor.js";
+import "./goosky.js";
 import "./hw5.js";
 import "./omp.js";
 import "./scorpion.js";
