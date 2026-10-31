@@ -45,12 +45,23 @@ const RC_CHANNEL_COUNT = 16; // CRSF
 const TELEM_SENSOR_SLOT_COUNT = 40;
 const ARMING_DISABLE_FLAGS_COUNT = 27;
 const ARMING_DISABLED_MSP = 1 << 16;
+const ARMING_DISABLED_OVERRIDE = 1 << 25; // API 12.9+
+const ARMING_DISABLED_MOTOR_PROTOCOL = 1 << 24;
 const DEBUG_COUNT = 82;
 const DEBUG_VALUE_COUNT = 8;
 const RATE_PROFILE_MASK = 1 << 7;
 
 const MIXER_OVERRIDE_OFF = 2501;
 const SERVO_OVERRIDE_OFF = 2001;
+
+// flight/servos.h tailOutput_e, tailOutputResult_e
+const TAIL_OUTPUT_SERVO = 0;
+const TAIL_OUTPUT_MOTOR = 1;
+const TAIL_RESULT_OK = 0;
+const TAIL_RESULT_INVALID = 5;
+
+// Where the tail pin is: the board default is SERVO 4.
+let tailOutput = TAIL_OUTPUT_SERVO;
 
 // src/main/msp/msp_box.c: name, permanent id, active when
 const BOXES = [
@@ -374,6 +385,112 @@ function dataflashReadReply(address, blockSize) {
   return buffer;
 }
 
+// flight/servos.c servoUpdate(), disarmed: an override puts the servo at
+// mid + scale * override, a servo without one stays at mid (there is no
+// mixer here to move it).
+function updateServoOutput(index) {
+  const config = FC.SERVO_CONFIG[index];
+  if (!config) return;
+  const raw = FC.SERVO_OVERRIDE[index];
+  let pos = raw >= -2000 && raw <= 2000 ? raw / 1000 : 0;
+  if (config.flags & 1) pos = -pos;
+  const travel = (pos > 0 ? config.rpos : config.rneg) * pos;
+  FC.SERVO_DATA[index] = Math.round(
+    config.mid + Math.max(config.min, Math.min(config.max, travel)),
+  );
+}
+
+// flight/servos.c, flight/mixer.c (API 12.10+): an override sent with a
+// trailing U16 timeout lapses unless it is re-sent in time; one without
+// stays. Keyed "servo:N" / "mixer:N".
+const overrideLapse = new Map();
+
+function lapseOverride(key, bytes, clear) {
+  clearTimeout(overrideLapse.get(key));
+  overrideLapse.delete(key);
+  if (
+    bytes.length < 5 ||
+    !semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
+  ) {
+    return;
+  }
+  const timeoutMs = Math.min(30000, Math.max(500, bytes[3] | (bytes[4] << 8)));
+  overrideLapse.set(
+    key,
+    setTimeout(() => {
+      overrideLapse.delete(key);
+      clear();
+      updateOverrideFlag();
+    }, timeoutMs),
+  );
+}
+
+// flight/motors.c motorUpdate(), disarmed: the output follows the override,
+// rising at most MOTOR_OVERRIDE_RATE per second and dropping at once. From
+// API 12.9 an override that isn't re-sent within MOTOR_OVERRIDE_TIMEOUT
+// lapses. Motor overrides don't block arming.
+const MOTOR_OVERRIDE_RATE = 0.25;
+const MOTOR_OVERRIDE_TIMEOUT_MS = 1000;
+const motorOverride = new Array(MAX_SUPPORTED_MOTORS).fill(0);
+const motorOutput = new Array(MAX_SUPPORTED_MOTORS).fill(0);
+let motorOverrideTime = 0;
+let motorUpdateTime = 0;
+
+function resetMotors() {
+  motorOverride.fill(0);
+  motorOutput.fill(0);
+}
+
+function updateMotorOutputs() {
+  const now = performance.now();
+  const dt = (now - motorUpdateTime) / 1000;
+  motorUpdateTime = now;
+  if (
+    semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) &&
+    now - motorOverrideTime > MOTOR_OVERRIDE_TIMEOUT_MS
+  ) {
+    motorOverride.fill(0);
+  }
+  for (let i = 0; i < MAX_SUPPORTED_MOTORS; i++) {
+    const target = Math.max(-1000, Math.min(1000, motorOverride[i])) / 1000;
+    const rise = MOTOR_OVERRIDE_RATE * dt;
+    motorOutput[i] =
+      target > motorOutput[i] + rise ? motorOutput[i] + rise : target;
+    // msp.c MSP_MOTOR: zero means disabled, otherwise output ± 1000.
+    if (i < FC.CONFIG.motorCount) {
+      const throttle = Math.round(motorOutput[i] * 1000);
+      FC.MOTOR_DATA[i] = throttle < 0 ? throttle - 1000 : throttle + 1000;
+    }
+  }
+}
+
+// fc/core.c updateArmingStatus() (API 12.10): a motorised tail needs a
+// MOTOR 2, reported as MOTOR_PROTO. The FC only clears it on a reboot,
+// which the virtual FC doesn't have, so it follows the tail at once.
+function updateTailMotorFlag() {
+  if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) return;
+  const motorised = (FC.MIXER_CONFIG.tail_rotor_mode ?? 0) !== 0;
+  if (motorised && FC.CONFIG.motorCount < 2) {
+    FC.CONFIG.armingDisableFlags |= ARMING_DISABLED_MOTOR_PROTOCOL;
+  } else {
+    FC.CONFIG.armingDisableFlags &= ~ARMING_DISABLED_MOTOR_PROTOCOL;
+  }
+}
+
+// fc/core.c updateArmingStatus(): any servo or mixer override blocks arming.
+function updateOverrideFlag() {
+  if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) return;
+  const servo = FC.SERVO_OVERRIDE.some((v) => v >= -2000 && v <= 2000);
+  const mixer = FC.MIXER_OVERRIDE.some(
+    (v, i) => i > 0 && v !== MIXER_OVERRIDE_OFF,
+  );
+  if (servo || mixer) {
+    FC.CONFIG.armingDisableFlags |= ARMING_DISABLED_OVERRIDE;
+  } else {
+    FC.CONFIG.armingDisableFlags &= ~ARMING_DISABLED_OVERRIDE;
+  }
+}
+
 function reply(code, buffer = new ArrayBuffer(0)) {
   const data = new DataView(buffer);
   return {
@@ -548,9 +665,65 @@ export function handleVirtualMessage(code, data) {
       if (config && firmwareLimitsTravel(FC.CONFIG.apiVersion)) {
         clampServoConfig(config, index >= BUS_SERVO_OFFSET);
       }
+      updateServoOutput(index);
       break;
     }
 
+    case MSPCodes.MSP_SET_SERVO_OVERRIDE: {
+      const index = bytes[0];
+      lapseOverride(`servo:${index}`, bytes, () => {
+        FC.SERVO_OVERRIDE[index] = SERVO_OVERRIDE_OFF;
+        updateServoOutput(index);
+      });
+      updateServoOutput(index);
+      updateOverrideFlag();
+      break;
+    }
+
+    case MSPCodes.MSP_SET_MIXER_OVERRIDE: {
+      const index = bytes[0];
+      lapseOverride(`mixer:${index}`, bytes, () => {
+        FC.MIXER_OVERRIDE[index] = MIXER_OVERRIDE_OFF;
+      });
+      updateOverrideFlag();
+      break;
+    }
+
+    case MSPCodes.MSP_SET_MOTOR_OVERRIDE: {
+      const index = bytes[0];
+      if (index < MAX_SUPPORTED_MOTORS) {
+        updateMotorOutputs();
+        motorOverride[index] = ((bytes[1] | (bytes[2] << 8)) << 16) >> 16;
+        motorOverrideTime = performance.now();
+      }
+      break;
+    }
+
+    case MSPCodes.MSP_MOTOR:
+      updateMotorOutputs();
+      break;
+
+    case MSPCodes.MSP_STATUS:
+      updateTailMotorFlag();
+      break;
+
+    // flight/servos.c setTailOutput() (API 12.10): moves the tail pin
+    // between SERVO 4 and MOTOR 2. The FC uses it after a reboot, which
+    // the virtual FC doesn't have, so the motor count follows at once.
+    case MSPCodes.MSP2_TAIL_MOTOR_OUTPUT: {
+      if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) break;
+      const action = bytes[0] ?? 0;
+      let result = TAIL_RESULT_OK;
+      if (action === 1) {
+        tailOutput = TAIL_OUTPUT_SERVO;
+      } else if (action === 2) {
+        tailOutput = TAIL_OUTPUT_MOTOR;
+      } else if (action !== 0) {
+        result = TAIL_RESULT_INVALID;
+      }
+      FC.CONFIG.motorCount = tailOutput === TAIL_OUTPUT_MOTOR ? 2 : 1;
+      return reply(code, Uint8Array.from([tailOutput, result]).buffer);
+    }
     // An SBUS/FBUS output port turns on bus servos: from then on the FC
     // reports its PWM servos plus all 18 bus channels (msp.c, MSP_STATUS
     // and hasBusServosConfigured()).
@@ -926,6 +1099,8 @@ export function applyVirtualConfig() {
   // Motors
   FC.MOTOR_DATA = [1000, 0, 0, 0, 0, 0, 0, 0];
   FC.MOTOR_OVERRIDE = new Array(MAX_SUPPORTED_MOTORS).fill(0);
+  resetMotors();
+  tailOutput = TAIL_OUTPUT_SERVO;
   Object.assign(FC.MOTOR_CONFIG, {
     mincommand: 1000,
     minthrottle: 1070,

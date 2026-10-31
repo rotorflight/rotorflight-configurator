@@ -6,6 +6,7 @@ const tabHelpURLs = {
 
     tabStatus:          'https://doc.rotorflight.org/2.4/configurator/tabs/status/',
     tabSetup:           'https://doc.rotorflight.org/2.4/configurator/tabs/setup/',
+    tabSetupWizard:     'https://doc.rotorflight.org/2.4/setup/setup-servos/',
     tabConfiguration:   'https://doc.rotorflight.org/2.4/configurator/tabs/configuration/',
     tabPresets:         'https://doc.rotorflight.org/2.4/configurator/tabs/presets/',
     tabReceiver:        'https://doc.rotorflight.org/2.4/configurator/tabs/receiver/',

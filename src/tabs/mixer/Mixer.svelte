@@ -25,6 +25,16 @@
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { reinitialiseConnection } from "@/js/serial_backend";
+  import {
+    TAIL_OUTPUT,
+    TAIL_RESULT,
+    TTA_GAIN_MOTOR,
+    TTA_GAIN_OFF,
+    readTailOutput,
+    setTtaGainAllProfiles,
+    switchTailOutput,
+    tailOutputMatches,
+  } from "@/js/tail_motor.js";
 
   import CustomMixerRules from "./CustomMixerRules.svelte";
   import MixerOverride from "./MixerOverride.svelte";
@@ -54,6 +64,20 @@
   let customRules;
 
   let motorised = $derived(form.tailMode > TAIL_VARIABLE_PITCH);
+
+  // Where the tail pin is (TAIL_OUTPUT), or null on firmware without
+  // MSP2_TAIL_MOTOR_OUTPUT. Saving moves it to suit the tail mode, and a
+  // change between a servo and a motor tail sets TTA on every profile.
+  let tailOutput = $state(null);
+  let origMotorised = $state(false);
+
+  let tailPinNote = $derived.by(() => {
+    if (tailOutput === null || tailOutputMatches(tailOutput, motorised)) {
+      return null;
+    }
+    if (tailOutput === TAIL_OUTPUT.NONE) return "tailOutputNoPin";
+    return motorised ? "tailOutputToMotor" : "tailOutputToServo";
+  });
 
   const directionOptions = [
     { value: 1, key: "mixerDirectionNormal" },
@@ -275,8 +299,38 @@
     origInputs = Mixer.cloneInputs(FC.MIXER_INPUTS);
 
     dataToForm();
+    origMotorised = motorised;
+    tailOutput = (await readTailOutput())?.output ?? null;
     loading = false;
   });
+
+  // Before the EEPROM write: the pin switch and TTA are unsaved changes,
+  // and both need the reboot the tail mode change asks for anyway.
+  async function applyTailMotor() {
+    if (
+      tailOutput !== null &&
+      tailOutput !== TAIL_OUTPUT.NONE &&
+      !tailOutputMatches(tailOutput, motorised)
+    ) {
+      const reply = await switchTailOutput(motorised);
+      if (reply?.result === TAIL_RESULT.OK) {
+        tailOutput = reply.output;
+        needSave = true;
+        needReboot = true;
+      } else if (reply) {
+        GUI.log(
+          $i18n.t("tailOutputFailed", {
+            1: $i18n.t(`tailOutputResult_${reply.result}`),
+          }),
+        );
+      }
+    }
+    if (motorised !== origMotorised) {
+      await setTtaGainAllProfiles(motorised ? TTA_GAIN_MOTOR : TTA_GAIN_OFF);
+      origMotorised = motorised;
+      needSave = true;
+    }
+  }
 
   // Config and inputs only -- deliberately not the rules table.
   //
@@ -308,6 +362,7 @@
   export async function onSave() {
     await sendDirtyConfig();
     await customRules?.sendDirty();
+    await applyTailMotor();
     if (needSave) {
       await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
       GUI.log($i18n.t("eepromSaved"));
@@ -358,8 +413,9 @@
   </button>
 {/snippet}
 
-{#snippet numberField(id, label, help, key, opts, onchange, unit)}
-  <Field {id} {label} {unit}>
+<!-- expert: { changed } hides the field in basic mode, see Field.svelte -->
+{#snippet numberField(id, label, help, key, opts, onchange, unit, expert)}
+  <Field {id} {label} {unit} expert={!!expert} changed={expert?.changed}>
     {#snippet tooltip()}
       {#if help}
         <Tooltip {help} />
@@ -489,6 +545,16 @@
             tailModeOptions,
             onTailModeChange,
           )}
+          {#if tailPinNote}
+            {#if tailPinNote === "tailOutputNoPin"}
+              <WarningNote message={tailPinNote} />
+            {:else}
+              <InfoNote message={tailPinNote} />
+            {/if}
+          {/if}
+          {#if motorised !== origMotorised}
+            <InfoNote message={motorised ? "tailTtaOn" : "tailTtaOff"} />
+          {/if}
           {@render selectField(
             "mixer-tail-dir",
             "mixerTailRotorDirection",
@@ -505,6 +571,8 @@
               "tailMotorCenterTrim",
               { min: -50, max: 50, step: 0.1 },
               applyConfig,
+              undefined,
+              { changed: FC.MIXER_CONFIG.tail_center_trim !== 0 },
             )}
           {:else}
             {@render numberField(
@@ -535,6 +603,8 @@
               "tailMotorMinYaw",
               { min: 0, max: 200, step: 1 },
               applyInput3,
+              undefined,
+              { changed: FC.MIXER_INPUTS[3].min !== -1250 },
             )}
             {@render numberField(
               "mixer-tail-motor-max",
@@ -543,6 +613,8 @@
               "tailMotorMaxYaw",
               { min: 0, max: 200, step: 1 },
               applyInput3,
+              undefined,
+              { changed: FC.MIXER_INPUTS[3].max !== 1250 },
             )}
             {@render numberField(
               "mixer-tail-motor-idle",
@@ -551,6 +623,8 @@
               "tailMotorIdle",
               { min: 0, max: 25, step: 0.1 },
               applyConfig,
+              undefined,
+              { changed: FC.MIXER_CONFIG.tail_motor_idle !== 0 },
             )}
           {:else}
             {@render numberField(
@@ -598,6 +672,8 @@
             "collGeoCorrection",
             { min: -25, max: 25, step: 0.2 },
             applyConfig,
+            undefined,
+            { changed: FC.MIXER_CONFIG.coll_geo_correction !== 0 },
           )}
           {@render numberField(
             "mixer-cyclic-limit",
@@ -630,6 +706,8 @@
             "swashPhase",
             { min: -180, max: 180, step: 0.1 },
             applyConfig,
+            undefined,
+            { changed: FC.MIXER_CONFIG.swash_phase !== 0 },
           )}
           {#if hasTiltCorrection}
             {@render numberField(
@@ -640,6 +718,7 @@
               { min: -100, max: 100, step: 1 },
               applyConfig,
               "%",
+              { changed: FC.MIXER_CONFIG.coll_tilt_correction_pos !== 0 },
             )}
             {@render numberField(
               "mixer-tilt-neg",
@@ -649,6 +728,7 @@
               { min: -100, max: 100, step: 1 },
               applyConfig,
               "%",
+              { changed: FC.MIXER_CONFIG.coll_tilt_correction_neg !== 10 },
             )}
           {/if}
         </Section>

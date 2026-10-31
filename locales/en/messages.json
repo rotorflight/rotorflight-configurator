@@ -197,11 +197,26 @@
     "zoomBoxText": {
         "message": "Zoom:"
     },
-    "expertMode": {
-        "message": "Expert Mode"
+    "userLevel": {
+        "message": "How much of the Configurator to show"
     },
-    "permanentExpertMode": {
-        "message": "Permanently enable Expert Mode"
+    "userLevelBeginner": {
+        "message": "Beginner"
+    },
+    "userLevelBeginnerHelp": {
+        "message": "Set up the helicopter with the Setup Wizard. Shows only the tabs the wizard doesn't cover."
+    },
+    "userLevelIntermediate": {
+        "message": "Intermediate"
+    },
+    "userLevelIntermediateHelp": {
+        "message": "Shows the tabs most pilots use, without the detailed settings that are usually left at their defaults."
+    },
+    "userLevelAdvanced": {
+        "message": "Advanced"
+    },
+    "userLevelAdvancedHelp": {
+        "message": "Shows every tab and every setting."
     },
     "rememberLastTab": {
         "message": "Reopen last tab on connect"
@@ -435,7 +450,1165 @@
         "message": "Status"
     },
     "tabSetup": {
-        "message": "Setup"
+        "message": "Maintenance"
+    },
+    "tabSetupWizard": {
+        "message": "Setup Wizard"
+    },
+    "setupWizardStep_sensors": {
+        "message": "Board orientation"
+    },
+    "setupWizardStep_receiver": {
+        "message": "Receiver"
+    },
+    "setupWizardStep_rates": {
+        "message": "Rates"
+    },
+    "setupWizardStep_swash": {
+        "message": "Swashplate"
+    },
+    "setupWizardStep_servoType": {
+        "message": "Servo type"
+    },
+    "setupWizardStep_servos": {
+        "message": "Servo direction & center"
+    },
+    "setupWizardStep_direction": {
+        "message": "Control directions"
+    },
+    "setupWizardStep_level": {
+        "message": "Level the swash"
+    },
+    "setupWizardStep_pitch": {
+        "message": "Blade pitch"
+    },
+    "setupWizardStep_tail": {
+        "message": "Tail rotor"
+    },
+    "setupWizardStep_motor": {
+        "message": "Motor & ESC"
+    },
+    "setupWizardStep_governor": {
+        "message": "Governor"
+    },
+    "setupWizardStep_connect": {
+        "message": "Connect the servos"
+    },
+    "setupWizardStep_throttle": {
+        "message": "ESC & spin test"
+    },
+    "setupWizardStep_escTelemetry": {
+        "message": "ESC telemetry"
+    },
+    "setupWizardStep_gyro": {
+        "message": "Gyro check"
+    },
+    "setupWizardStep_modes": {
+        "message": "Mode switches"
+    },
+    "setupWizardStep_profiles": {
+        "message": "Profiles & gain"
+    },
+    "setupWizardStep_finish": {
+        "message": "Finish"
+    },
+    "setupWizardStepCounter": {
+        "message": "Step $1 of $2"
+    },
+    "setupWizardBack": {
+        "message": "Back"
+    },
+    "setupWizardNext": {
+        "message": "Next"
+    },
+    "setupWizardSaveNext": {
+        "message": "Save & next"
+    },
+    "setupWizardRebootNext": {
+        "message": "Save & reboot"
+    },
+    "setupWizardRebootLater": {
+        "message": "Takes effect after the reboot at the Connect the servos step."
+    },
+    "setupWizardRebootSkipped": {
+        "message": "Settings from the earlier steps haven't taken effect yet: they need the reboot at the Connect the servos step."
+    },
+    "setupWizardUnsaved": {
+        "message": "Unsaved changes"
+    },
+    "setupWizardArmedWarning": {
+        "message": "The helicopter is armed. The wizard can only move the servos while it is disarmed."
+    },
+    "setupWizardServosMissing": {
+        "message": "This setup needs servo $1, but the flight controller has only $2 servo outputs. Check the resource mapping on the Remap FC tab."
+    },
+    "setupWizardBusServos": {
+        "message": "Bus servos (F.BUS / S.BUS out) are on. The wizard sets up the PWM servo outputs only; set up bus servos on the Servos tab."
+    },
+    "setupWizardRebootNeeded": {
+        "message": "These settings take effect after a reboot. The wizard opens again on this step afterwards."
+    },
+    "setupWizardServoLabel": {
+        "message": "Servo $1 · $2"
+    },
+    "setupWizardNoServos": {
+        "message": "The swash type uses no servos this flight controller has. Choose the swash type first."
+    },
+    "setupWizardDone": {
+        "message": "Done"
+    },
+    "setupWizardReset": {
+        "message": "Reset"
+    },
+    "setupWizardOpenConfiguration": {
+        "message": "Open the Configuration tab"
+    },
+    "setupWizardOpenReceiver": {
+        "message": "Open the Receiver tab"
+    },
+    "setupWizardOpenServos": {
+        "message": "Open the Servos tab"
+    },
+    "setupWizardOpenMixer": {
+        "message": "Open the Mixer tab"
+    },
+    "setupWizardGovIntro": {
+        "message": "How the flight controller drives the motor. Pick the governor mode and how the throttle switch works with it. Ramps, headspeed and gains are set later in the Governor and Profiles tabs."
+    },
+    "setupWizardGovMode_OFF": {
+        "message": "No governor. The throttle goes straight to the ESC. Use this with the ESC's own governor."
+    },
+    "setupWizardGovMode_LIMIT": {
+        "message": "No governor. The throttle goes to the ESC, kept between the idle, minimum and maximum throttle."
+    },
+    "setupWizardGovMode_DIRECT": {
+        "message": "Slow spoolup and bailout from the flight controller. The ESC's governor or a throttle curve holds the headspeed."
+    },
+    "setupWizardGovMode_ELECTRIC": {
+        "message": "Full governor for an electric motor: the flight controller holds the headspeed. Needs a fast RPM signal."
+    },
+    "setupWizardGovMode_NITRO": {
+        "message": "Full governor for an engine: the flight controller holds the headspeed. Needs a fast RPM signal."
+    },
+    "setupWizardGovMode_PASSTHROUGH": {
+        "message": "The throttle goes to the ESC, with slow spoolup and autorotation from the flight controller."
+    },
+    "setupWizardGovMode_STANDARD": {
+        "message": "Full governor: the flight controller holds the headspeed, like an ESC governor. Needs a fast RPM signal."
+    },
+    "setupWizardGovMode_MODE1": {
+        "message": "Like STANDARD, and collective and cyclic raise the throttle ahead of the load. Needs a fast RPM signal."
+    },
+    "setupWizardGovMode_MODE2": {
+        "message": "Like MODE1, and also makes up for battery voltage sag. Needs a fast RPM signal and fast voltage measurement."
+    },
+    "setupWizardGovType_NORMAL": {
+        "message": "The throttle drives the motor until the headspeed is reached, then the governor takes over. Suits an on/off throttle switch."
+    },
+    "setupWizardGovType_SWITCH": {
+        "message": "Below the handover point the throttle drives the motor directly. Above it the governor runs and the throttle position sets the headspeed. ELECTRIC and NITRO only."
+    },
+    "setupWizardGovType_FUNCTION": {
+        "message": "A 3-position throttle switch: low is idle, middle is autorotation, high is full power."
+    },
+    "setupWizardGovRpmOk": {
+        "message": "RPM signal set up: RPM sensor or bidirectional DShot."
+    },
+    "setupWizardGovRpmMissing": {
+        "message": "This governor needs a fast RPM signal: an RPM sensor, or bidirectional DShot telemetry. Serial ESC telemetry is too slow. Without one the helicopter will not arm. Pick DShot 300 in the Motor & ESC step (DShot 150 has no bidirectional DShot) and turn on its telemetry in the Motors tab, or fit an RPM sensor, or choose a mode without headspeed control."
+    },
+    "setupWizardGovNoRpmBadge": {
+        "message": "No RPM signal"
+    },
+    "setupWizardOpenGovernor": {
+        "message": "Open the Governor tab"
+    },
+    "setupWizardOpenMotors": {
+        "message": "Open the Motors tab"
+    },
+    "setupWizardOpenRemap": {
+        "message": "Open the Remap FC tab"
+    },
+    "setupWizardOpenModes": {
+        "message": "Open the Modes tab"
+    },
+    "setupWizardSensorsIntro": {
+        "message": "First tell the flight controller how it is mounted, so the gyro knows which way is forward. Take the blades off: they stay off until the Finish step. Leave the servos unplugged: the wizard tells you when to connect them."
+    },
+    "setupWizardSensorsNoAcc": {
+        "message": "This flight controller has no accelerometer, so it can't find its orientation by itself. Set the board alignment on the Configuration tab instead."
+    },
+    "setupWizardSensorsAccTitle": {
+        "message": "Calibrate the accelerometer"
+    },
+    "setupWizardSensorsAccText": {
+        "message": "Stand the helicopter on its skids on a level surface and keep it still."
+    },
+    "setupWizardSensorsAlignTitle": {
+        "message": "Find the board orientation"
+    },
+    "setupWizardSensorsAlignText": {
+        "message": "Stand the helicopter level, press the button, then lift the tail by at least 20°. The flight controller works out how it is mounted."
+    },
+    "setupWizardSensorsAlignValues": {
+        "message": "Now: roll $1°, pitch $2°, yaw $3°"
+    },
+    "setupWizardReceiverIntro": {
+        "message": "Tell the flight controller where the receiver is plugged in and how it talks, then check every stick and switch reaches it the right way round. Turn the radio on. On a helicopter the collective stick is not the throttle: the motor is switched on and off by a throttle switch (with throttle hold) on its own channel."
+    },
+    "setupWizardReceiverPortTitle": {
+        "message": "Port"
+    },
+    "setupWizardReceiverPortReceiver": {
+        "message": "Receiver"
+    },
+    "setupWizardReceiverPortFree": {
+        "message": "Free"
+    },
+    "setupWizardReceiverPortInUse": {
+        "message": "In use: $1"
+    },
+    "setupWizardReceiverPortNone": {
+        "message": "No port is set for the receiver yet. Choose a free one; ports in use for something else can be changed on the Configuration tab."
+    },
+    "setupWizardReceiverProtocolTitle": {
+        "message": "Protocol"
+    },
+    "setupWizardReceiverProtocolPick": {
+        "message": "Choose a protocol"
+    },
+    "setupWizardReceiverProtocolHelp": {
+        "message": "ExpressLRS and Crossfire use TBS CRSF."
+    },
+    "setupWizardReceiverSignalTitle": {
+        "message": "Signal"
+    },
+    "setupWizardReceiverSignalText": {
+        "message": "With the radio on and bound, the receiver should show as receiving. If it doesn't, Detect wiring tries the inverted, half-duplex and pin-swap settings until one works."
+    },
+    "setupWizardReceiverLinkUp": {
+        "message": "Receiving"
+    },
+    "setupWizardReceiverLinkDown": {
+        "message": "No signal"
+    },
+    "setupWizardReceiverSaveFirst": {
+        "message": "Save and reboot first."
+    },
+    "setupWizardReceiverChannelsTitle": {
+        "message": "Channel order"
+    },
+    "setupWizardReceiverOrderDetect": {
+        "message": "Detect from the sticks"
+    },
+    "setupWizardReceiverOrderDetectHelp": {
+        "message": "For any other order: move each stick when asked."
+    },
+    "setupWizardReceiverDetectTitle": {
+        "message": "Move each one in turn, all the way, and leave the others still."
+    },
+    "setupWizardReceiverDetect_collective": {
+        "message": "Collective: move the collective stick up and down"
+    },
+    "setupWizardReceiverDetect_roll": {
+        "message": "Roll: move the roll stick left and right"
+    },
+    "setupWizardReceiverDetect_pitch": {
+        "message": "Pitch: move the pitch stick forward and back"
+    },
+    "setupWizardReceiverDetect_yaw": {
+        "message": "Yaw: move the yaw stick left and right"
+    },
+    "setupWizardReceiverDetect_throttle": {
+        "message": "Throttle: flick the motor on/off (throttle) switch. Not the collective stick."
+    },
+    "setupWizardReceiverDetectWaiting": {
+        "message": "Waiting…"
+    },
+    "setupWizardReceiverDetectRestart": {
+        "message": "Start again"
+    },
+    "setupWizardReceiverChannel": {
+        "message": "Ch $1"
+    },
+    "setupWizardReceiverCheckText": {
+        "message": "Now move each control: its bar should move the way shown."
+    },
+    "setupWizardReceiverHint_roll": {
+        "message": "Right → bar right"
+    },
+    "setupWizardReceiverHint_pitch": {
+        "message": "Forward → bar right"
+    },
+    "setupWizardReceiverHint_yaw": {
+        "message": "Right → bar right"
+    },
+    "setupWizardReceiverHint_collective": {
+        "message": "Up → bar right"
+    },
+    "setupWizardReceiverHint_throttle": {
+        "message": "Switch on → bar right"
+    },
+    "setupWizardReceiverCheckWrong": {
+        "message": "A bar that moves the wrong way: reverse that channel on the radio. The wrong bar moves: choose another channel order."
+    },
+    "setupWizardThrottleRangeTitle": {
+        "message": "Throttle switch"
+    },
+    "setupWizardThrottleRangeText": {
+        "message": "On a helicopter the throttle is a switch, not the collective stick: one position is motor off (throttle hold), the other gives the ESC full power. Its off position must sit below the flight controller's 0 % point, or the flight controller takes the motor for running and refuses to arm the helicopter. Press Measure, flick the throttle switch through all its positions, then press Use: 0 % goes just above the off position and full power just below the on position."
+    },
+    "setupWizardThrottleRangeArms": {
+        "message": "Off position OK"
+    },
+    "setupWizardThrottleRangeNoArm": {
+        "message": "Off position too high"
+    },
+    "setupWizardThrottleRangeNow": {
+        "message": "Throttle now: $1 µs"
+    },
+    "setupWizardThrottleRangePoints": {
+        "message": "Motor off below $3 µs · 0 % at $1 µs · full power at $2 µs"
+    },
+    "setupWizardThrottleRangeMove": {
+        "message": "Flick the throttle switch to off (hold) and on…"
+    },
+    "setupWizardThrottleRangeSeen": {
+        "message": "Seen $1–$2 µs. Flick the throttle switch through every position, then press Use."
+    },
+    "setupWizardThrottleRangeMeasure": {
+        "message": "Measure"
+    },
+    "setupWizardThrottleRangeUse": {
+        "message": "Use"
+    },
+    "setupWizardThrottleRangeDefault": {
+        "message": "Use the default range"
+    },
+    "setupWizardThrottleSwitchWarning": {
+        "message": "Once the helicopter is armed, the throttle switch on gives the ESC full power and the motor starts. Never arm it on the bench with the main blades fitted. While this wizard is open the flight controller cannot arm, so flicking the switch here does not start the motor."
+    },
+    "setupWizardThrottleSwitchWarningTitle": {
+        "message": "Main blades off"
+    },
+    "setupWizardSwashIntro": {
+        "message": "Tell the flight controller how the swashplate servos are arranged and how the tail is driven."
+    },
+    "setupWizardSwashTypeTitle": {
+        "message": "Swashplate type"
+    },
+    "setupWizardSwashTypeHelp_2": {
+        "message": "Three servos, 120° apart. The most common."
+    },
+    "setupWizardSwashTypeHelp_3": {
+        "message": "Three servos, 135° apart."
+    },
+    "setupWizardSwashTypeHelp_4": {
+        "message": "Three servos, 140° apart."
+    },
+    "setupWizardSwashTypeHelp_5": {
+        "message": "Two servos, front and left, 90° apart."
+    },
+    "setupWizardSwashTypeHelp_6": {
+        "message": "Two servos, front left and front right."
+    },
+    "setupWizardSwashTypeHelp_1": {
+        "message": "Pitch, roll and collective on servos 1–3, for a mechanical mixer."
+    },
+    "setupWizardSwashTypeNote": {
+        "message": "The servo numbers are the flight controller's servo outputs. Servo 1 can be in front of the main shaft or behind it."
+    },
+    "setupWizardSwashRotorTitle": {
+        "message": "Main rotor direction"
+    },
+    "setupWizardSwashRotorText": {
+        "message": "Seen from above. Most helicopters turn clockwise."
+    },
+    "setupWizardSwashTailTitle": {
+        "message": "Tail"
+    },
+    "setupWizardSwashTailHelp_variable": {
+        "message": "A servo changes the tail blade pitch. On servo 4."
+    },
+    "setupWizardSwashTailHelp_motorised": {
+        "message": "A separate tail motor, on motor 2."
+    },
+    "setupWizardSwashTailHelp_bidirectional": {
+        "message": "A tail motor that can spin both ways."
+    },
+    "setupWizardServoTypeIntro": {
+        "message": "Set the center pulse and frame rate your servos are made for. Too fast a frame rate can burn a servo out."
+    },
+    "setupWizardServoTypeDisconnect": {
+        "message": "Leave the servos unplugged: they get this frame rate with the reboot before you connect them."
+    },
+    "setupWizardServoTypeCyclic": {
+        "message": "Cyclic servos"
+    },
+    "setupWizardServoTypeTail": {
+        "message": "Tail servo"
+    },
+    "setupWizardServoType_analog": {
+        "message": "Analog"
+    },
+    "setupWizardServoTypeHelp_analog": {
+        "message": "50 Hz. Works with any standard servo."
+    },
+    "setupWizardServoType_digital": {
+        "message": "Digital"
+    },
+    "setupWizardServoTypeHelp_digital": {
+        "message": "333 Hz. Most digital cyclic servos."
+    },
+    "setupWizardServoType_narrow": {
+        "message": "Narrow band"
+    },
+    "setupWizardServoTypeHelp_narrow": {
+        "message": "560 Hz. Only for servos made for a 760 µs center, usually tail servos."
+    },
+    "setupWizardServoTypeCustom": {
+        "message": "Now: $1 µs, $2 Hz. Choose a type to change it, or keep it if your servo maker says so."
+    },
+    "setupWizardServoTypeCheckMaker": {
+        "message": "If the servo maker gives other values, set them on the Servos tab."
+    },
+    "setupWizardServosIntro": {
+        "message": "Each servo is held at its center. Check that it moves the right way, then set the center so the arm is square."
+    },
+    "setupWizardServosTipArms": {
+        "message": "Fit the servo arms as close to 90° to the pushrods as the splines allow."
+    },
+    "setupWizardServosTipDirection": {
+        "message": "Press Move up: the arm should move up, towards the swashplate."
+    },
+    "setupWizardServosTipCentre": {
+        "message": "Adjust the center until the arm is exactly square."
+    },
+    "setupWizardServosTest": {
+        "message": "Move up $1°"
+    },
+    "setupWizardServosQuestion": {
+        "message": "Did the servo arm move up, towards the swashplate?"
+    },
+    "setupWizardServosAnswerUp": {
+        "message": "Yes, up"
+    },
+    "setupWizardServosAnswerDown": {
+        "message": "No, down: reverse it"
+    },
+    "setupWizardServosDirectionOk": {
+        "message": "Direction checked"
+    },
+    "setupWizardServosOffset": {
+        "message": "$1 µs from $2 µs"
+    },
+    "setupWizardServosFarWarning": {
+        "message": "The center is a long way from the servo's usual center. Move the arm a spline instead, or the servo loses travel on one side."
+    },
+    "setupWizardDirectionIntro": {
+        "message": "The sticks now drive the swashplate directly, without the gyro. Move each stick and check the swash follows."
+    },
+    "setupWizardDirectionIntroGyro": {
+        "message": "Move each stick and check the swash follows. This firmware has no mixer passthrough, so the gyro acts too: keep the helicopter still on the bench."
+    },
+    "setupWizardDirectionSafety": {
+        "message": "Blades off. The servos move with the sticks."
+    },
+    "setupWizardDirectionStick": {
+        "message": "Stick"
+    },
+    "setupWizardDirectionTitle_roll": {
+        "message": "Roll"
+    },
+    "setupWizardDirectionText_roll": {
+        "message": "Push the roll stick right: the swash should tilt to the right."
+    },
+    "setupWizardDirectionTitle_pitch": {
+        "message": "Pitch"
+    },
+    "setupWizardDirectionText_pitch": {
+        "message": "Push the pitch stick forward: the swash should tilt forward."
+    },
+    "setupWizardDirectionTitle_collective": {
+        "message": "Collective"
+    },
+    "setupWizardDirectionText_collective": {
+        "message": "Push the collective stick up: the swash should rise and the blade pitch increase."
+    },
+    "setupWizardDirectionCorrect": {
+        "message": "Correct"
+    },
+    "setupWizardDirectionWrong": {
+        "message": "Wrong way: reverse"
+    },
+    "setupWizardDirectionServoNote": {
+        "message": "If the swash tilts when it should rise, or rises when it should tilt, one servo is the wrong way round: go back to Servo direction & center."
+    },
+    "setupWizardLevelIntro": {
+        "message": "The swash is now held at 0° on every axis, with each servo arm square."
+    },
+    "setupWizardLevelTipLinks": {
+        "message": "Adjust the servo links until the swashplate is level, both ways. A swash leveler (a gauge that clamps on the main shaft) makes this quick and exact; without one, check by eye from the front and from the side."
+    },
+    "setupWizardLevelTipPitch": {
+        "message": "Adjust the upper links until both main blades are at 0° pitch."
+    },
+    "setupWizardLevelTrimTitle": {
+        "message": "Trims"
+    },
+    "setupWizardLevelTrimText": {
+        "message": "Only if the links can't be adjusted: trim the swash level with roll and pitch trim, and zero the blade pitch with collective trim."
+    },
+    "setupWizardPitchIntro": {
+        "message": "Calibrate the swash so the blade pitch the flight controller commands is the pitch the blades get. The PID defaults depend on it. You need a pitch gauge."
+    },
+    "setupWizardPitchZeroFirst": {
+        "message": "Check first that the blades are at 0° with nothing held."
+    },
+    "setupWizardPitchTitle_collective": {
+        "message": "Collective"
+    },
+    "setupWizardPitchText_collective": {
+        "message": "Hold the collective at $1° and measure the blade pitch."
+    },
+    "setupWizardPitchTitle_cyclic": {
+        "message": "Cyclic"
+    },
+    "setupWizardPitchText_cyclic": {
+        "message": "Turn the blades to point left and right. Hold the pitch at $1° and measure the blade pitch."
+    },
+    "setupWizardPitchHold": {
+        "message": "Hold at $1°"
+    },
+    "setupWizardPitchHolding": {
+        "message": "Holding $1°: release"
+    },
+    "setupWizardPitchMeasured": {
+        "message": "Measured"
+    },
+    "setupWizardPitchApply": {
+        "message": "Calibrate"
+    },
+    "setupWizardPitchFine": {
+        "message": "Fine adjust"
+    },
+    "setupWizardPitchLimitsTitle": {
+        "message": "Pitch limits"
+    },
+    "setupWizardPitchLimitsText": {
+        "message": "Hard limits: the most blade pitch the flight controller will ever command, whatever the sticks and the gyro ask for. They are not the pitch you fly with, which is set in the next card; they stop the swash going further than the head can take. Typical 3D setups use about 12° collective and 10–12° cyclic."
+    },
+    "setupWizardPitchFullStickTitle": {
+        "message": "Collective pitch at full stick"
+    },
+    "setupWizardPitchFullStickText": {
+        "message": "The blade pitch you get with the collective stick all the way up or down. It is the collective rate, set here in every rate profile. About 12° is usual for 3D, less for sport flying. Keep it at or below the collective limit above."
+    },
+    "setupWizardPitchFullStickLabel": {
+        "message": "Collective at full stick"
+    },
+    "setupWizardPitchFullStickClipped": {
+        "message": "That is more than the collective limit of $1°, which cuts it short at full stick. Raise the limit or lower this."
+    },
+    "setupWizardPitchFullStickOther": {
+        "message": "The rates type in use doesn't give this as a plain number of degrees. Set the collective rate in the Rates tab."
+    },
+    "setupWizardRatesIntro": {
+        "message": "How fast the helicopter turns at full stick. Pick a flying style for each rate profile: each is a starting point you can refine later in the Rates tab. Saving sets the $1 rates type with roll, pitch and yaw rates and expo. The collective pitch is left as it is: the Blade pitch step sets it."
+    },
+    "setupWizardRatesSuggest": {
+        "message": "Trainer, Sport and 3D on positions 1, 2 and 3"
+    },
+    "setupWizardRatesPosition": {
+        "message": "Switch position $1 · rate profile $2"
+    },
+    "setupWizardRatesProfile": {
+        "message": "Rate profile $1"
+    },
+    "setupWizardRateStyle_trainer": {
+        "message": "Trainer"
+    },
+    "setupWizardRateStyleHelp_trainer": {
+        "message": "Slow and soft, for learning to hover and first circuits."
+    },
+    "setupWizardRateStyle_sport": {
+        "message": "Sport"
+    },
+    "setupWizardRateStyleHelp_sport": {
+        "message": "The firmware's default rates, for general flying and gentle aerobatics."
+    },
+    "setupWizardRateStyle_3d": {
+        "message": "3D"
+    },
+    "setupWizardRateStyleHelp_3d": {
+        "message": "Fast, for 3D and hard aerobatics."
+    },
+    "setupWizardRatesNumbers": {
+        "message": "Cyclic $1°/s · yaw $2°/s · expo $3 %"
+    },
+    "setupWizardRatesStick": {
+        "message": "stick"
+    },
+    "setupWizardRatesCustom": {
+        "message": "None of the styles matches the rates this profile has now. Picking one replaces them."
+    },
+    "setupWizardRatesMore": {
+        "message": "Response time and acceleration limits stay as they are; they are in the Rates tab."
+    },
+    "setupWizardOpenRates": {
+        "message": "Open the Rates tab"
+    },
+    "setupWizardPitchLimitsBinding": {
+        "message": "Check at full stick that nothing binds: the swash must not hit the frame, and the links must not reach their ends."
+    },
+    "setupWizardTailIntro": {
+        "message": "Set up the tail pitch the same way: center, direction, calibration and end stops."
+    },
+    "setupWizardMainMotorTitle": {
+        "message": "Spin test"
+    },
+    "setupWizardMainMotorText": {
+        "message": "Hold the button: the motor runs at the speed set below and stops when you let go. The output rises 25 % a second, so keep holding. Some ESCs only start at 30–40 %: if the motor doesn't start, raise the speed a few % at a time. Check that it starts smoothly and that the rotor head turns $1, seen from above. If it turns the wrong way, swap two motor wires or reverse it on the ESC."
+    },
+    "setupWizardMainMotorSafe": {
+        "message": "Main blades off, and the helicopter held down with hands clear of the head and gears."
+    },
+    "setupWizardMainMotorWarning": {
+        "message": "The motor really runs, up to $1 %. Take the main blades off and hold the helicopter down, hands clear of the head and gears."
+    },
+    "setupWizardMainMotorSpeed": {
+        "message": "Test speed"
+    },
+    "setupWizardMainMotorOutput": {
+        "message": "Output: $1 %"
+    },
+    "setupWizardMainMotorAfterCal": {
+        "message": "Calibrate the ESC first."
+    },
+    "setupWizardTailMotorIntro": {
+        "message": "The tail is driven by a motor. The wizard spins it with the motor override to check its direction and find its idle. It runs only while you hold the button, or for up to 15 seconds at idle."
+    },
+    "setupWizardTailBladesOffTitle": {
+        "message": "Tail blades off"
+    },
+    "setupWizardTailMotorWarning": {
+        "message": "The tail motor really runs, up to $1 %. Take the tail blades off, or hold the helicopter down with hands clear of the tail."
+    },
+    "setupWizardTailMotorSafe": {
+        "message": "Tail blades off, or the helicopter held down with hands clear of the tail."
+    },
+    "setupWizardTailMotorDirTitle": {
+        "message": "Direction"
+    },
+    "setupWizardTailMotorDirText": {
+        "message": "Hold the button: the tail rotor turns slowly ($1 %). It must turn the way its blades are made for, leading edge first. If not, swap two motor wires, or reverse it on the ESC."
+    },
+    "setupWizardTailMotorDirTextBidir": {
+        "message": "Hold each button in turn: the tail rotor turns slowly ($1 %) one way, then the other. Both ways must work."
+    },
+    "setupWizardTailMotorHold": {
+        "message": "Hold to spin"
+    },
+    "setupWizardTailMotorHold_forward": {
+        "message": "Hold: one way"
+    },
+    "setupWizardTailMotorHold_reverse": {
+        "message": "Hold: other way"
+    },
+    "setupWizardTailMotorSpinning": {
+        "message": "Spinning…"
+    },
+    "setupWizardTailMotorIdleTitle": {
+        "message": "Idle"
+    },
+    "setupWizardTailMotorIdleText": {
+        "message": "The lowest throttle the tail motor gets while armed. Run it at idle and raise the value until the motor turns smoothly and starts every time, then press Use as idle."
+    },
+    "setupWizardTailMotorRun": {
+        "message": "Run at idle"
+    },
+    "setupWizardTailMotorStop": {
+        "message": "Stop"
+    },
+    "setupWizardTailMotorUse": {
+        "message": "Use as idle"
+    },
+    "setupWizardTailMotorIdleNow": {
+        "message": "Idle: $1 %"
+    },
+    "setupWizardTailCentreTitle": {
+        "message": "Center"
+    },
+    "setupWizardTailCentreText": {
+        "message": "With the tail held at 0°, adjust the pushrod so the tail bellcrank is at 90°. If the tail blades are not at 0° then, trim them with the center trim."
+    },
+    "setupWizardTailHoldZero": {
+        "message": "Hold at 0°"
+    },
+    "setupWizardTailDirectionTitle": {
+        "message": "Direction"
+    },
+    "setupWizardTailDirectionText": {
+        "message": "Use the stick, then push the yaw stick right: the tail pitch slider should move in, towards the tail case."
+    },
+    "setupWizardTailUseStick": {
+        "message": "Use the stick"
+    },
+    "setupWizardTailCalTitle": {
+        "message": "Calibration"
+    },
+    "setupWizardTailCalText": {
+        "message": "Hold the tail at $1° each way and measure the tail blade pitch. Adjust the calibration until it reads about the same both ways."
+    },
+    "setupWizardTailCalFold": {
+        "message": "No pitch gauge? Fold a square of paper corner to corner to get 45°. Look along the tail blades from the tip and fit the fold into the gap between them. At 22.5° each way it sits flush against both blades. Adjust the calibration until it does both ways."
+    },
+    "setupWizardTailHoldCw": {
+        "message": "Hold $1° CW"
+    },
+    "setupWizardTailHoldCcw": {
+        "message": "Hold $1° CCW"
+    },
+    "setupWizardTailLimitsTitle": {
+        "message": "End stops"
+    },
+    "setupWizardTailLimitsText": {
+        "message": "Hold the tail at $1° each way, then set the limits as high as they go without the slider or links binding."
+    },
+    "setupWizardMotorIntro": {
+        "message": "Tell the flight controller how to drive the ESC, and how to turn motor RPM into headspeed."
+    },
+    "setupWizardMotorPropsOff": {
+        "message": "Blades off. The ESC will run as soon as the helicopter is armed."
+    },
+    "setupWizardMotor_PWM": {
+        "message": "PWM"
+    },
+    "setupWizardMotorHelp_PWM": {
+        "message": "Any ESC. The wizard calibrates its throttle range later."
+    },
+    "setupWizardMotor_DSHOT150": {
+        "message": "DShot 150"
+    },
+    "setupWizardMotorHelp_DSHOT150": {
+        "message": "Digital, and the most tolerant of long ESC leads. No bidirectional RPM telemetry."
+    },
+    "setupWizardMotorDshot150NoRpm": {
+        "message": "DShot 150 has no bidirectional DShot, so it gives no motor RPM. The governor and the RPM filter need RPM: use DShot 300, or fit an RPM sensor."
+    },
+    "setupWizardMotor_DSHOT300": {
+        "message": "DShot 300"
+    },
+    "setupWizardMotorHelp_DSHOT300": {
+        "message": "Digital, for ESCs with DShot input: XDFly, BLHeli_32, AM32, Bluejay and others. Check your ESC's manual."
+    },
+    "setupWizardMotorOther": {
+        "message": "Other"
+    },
+    "setupWizardMotorDisabled": {
+        "message": "With the ESC protocol off, the main motor can't run."
+    },
+    "setupWizardMotorRpmTitle": {
+        "message": "Motor and gearing"
+    },
+    "setupWizardMotorRpmText": {
+        "message": "Used for headspeed, the governor and the RPM filters. Count the magnets in the motor bell for the poles."
+    },
+    "setupWizardMotorPinion": {
+        "message": "Pinion teeth"
+    },
+    "setupWizardMotorMainGear": {
+        "message": "Main gear teeth"
+    },
+    "setupWizardConnectIntro": {
+        "message": "Everything that is only typed in is set. From here on you work on the helicopter itself."
+    },
+    "setupWizardConnectBladesOff": {
+        "message": "Blades off. They stay off until the Finish step."
+    },
+    "setupWizardConnectReboot": {
+        "message": "Keep the servos unplugged for now. Press Save & reboot: the settings from the earlier steps, the servo frame rate among them, take effect, and the wizard opens on this step again."
+    },
+    "setupWizardConnectServosTitle": {
+        "message": "Plug the servos in"
+    },
+    "setupWizardConnectServosText": {
+        "message": "The flight controller now drives them with the right frame rate. Plug each servo into its output:"
+    },
+    "setupWizardConnectBatteryTitle": {
+        "message": "Battery"
+    },
+    "setupWizardConnectBatteryText": {
+        "message": "Leave the battery unplugged. The next step tells you when to connect it."
+    },
+    "setupWizardThrottleIntro": {
+        "message": "A PWM ESC has to learn its throttle range: the pulse for full throttle and the pulse for low throttle. It learns them when it powers up with full throttle."
+    },
+    "setupWizardThrottleNotNeeded": {
+        "message": "With $1 the ESC doesn't need its throttle range calibrated."
+    },
+    "setupWizardThrottleBatteryTitle": {
+        "message": "Connect the battery"
+    },
+    "setupWizardThrottleBatteryOn": {
+        "message": "Plug the battery in now, so the servos and the ESC have power for the next steps."
+    },
+    "setupWizardThrottleSafety": {
+        "message": "Blades off. Take the pinion out of mesh too, or hold the helicopter down: an ESC that doesn't go into calibration may run the motor at full throttle."
+    },
+    "setupWizardThrottleNoMotor": {
+        "message": "The main motor is off. Choose the ESC protocol in the Motor & ESC step, then reboot at the Connect the servos step."
+    },
+    "setupWizardThrottleFullTitle": {
+        "message": "Full throttle"
+    },
+    "setupWizardThrottleFullText": {
+        "message": "With the battery still unplugged and the flight controller on USB, press Full throttle. The output rises to 100 % in a few seconds."
+    },
+    "setupWizardThrottleFullButton": {
+        "message": "Full throttle"
+    },
+    "setupWizardThrottleCancel": {
+        "message": "Stop"
+    },
+    "setupWizardThrottleWait": {
+        "message": "Wait for 100 %…"
+    },
+    "setupWizardThrottleBatteryText": {
+        "message": "Plug the battery in. The ESC beeps to show it has taken full throttle; your ESC's manual lists the tones. Then press Low throttle."
+    },
+    "setupWizardThrottleLowButton": {
+        "message": "Low throttle"
+    },
+    "setupWizardThrottleLowTitle": {
+        "message": "Low throttle"
+    },
+    "setupWizardThrottleLowText": {
+        "message": "The ESC beeps again to confirm low throttle and stores the range. The motor must not run."
+    },
+    "setupWizardThrottleDoneButton": {
+        "message": "The ESC confirmed"
+    },
+    "setupWizardEscIntro": {
+        "message": "If your ESC sends telemetry, the flight controller can read RPM, voltage, current and temperature from it. If it doesn't, or the flight controller measures the battery itself, choose Not used."
+    },
+    "setupWizardEscCastle": {
+        "message": "Castle Link carries the telemetry on the throttle wire. Nothing more to set."
+    },
+    "setupWizardEscProtocolHelp": {
+        "message": "The ESC's brand or telemetry protocol."
+    },
+    "setupWizardEscPortTitle": {
+        "message": "Port"
+    },
+    "setupWizardEscPortEsc": {
+        "message": "ESC telemetry"
+    },
+    "setupWizardEscPortNone": {
+        "message": "No port is set for the ESC telemetry yet. Choose the one its telemetry wire is plugged into."
+    },
+    "setupWizardEscCheckTitle": {
+        "message": "Check"
+    },
+    "setupWizardEscCheckText": {
+        "message": "With the flight battery plugged in, the voltage and temperature should show. If nothing arrives, Detect wiring tries the half-duplex and pin-swap settings."
+    },
+    "setupWizardEscReceiving": {
+        "message": "Receiving"
+    },
+    "setupWizardEscNothing": {
+        "message": "Nothing yet"
+    },
+    "setupWizardEscSkip": {
+        "message": "ESC telemetry is not used. Where battery voltage and current come from (the flight controller's own sensors, or nothing) is set on the Power tab."
+    },
+    "setupWizardEscUseTitle": {
+        "message": "ESC telemetry"
+    },
+    "setupWizardEscUsed": {
+        "message": "Used"
+    },
+    "setupWizardEscUsedHelp": {
+        "message": "The ESC sends RPM, voltage, current and temperature to the flight controller."
+    },
+    "setupWizardEscNotUsed": {
+        "message": "Not used"
+    },
+    "setupWizardEscNotUsedHelp": {
+        "message": "The flight controller measures the battery itself (ADC), or nothing does."
+    },
+    "setupWizardEscProtocolPick": {
+        "message": "Choose the protocol"
+    },
+    "setupWizardOpenPower": {
+        "message": "Open the Power tab"
+    },
+    "setupWizardGyroIntro": {
+        "message": "Check the gyro corrects the right way. The sticks drive the stabilizer again, and the swash reacts to movement."
+    },
+    "setupWizardGyroHow": {
+        "message": "Hold the helicopter by the main shaft and make a short, brisk movement. Watch which way the swash twitches; it drifts back on its own."
+    },
+    "setupWizardGyroTitle_roll": {
+        "message": "Roll"
+    },
+    "setupWizardGyroText_roll": {
+        "message": "Roll the helicopter quickly to the right. The swash should tilt left, against the movement."
+    },
+    "setupWizardGyroTitle_pitch": {
+        "message": "Pitch"
+    },
+    "setupWizardGyroText_pitch": {
+        "message": "Tip the nose down quickly. The swash should tilt back, against the movement."
+    },
+    "setupWizardGyroTitle_yaw": {
+        "message": "Yaw"
+    },
+    "setupWizardGyroText_yaw": {
+        "message": "Turn the nose quickly to the right. The tail slider should move as it did for yaw stick left."
+    },
+    "setupWizardGyroAgainst": {
+        "message": "Against the movement"
+    },
+    "setupWizardGyroWith": {
+        "message": "With the movement"
+    },
+    "setupWizardGyroWrong": {
+        "message": "The gyro corrects the wrong way. If the sticks move the swash the right way, the board orientation is wrong. Find it again before flying."
+    },
+    "setupWizardGyroBackToSensors": {
+        "message": "Back to Board orientation"
+    },
+    "setupWizardModesIntro": {
+        "message": "Put modes on switches on your radio: press Assign, then flick the switch to the position that should turn the mode on. Only ARM is required. You can add or change modes later on the Modes tab."
+    },
+    "setupWizardModesHow": {
+        "message": "The wizard sees which switch moved and where it ended up."
+    },
+    "setupWizardModesFit8": {
+        "message": "On an 8-channel radio, channels 1–5 are the sticks and throttle, which leaves three switches: ARM on CH 6, the profile switch on CH 7 (next step), and Rescue and Trainer on two positions of one 3-position switch on CH 8."
+    },
+    "setupWizardProfilesIntro": {
+        "message": "One switch picks the flight profile: the PID profile, and with it the rates. Press Assign, then move the switch through every position."
+    },
+    "setupWizardProfilesFit8": {
+        "message": "The profile switch fits an 8-channel radio. Adjusting master gain in flight needs a channel of its own."
+    },
+    "setupWizardProfilesFull": {
+        "message": "Every adjustment slot is in use. Free one on the Adjustments tab."
+    },
+    "setupWizardProfilesSwitchTitle": {
+        "message": "Profile switch"
+    },
+    "setupWizardProfiles_both": {
+        "message": "Profiles and rates"
+    },
+    "setupWizardProfilesHelp_both": {
+        "message": "The switch picks PID profile and rate profile 1, 2 or 3 together."
+    },
+    "setupWizardProfiles_pid": {
+        "message": "PID profiles only"
+    },
+    "setupWizardProfilesHelp_pid": {
+        "message": "The switch picks the PID profile; the rates stay as they are."
+    },
+    "setupWizardProfiles_none": {
+        "message": "Not used"
+    },
+    "setupWizardProfilesHelp_none": {
+        "message": "The helicopter flies on one profile."
+    },
+    "setupWizardProfilesSwitchText": {
+        "message": "A 2- or 3-position switch. The wizard records where each position really is, so every position lands on its own profile."
+    },
+    "setupWizardProfilesListening": {
+        "message": "Move the switch…"
+    },
+    "setupWizardProfilesPositions": {
+        "message": "CH $1: $2 positions found. Move it through every position, then press Use."
+    },
+    "setupWizardProfilesUse": {
+        "message": "Use"
+    },
+    "setupWizardProfilesCount": {
+        "message": "$1 profiles"
+    },
+    "setupWizardProfilesNow": {
+        "message": "Now: profile $1"
+    },
+    "setupWizardProfilesNowBoth": {
+        "message": "Now: profile $1, rates $1"
+    },
+    "setupWizardProfilesUseProfile": {
+        "message": "Profile switch"
+    },
+    "setupWizardProfilesUseGain": {
+        "message": "Master gain"
+    },
+    "setupWizardProfilesGainTitle": {
+        "message": "Master gain in flight"
+    },
+    "setupWizardProfilesGainText": {
+        "message": "Master gain turns all of the flight controller's gains up or down together, as one number. At 100 % the gains are used exactly as set; 120 % makes them all 20 % stronger, 80 % makes them 20 % weaker. There is one for the cyclic (roll and pitch) and one for the yaw. Every helicopter needs a slightly different gain, and the quickest way to find it is in the air: too low feels soft and drifts back slowly after a stick input; too high makes the helicopter wobble or shake quickly, or the tail wag. Raise it until the wobble starts, then come back down a few steps."
+    },
+    "setupWizardGain_none": {
+        "message": "Not used"
+    },
+    "setupWizardGainHelp_none": {
+        "message": "Master gain stays as it is. Find it later in flight, or on the Profiles tab."
+    },
+    "setupWizardGain_buttons": {
+        "message": "Trim buttons"
+    },
+    "setupWizardGainHelp_buttons": {
+        "message": "Trim buttons step the gain up and down, all on one spare channel."
+    },
+    "setupWizardGain_knob": {
+        "message": "Knob"
+    },
+    "setupWizardGainHelp_knob": {
+        "message": "A knob or slider sets the gain, on a spare channel."
+    },
+    "setupWizardGainNeedsChannel": {
+        "message": "Your radio sends $1 channels. This needs a channel beyond the sticks, ARM, the profile switch and Rescue/Trainer, so it fits only if one of those is not used."
+    },
+    "setupWizardGainButtonsText": {
+        "message": "The elevator trim steps the cyclic gain and the rudder trim the yaw gain, $1 % per press; hold a button to repeat. Each button puts its own value on one spare channel. The steps use Ethos as the example."
+    },
+    "setupWizardGainButtonsStep1": {
+        "message": "<b>Model → Trims</b>: set the <b>Mode</b> of the elevator and rudder trims to <b>OFF</b>, so they no longer trim the sticks. The buttons still work for the mix below."
+    },
+    "setupWizardGainButtonsStep2": {
+        "message": "<b>Model → Mixes</b>: add a <b>Free mix</b> named GAIN: <b>Active condition</b> Always on, <b>Source</b> Maximum (under Special), <b>Operation</b> Add, <b>Output</b> a spare channel (CH9 here). Then <b>Add a new action</b> for each trim button, with these weights:"
+    },
+    "setupWizardGainButtonsStep3": {
+        "message": "The GAIN mix is then on its own channel. Press Assign below, then press any of the four trim buttons."
+    },
+    "setupWizardGainButtonsImage1": {
+        "message": "Ethos Trims page: elevator trim with Mode OFF"
+    },
+    "setupWizardGainButtonsImage2": {
+        "message": "Ethos GAIN free mix: source Maximum, operation Add, an action per trim button, output CH9. T2 Up is pressed, so CH9 is at 40 %."
+    },
+    "setupWizardGainButtonsImage3": {
+        "message": "Ethos Mixes list with GAIN on CH9"
+    },
+    "setupWizardGainButton": {
+        "message": "Button"
+    },
+    "setupWizardGainWeight": {
+        "message": "Weight"
+    },
+    "setupWizardGainDoes": {
+        "message": "Does"
+    },
+    "setupWizardGainButton_cyclicDown": {
+        "message": "Cyclic gain −$1 %"
+    },
+    "setupWizardGainButton_cyclicUp": {
+        "message": "Cyclic gain +$1 %"
+    },
+    "setupWizardGainButton_yawDown": {
+        "message": "Yaw gain −$1 %"
+    },
+    "setupWizardGainButton_yawUp": {
+        "message": "Yaw gain +$1 %"
+    },
+    "setupWizardGainButtonsRadio": {
+        "message": "On other radios, set up the same weights on a spare channel, with each trim button switching its own weight in. The button pressed now is shown in bold."
+    },
+    "setupWizardGainKnobText": {
+        "message": "The knob sets cyclic and yaw master gain together, 50 % at one end, 150 % at the other and 100 % in the middle."
+    },
+    "setupWizardGainKnobNow": {
+        "message": "Now: $1 %"
+    },
+    "setupWizardGainListeningButtons": {
+        "message": "Press a trim button…"
+    },
+    "setupWizardGainListeningKnob": {
+        "message": "Turn the knob…"
+    },
+    "setupWizardProfilesChannelsTitle": {
+        "message": "Channels in use"
+    },
+    "setupWizardProfilesBeyond8": {
+        "message": "Something is on CH 9 or higher, so this needs a radio and receiver link with more than 8 channels."
+    },
+    "setupWizardOpenAdjustments": {
+        "message": "Open the Adjustments tab"
+    },
+    "setupWizardMode_arm": {
+        "message": "Arm"
+    },
+    "setupWizardModeHelp_arm": {
+        "message": "Arms the motor. Use a switch you won't knock by accident."
+    },
+    "setupWizardMode_rescue": {
+        "message": "Rescue"
+    },
+    "setupWizardModeHelp_rescue": {
+        "message": "Turns the helicopter upright and holds it level."
+    },
+    "setupWizardMode_trainer": {
+        "message": "Trainer"
+    },
+    "setupWizardModeHelp_trainer": {
+        "message": "Limits how far the helicopter can tilt, to help while learning."
+    },
+    "setupWizardModesRequired": {
+        "message": "Required"
+    },
+    "setupWizardModesOn": {
+        "message": "On"
+    },
+    "setupWizardModesAssign": {
+        "message": "Assign"
+    },
+    "setupWizardModesReassign": {
+        "message": "Assign again"
+    },
+    "setupWizardModesRemove": {
+        "message": "Remove"
+    },
+    "setupWizardModesListening": {
+        "message": "Flick the switch now…"
+    },
+    "setupWizardFinishIntro": {
+        "message": "That's the setup done. Here is what the wizard set."
+    },
+    "setupWizardFinishTail": {
+        "message": "Tail"
+    },
+    "setupWizardFinishPitchValue": {
+        "message": "Collective ±$1°, cyclic ±$2°"
+    },
+    "setupWizardFinishOff": {
+        "message": "Off"
+    },
+    "setupWizardFinishAssigned": {
+        "message": "On a switch"
+    },
+    "setupWizardFinishNotAssigned": {
+        "message": "Not assigned"
+    },
+    "setupWizardFinishNoArm": {
+        "message": "ARM is not on a switch yet, so the helicopter can't be armed. Go back to Mode switches."
+    },
+    "setupWizardFinishNextTitle": {
+        "message": "Before the first flight"
+    },
+    "setupWizardFinishNextGovernor": {
+        "message": "Set the headspeed, spoolup and throttle limits in the Governor and Profiles tabs."
+    },
+    "setupWizardFinishNextProfiles": {
+        "message": "Check the PID profile and rates suit the helicopter."
+    },
+    "setupWizardFinish": {
+        "message": "Finish"
+    },
+    "setupWizardFinishDone": {
+        "message": "Setup saved. Fit the blades and do a careful first hover."
     },
     "tabSetupOSD": {
         "message": "OSD Setup"
@@ -1784,7 +2957,7 @@
         "description": "Message that pops up to describe the ACC_CALIB arming disable flag"
     },
     "statusArmingDisableFlagsTooltipMOTOR_PROTO": {
-        "message": "There is no motor throttle protocol selected",
+        "message": "There is no motor throttle protocol selected, the motor outputs couldn't start (a motor pin this protocol can't drive), or the tail is motorised but motor 2 has no pin (move the tail pin to motor 2 on the Mixer or Remap FC tab)",
         "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
     },
     "statusArmingDisableFlagsTooltipOVERRIDE": {
@@ -4273,6 +5446,48 @@
     },
     "mixerTailBidirectional": {
         "message": "Bidirectional"
+    },
+    "tailOutputToMotor": {
+        "message": "Saving moves the tail pin from servo 4 to motor 2, so it drives the tail motor."
+    },
+    "tailOutputToServo": {
+        "message": "Saving moves the tail pin from motor 2 back to servo 4, so it drives the tail servo."
+    },
+    "tailOutputNoPin": {
+        "message": "Neither servo 4 nor motor 2 has a pin. Set one on the Remap FC tab."
+    },
+    "tailTtaOn": {
+        "message": "Saving turns on Tail Torque Assist (gain 100) in every profile. It works with the Electric or Direct governor."
+    },
+    "tailTtaOff": {
+        "message": "Saving turns Tail Torque Assist off in every profile."
+    },
+    "tailOutputFailed": {
+        "message": "The tail pin was not moved: $1"
+    },
+    "tailOutputResult_1": {
+        "message": "the motor and servo pins are set by hand. Check them on the Remap FC tab."
+    },
+    "tailOutputResult_2": {
+        "message": "motor 1 has no pin, so motor 2 would not be used."
+    },
+    "tailOutputResult_3": {
+        "message": "the pin can't drive an output."
+    },
+    "tailOutputResult_4": {
+        "message": "its timer also drives another servo or motor, which would then run at the wrong rate. Use a different pin on the Remap FC tab."
+    },
+    "tailOutputResult_5": {
+        "message": "the flight controller didn't understand the request."
+    },
+    "tailOutputResult_6": {
+        "message": "the ESC protocol is DShot, and the pin has no DMA to drive it. Turn on DShot bitbang, or use a different pin on the Remap FC tab."
+    },
+    "motorOutputProblem_main": {
+        "message": "No motor output started, so the helicopter can't arm. One of the motor pins can't be driven with this ESC protocol, which stops all motors. Check the motor pins on the Remap FC tab, or choose another ESC protocol."
+    },
+    "motorOutputProblem_tail": {
+        "message": "The tail motor (motor 2) has no working output, so the tail won't run. Check that the tail pin is on motor 2 on the Remap FC tab."
     },
     "mixerTailRotorDirection": {
         "message": "Yaw Control Direction"

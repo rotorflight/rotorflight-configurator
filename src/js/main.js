@@ -15,6 +15,7 @@ import { ReleaseChecker } from "@/js/release_checker.js";
 import { serial } from "@/js/serial.js";
 import { handleConnectClick, initializeSerialBackend } from "@/js/serial_backend.js";
 import { TABS } from "@/js/tabs/tabs.js";
+import { homeTab, isTabInUserLevel, loadUserLevel, setUserLevel } from "@/js/user_level.js";
 
 const SERIAL_FUNCTION_RX_SERIAL = 64;
 const SERIAL_FUNCTION_FBUS_OUT = 524288;
@@ -348,13 +349,25 @@ export function startProcess() {
         $("#showlog").trigger('click');
     }
 
-    CONFIGURATOR.expertMode = config.expertMode;
-    $('#expert-mode input')
-        .on('change', function () {
-            CONFIGURATOR.expertMode = this.checked;
-            config.expertMode = this.checked;
-        })
-        .prop('checked', CONFIGURATOR.expertMode);
+    loadUserLevel();
+    showUserLevel();
+    $('#user-level button').on('click', function () {
+        const level = $(this).data('level');
+        if (level === CONFIGURATOR.userLevel) {
+            return;
+        }
+        const tabStillShown = !CONFIGURATOR.connectionValid || !GUI.active_tab
+            || isTabInUserLevel(GUI.active_tab, level);
+        setUserLevel(level);
+        showUserLevel();
+        if (CONFIGURATOR.connectionValid && FC.FEATURE_CONFIG?.features) {
+            updateTabList(FC.FEATURE_CONFIG.features);
+        }
+        if (!tabStillShown) {
+            // The tab click asks about unsaved changes itself.
+            $(`#tabs ul.mode-connected .tab_${homeTab()} a`).click();
+        }
+    });
 
     CliAutoComplete.setEnabled(config.cliAutoComplete);
 
@@ -441,8 +454,42 @@ function notifyOutdatedVersion(releaseData) {
     }
 }
 
+function showUserLevel() {
+    $('#user-level button').each(function () {
+        const selected = $(this).data('level') === CONFIGURATOR.userLevel;
+        $(this).toggleClass('active', selected).attr('aria-checked', String(selected));
+    });
+}
+
+function tabNameOf(li) {
+    return (li.className.match(/\btab_(\w+)/) ?? [])[1] ?? null;
+}
+
+// Hides the tabs outside the user level, and a group header when every
+// tab under it is hidden.
+export function filterTabsByUserLevel() {
+    $('#tabs ul.mode-connected li:not(.tab-group-header)').each(function () {
+        if (!isTabInUserLevel(tabNameOf(this))) {
+            $(this).hide();
+        }
+    });
+    $('#tabs ul.mode-connected li.tab-group-header').each(function () {
+        const tabs = $(this).nextUntil('.tab-group-header');
+        const anyShown = tabs.toArray().some((li) => li.style.display !== 'none');
+        $(this).toggle(anyShown);
+    });
+}
+
 export function updateTabList() {
     const { features } = FC.FEATURE_CONFIG;
+
+    // Start from the tabs this connection allows, so leaving Beginner
+    // brings back the tabs it hid.
+    $('#tabs ul.mode-connected li:not(.tab-group-header)').each(function () {
+        const tabName = tabNameOf(this);
+        $(this).toggle(tabName !== null && GUI.allowedTabs.includes(tabName));
+    });
+
     $('#tabs ul.mode-connected li.tab_gps').toggle(features.isEnabled('GPS'));
     $('#tabs ul.mode-connected li.tab_led_strip').toggle(features.isEnabled('LED_STRIP'));
 
@@ -469,6 +516,8 @@ export function updateTabList() {
         (port) => port.functions.includes('FBUS_OUT') || port.functions.includes('SPORT_MASTER'),
     );
     $('#tabs ul.mode-connected li.tab_fbus_sensors').toggle(fbusMasterActive);
+
+    filterTabsByUserLevel();
 }
 
 function zeroPad(value, width) {
