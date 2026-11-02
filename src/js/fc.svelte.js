@@ -77,7 +77,6 @@ class FlightController {
   SERVO_DATA = $state();
   SERVO_OVERRIDE = $state();
   SMARTFUEL_CONFIG = $state();
-  SRXL2_ESC_CONFIG = $state();
   TELEMETRY_CONFIG = $state();
   TRANSPONDER = $state();
   TUNING_SLIDERS = $state();
@@ -185,9 +184,6 @@ class FlightController {
     this.FBUS_MASTER_CONFIG = {
       forwardedSensors:            [],
     };
-    // MSP2_GET_SRXL2_ESC_CONFIG: throttle_rate_hz, telem_interval_frames, motor2_channel.
-    // Null until read, and on firmware without the message.
-    this.SRXL2_ESC_CONFIG = null;
 
     this.ANALOG = {
       voltage:                    0,
