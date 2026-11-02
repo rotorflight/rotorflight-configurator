@@ -57,7 +57,7 @@
       "name": "509",
       "path": "./pr/509/",
       "branch": "feature/srxl2-esc-config-v2",
-      "date": "2026-11-02T22:06:25Z",
+      "date": "2026-11-02T22:12:10Z",
       "number": 509,
       "title": "Show the SRXL2 ESC settings on the Motors tab",
       "url": "https://github.com/rotorflight/rotorflight-configurator/pull/509",
