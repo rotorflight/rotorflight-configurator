@@ -54,6 +54,17 @@
     },
     {
       "type": "pr",
+      "name": "509",
+      "path": "./pr/509/",
+      "branch": "feature/srxl2-esc-config-v2",
+      "date": "2026-11-02T21:44:30Z",
+      "number": 509,
+      "title": "Show the SRXL2 ESC settings on the Motors tab",
+      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/509",
+      "draft": false
+    },
+    {
+      "type": "pr",
       "name": "503",
       "path": "./pr/503/",
       "branch": "feature/goosky-esc-alias",
