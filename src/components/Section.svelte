@@ -1,9 +1,13 @@
 <script>
   import { slide } from "svelte/transition";
 
+  import { watchEmpty } from "@/js/emptyContent.js";
   import { i18n } from "@/js/i18n.js";
 
   let { children, label, summary, header } = $props();
+
+  // Not shown at all when nothing inside is (see emptyContent.js).
+  let empty = $state(false);
 
   let showSummary = $state(false);
 
@@ -12,7 +16,7 @@
   }
 </script>
 
-<div class="wrapper svelte">
+<div class={["wrapper", "svelte", empty && "empty"]}>
   <div class="container" data-tooltip-boundary>
     {#if header}
       {@render header()}
@@ -44,7 +48,7 @@
       </div>
     {/if}
     <div class="content">
-      <div class="content-wrapper">
+      <div class="content-wrapper" use:watchEmpty={(e) => (empty = e)}>
         {@render children?.()}
       </div>
     </div>
@@ -54,6 +58,10 @@
 <style lang="scss">
   .wrapper {
     padding-top: var(--section-gap);
+
+    &.empty {
+      display: none;
+    }
   }
 
   .container {

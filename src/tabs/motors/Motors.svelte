@@ -4,7 +4,9 @@
   import { slide } from "svelte/transition";
 
   import Page from "@/components/Page.svelte";
+  import WarningNote from "@/components/notes/WarningNote.svelte";
 
+  import { Mixer } from "@/js/Mixer.js";
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
   import { getTabHelpURL } from "@/js/help.js";
@@ -13,6 +15,7 @@
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { bit_check, reinitialiseConnection } from "@/js/serial_backend";
+  import { motorOutputProblem } from "@/js/tail_motor.js";
 
   import Motor from "./Motor.svelte";
   import Override from "./Override.svelte";
@@ -40,6 +43,17 @@
 
   let isEnabled = $derived(
     motorState.throttleEnabled && FC.CONFIG.motorCount > 0,
+  );
+
+  // A motor pin the protocol can't drive stops every motor (see
+  // tail_motor.js), so say so instead of showing motors that never move.
+  let motorProblem = $derived(
+    loading
+      ? null
+      : motorOutputProblem(
+          motorState.throttleEnabled,
+          FC.MIXER_CONFIG.tail_rotor_mode !== Mixer.TAIL_MODE_VARIABLE,
+        ),
   );
 
   let rpmAvailable = $derived(
@@ -189,6 +203,9 @@
 {/snippet}
 
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
+  {#if motorProblem}
+    <WarningNote message={`motorOutputProblem_${motorProblem}`} />
+  {/if}
   <div class="content">
     <div>
       <Throttle />

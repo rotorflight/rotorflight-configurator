@@ -3,6 +3,7 @@
   import NumberInput from "@/components/NumberInput.svelte";
   import Switch from "@/components/Switch.svelte";
 
+  import { CONFIGURATOR } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import {
@@ -30,9 +31,26 @@
     return FC.BUS_SERVO_CONFIG?.[servo.mspIndex - BUS_SERVO_OFFSET] ?? 0;
   }
 
+  // Speed and geometry correction are Advanced-only columns. Below Advanced
+  // a column still shows while any servo in this table has a non-default
+  // value (speed 0, geometry correction off), and stays shown once it has,
+  // so it doesn't vanish while being edited back.
+  let speedChanged = $derived(
+    servos.some((s) => FC.SERVO_CONFIG[s.index].speed !== 0),
+  );
+  let geocorChanged = $derived(servos.some((s) => flag(s.index, FLAG_GEOCOR)));
+  let speedKeep = $state(false);
+  let geocorKeep = $state(false);
+  $effect.pre(() => {
+    if (speedChanged) speedKeep = true;
+    if (geocorChanged) geocorKeep = true;
+  });
+  let showSpeed = $derived(CONFIGURATOR.expertMode || speedKeep);
+  let showGeocor = $derived(CONFIGURATOR.expertMode || geocorKeep);
+
   // One entry per editable column. The header, the desktop rows and the
   // compact detail form all render from this list so they can't drift.
-  let fields = $derived([
+  let allFields = $derived([
     { key: "mid", label: "servoMid", help: "servoMidHelp" },
     { key: "min", label: "servoMin", help: "servoMinHelp" },
     { key: "max", label: "servoMax", help: "servoMaxHelp" },
@@ -50,6 +68,12 @@
       html: true,
     },
   ]);
+  let fields = $derived(
+    allFields.filter(
+      (f) =>
+        (f.key !== "speed" || showSpeed) && (f.key !== "geocor" || showGeocor),
+    ),
+  );
 
   // No geometry correction for bus servos driven directly by the RX.
   function hasGeocor(servo) {
@@ -63,29 +87,32 @@
   const INDEX_COL = 40;
   const VALUE_COL_MIN = 96;
   const VALUE_COL_MAX = 112;
-  const VALUE_COLS = 7; // Center, Min, Max, Scale -/+, Rate or Source, Speed
+  // Center, Min, Max, Scale -/+, Rate or Source, and Speed when shown.
+  let valueCols = $derived(showSpeed ? 7 : 6);
   const REVERSE_COL = 72;
   const GEOCOR_COL = 72;
   const SIGNAL_MIN = 90;
   const COLUMN_GAP = 4;
   const ROW_PADDING = 8;
 
-  const gridColumns =
-    `${INDEX_COL}px repeat(${VALUE_COLS}, minmax(${VALUE_COL_MIN}px, ${VALUE_COL_MAX}px)) ` +
-    `${REVERSE_COL}px ${GEOCOR_COL}px minmax(${SIGNAL_MIN}px, 1fr)`;
+  let gridColumns = $derived(
+    `${INDEX_COL}px repeat(${valueCols}, minmax(${VALUE_COL_MIN}px, ${VALUE_COL_MAX}px)) ` +
+      `${REVERSE_COL}px ${showGeocor ? `${GEOCOR_COL}px ` : ""}minmax(${SIGNAL_MIN}px, 1fr)`,
+  );
 
   // The narrowest the grid can get before it overflows. Compared against
   // the measured width of the table's own container rather than a viewport
   // media query, which can't account for the side nav or the Section
   // padding around the table.
-  const gridMinWidth =
+  let gridMinWidth = $derived(
     INDEX_COL +
-    VALUE_COLS * VALUE_COL_MIN +
-    REVERSE_COL +
-    GEOCOR_COL +
-    SIGNAL_MIN +
-    (VALUE_COLS + 3) * COLUMN_GAP +
-    ROW_PADDING;
+      valueCols * VALUE_COL_MIN +
+      REVERSE_COL +
+      (showGeocor ? GEOCOR_COL + COLUMN_GAP : 0) +
+      SIGNAL_MIN +
+      (valueCols + 2) * COLUMN_GAP +
+      ROW_PADDING,
+  );
 
   // Below gridMinWidth the table becomes a list of servos; tapping one
   // opens a single-column form with every field at a usable size. Width

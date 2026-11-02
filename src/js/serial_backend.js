@@ -6,7 +6,7 @@ import { API_VERSION_12_10, CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
-import { updateTabList } from "@/js/main.js";
+import { filterTabsByUserLevel, updateTabList } from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { releaseOverrides } from "@/js/msp/release_overrides.js";
@@ -803,6 +803,7 @@ async function onConnect() {
 
         return found;
     }).show();
+    filterTabsByUserLevel();
 
     if (FC.CONFIG.flightControllerVersion !== '') {
         FC.BEEPER_CONFIG.beepers = new Beepers(FC.CONFIG);

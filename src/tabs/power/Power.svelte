@@ -517,6 +517,8 @@
           </Field>
           {#if smartFuelTuningEnabled}
             <Field
+              expert
+              changed={FC.SMARTFUEL_CONFIG.voltageDropRate !== 10}
               id="power-smartfuel-vdrop"
               label="powerSmartFuelVoltageDropRate"
               unit="mV/s"
@@ -533,6 +535,8 @@
               />
             </Field>
             <Field
+              expert
+              changed={FC.SMARTFUEL_CONFIG.chargeDropRate !== 50}
               id="power-smartfuel-cdrop"
               label="powerSmartFuelChargeDropRate"
               unit="%/s"
@@ -549,6 +553,8 @@
               />
             </Field>
             <Field
+              expert
+              changed={FC.SMARTFUEL_CONFIG.sagGain !== 40}
               id="power-smartfuel-sag"
               label="powerSmartFuelSagGain"
               unit="V"
@@ -602,6 +608,7 @@
               </div>
               {#if config?.sensorType === 1}
                 <Field
+                  expert
                   id={`power-vscale-${meter.id}`}
                   label="powerVoltageScale"
                 >
@@ -615,6 +622,8 @@
                   />
                 </Field>
                 <Field
+                  expert
+                  changed={config.vbatresdivval !== 10}
                   id={`power-vdiv-${meter.id}`}
                   label="powerVoltageDivider"
                 >
@@ -648,6 +657,7 @@
               </div>
               {#if config?.sensorType === 1}
                 <Field
+                  expert
                   id={`power-ascale-${meter.id}`}
                   label="powerAmperageScale"
                 >
@@ -661,6 +671,8 @@
                   />
                 </Field>
                 <Field
+                  expert
+                  changed={config.offset !== 0}
                   id={`power-aoffset-${meter.id}`}
                   label="powerAmperageOffset"
                 >

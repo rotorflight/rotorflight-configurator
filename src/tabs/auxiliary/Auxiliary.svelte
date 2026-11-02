@@ -49,15 +49,14 @@
 
   // ARM is always the first mode reported by the FC; keep it pinned at the
   // top of the list and order the rest by MODE_GROUPS, then name. Modes
-  // that are heli-specific/unused, or expert-only while not in expert mode,
-  // are dropped from the list entirely -- and (matching legacy) from what
-  // gets saved, since only modes represented here are written back.
+  // that are heli-specific/unused are dropped from the list entirely -- and
+  // (matching legacy) from what gets saved, since only modes represented
+  // here are written back. Expert-only modes stay in it, so they are still
+  // saved; below Advanced they are only left out of the "Add mode" picker.
   let modeIndices = $derived.by(() => {
     const indices = [];
     for (let i = 0; i < FC.AUX_CONFIG.length; i++) {
-      const modeName = FC.AUX_CONFIG[i];
-      if (UNUSED_MODES.includes(modeName)) continue;
-      if (EXPERT_MODES.includes(modeName) && !CONFIGURATOR.expertMode) continue;
+      if (UNUSED_MODES.includes(FC.AUX_CONFIG[i])) continue;
       indices.push(i);
     }
     const armIndex = indices.shift();
@@ -123,6 +122,9 @@
     for (const i of modeIndices) {
       if (visibleIndices.includes(i)) continue;
       const modeName = FC.AUX_CONFIG[i];
+      if (!CONFIGURATOR.expertMode && EXPERT_MODES.includes(modeName)) {
+        continue;
+      }
       const key = MODE_GROUPS[getModeOrder(modeName).group]?.key;
       const label = $i18n.t(`auxiliaryGroup${key ?? MODE_GROUP_OTHER}`);
       if (groups.at(-1)?.label !== label) groups.push({ label, items: [] });
