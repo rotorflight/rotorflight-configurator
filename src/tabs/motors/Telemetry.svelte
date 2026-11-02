@@ -121,6 +121,27 @@
             {/each}
           </select>
         </Field>
+        {#if motorState.isSrxl2 && FC.SRXL2_ESC_CONFIG}
+          <div transition:slide>
+            <Field id="srxl2-telem-interval" label="motorsSrxl2TelemInterval">
+              {#snippet tooltip()}
+                <Tooltip
+                  help="motorsSrxl2TelemIntervalHelp"
+                  attrs={[
+                    { name: "genericDefault", value: "7" },
+                    { name: "genericRange", value: "0 - 255" },
+                  ]}
+                />
+              {/snippet}
+              <NumberInput
+                id="srxl2-telem-interval"
+                min="0"
+                max="255"
+                bind:value={FC.SRXL2_ESC_CONFIG.telem_interval_frames}
+              />
+            </Field>
+          </div>
+        {/if}
       </SubSection>
     </div>
   {/if}

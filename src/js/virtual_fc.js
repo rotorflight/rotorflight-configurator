@@ -406,6 +406,23 @@ const VIRTUAL_FBUS_SENSORS = [
 
 let virtualFbusClearedAt = Date.now();
 
+// MSP2_GET/SET_SRXL2_ESC_CONFIG, firmware pg/srxl2_esc.c defaults. A save
+// is kept so the Motors tab reads it back after its reboot.
+const virtualSrxl2EscConfig = {
+  throttle_rate_hz: 250,
+  telem_interval_frames: 7,
+  motor2_channel: 0,
+};
+
+function encodeSrxl2EscConfig() {
+  const buffer = [];
+  buffer.push8(1); // payload version
+  buffer.push16(virtualSrxl2EscConfig.throttle_rate_hz);
+  buffer.push8(virtualSrxl2EscConfig.telem_interval_frames);
+  buffer.push8(virtualSrxl2EscConfig.motor2_channel);
+  return Uint8Array.from(buffer);
+}
+
 // MSP2_GET_FBUS_SENSORS: count, then per sensor physical ID, source,
 // forwarded, packet count, name and app IDs.
 function encodeFbusSensors() {
@@ -650,6 +667,18 @@ export function handleVirtualMessage(code, data) {
     // The sensors keep answering, so they show again at once with fresh counts
     case MSPCodes.MSP2_CLEAR_FBUS_SENSORS:
       virtualFbusClearedAt = Date.now();
+      break;
+
+    case MSPCodes.MSP2_GET_SRXL2_ESC_CONFIG:
+      return decodedReply(code, encodeSrxl2EscConfig());
+
+    // Exactly four bytes, as msp.c requires: u16 rate, u8 interval, u8 channel.
+    case MSPCodes.MSP2_SET_SRXL2_ESC_CONFIG:
+      if (bytes.length === 4) {
+        virtualSrxl2EscConfig.throttle_rate_hz = bytes[0] | (bytes[1] << 8);
+        virtualSrxl2EscConfig.telem_interval_frames = bytes[2];
+        virtualSrxl2EscConfig.motor2_channel = bytes[3] < 32 ? bytes[3] : 0;
+      }
       break;
 
     case MSPCodes.MSP_SET_ESC_PARAMETERS:
