@@ -238,4 +238,7 @@ export const MSPCodes = {
     MSP2_SET_FBUS_MASTER_CONFIG:        0x5F0A,
     // 0x5F15: 0x5F0B-0x5F14 are taken upstream and by open PRs.
     MSP2_GET_FBUS_SENSORS_STATUS:       0x5F15,
+    // SRXL2 ESC settings (firmware #537): telemetry interval, motor 2 channel.
+    MSP2_GET_SRXL2_ESC_CONFIG:          0x5F16,
+    MSP2_SET_SRXL2_ESC_CONFIG:          0x5F17,
 };
