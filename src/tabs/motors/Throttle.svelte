@@ -10,6 +10,7 @@
   import WarningNote from "@/components/notes/WarningNote.svelte";
 
   import { FC } from "@/js/fc.svelte.js";
+  import { i18n } from "@/js/i18n.js";
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
@@ -82,6 +83,28 @@
             max="8000"
             bind:value={FC.MOTOR_CONFIG.motor_pwm_rate}
           />
+        </Field>
+      </div>
+    {/if}
+
+    <!-- Part of the SRXL2 motor protocol: the channel the ESC drives its second
+         motor from. Telemetry Interval, from the same message, is under ESC
+         Telemetry. -->
+    {#if motorState.isSrxl2 && FC.SRXL2_ESC_CONFIG}
+      <div transition:slide>
+        <Field id="srxl2-motor2-channel" label="motorsSrxl2Motor2Channel">
+          {#snippet tooltip()}
+            <Tooltip help="motorsSrxl2Motor2ChannelHelp" />
+          {/snippet}
+          <select
+            id="srxl2-motor2-channel"
+            bind:value={FC.SRXL2_ESC_CONFIG.motor2_channel}
+          >
+            <option value={0}>{$i18n.t("motorsSrxl2Motor2ChannelOff")}</option>
+            {#each Array.from({ length: 31 }, (_, i) => i + 1) as ch (ch)}
+              <option value={ch}>{ch}</option>
+            {/each}
+          </select>
         </Field>
       </div>
     {/if}

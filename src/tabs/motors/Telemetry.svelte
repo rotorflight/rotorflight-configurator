@@ -174,20 +174,6 @@
             bind:value={FC.SRXL2_ESC_CONFIG.telem_interval_frames}
           />
         </Field>
-        <Field id="srxl2-motor2-channel" label="motorsSrxl2Motor2Channel">
-          {#snippet tooltip()}
-            <Tooltip help="motorsSrxl2Motor2ChannelHelp" />
-          {/snippet}
-          <select
-            id="srxl2-motor2-channel"
-            bind:value={FC.SRXL2_ESC_CONFIG.motor2_channel}
-          >
-            <option value={0}>{$i18n.t("motorsSrxl2Motor2ChannelOff")}</option>
-            {#each Array.from({ length: 31 }, (_, i) => i + 1) as ch (ch)}
-              <option value={ch}>{ch}</option>
-            {/each}
-          </select>
-        </Field>
       </SubSection>
     </div>
   {/if}
