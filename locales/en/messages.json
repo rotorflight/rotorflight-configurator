@@ -4664,6 +4664,24 @@
     "motorsEscTelemetryPinswapHelp": {
         "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
+    "motorsSectionSrxl2Esc": {
+        "message": "SRXL2 ESC"
+    },
+    "motorsSrxl2TelemInterval": {
+        "message": "Telemetry Interval"
+    },
+    "motorsSrxl2TelemIntervalHelp": {
+        "message": "Every how many throttle frames the ESC is asked for telemetry. 0 turns telemetry polling off."
+    },
+    "motorsSrxl2Motor2Channel": {
+        "message": "Motor 2 Channel"
+    },
+    "motorsSrxl2Motor2ChannelHelp": {
+        "message": "For dual-motor Smart ESCs (e.g. Spektrum SPMXAE1020): the SRXL2 channel that carries motor 2. Motor 1 is always channel 0. With a channel set the motor count becomes 2 and the mixer's second motor output drives it. Leave Off for a single motor."
+    },
+    "motorsSrxl2Motor2ChannelOff": {
+        "message": "Off"
+    },
     "motorsEscWiringDetectButton": {
         "message": "Detect Wiring"
     },
