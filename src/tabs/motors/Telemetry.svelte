@@ -154,43 +154,6 @@
       </SubSection>
     </div>
   {/if}
-  {#if motorState.isSrxl2 && FC.SRXL2_ESC_CONFIG}
-    <div transition:slide>
-      <SubSection label="motorsSectionSrxl2Esc">
-        <Field id="srxl2-telem-interval" label="motorsSrxl2TelemInterval">
-          {#snippet tooltip()}
-            <Tooltip
-              help="motorsSrxl2TelemIntervalHelp"
-              attrs={[
-                { name: "genericDefault", value: "7" },
-                { name: "genericRange", value: "0 - 255" },
-              ]}
-            />
-          {/snippet}
-          <NumberInput
-            id="srxl2-telem-interval"
-            min="0"
-            max="255"
-            bind:value={FC.SRXL2_ESC_CONFIG.telem_interval_frames}
-          />
-        </Field>
-        <Field id="srxl2-motor2-channel" label="motorsSrxl2Motor2Channel">
-          {#snippet tooltip()}
-            <Tooltip help="motorsSrxl2Motor2ChannelHelp" />
-          {/snippet}
-          <select
-            id="srxl2-motor2-channel"
-            bind:value={FC.SRXL2_ESC_CONFIG.motor2_channel}
-          >
-            <option value={0}>{$i18n.t("motorsSrxl2Motor2ChannelOff")}</option>
-            {#each Array.from({ length: 31 }, (_, i) => i + 1) as ch (ch)}
-              <option value={ch}>{ch}</option>
-            {/each}
-          </select>
-        </Field>
-      </SubSection>
-    </div>
-  {/if}
   {#if motorState.telemEnabled && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)}
     <div transition:slide>
       <SubSection label="motorsSectionSensorCorrection">
