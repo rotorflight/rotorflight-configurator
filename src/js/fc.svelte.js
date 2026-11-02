@@ -184,6 +184,9 @@ class FlightController {
     this.FBUS_MASTER_CONFIG = {
       forwardedSensors:            [],
     };
+    // MSP2_GET_SRXL2_ESC_CONFIG: throttle_rate_hz, telem_interval_frames, motor2_channel.
+    // Null until read, and on firmware without the message.
+    this.SRXL2_ESC_CONFIG = null;
 
     this.ANALOG = {
       voltage:                    0,
