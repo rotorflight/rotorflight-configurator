@@ -116,8 +116,10 @@
             id="esc-telemetry-protocol"
             bind:value={FC.ESC_SENSOR_CONFIG.protocol}
           >
-            {#each motorState.telemetryProtocols as proto, index (proto)}
-              <option value={index}>{proto}</option>
+            {#each motorState.telemetryProtocols as proto, index (index)}
+              {#if proto}
+                <option value={index}>{proto}</option>
+              {/if}
             {/each}
           </select>
         </Field>

@@ -24,18 +24,20 @@
   };
 
   // Logos converted from the Lua suite's app/gfx/esc_mfg_*.png into alpha masks, so they
-  // can be tinted with the theme's text colour via CSS mask-image.
+  // can be tinted with the theme's text colour via CSS mask-image. Goosky reuses the
+  // wordmark from the Remap FC tab.
   const LOGOS = {
-    am32: "am32",
-    blheli_s: "blheli_s",
-    bluejay: "bluejay",
-    flrtr: "flyrotor",
-    hw5: "hw5",
-    omp: "omp",
-    scorp: "scorpion",
-    xdfly: "xdfly",
-    yge: "yge",
-    ztw: "ztw",
+    am32: "esc_mfg/am32.png",
+    blheli_s: "esc_mfg/blheli_s.png",
+    bluejay: "esc_mfg/bluejay.png",
+    flrtr: "esc_mfg/flyrotor.png",
+    goosky: "remap_fc/GOOSKY_BRAND.svg",
+    hw5: "esc_mfg/hw5.png",
+    omp: "esc_mfg/omp.png",
+    scorp: "esc_mfg/scorpion.png",
+    xdfly: "esc_mfg/xdfly.png",
+    yge: "esc_mfg/yge.png",
+    ztw: "esc_mfg/ztw.png",
   };
 
   function select(manufacturer) {
@@ -50,7 +52,7 @@
   // FC.ESC_SENSOR_CONFIG.protocol is one of its escSensorProtocolIds (same id space as the
   // Motors tab's telemetryProtocols index -- e.g. Scorpion=4, OMP=6, ZTW=7, YGE=9,
   // FlyRotor=10, XDFly=12). AM32/BLHeli_S/Bluejay share id 1 (BLHeli32), since telemetry
-  // can't distinguish them. Protocol 0 (disabled) matches nothing, so every button is off.
+  // can't distinguish them; AM32 and Goosky also accept 16 (Goosky, an alias of BLHeli32). Protocol 0 (disabled) matches nothing, so every button is off.
   // Virtual mode skips the check, like the Lua guard does in simulation.
   let telemetryDisabled = $derived(
     !CONFIGURATOR.virtualMode && !FC.ESC_SENSOR_CONFIG.protocol,
@@ -130,7 +132,7 @@
         >
           <span
             class="logo"
-            style:--logo="url('/images/esc_mfg/{LOGOS[manufacturer.id]}.png')"
+            style:--logo="url('/images/{LOGOS[manufacturer.id]}')"
           ></span>
           <span class="name">{manufacturer.name}</span>
           {#if reason}
@@ -244,8 +246,10 @@
     }
   }
 
+  /* Square logos stay 64px; wide wordmarks like Goosky's get the extra width. */
   .logo {
-    width: 64px;
+    width: 100%;
+    max-width: 128px;
     height: 64px;
     flex-shrink: 0;
     background-color: currentColor;
