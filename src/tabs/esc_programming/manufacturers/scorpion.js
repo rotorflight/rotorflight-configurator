@@ -39,6 +39,10 @@ const fields = [
     { key: "bailout", type: "U16", min: 0, max: 100000, unit: "s", scale: 1000 },
     { key: "gov_proportional", type: "U32", min: 30, max: 180, scale: 100 },
     { key: "gov_integral", type: "U32", min: 150, max: 250, scale: 100 },
+    // Not shown, but part of the 84-byte block the firmware expects (tribParamAddrLen + 2).
+    // Without them a save sent 76 bytes and the firmware filled the rest from stale buffer bytes.
+    { key: "stick_max", type: "U32" },
+    { key: "stick_zero", type: "U32" },
 ];
 
 const pages = [
@@ -121,6 +125,8 @@ const simResponse = [
     208, 7, // bailout
     100, 0, 0, 0, // gov_proportional
     200, 0, 0, 0, // gov_integral
+    1, 0, 0, 0, // stick_max
+    200, 250, 0, 0, // stick_zero
 ];
 
 const scorpion = {

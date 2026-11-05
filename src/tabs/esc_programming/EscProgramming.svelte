@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
 
   import Page from "@/components/Page.svelte";
+  import ErrorNote from "@/components/notes/ErrorNote.svelte";
 
   import { i18n } from "@/js/i18n.js";
   import { MSP } from "@/js/msp.svelte.js";
@@ -71,6 +72,10 @@
       <i class="fas fa-exclamation-circle"></i>
       <p>{$i18n.t("escProgrammingArmedWarning")}</p>
     </div>
+  {/if}
+
+  {#if escState.saveFailed && escState.view === View.FORM}
+    <ErrorNote message="escProgrammingSaveFailed" />
   {/if}
 
   {#if escState.view === View.PICKER}
