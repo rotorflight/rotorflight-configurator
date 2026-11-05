@@ -701,6 +701,9 @@
     "escProgrammingBack": {
         "message": "Back"
     },
+    "escProgrammingSaveFailed": {
+        "message": "Saving the ESC settings <span class=\"message-negative\">failed</span>. The flight controller rejected the request or did not respond. Nothing was written to the ESC."
+    },
     "escProgrammingChangeEsc": {
         "message": "Change ESC"
     },

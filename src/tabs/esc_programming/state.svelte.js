@@ -1,6 +1,8 @@
 import diff from "microdiff";
 
 import { FC } from "@/js/fc.svelte.js";
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { bit_check } from "@/js/serial_backend.js";
@@ -24,6 +26,7 @@ class State {
     escTarget = $state(0);
     status = $state(HandshakeStatus.IDLE);
     error = $state(null);
+    saveFailed = $state(false);
     values = $state({});
 
     // initialValues must be reactive ($state): it's read inside the `changes` derived below,
@@ -61,6 +64,7 @@ class State {
         this.escTarget = 0;
         this.status = HandshakeStatus.IDLE;
         this.error = null;
+        this.saveFailed = false;
         this.rawBuffer = null;
         this.values = {};
         this.initialValues = null;
@@ -157,7 +161,15 @@ class State {
         // Firmware commits ESC EEPROM synchronously in the MSP_SET_ESC_PARAMETERS handler --
         // never call MSP_EEPROM_WRITE/reboot here, that subsystem is unrelated to ESC params
         // and would drop the bridge/serial link mid-write for no benefit.
-        await MSP.promise(MSPCodes.MSP_SET_ESC_PARAMETERS, Array.from(payload));
+        // MSP.promise() also resolves on an MSP error reply (e.g. a payload the firmware
+        // refuses), so check the reply and keep the form dirty instead of treating it as saved.
+        const response = await MSP.promise(MSPCodes.MSP_SET_ESC_PARAMETERS, Array.from(payload));
+        if (!response || response.unsupported || response.crcError) {
+            this.saveFailed = true;
+            GUI.log(i18n.getMessage("escProgrammingSaveFailed"));
+            return;
+        }
+        this.saveFailed = false;
 
         if (this.manufacturer.group === "bridged") {
             await runPostSaveCycle(this.manufacturer, this.escTarget, {});
