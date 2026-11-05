@@ -38,7 +38,14 @@ const tab = {
 
   save(callback) {
     if (this.svelteComponent) {
-      this.svelteComponent.onSave().finally(callback);
+      // Only leave the tab after a successful save: on a refused write the edits stay
+      // in the form and the error note stays visible, as if the dialog was cancelled.
+      this.svelteComponent.onSave().then(
+        (saved) => {
+          if (saved) callback?.();
+        },
+        (err) => console.error("ESC programming save failed", err),
+      );
     } else {
       callback?.();
     }

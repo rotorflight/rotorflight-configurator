@@ -156,6 +156,7 @@ class State {
         this.view = this.manufacturer?.group === "bridged" ? View.SELECTOR : View.PICKER;
     }
 
+    // Resolves true when the FC accepted the write, false on a refusal or an invalid reply.
     async onSave() {
         const payload = buildManufacturerPayload(this.manufacturer, this.values, this.rawBuffer);
         // Firmware commits ESC EEPROM synchronously in the MSP_SET_ESC_PARAMETERS handler --
@@ -167,7 +168,7 @@ class State {
         if (!response || response.unsupported || response.crcError) {
             this.saveFailed = true;
             GUI.log(i18n.getMessage("escProgrammingSaveFailed"));
-            return;
+            return false;
         }
         this.saveFailed = false;
 
@@ -182,6 +183,7 @@ class State {
         // tool exactly and sidesteps the race entirely.
         this.rawBuffer = payload;
         this.initialValues = $state.snapshot(this.values);
+        return true;
     }
 
     onRevert() {

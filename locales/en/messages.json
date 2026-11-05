@@ -702,7 +702,7 @@
         "message": "Back"
     },
     "escProgrammingSaveFailed": {
-        "message": "Saving the ESC settings <span class=\"message-negative\">failed</span>. The flight controller rejected the request or did not respond. Nothing was written to the ESC."
+        "message": "Saving the ESC settings <span class=\"message-negative\">failed</span>. The flight controller rejected the request or no valid reply was received, so the ESC may or may not have been updated. Your changes are still in the form: save again, or use Change ESC to read the settings back from the ESC."
     },
     "escProgrammingChangeEsc": {
         "message": "Change ESC"
