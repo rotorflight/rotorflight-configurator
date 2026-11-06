@@ -77,7 +77,12 @@
 
   async function finish() {
     if (wiz.pending) {
-      await wiz.save();
+      try {
+        await wiz.save();
+      } catch {
+        // Reported by save(). Stay on Finish.
+        return;
+      }
     }
     finished = true;
   }

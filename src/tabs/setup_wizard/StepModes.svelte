@@ -37,6 +37,14 @@
   const POLL_MS = 100;
   const EMPTY_RANGE = { start: 1500, end: 1500 };
 
+  // ARM is required: the heli cannot be flown without it, so Next waits for it.
+  const ARM = MODES.find((m) => m.key === "arm");
+  wiz.setGuard(() =>
+    FC.MODE_RANGES.some((r) => r.id === ARM.id && r.range.start < r.range.end)
+      ? null
+      : "setupWizardGuardArm",
+  );
+
   let listening = $state(null);
   let baseline = [];
   let detectTimer;
@@ -155,19 +163,29 @@
     wiz.markChanged();
   }
 
+  // Any active range of a mode sets it, so a second one left over would keep
+  // the old switch live. All of them are cleared; the first is reused.
+  function activeRangeIndexes(modeId) {
+    return FC.MODE_RANGES.flatMap((r, i) =>
+      r.id === modeId && r.range.start < r.range.end ? [i] : [],
+    );
+  }
+
   async function save(mode, aux, from, to) {
-    let index = rangeIndex(mode);
-    if (index < 0) {
-      index = FC.MODE_RANGES.findIndex((r) => !(r.range.start < r.range.end));
+    const [first, ...extra] = activeRangeIndexes(mode.id);
+    for (const index of extra) {
+      await writeSlot(index, 0, 0, { ...EMPTY_RANGE });
     }
+    let index =
+      first ?? FC.MODE_RANGES.findIndex((r) => !(r.range.start < r.range.end));
     if (index < 0) return;
     await writeSlot(index, mode.id, aux, rangeForSwitch(from, to));
   }
 
   async function remove(mode) {
-    const index = rangeIndex(mode);
-    if (index < 0) return;
-    await writeSlot(index, 0, 0, { ...EMPTY_RANGE });
+    for (const index of activeRangeIndexes(mode.id)) {
+      await writeSlot(index, 0, 0, { ...EMPTY_RANGE });
+    }
   }
 </script>
 

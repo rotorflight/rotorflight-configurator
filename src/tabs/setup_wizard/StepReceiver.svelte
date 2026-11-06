@@ -304,6 +304,39 @@
 
   let readings = $derived(FUNCTIONS.map((fn, i) => ({ ...fn, ...reading(i) })));
 
+  //// Stick travel. Each stick has to reach both ends of its travel while
+  //// this step is open, and Next waits for that. Throttle is left out: it is
+  //// often a switch, and its range is measured in step 4.
+  const TRAVEL_KEYS = ["roll", "pitch", "yaw", "collective"];
+  const TRAVEL_FULL = 0.95;
+  // key -> lowest and highest fraction of the deflection seen on this step.
+  let travel = $state({});
+
+  $effect(() => {
+    const now = readings;
+    untrack(() => {
+      for (const r of now) {
+        if (!TRAVEL_KEYS.includes(r.key) || !r.known) continue;
+        const seen = travel[r.key] ?? { low: 0, high: 0 };
+        travel[r.key] = {
+          low: Math.min(seen.low, r.f),
+          high: Math.max(seen.high, r.f),
+        };
+      }
+    });
+  });
+
+  wiz.setGuard(() =>
+    TRAVEL_KEYS.every(
+      (key) =>
+        travel[key] &&
+        travel[key].low <= -TRAVEL_FULL &&
+        travel[key].high >= TRAVEL_FULL,
+    )
+      ? null
+      : "setupWizardGuardTravel",
+  );
+
   //// 4. Throttle range. The FC arms only with the throttle channel below
   //// its 0 % point less RC_THROTTLE_DEADBAND (fc/rc.c isThrottleOff), and
   //// 0 % defaults to rc_center - 0.9 * rc_deflection (1041 us): a radio

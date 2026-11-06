@@ -527,10 +527,25 @@
         "message": "Takes effect after the reboot at the Connect the servos step."
     },
     "setupWizardRebootSkipped": {
-        "message": "Settings from the earlier steps haven't taken effect yet: they need the reboot at the Connect the servos step."
+        "message": "Changed settings haven't taken effect yet and need a reboot: use Save & reboot here, or go to the Connect the servos step."
+    },
+    "setupWizardGuardArm": {
+        "message": "Assign ARM to a switch first. The helicopter cannot be armed without it."
+    },
+    "setupWizardGuardTravel": {
+        "message": "Move roll, pitch, yaw and collective to both ends of their travel first."
+    },
+    "setupWizardGuardGyro": {
+        "message": "Answer every axis. A wrong direction is fixed on the Sensors step first."
     },
     "setupWizardUnsaved": {
         "message": "Unsaved changes"
+    },
+    "setupWizardEepromFailed": {
+        "message": "The flight controller refused to store the settings (EEPROM write failed, for example because it is armed). They are active until the next restart but are not saved. Disarm and press Save again."
+    },
+    "setupWizardCommitFailed": {
+        "message": "A setting on this step could not be sent to the flight controller. Check the value and try again."
     },
     "setupWizardArmedWarning": {
         "message": "The helicopter is armed. The wizard can only move the servos while it is disarmed."
