@@ -17,9 +17,12 @@ export const CONTROL_CHANNELS = 5;
 // AUX channels that fit an 8-channel link.
 export const AUX_IN_8_CHANNELS = 3;
 
-// The channel number a pilot sees for AUX channel `aux` (0 = AUX1 = CH6).
-export function channelNumber(aux) {
-  return aux + CONTROL_CHANNELS + 1;
+// The radio channel number a pilot sees for AUX channel `aux` (0 = AUX1).
+// The receiver map (rcMap[function] = receiver channel, as in the presets)
+// decides it: ELRS puts AUX1 on CH5, the default order on CH6.
+export function channelNumber(aux, rcMap) {
+  const fn = CONTROL_CHANNELS + aux;
+  return (rcMap?.[fn] ?? fn) + 1;
 }
 
 // Adjustment functions (fc/rc_adjustments.h).

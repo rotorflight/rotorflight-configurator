@@ -42,15 +42,23 @@
     FC.FEATURE_CONFIG.features.GOVERNOR ? FC.GOVERNOR.gov_mode : 0,
   );
 
+  // The throttle types the current mode reads. Limit only limits the
+  // throttle (governorUpdate -> govUpdateLimitedThrottle), so neither type
+  // applies there. Switch also needs a headspeed (flight/governor.c).
+  function typeAllowed(index) {
+    if (index === GOV_THROTTLE_TYPE.SWITCH) return govState.govHeadspeed;
+    if (index === GOV_THROTTLE_TYPE.FUNCTION) {
+      return govState.govMode !== "LIMIT";
+    }
+    return true;
+  }
+
   function setMode(index) {
     if (mode === index) return;
     FC.GOVERNOR.gov_mode = index;
     FC.FEATURE_CONFIG.features.GOVERNOR = index > 0;
-    // SWITCH only works with a governor that holds the headspeed.
-    if (
-      !govState.govHeadspeed &&
-      FC.GOVERNOR.gov_throttle_type === GOV_THROTTLE_TYPE.SWITCH
-    ) {
+    // A type the new mode doesn't read goes back to Normal.
+    if (!typeAllowed(FC.GOVERNOR.gov_throttle_type)) {
       FC.GOVERNOR.gov_throttle_type = GOV_THROTTLE_TYPE.NORMAL;
     }
     markChanged();
@@ -112,8 +120,7 @@
           role="radio"
           aria-checked={selected}
           class={["tile", selected && "selected"]}
-          disabled={index === GOV_THROTTLE_TYPE.SWITCH &&
-            !govState.govHeadspeed}
+          disabled={!typeAllowed(index)}
           onclick={() => setType(index)}
         >
           <span class="tile-name">

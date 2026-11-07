@@ -25,7 +25,9 @@
   const MAX_PERCENT = 50;
   const KEEPALIVE_MS = 250;
   const IDLE_RUN_MS = 15000;
-  const IDLE_MAX = 30;
+  // tail_motor_idle is one byte in 0.1 %, so 25.5 is the most it can hold
+  // and the Mixer tab caps at 25. Above that the value wraps (30 % -> 4.4 %).
+  const IDLE_MAX = 25;
 
   let safe = $state(false);
   let percent = $state(10);

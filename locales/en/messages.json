@@ -1401,7 +1401,7 @@
         "message": "The wizard sees which switch moved and where it ended up."
     },
     "setupWizardModesFit8": {
-        "message": "On an 8-channel radio, channels 1–5 are the sticks and throttle, which leaves three switches: ARM on CH 6, the profile switch on CH 7 (next step), and Rescue and Trainer on two positions of one 3-position switch on CH 8."
+        "message": "On an 8-channel radio, five channels are the sticks and throttle, which leaves three switches: ARM, the profile switch, and Rescue and Trainer on two positions of one 3-position switch. The channel numbers shown follow the channel order chosen on the Receiver step."
     },
     "setupWizardProfilesIntro": {
         "message": "One switch picks the flight profile: the PID profile, and with it the rates. Press Assign, then move the switch through every position."
@@ -5497,6 +5497,12 @@
     },
     "tailOutputResult_6": {
         "message": "the ESC protocol is DShot, and the pin has no DMA to drive it. Turn on DShot bitbang, or use a different pin on the Remap FC tab."
+    },
+    "tailOutputResult_7": {
+        "message": "the ESC protocol is DShot, and the pin's DMA stream is already used by another function. Turn on DShot bitbang, or use a different pin on the Remap FC tab."
+    },
+    "tailOutputResult_8": {
+        "message": "the helicopter is armed. Disarm first, then try again."
     },
     "motorOutputProblem_main": {
         "message": "No motor output started, so the helicopter can't arm. One of the motor pins can't be driven with this ESC protocol, which stops all motors. Check the motor pins on the Remap FC tab, or choose another ESC protocol."
