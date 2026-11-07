@@ -1,6 +1,22 @@
 <script>
   let { children, loading = false, header, toolbar } = $props();
+
+  // Ctrl+S (Cmd+S on a Mac) runs the page's Save button (marked data-save): the one in an
+  // open dialog if there is one, otherwise the tab's toolbar (#360). The Save button is
+  // disabled when there is nothing to save, so the shortcut does nothing then.
+  function onSaveShortcut(e) {
+    if (!(e.ctrlKey || e.metaKey) || e.altKey || e.shiftKey) return;
+    if (e.key.toLowerCase() !== "s") return;
+    const dialog = document.querySelector("dialog[open]");
+    const scope = dialog ?? document.querySelector(".toolbar");
+    const button = scope?.querySelector("[data-save]:not([disabled])");
+    if (!button) return;
+    e.preventDefault();
+    button.click();
+  }
 </script>
+
+<svelte:window onkeydown={onSaveShortcut} />
 
 <div class="container svelte">
   <div class="wrapper">

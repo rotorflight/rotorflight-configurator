@@ -177,6 +177,11 @@
 
 {#snippet toolbar()}
   <button class="btn" onclick={onSave}>{$i18n.t("cliSaveToFileBtn")}</button>
+  <!-- The configuration as `diff all` gives it, clearing the CLI first; the file is named
+       after the craft and the date (#358). -->
+  <button class="btn" onclick={() => runBackupAndSave(BACKUP_TYPES.DIFF)}>
+    {$i18n.t("cliSaveConfigurationBtn")}
+  </button>
   <button class="btn" onclick={onLoad}>{$i18n.t("cliLoadFromFileBtn")}</button>
   <button class="btn" onclick={() => backupDialogEl.showModal()}>
     {$i18n.t("cliBackupToFileBtn")}

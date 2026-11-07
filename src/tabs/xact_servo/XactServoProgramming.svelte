@@ -157,7 +157,12 @@
   <button class="btn" onclick={onRevert} disabled={saving}>
     {$i18n.t("buttonRevert")}
   </button>
-  <button class="btn" onclick={onSave} disabled={saving || xactState.armed}>
+  <button
+    class="btn"
+    onclick={onSave}
+    data-save
+    disabled={saving || xactState.armed}
+  >
     {$i18n.t("buttonSave")}
   </button>
 {/snippet}

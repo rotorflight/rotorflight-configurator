@@ -395,7 +395,7 @@
   {/if}
   {#if changes.length > 0}
     <button class="btn" onclick={onRevert}>{$i18n.t("buttonRevert")}</button>
-    <button class="btn" onclick={onSave}>
+    <button class="btn" onclick={onSave} data-save>
       {$i18n.t("buttonSaveReboot")}
     </button>
   {/if}

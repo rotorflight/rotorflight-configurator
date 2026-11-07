@@ -236,7 +236,9 @@
 
 {#snippet toolbar()}
   <button class="btn" onclick={onRevert}>{$i18n.t("buttonRevert")}</button>
-  <button class="btn" onclick={onSave}>{$i18n.t("buttonSaveReboot")}</button>
+  <button class="btn" onclick={onSave} data-save
+    >{$i18n.t("buttonSaveReboot")}</button
+  >
 {/snippet}
 
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
