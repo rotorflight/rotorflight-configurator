@@ -873,7 +873,7 @@
         "message": "Digital"
     },
     "setupWizardServoTypeHelp_digital": {
-        "message": "333 Hz. Most digital cyclic servos."
+        "message": "Most digital servos. Cyclic runs at 165 Hz, tail at 200 Hz."
     },
     "setupWizardServoType_narrow": {
         "message": "Narrow band"
