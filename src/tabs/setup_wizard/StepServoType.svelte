@@ -28,8 +28,8 @@
     tail: { digital: 200, narrow: 560 },
   };
   const BANDS = {
-    wide: { mid: 1520, travel: 700, scale: 500 },
-    narrow: { mid: 760, travel: 250, scale: 250 },
+    wide: { mid: 1520, travel: 700, scale: 500, minHz: 50, maxHz: 560 },
+    narrow: { mid: 760, travel: 250, scale: 250, minHz: 50, maxHz: 560 },
   };
 
   const GROUPS = [
@@ -129,6 +129,7 @@
   {@const servos = groupServos(group.kind)}
   {#if servos.length > 0}
     {@const current = currentType(group.kind)}
+    {@const band = BANDS[bandOf(FC.SERVO_CONFIG[servos[0].servo])]}
     <section class="card">
       <h3>{$i18n.t(group.title)}</h3>
       <span class="muted">
@@ -170,36 +171,71 @@
           })}
         </p>
       {/if}
+
+      <!-- Frame rate: custom value within the band's range -->
+      <div style="margin-top: 1rem;">
+        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">
+          {$i18n.t("setupWizardServoTypeFrameRate")}
+        </label>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <input
+            type="number"
+            min={band.minHz}
+            max={band.maxHz}
+            value={FC.SERVO_CONFIG[servos[0].servo].rate || 0}
+            style="padding: 0.5rem; flex: 1;"
+            onchange={(e) => {
+              const v = parseInt(e.currentTarget.value);
+              if (!isNaN(v) && v >= band.minHz && v <= band.maxHz) {
+                let changed = false;
+                for (const s of servos) {
+                  const config = FC.SERVO_CONFIG[s.servo];
+                  if (config.rate !== v) {
+                    config.rate = v;
+                    changed = true;
+                    wiz.sendServo(s.servo);
+                  }
+                }
+                if (changed) {
+                  rebootNeeded = true;
+                  wiz.requestReboot();
+                }
+              }
+            }}
+          />
+          <span class="unit">{$i18n.t("setupWizardServoTypeHzUnit")}</span>
+        </div>
+      </div>
+
+      <!-- Geometry correction for cyclic servos only -->
+      {#if group.kind === "swash"}
+        <div style="margin-top: 1.5rem;">
+          <h4 style="margin: 0 0 1rem 0;">{$i18n.t("setupWizardGeoTitle")}</h4>
+          <div class="tiles" role="radiogroup">
+            <button
+              type="button"
+              role="radio"
+              aria-checked={!geoCor}
+              class={["tile", !geoCor && "selected"]}
+              onclick={() => setGeoCor(false)}
+            >
+              <span class="tile-name">{$i18n.t("setupWizardGeoOff")}</span>
+            </button>
+            <button
+              type="button"
+              role="radio"
+              aria-checked={geoCor}
+              class={["tile", geoCor && "selected"]}
+              onclick={() => setGeoCor(true)}
+            >
+              <span class="tile-name">{$i18n.t("setupWizardGeoOn")}</span>
+            </button>
+          </div>
+        </div>
+      {/if}
     </section>
   {/if}
 {/each}
-
-{#if groupServos("swash").length > 0}
-  <section class="card">
-    <h3>{$i18n.t("setupWizardGeoTitle")}</h3>
-    <p>{$i18n.t("setupWizardGeoText")}</p>
-    <div class="tiles" role="radiogroup">
-      <button
-        type="button"
-        role="radio"
-        aria-checked={!geoCor}
-        class={["tile", !geoCor && "selected"]}
-        onclick={() => setGeoCor(false)}
-      >
-        <span class="tile-name">{$i18n.t("setupWizardGeoOff")}</span>
-      </button>
-      <button
-        type="button"
-        role="radio"
-        aria-checked={geoCor}
-        class={["tile", geoCor && "selected"]}
-        onclick={() => setGeoCor(true)}
-      >
-        <span class="tile-name">{$i18n.t("setupWizardGeoOn")}</span>
-      </button>
-    </div>
-  </section>
-{/if}
 
 {#if wiz.servos.length === 0}
   <div class="note">{$i18n.t("setupWizardNoServos")}</div>

@@ -914,6 +914,12 @@
     "setupWizardServoTypeCheckMaker": {
         "message": "If the servo maker gives other values, set them on the Servos tab."
     },
+    "setupWizardServoTypeFrameRate": {
+        "message": "Frame rate"
+    },
+    "setupWizardServoTypeHzUnit": {
+        "message": "Hz"
+    },
     "setupWizardServosIntro": {
         "message": "Each servo is held at its center. Check that it moves the right way, then set the center so the arm is square."
     },
