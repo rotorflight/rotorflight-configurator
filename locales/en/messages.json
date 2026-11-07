@@ -1355,6 +1355,9 @@
     "setupWizardPowerProfile": {
         "message": "Battery profile $1 is active. Cells and capacity are set for it."
     },
+    "setupWizardPowerCapacityText": {
+        "message": "Capacity in mAh for each battery. Editing a battery does not activate it."
+    },
     "setupWizardPowerNeedsVoltage": {
         "message": "SmartFuel on voltage needs a voltage source. Pick one above."
     },

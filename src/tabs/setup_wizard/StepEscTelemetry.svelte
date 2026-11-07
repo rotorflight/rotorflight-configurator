@@ -55,7 +55,11 @@
   let powerLoaded = $state(false);
   let powerChanged = false;
   let cells = $state(0);
-  let capacityInput = $state(0);
+  // The six battery profiles' capacities, as Ethos's capacity screen shows
+  // them. Before API 12.9 there is one capacity, the active battery's.
+  const capacitiesSupported = smartFuelSupported;
+  const BATTERY_PROFILES = 6;
+  let capacityInputs = $state(Array(BATTERY_PROFILES).fill(0));
 
   let activeProfile = $derived(FC.BATTERY_STATE.batteryProfile ?? 0);
   let needsVoltage = $derived(
@@ -69,7 +73,11 @@
     cells = FC.BATTERY_CONFIG.hasProfileCells
       ? FC.BATTERY_CONFIG.cellCounts[activeProfile]
       : FC.BATTERY_CONFIG.cellCount;
-    capacityInput = FC.BATTERY_CONFIG.capacities?.[activeProfile] ?? 0;
+    const stored = FC.BATTERY_CONFIG.capacities ?? [];
+    capacityInputs = Array.from({ length: BATTERY_PROFILES }, (_, i) => {
+      if (capacitiesSupported) return stored[i] ?? 0;
+      return i === activeProfile ? (FC.BATTERY_CONFIG.capacity ?? 0) : 0;
+    });
     powerLoaded = true;
   }
 
@@ -102,11 +110,16 @@
     });
   }
 
-  function setCapacity(value) {
+  // Editing a battery doesn't activate it. The legacy field mirrors the active
+  // one, as the Power tab saves it.
+  function setCapacity(index, value) {
     const mah = Math.max(0, Math.min(40000, Math.round(value)));
+    capacityInputs[index] = mah;
     changePower(() => {
-      FC.BATTERY_CONFIG.capacities[activeProfile] = mah;
-      FC.BATTERY_CONFIG.capacity = mah;
+      if (capacitiesSupported) FC.BATTERY_CONFIG.capacities[index] = mah;
+      if (!capacitiesSupported || index === activeProfile) {
+        FC.BATTERY_CONFIG.capacity = mah;
+      }
     });
   }
 
@@ -486,16 +499,40 @@
         onchange={() => setCells(cells)}
       />
       <span class="muted">S</span>
-      <span>{$i18n.t("powerBatteryCapacity")}</span>
-      <NumberInput
-        min="0"
-        max="40000"
-        step="1"
-        bind:value={capacityInput}
-        onchange={() => setCapacity(capacityInput)}
-      />
-      <span class="muted">mAh</span>
     </div>
+
+    {#if capacitiesSupported}
+      <p class="muted">{$i18n.t("setupWizardPowerCapacityText")}</p>
+      <div class="capacities">
+        <!-- Batteries 1 to 3 on the left, 4 to 6 on the right, as Ethos. -->
+        {#each [0, 1, 2] as row (row)}
+          {#each [row, row + 3] as index (index)}
+            <span>{$i18n.t("powerBatteryProfile", { 1: index + 1 })}</span>
+            <NumberInput
+              min="0"
+              max="40000"
+              step="1"
+              bind:value={capacityInputs[index]}
+              onchange={() => setCapacity(index, capacityInputs[index])}
+            />
+            <span class="muted">mAh</span>
+          {/each}
+        {/each}
+      </div>
+    {:else}
+      <div class="fields">
+        <span>{$i18n.t("powerBatteryCapacity")}</span>
+        <NumberInput
+          min="0"
+          max="40000"
+          step="1"
+          bind:value={capacityInputs[activeProfile]}
+          onchange={() =>
+            setCapacity(activeProfile, capacityInputs[activeProfile])}
+        />
+        <span class="muted">mAh</span>
+      </div>
+    {/if}
 
     {#if smartFuelSupported}
       <span class="muted">{$i18n.t("powerSmartFuelSource")}</span>
@@ -522,6 +559,20 @@
 {/if}
 
 <style lang="scss">
+  /* Six battery capacities in three rows: label, field and unit, twice a row. */
+  .capacities {
+    display: grid;
+    grid-template-columns: max-content 7rem max-content max-content 7rem max-content;
+    justify-content: start;
+    align-items: center;
+    gap: 8px 12px;
+
+    /* The unit of the left battery: room before the right battery's label. */
+    > .muted:nth-child(3) {
+      margin-right: 1.5rem;
+    }
+  }
+
   .btn {
     @extend %button;
   }
