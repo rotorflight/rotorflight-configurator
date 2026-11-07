@@ -500,24 +500,38 @@
     <p class="muted">
       {$i18n.t("setupWizardPowerProfile", { 1: activeProfile + 1 })}
     </p>
+    <div class="note">{$i18n.t("setupWizardPowerAutoCells")}</div>
+
     {#if FC.BATTERY_CONFIG.hasProfileCells}
-      <span class="muted heading">{$i18n.t("powerBatteryCellCount")}</span>
-      <div class="profiles">
+      <!-- Each battery: its cells and capacity on one line. Batteries 1 to 3
+           on the left, 4 to 6 on the right, as Ethos. -->
+      <div class="batteries">
         {#each [0, 1, 2] as row (row)}
           {#each [row, row + 3] as index (index)}
-            <span>{$i18n.t("powerBatteryProfile", { 1: index + 1 })}</span>
-            <NumberInput
-              min="0"
-              max="24"
-              step="1"
-              bind:value={cellInputs[index]}
-              onchange={() => setCells(index, cellInputs[index])}
-            />
-            <span class="muted">S</span>
+            <div class="battery">
+              <span>{$i18n.t("powerBatteryProfile", { 1: index + 1 })}</span>
+              <NumberInput
+                min="0"
+                max="24"
+                step="1"
+                bind:value={cellInputs[index]}
+                onchange={() => setCells(index, cellInputs[index])}
+              />
+              <span class="muted">S</span>
+              <NumberInput
+                min="0"
+                max="40000"
+                step="1"
+                bind:value={capacityInputs[index]}
+                onchange={() => setCapacity(index, capacityInputs[index])}
+              />
+              <span class="muted">mAh</span>
+            </div>
           {/each}
         {/each}
       </div>
     {:else}
+      <!-- One cell count for all batteries on this firmware. -->
       <div class="line">
         <span>{$i18n.t("powerBatteryCellCount")}</span>
         <NumberInput
@@ -529,40 +543,37 @@
         />
         <span class="muted">S</span>
       </div>
-    {/if}
-
-    {#if capacitiesSupported}
-      <p class="muted">{$i18n.t("setupWizardPowerCapacityText")}</p>
-      <span class="muted heading">{$i18n.t("powerBatteryCapacity")}</span>
-      <div class="profiles">
-        <!-- Batteries 1 to 3 on the left, 4 to 6 on the right, as Ethos. -->
-        {#each [0, 1, 2] as row (row)}
-          {#each [row, row + 3] as index (index)}
-            <span>{$i18n.t("powerBatteryProfile", { 1: index + 1 })}</span>
-            <NumberInput
-              min="0"
-              max="40000"
-              step="1"
-              bind:value={capacityInputs[index]}
-              onchange={() => setCapacity(index, capacityInputs[index])}
-            />
-            <span class="muted">mAh</span>
+      {#if capacitiesSupported}
+        <p class="muted">{$i18n.t("setupWizardPowerCapacityText")}</p>
+        <div class="profiles">
+          {#each [0, 1, 2] as row (row)}
+            {#each [row, row + 3] as index (index)}
+              <span>{$i18n.t("powerBatteryProfile", { 1: index + 1 })}</span>
+              <NumberInput
+                min="0"
+                max="40000"
+                step="1"
+                bind:value={capacityInputs[index]}
+                onchange={() => setCapacity(index, capacityInputs[index])}
+              />
+              <span class="muted">mAh</span>
+            {/each}
           {/each}
-        {/each}
-      </div>
-    {:else}
-      <div class="line">
-        <span>{$i18n.t("powerBatteryCapacity")}</span>
-        <NumberInput
-          min="0"
-          max="40000"
-          step="1"
-          bind:value={capacityInputs[activeProfile]}
-          onchange={() =>
-            setCapacity(activeProfile, capacityInputs[activeProfile])}
-        />
-        <span class="muted">mAh</span>
-      </div>
+        </div>
+      {:else}
+        <div class="line">
+          <span>{$i18n.t("powerBatteryCapacity")}</span>
+          <NumberInput
+            min="0"
+            max="40000"
+            step="1"
+            bind:value={capacityInputs[activeProfile]}
+            onchange={() =>
+              setCapacity(activeProfile, capacityInputs[activeProfile])}
+          />
+          <span class="muted">mAh</span>
+        </div>
+      {/if}
     {/if}
 
     {#if smartFuelSupported}
@@ -598,10 +609,18 @@
     gap: 8px 12px;
   }
 
-  /* The heading of a grid, set off from the grid above. */
-  .heading {
-    display: block;
-    margin-top: 12px;
+  /* One battery per block: its cells and capacity on one line; two blocks a row. */
+  .batteries {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 32px;
+  }
+
+  .battery {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 8px;
   }
 
   /* Six batteries in three rows, cells and capacity alike: label, field and unit, twice a row. */

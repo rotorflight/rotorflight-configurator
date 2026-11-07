@@ -1355,6 +1355,9 @@
     "setupWizardPowerProfile": {
         "message": "Battery profile $1 is active."
     },
+    "setupWizardPowerAutoCells": {
+        "message": "A cell count of 0 detects the cells automatically. Editing a battery does not activate it."
+    },
     "setupWizardPowerCapacityText": {
         "message": "Capacity in mAh for each battery. Editing a battery does not activate it."
     },
