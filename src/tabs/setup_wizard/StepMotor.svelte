@@ -182,15 +182,16 @@
   }
 
   // From the intermediate shaft the main gear drives the shaft through the
-  // intermediate gear on the main side: the two-stage train's own, else the
-  // tail's mesh count.
-  function meshOf(t, m) {
-    return m.mode === TWO ? m.mainSide : t.mesh;
+  // tail's own gear on the main side. It is a separate gear from the main
+  // train's intermediate gears, which mesh the pinion and the main gear, so
+  // changing the main train does not change the tail's count.
+  function meshOf(t) {
+    return t.mesh;
   }
 
   function tailProducts(t, m) {
     if (t.mode === RATIO) return wholePair(t.ratio);
-    if (t.mode === TWO) return [meshOf(t, m) * t.rotor, m.main * t.drive];
+    if (t.mode === TWO) return [meshOf(t) * t.rotor, m.main * t.drive];
     return [t.rotor, t.drive];
   }
 
@@ -283,11 +284,7 @@
       // Teeth at the ratio as it is now.
       let pair = [main.pinion, main.main];
       if (main.mode === RATIO) pair = teethFor(main.ratio);
-      if (main.mode === TWO) {
-        pair = onePair(main.pinion, p0, p1);
-        // The tail keeps the main-side gear for a drive from the shaft.
-        tail.mesh = main.mainSide;
-      }
+      if (main.mode === TWO) pair = onePair(main.pinion, p0, p1);
       if (!pair) return;
       [main.pinion, main.main] = pair;
       // Two stages start with both intermediate gears at the main gear's
@@ -320,15 +317,14 @@
     applyTail();
   }
 
-  // The intermediate gear on the main side, as the tail sees it.
+  // The tail's gear on the main side, as the tail's own count.
   function getMesh() {
-    return meshOf(tail, main);
+    return meshOf(tail);
   }
 
   function setMesh(v) {
-    if (main.mode === TWO) main.mainSide = v;
-    else tail.mesh = v;
-    applyMain();
+    tail.mesh = v;
+    applyTail();
   }
 </script>
 
