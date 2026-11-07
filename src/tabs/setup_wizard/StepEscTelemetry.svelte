@@ -54,7 +54,10 @@
 
   let powerLoaded = $state(false);
   let powerChanged = false;
-  let cells = $state(0);
+  // The cell counts per battery profile, when the FC keeps one per profile
+  // (hasProfileCells, from the length of its reply, not from the API). Older
+  // firmware keeps one cell count for all profiles: the single field.
+  let cellInputs = $state(Array(6).fill(0));
   // The six battery profiles' capacities, as Ethos's capacity screen shows
   // them. Before API 12.9 there is one capacity, the active battery's.
   const capacitiesSupported = smartFuelSupported;
@@ -70,9 +73,12 @@
     await MSP.promise(MSPCodes.MSP_BATTERY_CONFIG);
     await MSP.promise(MSPCodes.MSP_BATTERY_STATE);
     if (smartFuelSupported) await MSP.promise(MSPCodes.MSP2_SMARTFUEL_CONFIG);
-    cells = FC.BATTERY_CONFIG.hasProfileCells
-      ? FC.BATTERY_CONFIG.cellCounts[activeProfile]
-      : FC.BATTERY_CONFIG.cellCount;
+    cellInputs = Array.from({ length: BATTERY_PROFILES }, (_, i) => {
+      if (FC.BATTERY_CONFIG.hasProfileCells) {
+        return FC.BATTERY_CONFIG.cellCounts?.[i] ?? 0;
+      }
+      return i === activeProfile ? FC.BATTERY_CONFIG.cellCount : 0;
+    });
     const stored = FC.BATTERY_CONFIG.capacities ?? [];
     capacityInputs = Array.from({ length: BATTERY_PROFILES }, (_, i) => {
       if (capacitiesSupported) return stored[i] ?? 0;
@@ -99,13 +105,18 @@
     });
   }
 
-  function setCells(value) {
+  // Editing a battery doesn't activate it. Without per-profile cells the one
+  // count is the legacy field, which applies to every profile.
+  function setCells(index, value) {
     const count = Math.max(0, Math.min(24, Math.round(value)));
+    cellInputs[index] = count;
     changePower(() => {
-      // The legacy field mirrors the active profile, as the Power tab saves it.
-      FC.BATTERY_CONFIG.cellCount = count;
       if (FC.BATTERY_CONFIG.hasProfileCells) {
-        FC.BATTERY_CONFIG.cellCounts[activeProfile] = count;
+        FC.BATTERY_CONFIG.cellCounts[index] = count;
+      }
+      // The legacy field mirrors the active profile, as the Power tab saves it.
+      if (!FC.BATTERY_CONFIG.hasProfileCells || index === activeProfile) {
+        FC.BATTERY_CONFIG.cellCount = count;
       }
     });
   }
@@ -489,21 +500,41 @@
     <p class="muted">
       {$i18n.t("setupWizardPowerProfile", { 1: activeProfile + 1 })}
     </p>
-    <div class="line">
-      <span>{$i18n.t("powerBatteryCellCount")}</span>
-      <NumberInput
-        min="0"
-        max="24"
-        step="1"
-        bind:value={cells}
-        onchange={() => setCells(cells)}
-      />
-      <span class="muted">S</span>
-    </div>
+    {#if FC.BATTERY_CONFIG.hasProfileCells}
+      <span class="muted heading">{$i18n.t("powerBatteryCellCount")}</span>
+      <div class="profiles">
+        {#each [0, 1, 2] as row (row)}
+          {#each [row, row + 3] as index (index)}
+            <span>{$i18n.t("powerBatteryProfile", { 1: index + 1 })}</span>
+            <NumberInput
+              min="0"
+              max="24"
+              step="1"
+              bind:value={cellInputs[index]}
+              onchange={() => setCells(index, cellInputs[index])}
+            />
+            <span class="muted">S</span>
+          {/each}
+        {/each}
+      </div>
+    {:else}
+      <div class="line">
+        <span>{$i18n.t("powerBatteryCellCount")}</span>
+        <NumberInput
+          min="0"
+          max="24"
+          step="1"
+          bind:value={cellInputs[activeProfile]}
+          onchange={() => setCells(activeProfile, cellInputs[activeProfile])}
+        />
+        <span class="muted">S</span>
+      </div>
+    {/if}
 
     {#if capacitiesSupported}
       <p class="muted">{$i18n.t("setupWizardPowerCapacityText")}</p>
-      <div class="capacities">
+      <span class="muted heading">{$i18n.t("powerBatteryCapacity")}</span>
+      <div class="profiles">
         <!-- Batteries 1 to 3 on the left, 4 to 6 on the right, as Ethos. -->
         {#each [0, 1, 2] as row (row)}
           {#each [row, row + 3] as index (index)}
@@ -567,8 +598,14 @@
     gap: 8px 12px;
   }
 
-  /* Six battery capacities in three rows: label, field and unit, twice a row. */
-  .capacities {
+  /* The heading of a grid, set off from the grid above. */
+  .heading {
+    display: block;
+    margin-top: 12px;
+  }
+
+  /* Six batteries in three rows, cells and capacity alike: label, field and unit, twice a row. */
+  .profiles {
     display: grid;
     grid-template-columns: max-content 7rem max-content max-content 7rem max-content;
     justify-content: start;
