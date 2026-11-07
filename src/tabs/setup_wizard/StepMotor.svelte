@@ -319,10 +319,10 @@
     {#if mainGearMode < 3}
       <!-- One stage or Two stages: tooth count inputs + visualization -->
       <div
-        style="display: flex; gap: 2rem; align-items: flex-start; margin-bottom: 1.5rem;"
+        style="display: grid; grid-template-columns: minmax(0, 1fr) 160px; gap: 2rem; align-items: flex-start; margin-bottom: 1.5rem;"
       >
         <div
-          style="flex: 1; display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;"
+          style="display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;"
         >
           <span>{$i18n.t("setupWizardMotorPinion")}</span>
           <NumberInput
@@ -364,7 +364,7 @@
         </div>
 
         <div
-          style="width: 160px; flex-shrink: 0; display: flex; justify-content: center; align-items: center;"
+          style="display: flex; justify-content: center; align-items: flex-start;"
         >
           <GearVisualization
             teeth={mainGearMode === 2
@@ -427,10 +427,10 @@
         {#if tailGearMode === 1}
           <!-- From main shaft: drive pulley on main, tail rotor pulley -->
           <div
-            style="display: flex; gap: 2rem; align-items: flex-start; margin-bottom: 1.5rem;"
+            style="display: grid; grid-template-columns: minmax(0, 1fr) 160px; gap: 2rem; align-items: flex-start; margin-bottom: 1.5rem;"
           >
             <div
-              style="flex: 1; display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;"
+              style="display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;"
             >
               <span>{$i18n.t("setupWizardGearDrivePulley")}</span>
               <NumberInput
@@ -452,7 +452,7 @@
             </div>
 
             <div
-              style="width: 160px; flex-shrink: 0; display: flex; justify-content: center; align-items: center;"
+              style="display: flex; justify-content: center; align-items: flex-start;"
             >
               <GearVisualization
                 teeth={[tailShaft.drive, tailShaft.rotor]}
@@ -463,10 +463,10 @@
         {:else if tailGearMode === 2}
           <!-- From intermediate shaft: mesh, drive pulley, rotor pulley -->
           <div
-            style="display: flex; gap: 2rem; align-items: flex-start; margin-bottom: 1.5rem;"
+            style="display: grid; grid-template-columns: minmax(0, 1fr) 160px; gap: 2rem; align-items: flex-start; margin-bottom: 1.5rem;"
           >
             <div
-              style="flex: 1; display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;"
+              style="display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;"
             >
               {#if mainGearMode === 1}
                 <span>{$i18n.t("setupWizardGearMesh")}</span>
@@ -499,7 +499,7 @@
             </div>
 
             <div
-              style="width: 160px; flex-shrink: 0; display: flex; justify-content: center; align-items: center;"
+              style="display: flex; justify-content: center; align-items: flex-start;"
             >
               <GearVisualization
                 teeth={[
