@@ -1,6 +1,8 @@
 <script>
   import { getContext } from "svelte";
 
+  import NumberInput from "@/components/NumberInput.svelte";
+
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
@@ -14,24 +16,25 @@
   // Centre pulse and frame rate. A narrow band servo (760 us centre) needs
   // its own limits and scale too; those are reset only when the band
   // changes, so a type change within a band keeps any calibration.
-  const CYCLIC_TYPES = [
-    { key: "analog", band: "wide" },
-    { key: "digital", band: "wide" },
-    { key: "narrow", band: "narrow" },
-  ];
-  const TAIL_TYPES = [
-    { key: "digital", band: "wide" },
-    { key: "specific_digital", band: "narrow" },
-    { key: "hiend_digital", band: "narrow" },
-  ];
-  // Frame rate (Hz) per group and type, as in the Ethos suite.
-  const RATES = {
-    swash: { analog: 50, digital: 165, narrow: 560 },
-    tail: { digital: 200, specific_digital: 333, hiend_digital: 560 },
+  // The types per group, their band and frame rate (Hz), as in the Ethos
+  // wizard (lib/setup_wizard_heli.lua SERVO_TYPES, setup_wizard_servotype.lua).
+  const TYPES = {
+    swash: [
+      { key: "analog", band: "wide", rate: 50 },
+      { key: "digital", band: "wide", rate: 165 },
+      { key: "hiend", band: "wide", rate: 333 },
+      { key: "narrow", band: "narrow", rate: 560 },
+    ],
+    tail: [
+      { key: "digital", band: "wide", rate: 200 },
+      { key: "specific", band: "narrow", rate: 333 },
+      { key: "hiend_specific", band: "narrow", rate: 560 },
+    ],
   };
+  // A frame rate of its own stays within its band's range (Ethos BAND_HZ).
   const BANDS = {
-    wide: { mid: 1520, travel: 700, scale: 500, minHz: 50, maxHz: 560 },
-    narrow: { mid: 760, travel: 250, scale: 250, minHz: 50, maxHz: 560 },
+    wide: { mid: 1520, travel: 700, scale: 500, minHz: 50, maxHz: 333 },
+    narrow: { mid: 760, travel: 250, scale: 250, minHz: 200, maxHz: 560 },
   };
 
   const GROUPS = [
@@ -49,30 +52,35 @@
     return wiz.servos.filter((s) => s.kind === kind);
   }
 
-  // The types a group offers per kind.
-  function typesFor(kind) {
-    return kind === "tail" ? TAIL_TYPES : CYCLIC_TYPES;
-  }
-
-  function rateOf(kind, key) {
-    return RATES[kind][key];
-  }
-
   // The type every servo of the group already has, or null.
   function currentType(kind) {
     const configs = groupServos(kind).map((s) => FC.SERVO_CONFIG[s.servo]);
     if (configs.length === 0) return null;
-    const type = typesFor(kind).find(
-      (t) =>
-        rateOf(kind, t.key) === configs[0].rate &&
-        t.band === bandOf(configs[0]),
+    const type = TYPES[kind].find(
+      (t) => t.rate === configs[0].rate && t.band === bandOf(configs[0]),
     );
     return type &&
-      configs.every(
-        (c) => c.rate === rateOf(kind, type.key) && bandOf(c) === type.band,
-      )
+      configs.every((c) => c.rate === type.rate && bandOf(c) === type.band)
       ? type.key
       : null;
+  }
+
+  // The group's frame rate, as its first servo has it.
+  function getRate(kind) {
+    return FC.SERVO_CONFIG[groupServos(kind)[0].servo].rate;
+  }
+
+  // A frame rate of its own, for every servo of the group. Its band stays;
+  // the field keeps the value within the band's range.
+  function setRate(kind, rate) {
+    for (const s of groupServos(kind)) {
+      const config = FC.SERVO_CONFIG[s.servo];
+      if (config.rate === rate) continue;
+      config.rate = rate;
+      rebootNeeded = true;
+      wiz.requestReboot();
+      wiz.sendServo(s.servo);
+    }
   }
 
   // Geometry correction (servo flag bit 2), for the cyclic servos only. It
@@ -97,8 +105,8 @@
   }
 
   function apply(kind, key) {
-    const type = typesFor(kind).find((t) => t.key === key);
-    const rate = rateOf(kind, key);
+    const type = TYPES[kind].find((t) => t.key === key);
+    const rate = type.rate;
     for (const s of groupServos(kind)) {
       const config = FC.SERVO_CONFIG[s.servo];
       if (config.rate !== rate) {
@@ -138,7 +146,7 @@
         {servos.map((s) => wiz.servoLabel(s)).join(" · ")}
       </span>
       <div class="tiles" role="radiogroup">
-        {#each typesFor(group.kind) as type (type.key)}
+        {#each TYPES[group.kind] as type (type.key)}
           <button
             type="button"
             role="radio"
@@ -152,13 +160,8 @@
                 <i class="fas fa-check-circle" aria-hidden="true"></i>
               {/if}
             </span>
-            <PulseTrain
-              rate={rateOf(group.kind, type.key)}
-              width={BANDS[type.band].mid}
-            />
-            <span class="pill"
-              >{BANDS[type.band].mid} µs · {rateOf(group.kind, type.key)} Hz</span
-            >
+            <PulseTrain rate={type.rate} width={BANDS[type.band].mid} />
+            <span class="pill">{BANDS[type.band].mid} µs · {type.rate} Hz</span>
             <span class="muted">
               {$i18n.t(`setupWizardServoTypeHelp_${type.key}`)}
             </span>
@@ -174,71 +177,50 @@
         </p>
       {/if}
 
-      <!-- Frame rate: custom value within the band's range -->
-      <div
-        style="margin-top: 1rem; display: flex; gap: 1rem; align-items: center;"
-      >
-        <label style="font-weight: 500; white-space: nowrap;">
-          {$i18n.t("setupWizardServoTypeFrameRate")}
-        </label>
-        <div style="display: flex; gap: 0.3rem; align-items: center;">
-          <input
-            type="number"
+      <div class="rows">
+        <!-- A frame rate of its own, within the band's range, as Ethos. -->
+        <span>{$i18n.t("setupWizardServoTypeFrameRate")}</span>
+        <span class="row-control">
+          <NumberInput
             min={band.minHz}
             max={band.maxHz}
-            value={FC.SERVO_CONFIG[servos[0].servo].rate || 0}
-            style="padding: 0.4rem; width: 70px;"
-            onchange={(e) => {
-              const v = parseInt(e.currentTarget.value);
-              if (!isNaN(v) && v >= band.minHz && v <= band.maxHz) {
-                let changed = false;
-                for (const s of servos) {
-                  const config = FC.SERVO_CONFIG[s.servo];
-                  if (config.rate !== v) {
-                    config.rate = v;
-                    changed = true;
-                    wiz.sendServo(s.servo);
-                  }
-                }
-                if (changed) {
-                  rebootNeeded = true;
-                  wiz.requestReboot();
-                }
-              }
-            }}
+            bind:value={
+              () => getRate(group.kind), (v) => setRate(group.kind, v)
+            }
           />
-          <span class="unit" style="font-size: 0.9rem;">
-            {$i18n.t("setupWizardServoTypeHzUnit")}
+          <span class="muted">
+            {$i18n.t("setupWizardServoTypeHzUnit")} ({band.minHz}–{band.maxHz})
           </span>
-        </div>
-      </div>
+        </span>
 
-      <!-- Geometry correction for cyclic servos only -->
-      {#if group.kind === "swash"}
-        <div style="margin-top: 1.5rem;">
-          <h4 style="margin: 0 0 1rem 0;">{$i18n.t("setupWizardGeoTitle")}</h4>
-          <div class="tiles" role="radiogroup">
+        <!-- Geometry correction: the cyclic servos only, their linkage
+             swings in an arc; the tail's needs none. -->
+        {#if group.kind === "swash"}
+          <span>{$i18n.t("setupWizardGeoTitle")}</span>
+          <span class="row-control" role="radiogroup">
             <button
               type="button"
               role="radio"
               aria-checked={!geoCor}
-              class={["tile", !geoCor && "selected"]}
+              class={["btn", !geoCor && "primary"]}
               onclick={() => setGeoCor(false)}
             >
-              <span class="tile-name">{$i18n.t("setupWizardGeoOff")}</span>
+              {$i18n.t("setupWizardGeoOff")}
             </button>
             <button
               type="button"
               role="radio"
               aria-checked={geoCor}
-              class={["tile", geoCor && "selected"]}
+              class={["btn", geoCor && "primary"]}
               onclick={() => setGeoCor(true)}
             >
-              <span class="tile-name">{$i18n.t("setupWizardGeoOn")}</span>
+              {$i18n.t("setupWizardGeoOn")}
             </button>
-          </div>
-        </div>
-      {/if}
+          </span>
+          <span></span>
+          <span class="muted">{$i18n.t("setupWizardGeoText")}</span>
+        {/if}
+      </div>
     </section>
   {/if}
 {/each}
@@ -258,3 +240,28 @@
     {$i18n.t("setupWizardOpenServos")}
   </TabButton>
 </div>
+
+<style lang="scss">
+  /* Frame rate and geometry correction: a label, its control beside it. */
+  .rows {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    align-items: center;
+    gap: 8px 12px;
+  }
+
+  .row-control {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn {
+    @extend %button;
+  }
+
+  .btn.primary {
+    @extend %button-primary;
+  }
+</style>

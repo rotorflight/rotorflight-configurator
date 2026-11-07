@@ -908,17 +908,23 @@
     "setupWizardServoTypeHelp_narrow": {
         "message": "560 Hz. Only for servos made for a 760 µs center, usually tail servos."
     },
-    "setupWizardServoType_specific_digital": {
+    "setupWizardServoType_hiend": {
+        "message": "Hi-End digital"
+    },
+    "setupWizardServoTypeHelp_hiend": {
+        "message": "333 Hz. Only for servos their maker rates for 333 Hz."
+    },
+    "setupWizardServoType_specific": {
         "message": "Specific digital"
     },
-    "setupWizardServoTypeHelp_specific_digital": {
-        "message": "333 Hz on a 760 µs center pulse, for tail servos."
+    "setupWizardServoTypeHelp_specific": {
+        "message": "333 Hz on a 760 µs center, for tail servos made for it."
     },
-    "setupWizardServoType_hiend_digital": {
+    "setupWizardServoType_hiend_specific": {
         "message": "Hi-End specific digital"
     },
-    "setupWizardServoTypeHelp_hiend_digital": {
-        "message": "560 Hz on a 760 µs center pulse, high-speed tail servo."
+    "setupWizardServoTypeHelp_hiend_specific": {
+        "message": "560 Hz on a 760 µs center, for fast tail servos made for it."
     },
     "setupWizardServoTypeCustom": {
         "message": "Now: $1 µs, $2 Hz. Choose a type to change it, or keep it if your servo maker says so."
@@ -1281,7 +1287,25 @@
         "message": "Motor and gearing"
     },
     "setupWizardMotorRpmText": {
-        "message": "Used for headspeed, the governor and the RPM filters. Count the magnets in the motor bell for the poles."
+        "message": "Used for headspeed, the governor and the RPM filters."
+    },
+    "setupWizardPolesTitle": {
+        "message": "Motor poles"
+    },
+    "setupWizardPolesText": {
+        "message": "Magnet poles of the main motor, from its data sheet (often 10 or 12)."
+    },
+    "setupWizardGearMainTitle": {
+        "message": "Main gear ratio"
+    },
+    "setupWizardGearMainText": {
+        "message": "Count the teeth on the pinion and the main gear."
+    },
+    "setupWizardGearTailTitle": {
+        "message": "Tail gear ratio"
+    },
+    "setupWizardGearTailText": {
+        "message": "Ratio from the main rotor to the tail, always counted from the main rotor shaft. Count the teeth or pulleys of the tail drive."
     },
     "setupWizardGearStage": {
         "message": "Gear train"
@@ -1292,32 +1316,32 @@
     "setupWizardGearStageTwo": {
         "message": "Two stages"
     },
-    "setupWizardGearInterPinion": {
-        "message": "Intermediate gear, pinion side"
+    "setupWizardGearStageRatio": {
+        "message": "Ratio only"
     },
-    "setupWizardGearInterMain": {
-        "message": "Intermediate gear, main side"
+    "setupWizardGearPairSingle": {
+        "message": "Pinion : main gear"
     },
-    "setupWizardGearRatio": {
-        "message": "Ratio, as 1 : x"
+    "setupWizardGearPairStage1": {
+        "message": "Pinion : intermediate"
     },
-    "setupWizardGearTail": {
-        "message": "Tail drive"
+    "setupWizardGearPairStage2": {
+        "message": "Intermediate : main gear"
     },
-    "setupWizardGearTailDirect": {
-        "message": "From the main shaft"
+    "setupWizardGearPairTail": {
+        "message": "Drive : tail rotor gear"
     },
-    "setupWizardGearTailShaft": {
-        "message": "From the intermediate shaft"
+    "setupWizardGearPairMainMesh": {
+        "message": "Intermediate : main gear"
     },
-    "setupWizardGearDrivePulley": {
-        "message": "Drive pulley, on the shaft"
+    "setupWizardGearPairTailShaft": {
+        "message": "Pulley : tail rotor pulley"
     },
-    "setupWizardGearRotorPulley": {
-        "message": "Tail rotor pulley"
+    "setupWizardGearRatioDirect": {
+        "message": "Gear ratio"
     },
-    "setupWizardGearMesh": {
-        "message": "Intermediate gear meshing with the main gear"
+    "setupWizardGearMinTeeth": {
+        "message": "At least 6 teeth per gear. For anything else, use Ratio only."
     },
     "setupWizardGearOverflow": {
         "message": "The tooth counts are too large for the firmware. Use smaller counts or a ratio."
@@ -1393,12 +1417,6 @@
     },
     "setupWizardRpmSourceNone": {
         "message": "No RPM source is set. The governor can't hold the headspeed without one."
-    },
-    "setupWizardMotorPinion": {
-        "message": "Pinion teeth"
-    },
-    "setupWizardMotorMainGear": {
-        "message": "Main gear teeth"
     },
     "setupWizardConnectIntro": {
         "message": "Everything that is only typed in is set. From here on you work on the helicopter itself."

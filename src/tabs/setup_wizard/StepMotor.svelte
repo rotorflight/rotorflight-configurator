@@ -1,3 +1,8 @@
+<script module>
+  // The gear modes and counts, kept while the configurator runs.
+  const session = { main: null, tail: null };
+</script>
+
 <script>
   import { getContext } from "svelte";
 
@@ -13,7 +18,6 @@
 
   import GearVisualization from "./GearVisualization.svelte";
   import HeliSide from "./HeliSide.svelte";
-  import MotorGearArt from "./MotorGearArt.svelte";
   import MotorPolesViz from "./MotorPolesViz.svelte";
   import RebootLater from "./RebootLater.svelte";
   import TabButton from "./TabButton.svelte";
@@ -93,123 +97,238 @@
     markChanged();
   }
 
-  let mainRatio = $derived(
-    FC.MOTOR_CONFIG.main_rotor_gear_ratio[1] /
-      FC.MOTOR_CONFIG.main_rotor_gear_ratio[0],
-  );
-  let tailRatio = $derived(
-    FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1] /
-      FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0],
-  );
+  //// Gearing, as in the Ethos wizard (app/pages/setup_wizard_motor.lua).
+  //// The firmware keeps two products per ratio, and the ratio is field 1 /
+  //// field 0 (flight/motors.c). Main gear: field 0 = pinion x the
+  //// intermediate gear on the main side, field 1 = the intermediate gear on
+  //// the pinion side x main gear. Tail: field 0 = the tail side, field 1 =
+  //// the drive side. Each goes in one of three ways: one stage, two stages,
+  //// or the ratio only.
 
-  //// Gearing, as in the Ethos wizard. The firmware keeps two products per
-  //// ratio, and the ratio is field 1 / field 0 (flight/motors.c). Main gear:
-  //// field 0 = pinion x the gear on the main side, field 1 = the gear on the
-  //// pinion side x main gear. Tail: field 0 = the tail side, field 1 = the
-  //// drive side. One stage is two stages with both intermediate gears at 1.
-
-  const MIN_TEETH = 6; // Minimum tooth count for gear visualization
+  const ONE = 1;
+  const TWO = 2;
+  const RATIO = 3;
+  const MODES = [
+    [ONE, "setupWizardGearStageOne"],
+    [TWO, "setupWizardGearStageTwo"],
+    [RATIO, "setupWizardGearStageRatio"],
+  ];
+  // A gear has at least 6 teeth; anything else goes in as a ratio.
+  const MIN_TEETH = 6;
   const MAX_TEETH = 500;
+  // The firmware's fields are 16 bit.
   const MAX_PRODUCT = 65535;
+  const MIN_RATIO = 1;
+  const MAX_RATIO = 100;
 
-  // Gear modes: 1=One stage, 2=Two stages, 3=Ratio only (like Ethos)
-  let mainGearMode = $state(1);
-  let tailGearMode = $state(1);
+  const round2 = (v) => Math.round(v * 100) / 100;
+  const clampRatio = (v) =>
+    Math.min(MAX_RATIO, Math.max(MIN_RATIO, round2(v) || MIN_RATIO));
+  const fits = (v) => v >= MIN_TEETH && v <= MAX_TEETH;
+  const same = (p, q) => p[0] === q[0] && p[1] === q[1];
+  const gcd = (a, b) => (b ? gcd(b, a % b) : a);
 
-  let train = $state({
-    pinion: FC.MOTOR_CONFIG.main_rotor_gear_ratio[0],
-    pinionSide: 1,
-    mainSide: 1,
-    main: FC.MOTOR_CONFIG.main_rotor_gear_ratio[1],
-  });
-  let mainRatioValue = $state(
-    FC.MOTOR_CONFIG.main_rotor_gear_ratio[1] /
-      FC.MOTOR_CONFIG.main_rotor_gear_ratio[0],
-  );
-
-  let tailShaft = $state({ drive: 1, rotor: 1, mesh: 1 });
-  let tailRatioValue = $state(
-    FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1] /
-      FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0],
-  );
-
-  let gearOverflow = $derived(
-    train.pinion * train.mainSide > MAX_PRODUCT ||
-      train.pinionSide * train.main > MAX_PRODUCT,
-  );
-
-  // The smallest whole pair with this ratio: 9.70 is 10 and 97. Null when
-  // no pair up to MAX_TEETH gives it.
+  // The smallest whole pair with this ratio: 9.70 is 10 and 97.
   function wholePair(ratio) {
     const hundredths = Math.round(ratio * 100);
-    for (let k = 1; k <= MAX_TEETH; k++) {
+    for (let k = 1; k < 100; k++) {
       if ((hundredths * k) % 100 === 0) return [k, (hundredths * k) / 100];
     }
-    return null;
+    return [100, hundredths];
   }
 
-  function applyMain() {
-    const g = FC.MOTOR_CONFIG.main_rotor_gear_ratio;
-    g[0] = train.pinion * train.mainSide;
-    g[1] = train.pinionSide * train.main;
-    if (tailGearMode === 2) applyTail(); // Tail from intermediate shaft needs main gear update
-    markChanged();
-  }
-
-  function setMainGearMode(mode) {
-    if (mainGearMode === mode) return;
-    mainGearMode = mode;
-    if (mode === 2) {
-      // Two stages: intermediate gears take main gear count
-      train.pinionSide = train.main;
-      train.mainSide = train.main;
-    } else if (mode === 1) {
-      // One stage: reset intermediate gears to 1
-      train.pinionSide = 1;
-      train.mainSide = 1;
+  // Teeth for a ratio: the smallest pair that shows it to two decimals (7.27
+  // is 11 and 80), else the nearest. Null above MAX_TEETH / MIN_TEETH.
+  function teethFor(ratio) {
+    let best = null;
+    for (let p = MIN_TEETH; p * ratio <= MAX_TEETH + 0.5; p++) {
+      const m = Math.round(p * ratio);
+      if (!fits(m)) continue;
+      const error = Math.abs(m / p - ratio);
+      if (error < 0.005) return [p, m];
+      if (!best || error < best.error) best = { pair: [p, m], error };
     }
-    // Mode 3 (Ratio only) doesn't need gear changes
-    if (mode !== 3) applyMain();
+    return best?.pair ?? null;
   }
 
-  function applyMainRatioOnly() {
+  // A pair as gear teeth: scaled up until both have MIN_TEETH. Null when
+  // that is more than MAX_TEETH.
+  function asTeeth(pair) {
+    const k = Math.ceil(MIN_TEETH / Math.min(...pair));
+    const scaled = pair.map((v) => v * k);
+    return scaled.every(fits) ? scaled : null;
+  }
+
+  // Two products as one pair of teeth: the first count kept when the second
+  // comes out whole (as Ethos), else the reduced pair. When that needs more
+  // than MAX_TEETH, the first count is kept and the second rounded: the ratio
+  // shown beside the title then tells the small difference.
+  function onePair(first, p0, p1) {
+    const second = (first * p1) / p0;
+    if (Number.isInteger(second) && fits(first) && fits(second)) {
+      return [first, second];
+    }
+    const g = gcd(p0, p1);
+    const exact = asTeeth([p0 / g, p1 / g]);
+    if (exact) return exact;
+    const near = [first, Math.round(second)];
+    return near.every(fits) ? near : teethFor(clampRatio(p1 / p0));
+  }
+
+  function mainProducts(m) {
+    if (m.mode === RATIO) return wholePair(m.ratio);
+    if (m.mode === TWO) return [m.pinion * m.mainSide, m.pinionSide * m.main];
+    return [m.pinion, m.main];
+  }
+
+  // From the intermediate shaft the main gear drives the shaft through the
+  // intermediate gear on the main side: the two-stage train's own, else the
+  // tail's mesh count.
+  function meshOf(t, m) {
+    return m.mode === TWO ? m.mainSide : t.mesh;
+  }
+
+  function tailProducts(t, m) {
+    if (t.mode === RATIO) return wholePair(t.ratio);
+    if (t.mode === TWO) return [meshOf(t, m) * t.rotor, m.main * t.drive];
+    return [t.rotor, t.drive];
+  }
+
+  // The counts behind two stages can't be read back from the two products,
+  // so they are kept for the session, as Ethos does, and used again while
+  // the FC still holds their products.
+  function initMain() {
     const g = FC.MOTOR_CONFIG.main_rotor_gear_ratio;
-    const pair = wholePair(mainRatioValue);
-    if (!pair) return;
+    const s = session.main;
+    if (s && same(mainProducts(s), g)) return { ...s };
+    const ratio = clampRatio(g[1] / g[0]);
+    if (fits(g[0]) && fits(g[1])) {
+      return {
+        mode: ONE,
+        pinion: g[0],
+        pinionSide: g[1],
+        mainSide: g[1],
+        main: g[1],
+        ratio,
+      };
+    }
+    // An FC that has no gear set (1:1) opens on the ratio.
+    const [pinion, main] = teethFor(ratio) ?? [MIN_TEETH, MIN_TEETH];
+    return {
+      mode: RATIO,
+      pinion,
+      pinionSide: main,
+      mainSide: main,
+      main,
+      ratio,
+    };
+  }
+
+  function initTail(m) {
+    const t = FC.MOTOR_CONFIG.tail_rotor_gear_ratio;
+    const s = session.tail;
+    if (s && same(tailProducts(s, m), t)) return { ...s };
+    const ratio = clampRatio(t[1] / t[0]);
+    if (fits(t[0]) && fits(t[1])) {
+      return { mode: ONE, drive: t[1], rotor: t[0], mesh: m.main, ratio };
+    }
+    const [rotor, drive] = teethFor(ratio) ?? [MIN_TEETH, MIN_TEETH];
+    return { mode: RATIO, drive, rotor, mesh: m.main, ratio };
+  }
+
+  let main = $state(initMain());
+  let tail = $state(initTail(main));
+
+  let mainOverflow = $derived(mainProducts(main).some((v) => v > MAX_PRODUCT));
+  let tailOverflow = $derived(
+    !wiz.motorised && tailProducts(tail, main).some((v) => v > MAX_PRODUCT),
+  );
+
+  function ratioText(pair) {
+    return `${(pair[1] / pair[0]).toFixed(2)}:1`;
+  }
+
+  function store(field, pair) {
+    const g = FC.MOTOR_CONFIG[field];
+    if (pair.some((v) => v > MAX_PRODUCT) || same(pair, g)) return;
     g[0] = pair[0];
     g[1] = pair[1];
     markChanged();
   }
 
-  function setTailGearMode(mode) {
-    if (tailGearMode === mode) return;
-    tailGearMode = mode;
-    // Mode changes don't apply immediately for tail in Ratio only
-  }
-
-  function applyTailRatioOnly() {
-    const t = FC.MOTOR_CONFIG.tail_rotor_gear_ratio;
-    const pair = wholePair(tailRatioValue);
-    if (!pair) return;
-    t[0] = pair[0];
-    t[1] = pair[1];
-    markChanged();
+  function remember() {
+    session.main = $state.snapshot(main);
+    session.tail = $state.snapshot(tail);
   }
 
   function applyTail() {
-    const t = FC.MOTOR_CONFIG.tail_rotor_gear_ratio;
-    if (tailGearMode === 3) return; // Ratio only, don't apply
-    if (tailGearMode === 1) {
-      // From main shaft: drive gear (from main) x rotor pulley
-      t[0] = tailShaft.rotor;
-      t[1] = train.main * tailShaft.drive;
-    } else if (tailGearMode === 2) {
-      // From intermediate shaft: mesh x rotor pulley and intermediate x drive
-      const mesh = mainGearMode === 2 ? train.mainSide : tailShaft.mesh;
-      t[0] = mesh * tailShaft.rotor;
-      t[1] = train.main * tailShaft.drive;
+    if (!wiz.motorised) {
+      store("tail_rotor_gear_ratio", tailProducts(tail, main));
     }
-    markChanged();
+    remember();
+  }
+
+  function applyMain() {
+    store("main_rotor_gear_ratio", mainProducts(main));
+    // A tail driven from the intermediate shaft turns with the main gear.
+    applyTail();
+  }
+
+  function setMainMode(mode) {
+    if (main.mode === mode) return;
+    const [p0, p1] = mainProducts(main);
+    if (mode === RATIO) {
+      main.ratio = clampRatio(p1 / p0);
+    } else {
+      // Teeth at the ratio as it is now.
+      let pair = [main.pinion, main.main];
+      if (main.mode === RATIO) pair = teethFor(main.ratio);
+      if (main.mode === TWO) {
+        pair = onePair(main.pinion, p0, p1);
+        // The tail keeps the main-side gear for a drive from the shaft.
+        tail.mesh = main.mainSide;
+      }
+      if (!pair) return;
+      [main.pinion, main.main] = pair;
+      // Two stages start with both intermediate gears at the main gear's
+      // count: a 1:1 pair, so the ratio stays.
+      if (mode === TWO) {
+        main.pinionSide = main.main;
+        main.mainSide = main.main;
+      }
+    }
+    main.mode = mode;
+    applyMain();
+  }
+
+  function setTailMode(mode) {
+    if (tail.mode === mode) return;
+    const [p0, p1] = tailProducts(tail, main);
+    if (mode === RATIO) {
+      tail.ratio = clampRatio(p1 / p0);
+    } else {
+      let pair = [tail.rotor, tail.drive];
+      if (tail.mode === RATIO) pair = teethFor(tail.ratio);
+      else if (mode === ONE) pair = onePair(tail.rotor, p0, p1);
+      if (!pair) return;
+      [tail.rotor, tail.drive] = pair;
+      // Onto the intermediate shaft: its main-side gear takes the main
+      // gear's count (1:1), so the tail keeps its ratio.
+      if (mode === TWO && main.mode !== TWO) tail.mesh = main.main;
+    }
+    tail.mode = mode;
+    applyTail();
+  }
+
+  // The intermediate gear on the main side, as the tail sees it.
+  function getMesh() {
+    return meshOf(tail, main);
+  }
+
+  function setMesh(v) {
+    if (main.mode === TWO) main.mainSide = v;
+    else tail.mesh = v;
+    applyMain();
   }
 </script>
 
@@ -263,280 +382,240 @@
 
 <section class="card">
   <h3><span class="num">2</span>{$i18n.t("setupWizardMotorRpmTitle")}</h3>
-  <div class="with-art">
-    <div class="art"><MotorGearArt /></div>
-    <div class="text"><p>{$i18n.t("setupWizardMotorRpmText")}</p></div>
-  </div>
+  <p>{$i18n.t("setupWizardMotorRpmText")}</p>
 
-  <!-- Motor poles with visualization -->
-  <div
-    style="display: flex; gap: 2rem; align-items: center; margin-bottom: 2rem;"
-  >
-    <div style="flex: 1;">
-      <label style="display: block; font-weight: 500; margin-bottom: 0.5rem;">
-        {$i18n.t("motorsMotorPoles1Long")}
-      </label>
-      <NumberInput
-        min="2"
-        max="255"
-        step="2"
-        bind:value={FC.MOTOR_CONFIG.motor_poles[0]}
-        onchange={markChanged}
-      />
-    </div>
-    <div style="width: 150px; flex-shrink: 0;">
-      <MotorPolesViz poles={FC.MOTOR_CONFIG.motor_poles[0]} />
+  <div class="part">
+    <h4>{$i18n.t("setupWizardPolesTitle")}</h4>
+    <p class="muted">{$i18n.t("setupWizardPolesText")}</p>
+    <div class="part-row">
+      <div class="part-fields">
+        <span>{$i18n.t("motorsMotorPoles1Long")}</span>
+        <NumberInput
+          min="2"
+          max="254"
+          step="2"
+          bind:value={FC.MOTOR_CONFIG.motor_poles[0]}
+          onchange={markChanged}
+        />
+      </div>
+      <div class="part-art poles">
+        <MotorPolesViz poles={FC.MOTOR_CONFIG.motor_poles[0]} />
+      </div>
     </div>
   </div>
 
-  <!-- Main Gear Ratio Section -->
-  <div style="margin-top: 2rem;">
-    <h4 style="margin: 0 0 1rem 0;">{$i18n.t("setupWizardMotorMainGear")}</h4>
-    <div class="stages" style="margin-bottom: 1.5rem;">
-      <button
-        type="button"
-        class={["btn", mainGearMode === 1 && "primary"]}
-        onclick={() => setMainGearMode(1)}
-      >
-        {$i18n.t("setupWizardGearStageOne")}
-      </button>
-      <button
-        type="button"
-        class={["btn", mainGearMode === 2 && "primary"]}
-        onclick={() => setMainGearMode(2)}
-      >
-        {$i18n.t("setupWizardGearStageTwo")}
-      </button>
-      <button
-        type="button"
-        class={["btn", mainGearMode === 3 && "primary"]}
-        onclick={() => setMainGearMode(3)}
-      >
-        {$i18n.t("setupWizardMotorRatioOnlyTitle", "Ratio only")}
-      </button>
-    </div>
+  <div class="part">
+    <h4>
+      {$i18n.t("setupWizardGearMainTitle")}
+      <span class="pill">
+        {ratioText(FC.MOTOR_CONFIG.main_rotor_gear_ratio)}
+      </span>
+    </h4>
+    <p class="muted">{$i18n.t("setupWizardGearMainText")}</p>
+    <div class="part-row">
+      <div class="part-fields">
+        <span>{$i18n.t("setupWizardGearStage")}</span>
+        {@render modes(main.mode, setMainMode)}
 
-    {#if mainGearMode < 3}
-      <!-- One stage or Two stages: tooth count inputs + visualization -->
-      <div
-        style="display: grid; grid-template-columns: minmax(0, 1fr) 160px; gap: 2rem; align-items: flex-start; margin-bottom: 1.5rem;"
-      >
-        <div
-          style="display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;"
-        >
-          <span>{$i18n.t("setupWizardMotorPinion")}</span>
-          <NumberInput
-            min={MIN_TEETH}
-            max={MAX_TEETH}
-            bind:value={train.pinion}
-            onchange={applyMain}
-          />
-          <span></span>
-
-          {#if mainGearMode === 2}
-            <span>{$i18n.t("setupWizardGearInterPinion")}</span>
+        {#if main.mode === RATIO}
+          <span>{$i18n.t("setupWizardGearRatioDirect")}</span>
+          <span class="pair">
+            <NumberInput
+              min={MIN_RATIO}
+              max={MAX_RATIO}
+              step="0.01"
+              bind:value={main.ratio}
+              onchange={applyMain}
+            />
+            <span class="muted">:1</span>
+          </span>
+        {:else if main.mode === TWO}
+          <span>{$i18n.t("setupWizardGearPairStage1")}</span>
+          <span class="pair">
             <NumberInput
               min={MIN_TEETH}
               max={MAX_TEETH}
-              bind:value={train.pinionSide}
+              bind:value={main.pinion}
               onchange={applyMain}
             />
-            <span></span>
-
-            <span>{$i18n.t("setupWizardGearInterMain")}</span>
+            :
             <NumberInput
               min={MIN_TEETH}
               max={MAX_TEETH}
-              bind:value={train.mainSide}
+              bind:value={main.pinionSide}
               onchange={applyMain}
             />
-            <span></span>
-          {/if}
-
-          <span>{$i18n.t("setupWizardMotorMainGear")}</span>
-          <NumberInput
-            min={MIN_TEETH}
-            max={MAX_TEETH}
-            bind:value={train.main}
-            onchange={applyMain}
-          />
-          <span class="pill">1:{mainRatio.toFixed(2)}</span>
-        </div>
-
-        <div
-          style="display: flex; justify-content: center; align-items: flex-start;"
-        >
-          <GearVisualization
-            teeth={mainGearMode === 2
-              ? [train.pinion, train.pinionSide, train.mainSide, train.main]
-              : [train.pinion, train.main]}
-            stage={mainGearMode}
-          />
-        </div>
-      </div>
-    {:else}
-      <!-- Ratio only: direct ratio input -->
-      <div
-        style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;"
-      >
-        <label style="font-weight: 500; white-space: nowrap;">
-          {$i18n.t("setupWizardGearRatio")}
-        </label>
-        <div style="display: flex; gap: 0.3rem; align-items: center;">
-          <NumberInput
-            min="0.1"
-            max="500"
-            step="0.01"
-            bind:value={mainRatioValue}
-            onchange={applyMainRatioOnly}
-          />
-          <span class="muted">:1</span>
-        </div>
-      </div>
-    {/if}
-
-    {#if !wiz.motorised}
-      <!-- Tail Gear Ratio Section -->
-      <div style="margin-top: 2rem;">
-        <h4 style="margin: 0 0 1rem 0;">{$i18n.t("setupWizardGearTail")}</h4>
-        <div class="stages" style="margin-bottom: 1.5rem;">
-          <button
-            type="button"
-            class={["btn", tailGearMode === 1 && "primary"]}
-            onclick={() => setTailGearMode(1)}
-          >
-            {$i18n.t("setupWizardMotorTailFromMain", "From main")}
-          </button>
-          <button
-            type="button"
-            class={["btn", tailGearMode === 2 && "primary"]}
-            onclick={() => setTailGearMode(2)}
-            disabled={mainGearMode !== 2}
-          >
-            {$i18n.t("setupWizardMotorTailFromInter", "From intermediate")}
-          </button>
-          <button
-            type="button"
-            class={["btn", tailGearMode === 3 && "primary"]}
-            onclick={() => setTailGearMode(3)}
-          >
-            {$i18n.t("setupWizardMotorRatioOnlyTitle", "Ratio only")}
-          </button>
-        </div>
-
-        {#if tailGearMode === 1}
-          <!-- From main shaft: drive pulley on main, tail rotor pulley -->
-          <div
-            style="display: grid; grid-template-columns: minmax(0, 1fr) 160px; gap: 2rem; align-items: flex-start; margin-bottom: 1.5rem;"
-          >
-            <div
-              style="display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;"
-            >
-              <span>{$i18n.t("setupWizardGearDrivePulley")}</span>
-              <NumberInput
-                min={MIN_TEETH}
-                max={MAX_TEETH}
-                bind:value={tailShaft.drive}
-                onchange={applyTail}
-              />
-              <span></span>
-
-              <span>{$i18n.t("setupWizardGearRotorPulley")}</span>
-              <NumberInput
-                min={MIN_TEETH}
-                max={MAX_TEETH}
-                bind:value={tailShaft.rotor}
-                onchange={applyTail}
-              />
-              <span class="pill">1:{tailRatio.toFixed(2)}</span>
-            </div>
-
-            <div
-              style="display: flex; justify-content: center; align-items: flex-start;"
-            >
-              <GearVisualization
-                teeth={[tailShaft.drive, tailShaft.rotor]}
-                stage={1}
-              />
-            </div>
-          </div>
-        {:else if tailGearMode === 2}
-          <!-- From intermediate shaft: mesh, drive pulley, rotor pulley -->
-          <div
-            style="display: grid; grid-template-columns: minmax(0, 1fr) 160px; gap: 2rem; align-items: flex-start; margin-bottom: 1.5rem;"
-          >
-            <div
-              style="display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;"
-            >
-              {#if mainGearMode === 1}
-                <span>{$i18n.t("setupWizardGearMesh")}</span>
-                <NumberInput
-                  min={MIN_TEETH}
-                  max={MAX_TEETH}
-                  bind:value={tailShaft.mesh}
-                  onchange={applyTail}
-                />
-                <span></span>
-              {/if}
-
-              <span>{$i18n.t("setupWizardGearDrivePulley")}</span>
-              <NumberInput
-                min={MIN_TEETH}
-                max={MAX_TEETH}
-                bind:value={tailShaft.drive}
-                onchange={applyTail}
-              />
-              <span></span>
-
-              <span>{$i18n.t("setupWizardGearRotorPulley")}</span>
-              <NumberInput
-                min={MIN_TEETH}
-                max={MAX_TEETH}
-                bind:value={tailShaft.rotor}
-                onchange={applyTail}
-              />
-              <span class="pill">1:{tailRatio.toFixed(2)}</span>
-            </div>
-
-            <div
-              style="display: flex; justify-content: center; align-items: flex-start;"
-            >
-              <GearVisualization
-                teeth={[
-                  mainGearMode === 2 ? train.mainSide : tailShaft.mesh,
-                  tailShaft.drive,
-                  tailShaft.rotor,
-                  train.main,
-                ]}
-                stage={2}
-              />
-            </div>
-          </div>
+          </span>
+          <span>{$i18n.t("setupWizardGearPairStage2")}</span>
+          <span class="pair">
+            <NumberInput
+              min={MIN_TEETH}
+              max={MAX_TEETH}
+              bind:value={main.mainSide}
+              onchange={applyMain}
+            />
+            :
+            <NumberInput
+              min={MIN_TEETH}
+              max={MAX_TEETH}
+              bind:value={main.main}
+              onchange={applyMain}
+            />
+          </span>
         {:else}
-          <!-- Ratio only: direct ratio input -->
-          <div style="display: flex; gap: 1rem; align-items: center;">
-            <label style="font-weight: 500; white-space: nowrap;">
-              {$i18n.t("setupWizardGearRatio")}
-            </label>
-            <div style="display: flex; gap: 0.3rem; align-items: center;">
-              <NumberInput
-                min="0.1"
-                max="500"
-                step="0.01"
-                bind:value={tailRatioValue}
-                onchange={applyTailRatioOnly}
-              />
-              <span class="muted">:1</span>
-            </div>
-          </div>
+          <span>{$i18n.t("setupWizardGearPairSingle")}</span>
+          <span class="pair">
+            <NumberInput
+              min={MIN_TEETH}
+              max={MAX_TEETH}
+              bind:value={main.pinion}
+              onchange={applyMain}
+            />
+            :
+            <NumberInput
+              min={MIN_TEETH}
+              max={MAX_TEETH}
+              bind:value={main.main}
+              onchange={applyMain}
+            />
+          </span>
         {/if}
       </div>
+      <div class="part-art">
+        {#if main.mode === RATIO}
+          <GearVisualization teeth={[8, 32]} counts={false} />
+        {:else if main.mode === TWO}
+          <GearVisualization
+            teeth={[main.pinion, main.pinionSide, main.mainSide, main.main]}
+            train
+          />
+        {:else}
+          <GearVisualization teeth={[main.pinion, main.main]} />
+        {/if}
+      </div>
+    </div>
+    {#if main.mode !== RATIO}
+      <p class="muted">{$i18n.t("setupWizardGearMinTeeth")}</p>
     {/if}
   </div>
-  {#if gearOverflow}
+
+  {#if !wiz.motorised}
+    <div class="part">
+      <h4>
+        {$i18n.t("setupWizardGearTailTitle")}
+        <span class="pill">
+          {ratioText(FC.MOTOR_CONFIG.tail_rotor_gear_ratio)}
+        </span>
+      </h4>
+      <p class="muted">{$i18n.t("setupWizardGearTailText")}</p>
+      <div class="part-row">
+        <div class="part-fields">
+          <span>{$i18n.t("setupWizardGearStage")}</span>
+          {@render modes(tail.mode, setTailMode)}
+
+          {#if tail.mode === RATIO}
+            <span>{$i18n.t("setupWizardGearRatioDirect")}</span>
+            <span class="pair">
+              <NumberInput
+                min={MIN_RATIO}
+                max={MAX_RATIO}
+                step="0.01"
+                bind:value={tail.ratio}
+                onchange={applyTail}
+              />
+              <span class="muted">:1</span>
+            </span>
+          {:else if tail.mode === TWO}
+            <span>{$i18n.t("setupWizardGearPairMainMesh")}</span>
+            <span class="pair">
+              <NumberInput
+                min={MIN_TEETH}
+                max={MAX_TEETH}
+                bind:value={getMesh, setMesh}
+              />
+              :
+              <NumberInput
+                min={MIN_TEETH}
+                max={MAX_TEETH}
+                bind:value={main.main}
+                onchange={applyMain}
+              />
+            </span>
+            <span>{$i18n.t("setupWizardGearPairTailShaft")}</span>
+            <span class="pair">
+              <NumberInput
+                min={MIN_TEETH}
+                max={MAX_TEETH}
+                bind:value={tail.drive}
+                onchange={applyTail}
+              />
+              :
+              <NumberInput
+                min={MIN_TEETH}
+                max={MAX_TEETH}
+                bind:value={tail.rotor}
+                onchange={applyTail}
+              />
+            </span>
+          {:else}
+            <span>{$i18n.t("setupWizardGearPairTail")}</span>
+            <span class="pair">
+              <NumberInput
+                min={MIN_TEETH}
+                max={MAX_TEETH}
+                bind:value={tail.drive}
+                onchange={applyTail}
+              />
+              :
+              <NumberInput
+                min={MIN_TEETH}
+                max={MAX_TEETH}
+                bind:value={tail.rotor}
+                onchange={applyTail}
+              />
+            </span>
+          {/if}
+        </div>
+        <div class="part-art">
+          {#if tail.mode === RATIO}
+            <GearVisualization teeth={[3, 5]} counts={false} />
+          {:else if tail.mode === TWO}
+            <!-- Left to right, as Ethos: tail rotor pulley, drive pulley on
+                 the intermediate shaft, its gear on the main side, main gear. -->
+            <GearVisualization
+              teeth={[tail.rotor, tail.drive, getMesh(), main.main]}
+              train
+            />
+          {:else}
+            <GearVisualization teeth={[tail.drive, tail.rotor]} />
+          {/if}
+        </div>
+      </div>
+      {#if tail.mode !== RATIO}
+        <p class="muted">{$i18n.t("setupWizardGearMinTeeth")}</p>
+      {/if}
+    </div>
+  {/if}
+
+  {#if mainOverflow || tailOverflow}
     <div class="note">{$i18n.t("setupWizardGearOverflow")}</div>
   {/if}
 </section>
+
+{#snippet modes(current, set)}
+  <span class="stages">
+    {#each MODES as [mode, key] (mode)}
+      <button
+        type="button"
+        class={["btn", current === mode && "primary"]}
+        aria-pressed={current === mode}
+        onclick={() => set(mode)}
+      >
+        {$i18n.t(key)}
+      </button>
+    {/each}
+  </span>
+{/snippet}
 
 {#if govState.enabled}
   <section class="card">
@@ -588,15 +667,58 @@
 </div>
 
 <style lang="scss">
-  .fields {
+  /* One part of the motor card (poles, main gear, tail gear): its fields,
+     and the picture right beside them, not pushed to the card's edge. */
+  .part {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border-soft);
+
+    p {
+      margin: 0;
+    }
+  }
+
+  h4 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    margin: 0;
+    font-size: 1em;
+    font-weight: 700;
+  }
+
+  .part-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 40px;
+  }
+
+  /* The minimum width lines the three pictures up in one column. */
+  .part-fields {
     display: grid;
-    grid-template-columns: auto 12rem auto;
-    justify-content: start;
+    min-width: 30rem;
+    grid-template-columns: max-content max-content;
     align-items: center;
     gap: 8px 12px;
   }
 
-  .ratio {
+  .part-art {
+    flex: none;
+    width: 200px;
+
+    /* Smaller than the gears, centred in the same column. */
+    &.poles :global(.poles-viz) {
+      width: 120px;
+      margin: 0 auto;
+    }
+  }
+
+  .pair {
     display: flex;
     align-items: center;
     gap: 6px;

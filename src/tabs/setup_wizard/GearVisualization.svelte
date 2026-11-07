@@ -1,164 +1,154 @@
 <script>
-  // Dynamic gear visualization: simple gears (pinion & main) or a two-stage train.
-  // Like the Ethos suite, the gear sizes scale with tooth count.
-  //
-  // Props:
-  //   teeth: array of tooth counts ([pinion, main] for simple; [pinion, pinion-side, main-side, main] for train)
-  //   stage: 1 or 2 (one stage or two-stage train)
-  //   ratio: display text (e.g. "2.50:1")
+  // A gear pair or a two-stage gear train, drawn to the tooth counts, as the
+  // Ethos wizard draws them (app/setup_wizard_art.lua). Decorative only: the
+  // counts are the fields beside it.
+  //  - pair: two gears from the front, each sized to its count, meshing;
+  //  - train: side view of a two-stage train with an intermediate shaft.
+  //    teeth = [pinion, intermediate on the pinion side, intermediate on the
+  //    main side, main gear]; each gear is a bar as long as its pitch
+  //    diameter, the lower stage under the upper one.
+  // counts = false leaves the numbers off (a ratio alone has no teeth).
+  let { teeth = [], train = false, counts = true } = $props();
 
-  let { teeth = [], stage = 1 } = $props();
+  const W = 200;
+  const PAD = 4;
 
-  // Clamp tooth count: min 6, max 60 for display
-  const clamp = (n) => Math.max(6, Math.min(60, n || 6));
+  // Teeth drawn: at least 6, at most 60, as in Ethos.
+  const drawn = (n) => Math.min(Math.max(Math.round(n) || 0, 6), 60);
+  const count = (n) => Math.max(1, Math.round(n) || 1);
 
-  // For simple gears: pinion (small) on left, main (big) on right
-  // Scale pinion relative to main: min 0.3x, max 0.7x of main gear size
-  const simpleFx = () => {
-    const pinion = clamp(teeth[0] || 10);
-    const main = clamp(teeth[1] || 30);
-    const r_max = 35; // max radius for main gear
-    const r_min_pinion = r_max * 0.2;
-    const r_pinion = Math.max(r_min_pinion, (r_max * pinion) / main);
-    const r_main = r_max;
+  // Pair: the larger gear gets R_MAX, the other its share, never under R_MIN.
+  const R_MAX = 44;
+  const R_MIN = 7;
+  const PAIR_H = 2 * R_MAX + PAD + 22;
 
-    const spacing = r_pinion + r_main + 8; // gap between centers
-    const cx_pinion = 20 + r_pinion;
-    const cx_main = cx_pinion + spacing;
+  let pair = $derived.by(() => {
+    const a = count(teeth[0]);
+    const b = count(teeth[1]);
+    const k = Math.min(R_MAX / Math.max(a, b), (W - 2 * PAD) / (2 * (a + b)));
+    const ra = Math.max(R_MIN, k * a);
+    const rb = Math.max(R_MIN, k * b);
+    const left = (W - 2 * (ra + rb)) / 2;
+    const cy = PAD + R_MAX;
+    return {
+      cy,
+      labelY: cy + R_MAX + 16,
+      gears: [
+        { cx: left + ra, r: ra, n: a },
+        { cx: left + 2 * ra + rb, r: rb, n: b },
+      ],
+    };
+  });
 
-    return { cx_pinion, r_pinion, cx_main, r_main, pinion, main };
-  };
+  // The tooth tips round a gear, from its rim out to its radius.
+  function ticks(g, cy) {
+    const n = drawn(g.n);
+    const rim = g.r * 0.82;
+    return Array.from({ length: n }, (_, i) => {
+      const a = (i * 2 * Math.PI) / n;
+      const c = Math.cos(a);
+      const s = Math.sin(a);
+      return {
+        x1: g.cx + rim * c,
+        y1: cy + rim * s,
+        x2: g.cx + g.r * c,
+        y2: cy + g.r * s,
+      };
+    });
+  }
 
-  // For two-stage train: side view with shafts and teeth as bars
-  // Like Ethos: pinion on motor shaft (bottom), intermediate gears on shaft,
-  // main gear on rotor shaft (top)
-  const trainFx = () => {
-    const t = [
-      clamp(teeth[0] || 10), // pinion
-      clamp(teeth[1] || 20), // intermediate pinion-side
-      clamp(teeth[2] || 20), // intermediate main-side
-      clamp(teeth[3] || 50), // main
-    ];
-    // Pitch diameter proportional to tooth count; unit = 2px per tooth (smaller)
-    const unitPx = 2;
-    const r = t.map((n) => (n * unitPx) / 2);
+  // Train: positions in tooth units first, then scaled to fit the width.
+  const BAR_H = 12;
+  const TOP2 = 8; // upper stage: main side
+  const TOP1 = TOP2 + BAR_H + 26; // lower stage: pinion side
+  const TRAIN_H = TOP1 + BAR_H + 22;
 
-    // Layout: shafts at x positions, compact
-    // motor shaft (x_m), intermediate shaft (x_i), rotor shaft (x_r)
-    const x_m = 6 + r[0];
-    const x_i = x_m + r[0] + r[1] + 4;
-    const x_r = x_i + r[2] + r[3] + 4;
+  let gearTrain = $derived.by(() => {
+    const [t1, ts, tl, t4] = [0, 1, 2, 3].map((i) => count(teeth[i]));
+    const xm = t1 / 2;
+    const xi = t1 + ts / 2;
+    const xr = xi + tl / 2 + t4 / 2;
+    const minX = Math.min(0, xi - tl / 2);
+    const maxX = Math.max(t1 + ts, xr + t4 / 2);
+    const k = (W - 2 * PAD) / (maxX - minX);
+    const x = (u) => PAD + (u - minX) * k;
+    const gear = (cu, n, top) => ({ cx: x(cu), r: (k * n) / 2, n, top });
+    return {
+      shafts: [
+        { x: x(xm), y1: TOP1 - 6, y2: TOP1 + BAR_H + 6 },
+        { x: x(xi), y1: TOP2 - 6, y2: TOP1 + BAR_H + 6 },
+        { x: x(xr), y1: TOP2 - 6, y2: TOP2 + BAR_H + 6 },
+      ],
+      gears: [
+        gear(xi, tl, TOP2),
+        gear(xr, t4, TOP2),
+        gear(xm, t1, TOP1),
+        gear(xi, ts, TOP1),
+      ],
+    };
+  });
 
-    const y_top = 15; // top gear (main side)
-    const y_bot = 60; // bottom gear (pinion side)
-    const barH = 10;
-
-    return { x_m, x_i, x_r, y_top, y_bot, barH, r, t };
-  };
+  // The tooth flanks across a bar: equal angles round a half-turn, so wide in
+  // the middle and close at the ends.
+  function grooves(g) {
+    const n = Math.max(3, Math.min(g.n, 14));
+    const x0 = g.cx - g.r;
+    return Array.from({ length: n - 1 }, (_, i) => {
+      const theta = -Math.PI / 2 + ((i + 1) * Math.PI) / n;
+      return x0 + g.r * (1 + Math.sin(theta));
+    });
+  }
 </script>
 
-{#if stage === 1}
-  <!-- Simple gears: pinion on left, main on right -->
-  {@const gear = simpleFx()}
+{#if train}
   <svg
-    viewBox="0 0 180 90"
+    viewBox="0 0 {W} {TRAIN_H}"
     class="gear-viz"
     aria-hidden="true"
     focusable="false"
   >
-    <!-- Main gear: rim + teeth outline + hub -->
-    <circle cx={gear.cx_main} cy="45" r={gear.r_main} class="gear-rim" />
-    <circle cx={gear.cx_main} cy="45" r={gear.r_main - 2} class="gear-rim" />
-
-    <!-- Teeth: radial lines -->
-    {#each Array(Math.max(6, Math.min(20, Math.floor(gear.main / 3)))) as _, i (i)}
-      {@const deg = (i * 360) / Math.max(6, Math.floor(gear.main / 3))}
-      {@const rad = (deg * Math.PI) / 180}
-      {@const x1 = Math.cos(rad) * (gear.r_main - 3) + gear.cx_main}
-      {@const y1 = Math.sin(rad) * (gear.r_main - 3) + 45}
-      {@const x2 = Math.cos(rad) * gear.r_main + gear.cx_main}
-      {@const y2 = Math.sin(rad) * gear.r_main + 45}
-      <line {x1} {y1} {x2} {y2} class="tooth" />
+    {#each gearTrain.shafts as s, i (i)}
+      <line class="shaft" x1={s.x} y1={s.y1} x2={s.x} y2={s.y2} />
     {/each}
-
-    <circle cx={gear.cx_main} cy="45" r="3" class="hub" />
-
-    <!-- Pinion: smaller gear -->
-    <circle cx={gear.cx_pinion} cy="45" r={gear.r_pinion} class="pinion-rim" />
-    <circle
-      cx={gear.cx_pinion}
-      cy="45"
-      r={gear.r_pinion - 1.5}
-      class="pinion-rim"
-    />
-
-    {#each Array(Math.max(6, Math.floor(gear.pinion / 2))) as _, i (i)}
-      {@const deg = (i * 360) / Math.max(6, Math.floor(gear.pinion / 2))}
-      {@const rad = (deg * Math.PI) / 180}
-      {@const x1 = Math.cos(rad) * (gear.r_pinion - 2) + gear.cx_pinion}
-      {@const y1 = Math.sin(rad) * (gear.r_pinion - 2) + 45}
-      {@const x2 = Math.cos(rad) * gear.r_pinion + gear.cx_pinion}
-      {@const y2 = Math.sin(rad) * gear.r_pinion + 45}
-      <line {x1} {y1} {x2} {y2} class="tooth-pinion" />
-    {/each}
-
-    <circle cx={gear.cx_pinion} cy="45" r="1.5" class="hub" />
-
-    <!-- Labels -->
-    <text x={gear.cx_main} y="70" class="tooth-label">{gear.main}</text>
-    <text x={gear.cx_pinion} y="70" class="tooth-label">{gear.pinion}</text>
-  </svg>
-{:else}
-  <!-- Two-stage train: side view -->
-  {@const train = trainFx()}
-  <svg
-    viewBox="0 0 140 100"
-    class="gear-viz"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <!-- Shafts: vertical lines -->
-    <line x1={train.x_m} y1="5" x2={train.x_m} y2="80" class="shaft" />
-    <line x1={train.x_i} y1="5" x2={train.x_i} y2="80" class="shaft" />
-    <line x1={train.x_r} y1="5" x2={train.x_r} y2="80" class="shaft" />
-
-    <!-- Gears as bars with teeth -->
-    {#each [{ x: train.x_m, y: train.y_bot, r: train.r[0], label: train.t[0], idx: 0 }, { x: train.x_i, y: train.y_bot, r: train.r[1], label: train.t[1], idx: 1 }, { x: train.x_i, y: train.y_top, r: train.r[2], label: train.t[2], idx: 2 }, { x: train.x_r, y: train.y_top, r: train.r[3], label: train.t[3], idx: 3 }] as gear (gear.idx)}
-      {@const x0 = Math.max(5, Math.floor(gear.x - gear.r))}
-      {@const len = Math.max(2, Math.floor(2 * gear.r - 2))}
-
-      <!-- Gear bar -->
+    {#each gearTrain.gears as g, i (i)}
+      <!-- A pixel short at each end, so meshing gears show a seam. -->
       <rect
-        x={x0}
-        y={gear.y}
-        width={len}
-        height={train.barH}
-        class="gear-bar"
+        class="bar"
+        x={g.cx - g.r + 0.6}
+        y={g.top}
+        width={Math.max(1.5, 2 * g.r - 1.2)}
+        height={BAR_H}
       />
-      <rect
-        x={x0}
-        y={gear.y}
-        width={len}
-        height={train.barH}
-        class="gear-outline"
-      />
-
-      <!-- Teeth: grooves on top edge -->
-      {#each Array(Math.max(3, Math.min(10, gear.label))) as _, i (i)}
-        {@const gx = x0 + (len / (gear.label || 1)) * (i + 0.5) - 0.5}
+      {#each grooves(g) as gx, j (j)}
         <line
+          class="groove"
           x1={gx}
-          y1={gear.y + 2}
+          y1={g.top + 2.5}
           x2={gx}
-          y2={gear.y + train.barH - 3}
-          class="tooth-groove"
+          y2={g.top + BAR_H - 2.5}
         />
       {/each}
-
-      <!-- Tooth label (below gears to avoid shaft overlap) -->
-      <text x={gear.x} y={gear.y + train.barH + 18} class="tooth-label">
-        {gear.label}
-      </text>
+      {#if counts}
+        <text class="count" x={g.cx} y={g.top + BAR_H + 14}>{g.n}</text>
+      {/if}
+    {/each}
+  </svg>
+{:else}
+  <svg
+    viewBox="0 0 {W} {PAIR_H}"
+    class="gear-viz"
+    aria-hidden="true"
+    focusable="false"
+  >
+    {#each pair.gears as g, i (i)}
+      <circle class="disc" cx={g.cx} cy={pair.cy} r={g.r * 0.82} />
+      {#each ticks(g, pair.cy) as t, j (j)}
+        <line class="tooth" x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2} />
+      {/each}
+      <circle class="hub" cx={g.cx} cy={pair.cy} r={Math.max(1.5, g.r * 0.2)} />
+      {#if counts}
+        <text class="count" x={g.cx} y={pair.labelY}>{g.n}</text>
+      {/if}
     {/each}
   </svg>
 {/if}
@@ -168,64 +158,55 @@
     display: block;
     width: 100%;
     height: auto;
-    overflow: visible;
     color: var(--color-text-muted);
   }
 
-  /* Simple gears */
-  .gear-rim {
+  .disc {
     fill: var(--color-surface);
     stroke: currentColor;
-    stroke-width: 1;
-  }
-
-  .pinion-rim {
-    fill: var(--color-accent-soft);
-    stroke: var(--color-accent-500);
-    stroke-width: 1;
+    stroke-width: 1.4;
   }
 
   .tooth {
     stroke: currentColor;
-    stroke-width: 1;
-    opacity: 0.6;
-  }
-
-  .tooth-pinion {
-    stroke: var(--color-accent-500);
-    stroke-width: 1;
-    opacity: 0.8;
+    stroke-width: 1.2;
+    stroke-linecap: round;
   }
 
   .hub {
-    fill: currentColor;
-  }
-
-  .tooth-label {
-    font-size: 10px;
-    fill: var(--color-text-muted);
-    text-anchor: middle;
-  }
-
-  /* Two-stage train */
-  .shaft {
-    stroke: currentColor;
-    stroke-width: 2;
-    opacity: 0.7;
-  }
-
-  .gear-bar {
-    fill: var(--color-surface);
-  }
-
-  .gear-outline {
     fill: none;
     stroke: currentColor;
-    stroke-width: 1;
+    stroke-width: 1.2;
   }
 
-  .tooth-groove {
-    stroke: var(--color-bg);
+  .shaft {
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+    opacity: 0.55;
+  }
+
+  .bar {
+    fill: var(--color-surface);
+    stroke: currentColor;
+    stroke-width: 1.2;
+  }
+
+  .groove {
+    stroke: currentColor;
     stroke-width: 0.8;
+    opacity: 0.5;
+  }
+
+  /* The count sits on a halo of the card's colour, so a shaft behind it
+     doesn't run through the digits. */
+  .count {
+    fill: var(--color-text);
+    font-size: 11px;
+    text-anchor: middle;
+    paint-order: stroke;
+    stroke: var(--color-surface-sunken);
+    stroke-width: 4px;
+    stroke-linejoin: round;
   }
 </style>

@@ -1,89 +1,80 @@
 <script>
-  // Dynamic visualization of motor poles (magnets) around the rotor bell.
-  // Like the Ethos suite, shows the poles arranged in a circle.
+  // The motor bell from the front with its magnets round the rim, north
+  // filled and south as an outline in turn, and the pole count in the middle,
+  // as the Ethos wizard draws it (app/setup_wizard_art.lua drawPoles).
+  // Decorative only: the count is the field beside it.
+  let { poles = 0 } = $props();
 
-  let { poles = 12 } = $props();
+  const C = 60;
+  const R = 54;
+  const RING = R * 0.81;
 
-  // Clamp poles to valid range and derive pole array
-  let p = $derived(Math.max(2, Math.min(254, poles)));
-  let polesArray = $derived(Array.from({ length: p }, (_, i) => i));
+  // At most 40 magnets are drawn; a magnet is at most a sixth of the bell's
+  // radius and no wider than the gap to its neighbours.
+  let n = $derived(Math.min(Math.max(Math.round(poles) || 0, 2), 40));
+  let dot = $derived(
+    Math.max(2.5, Math.min(R * 0.16, RING * Math.sin(Math.PI / n) * 0.6)),
+  );
+  let magnets = $derived(
+    Array.from({ length: n }, (_, i) => {
+      const a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
+      return {
+        x: C + RING * Math.cos(a),
+        y: C + RING * Math.sin(a),
+        north: i % 2 === 0,
+      };
+    }),
+  );
 </script>
 
 <svg
-  viewBox="0 0 140 140"
-  class="motor-poles-viz"
+  viewBox="0 0 120 120"
+  class="poles-viz"
   aria-hidden="true"
   focusable="false"
 >
-  <!-- Stator ring (outer) -->
-  <circle cx="70" cy="70" r="65" class="stator" />
-
-  <!-- Rotor bell (inner) -->
-  <circle cx="70" cy="70" r="45" class="rotor" />
-
-  <!-- Magnets/poles arranged in circle -->
-  {#each polesArray as _, i (i)}
-    {@const angle = (i * 360) / p - 90}
-    {@const rad = (angle * Math.PI) / 180}
-    {@const x = 70 + 55 * Math.cos(rad)}
-    {@const y = 70 + 55 * Math.sin(rad)}
-    {@const isMagnet = i % 2 === 0}
-
-    <circle cx={x} cy={y} r="8" class={isMagnet ? "pole-n" : "pole-s"} />
-    {#if isMagnet}
-      <text {x} {y} class="pole-label">N</text>
-    {:else}
-      <text {x} {y} class="pole-label">S</text>
-    {/if}
+  <circle class="bell" cx={C} cy={C} r={R} />
+  <circle class="stator" cx={C} cy={C} r={R * 0.62} />
+  {#each magnets as m, i (i)}
+    <circle class={m.north ? "north" : "south"} cx={m.x} cy={m.y} r={dot} />
   {/each}
-
-  <!-- Center rotor shaft -->
-  <circle cx="70" cy="70" r="6" class="shaft-center" />
+  <text class="count" x={C} y={C}>{poles}</text>
 </svg>
 
 <style lang="scss">
-  .motor-poles-viz {
+  .poles-viz {
     display: block;
     width: 100%;
     height: auto;
-    overflow: visible;
     color: var(--color-text-muted);
+  }
+
+  .bell {
+    fill: var(--color-surface);
+    stroke: currentColor;
+    stroke-width: 1.6;
   }
 
   .stator {
     fill: none;
     stroke: currentColor;
-    stroke-width: 2;
-    opacity: 0.5;
+    stroke-width: 1.2;
   }
 
-  .rotor {
+  .north {
+    fill: var(--color-accent-500);
+  }
+
+  .south {
     fill: var(--color-surface);
     stroke: currentColor;
-    stroke-width: 1.5;
+    stroke-width: 1.2;
   }
 
-  .pole-n {
-    fill: var(--color-accent-500);
-    stroke: var(--color-accent-500);
-    stroke-width: 1;
-  }
-
-  .pole-s {
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.5;
-  }
-
-  .pole-label {
-    font-size: 8px;
-    font-weight: 700;
-    fill: currentColor;
+  .count {
+    fill: var(--color-text);
+    font-size: 16px;
     text-anchor: middle;
     dominant-baseline: central;
-  }
-
-  .shaft-center {
-    fill: currentColor;
   }
 </style>
