@@ -54,10 +54,9 @@ export function applyStyle(tuning, style, ratesType) {
     }
     tuning[`${axis}_rc_expo`] = expo;
   }
-  tuning.collective_rc_expo = 0;
-  if (ratesType === RATES_TYPE.ROTORFLIGHT) {
-    tuning.collective_srate = SHAPE / 100;
-  } else {
+  // The collective keeps its expo and shape. On Actual rates its centre is
+  // set so the full-stick pitch stays where it was.
+  if (ratesType !== RATES_TYPE.ROTORFLIGHT) {
     // setCollectiveAtFullStick keeps the centre at or below the max.
     tuning.collective_rc_rate = round2(collective / 25);
   }
