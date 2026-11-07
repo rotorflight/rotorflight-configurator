@@ -31,8 +31,10 @@
 
   // `inputs`: the mixer inputs this calibration sets (both cyclic axes share
   // one calibration). `hold`: the input held while measuring. Cyclic holds
-  // roll: with the blades along the boom, holding pitch gives the same
-  // reading with the head left where it stood.
+  // roll: the blades point left and right, across the boom. Roll moves them
+  // fully and pitch not at all in the ideal geometry, so holding pitch would
+  // measure nothing. The swash phase setting can shift this; the hardware
+  // check covers it.
   const CALIBRATIONS = [
     { key: "collective", inputs: [COLLECTIVE], hold: COLLECTIVE },
     { key: "cyclic", inputs: [ROLL, PITCH], hold: ROLL },
@@ -60,11 +62,23 @@
     else holdOnly(cal.hold, heldAt[cal.key]);
   }
 
-  // Bounded by the stored input limit, on both sides.
+  // Bounded by the stored input limits of the inputs the calibration sets,
+  // on both sides. The tightest one wins, so both cyclic axes stay in range.
+  function heldLimit(cal) {
+    return Math.min(
+      ...cal.inputs.map((i) => Math.abs(limitDegrees(FC.MIXER_INPUTS[i].max))),
+    );
+  }
+
   function setHeld(cal, degrees) {
-    const max = Math.abs(limitDegrees(FC.MIXER_INPUTS[cal.hold].max));
+    const max = heldLimit(cal);
     heldAt[cal.key] = Math.max(-max, Math.min(max, degrees));
     if (holding === cal.hold) holdOnly(cal.hold, heldAt[cal.key]);
+  }
+
+  // After a limit change, pull any held angle beyond the new limit back in.
+  function clampHeld() {
+    for (const cal of CALIBRATIONS) setHeld(cal, heldAt[cal.key]);
   }
 
   // From the held input: that is the axis the pilot measures, and the
@@ -115,6 +129,7 @@
       FC.MIXER_INPUTS[input].max = raw;
       wiz.sendMixerInput(input);
     }
+    clampHeld();
   }
 
   function applyCollectiveLimit() {
@@ -122,6 +137,7 @@
     FC.MIXER_INPUTS[COLLECTIVE].min = -raw;
     FC.MIXER_INPUTS[COLLECTIVE].max = raw;
     wiz.sendMixerInput(COLLECTIVE);
+    clampHeld();
   }
 
   function applyTotalLimit() {
@@ -204,11 +220,19 @@
           : $i18n.t("setupWizardPitchHold", { 1: heldAt[cal.key] })}
       </button>
       <span class="angle">
-        <button class="btn" onclick={() => setHeld(cal, heldAt[cal.key] - 1)}>
+        <button
+          class="btn"
+          aria-label={$i18n.t("setupWizardPitchHoldLess")}
+          onclick={() => setHeld(cal, heldAt[cal.key] - 1)}
+        >
           −
         </button>
         <span class="value">{heldAt[cal.key]}°</span>
-        <button class="btn" onclick={() => setHeld(cal, heldAt[cal.key] + 1)}>
+        <button
+          class="btn"
+          aria-label={$i18n.t("setupWizardPitchHoldMore")}
+          onclick={() => setHeld(cal, heldAt[cal.key] + 1)}
+        >
           +
         </button>
       </span>
@@ -341,6 +365,11 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
+  }
+
+  .angle .value {
+    min-width: 3ch;
+    text-align: center;
   }
 
   .limits {

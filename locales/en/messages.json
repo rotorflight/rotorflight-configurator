@@ -989,6 +989,12 @@
     "setupWizardPitchHoldNote": {
         "message": "Calibrate works at $1° only. Other angles are for checking the gauge."
     },
+    "setupWizardPitchHoldLess": {
+        "message": "Lower the held angle"
+    },
+    "setupWizardPitchHoldMore": {
+        "message": "Raise the held angle"
+    },
     "setupWizardPitchTitle_cyclic": {
         "message": "Cyclic"
     },

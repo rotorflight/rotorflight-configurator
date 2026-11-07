@@ -7,11 +7,13 @@
   const CX = 70;
   const CY = 40;
 
-  // The arc from the level line to the blade's chord, on the right.
+  // The arc from the level line to the blade's chord, on the right. The sweep
+  // flag turns it toward the chord: up for positive angles, down for negative.
   let arc = $derived.by(() => {
     const r = 46;
     const rad = (angle * Math.PI) / 180;
-    return `M${CX + r} ${CY} A${r} ${r} 0 0 0 ${CX + r * Math.cos(rad)} ${CY - r * Math.sin(rad)}`;
+    const sweep = angle < 0 ? 1 : 0;
+    return `M${CX + r} ${CY} A${r} ${r} 0 0 ${sweep} ${CX + r * Math.cos(rad)} ${CY - r * Math.sin(rad)}`;
   });
 </script>
 
