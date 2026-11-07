@@ -139,7 +139,19 @@
     // whatever was already in the terminal.
     engine.clearOutputHistory();
 
-    const text = await runBackupCommand(engine, backupType);
+    let text;
+    try {
+      text = await runBackupCommand(engine, backupType);
+    } catch (err) {
+      // No file for a backup the FC did not answer: an empty file looks like a backup (#331).
+      GUI.log($i18n.t("cliBackupNoAnswer"));
+      console.log("Backup not read", err);
+      return;
+    }
+    if (!text.trim()) {
+      GUI.log($i18n.t("cliBackupEmpty"));
+      return;
+    }
 
     try {
       await saveBackupToFile(text, `cli_backup_${backupType}`);

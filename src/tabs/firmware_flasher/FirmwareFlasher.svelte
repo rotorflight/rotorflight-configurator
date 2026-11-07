@@ -1796,17 +1796,24 @@
 
   function disconnectDetect() {
     clearTimeout(detectConnectDelayTimer);
-    serial.disconnect(onDetectClose);
-    MSP.disconnect_cleanup();
-    // onClickDetectBoard() disables flashing for the duration of the detect
-    // connection -- restore whatever's actually true now, rather than
-    // unconditionally re-enabling it. Detecting a board doesn't load
-    // firmware by itself (onVersionChange()'s cache auto-load is a separate,
-    // not-yet-settled async chain at this point), so hardcoding `true` here
-    // let Next on step 3 go through with nothing actually loaded.
-    setFlashingEnabled(!!parsedHex);
-    boardDetectionInProgress = false;
-    GUI.connect_lock = false;
+    // The lock is released whatever the disconnect does: a port that never opened can
+    // make the close throw, and then the configurator stayed locked until a restart (#214).
+    try {
+      serial.disconnect(onDetectClose);
+      MSP.disconnect_cleanup();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      // onClickDetectBoard() disables flashing for the duration of the detect
+      // connection -- restore whatever's actually true now, rather than
+      // unconditionally re-enabling it. Detecting a board doesn't load
+      // firmware by itself (onVersionChange()'s cache auto-load is a separate,
+      // not-yet-settled async chain at this point), so hardcoding `true` here
+      // let Next on step 3 go through with nothing actually loaded.
+      setFlashingEnabled(!!parsedHex);
+      boardDetectionInProgress = false;
+      GUI.connect_lock = false;
+    }
   }
 
   function onDetectClose(result) {
