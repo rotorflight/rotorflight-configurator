@@ -1265,6 +1265,48 @@
     "setupWizardMotorRpmText": {
         "message": "Used for headspeed, the governor and the RPM filters. Count the magnets in the motor bell for the poles."
     },
+    "setupWizardPowerTitle": {
+        "message": "Battery and power"
+    },
+    "setupWizardPowerText": {
+        "message": "The voltage and current sources, and the cells and capacity of the active battery profile. SmartFuel, if the flight controller has it. Saved with the step."
+    },
+    "setupWizardPowerProfile": {
+        "message": "Battery profile $1 is active. Cells and capacity are set for it."
+    },
+    "setupWizardPowerNeedsVoltage": {
+        "message": "SmartFuel on voltage needs a voltage source. Pick one above."
+    },
+    "setupWizardStep_rescue": {
+        "message": "Rescue"
+    },
+    "setupWizardRescueIntro": {
+        "message": "Rescue brings the helicopter back to a safe hover after a fault. The settings are written to every PID profile on Save."
+    },
+    "setupWizardRescueLoading": {
+        "message": "Reading the rescue settings of each PID profile..."
+    },
+    "setupWizardRescueEnableTitle": {
+        "message": "Rescue"
+    },
+    "setupWizardRescueFlipTitle": {
+        "message": "Flip to upright"
+    },
+    "setupWizardRescueOff": {
+        "message": "Off"
+    },
+    "setupWizardRescueOn": {
+        "message": "On"
+    },
+    "setupWizardRescueNoFlip": {
+        "message": "No flip"
+    },
+    "setupWizardRescueFlip": {
+        "message": "Flip"
+    },
+    "setupWizardRescueNoSwitch": {
+        "message": "Assign a rescue switch in the Mode switches step first. Rescue can't be set up without one."
+    },
     "setupWizardGovHeadspeedTitle": {
         "message": "Headspeed"
     },

@@ -34,6 +34,7 @@
   import StepProfiles from "./StepProfiles.svelte";
   import StepRates from "./StepRates.svelte";
   import StepReceiver from "./StepReceiver.svelte";
+  import StepRescue from "./StepRescue.svelte";
   import StepSensors from "./StepSensors.svelte";
   import StepServoType from "./StepServoType.svelte";
   import StepServos from "./StepServos.svelte";
@@ -58,6 +59,9 @@
     { key: "modes", component: StepModes },
     // Profiles, rates and master gain on switches; fits 8 channels.
     { key: "profiles", component: StepProfiles },
+    // Rescue on and flip, set on every PID profile. Needs the rescue switch
+    // from the Mode switches step.
+    { key: "rescue", component: StepRescue },
     // A flying style per rate profile on the profile switch.
     { key: "rates", component: StepRates },
     { key: "swash", component: StepSwash },

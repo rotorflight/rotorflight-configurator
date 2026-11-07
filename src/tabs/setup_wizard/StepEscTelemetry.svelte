@@ -1,6 +1,10 @@
 <script>
+  import semver from "semver";
   import { getContext, mount, onDestroy, onMount, unmount } from "svelte";
 
+  import NumberInput from "@/components/NumberInput.svelte";
+
+  import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import { MSP } from "@/js/msp.svelte.js";
@@ -34,7 +38,97 @@
       if (!stopped) pollTimer = setTimeout(poll, POLL_MS);
     }
     poll();
+    loadPower();
   });
+
+  //// Battery and SmartFuel, as the Ethos wizard's power screens set them:
+  //// the voltage and current sources, the cells and capacity of the active
+  //// battery profile, and the SmartFuel mode. Written on Save.
+
+  const SMARTFUEL_KEYS = ["None", "Voltage", "Current", "Combined"];
+  const smartFuelSupported = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9);
+  // FBUS meters exist from API 12.9, as in the Power tab.
+  const meterKeys = smartFuelSupported
+    ? ["None", "Adc", "Esc", "Fbus"]
+    : ["None", "Adc", "Esc"];
+
+  let powerLoaded = $state(false);
+  let powerChanged = false;
+  let cells = $state(0);
+  let capacityInput = $state(0);
+
+  let activeProfile = $derived(FC.BATTERY_STATE.batteryProfile ?? 0);
+  let needsVoltage = $derived(
+    smartFuelSupported && [1, 3].includes(FC.SMARTFUEL_CONFIG?.mode),
+  );
+
+  async function loadPower() {
+    await MSP.promise(MSPCodes.MSP_BATTERY_CONFIG);
+    await MSP.promise(MSPCodes.MSP_BATTERY_STATE);
+    if (smartFuelSupported) await MSP.promise(MSPCodes.MSP2_SMARTFUEL_CONFIG);
+    cells = FC.BATTERY_CONFIG.hasProfileCells
+      ? FC.BATTERY_CONFIG.cellCounts[activeProfile]
+      : FC.BATTERY_CONFIG.cellCount;
+    capacityInput = FC.BATTERY_CONFIG.capacities?.[activeProfile] ?? 0;
+    powerLoaded = true;
+  }
+
+  function changePower(apply) {
+    apply();
+    powerChanged = true;
+    wiz.markChanged();
+  }
+
+  function setVoltageSource(value) {
+    changePower(() => {
+      FC.BATTERY_CONFIG.voltageMeterSource = value;
+    });
+  }
+
+  function setCurrentSource(value) {
+    changePower(() => {
+      FC.BATTERY_CONFIG.currentMeterSource = value;
+    });
+  }
+
+  function setCells(value) {
+    const count = Math.max(0, Math.min(24, Math.round(value)));
+    changePower(() => {
+      // The legacy field mirrors the active profile, as the Power tab saves it.
+      FC.BATTERY_CONFIG.cellCount = count;
+      if (FC.BATTERY_CONFIG.hasProfileCells) {
+        FC.BATTERY_CONFIG.cellCounts[activeProfile] = count;
+      }
+    });
+  }
+
+  function setCapacity(value) {
+    const mah = Math.max(0, Math.min(40000, Math.round(value)));
+    changePower(() => {
+      FC.BATTERY_CONFIG.capacities[activeProfile] = mah;
+      FC.BATTERY_CONFIG.capacity = mah;
+    });
+  }
+
+  function setSmartFuel(mode) {
+    changePower(() => {
+      FC.SMARTFUEL_CONFIG.mode = mode;
+    });
+  }
+
+  async function writePower() {
+    await MSP.promise(
+      MSPCodes.MSP_SET_BATTERY_CONFIG,
+      mspHelper.crunch(MSPCodes.MSP_SET_BATTERY_CONFIG),
+    );
+    if (smartFuelSupported) {
+      await MSP.promise(
+        MSPCodes.MSP2_SET_SMARTFUEL_CONFIG,
+        mspHelper.crunch(MSPCodes.MSP2_SET_SMARTFUEL_CONFIG),
+      );
+    }
+    powerChanged = false;
+  }
 
   onDestroy(() => {
     stopped = true;
@@ -44,6 +138,7 @@
   });
 
   wiz.setCommit(async () => {
+    if (powerChanged) await writePower();
     if (!changed) return;
     motorState.fixConfig();
     for (const code of [
@@ -331,6 +426,99 @@
   <div>
     <TabButton tab="power">{$i18n.t("setupWizardOpenPower")}</TabButton>
   </div>
+{/if}
+
+{#if powerLoaded}
+  <section class="card">
+    <h3>{$i18n.t("setupWizardPowerTitle")}</h3>
+    <p>{$i18n.t("setupWizardPowerText")}</p>
+
+    <span class="muted">{$i18n.t("powerBatteryVoltageMeterSource")}</span>
+    <div class="tiles" role="radiogroup">
+      {#each meterKeys as key, value (key)}
+        <button
+          type="button"
+          role="radio"
+          aria-checked={FC.BATTERY_CONFIG.voltageMeterSource === value}
+          class={[
+            "tile",
+            FC.BATTERY_CONFIG.voltageMeterSource === value && "selected",
+          ]}
+          onclick={() => setVoltageSource(value)}
+        >
+          <span class="tile-name">
+            {$i18n.t(`powerBatteryVoltageMeterType${key}`)}
+          </span>
+        </button>
+      {/each}
+    </div>
+
+    <span class="muted">{$i18n.t("powerBatteryCurrentMeterSource")}</span>
+    <div class="tiles" role="radiogroup">
+      {#each meterKeys as key, value (key)}
+        <button
+          type="button"
+          role="radio"
+          aria-checked={FC.BATTERY_CONFIG.currentMeterSource === value}
+          class={[
+            "tile",
+            FC.BATTERY_CONFIG.currentMeterSource === value && "selected",
+          ]}
+          onclick={() => setCurrentSource(value)}
+        >
+          <span class="tile-name">
+            {$i18n.t(`powerBatteryCurrentMeterType${key}`)}
+          </span>
+        </button>
+      {/each}
+    </div>
+
+    <p class="muted">
+      {$i18n.t("setupWizardPowerProfile", { 1: activeProfile + 1 })}
+    </p>
+    <div class="fields">
+      <span>{$i18n.t("powerBatteryCellCount")}</span>
+      <NumberInput
+        min="0"
+        max="24"
+        step="1"
+        bind:value={cells}
+        onchange={() => setCells(cells)}
+      />
+      <span class="muted">S</span>
+      <span>{$i18n.t("powerBatteryCapacity")}</span>
+      <NumberInput
+        min="0"
+        max="40000"
+        step="1"
+        bind:value={capacityInput}
+        onchange={() => setCapacity(capacityInput)}
+      />
+      <span class="muted">mAh</span>
+    </div>
+
+    {#if smartFuelSupported}
+      <span class="muted">{$i18n.t("powerSmartFuelSource")}</span>
+      <div class="tiles" role="radiogroup">
+        {#each SMARTFUEL_KEYS as key, mode (key)}
+          <button
+            type="button"
+            role="radio"
+            aria-checked={FC.SMARTFUEL_CONFIG.mode === mode}
+            class={["tile", FC.SMARTFUEL_CONFIG.mode === mode && "selected"]}
+            onclick={() => setSmartFuel(mode)}
+          >
+            <span class="tile-name">
+              {$i18n.t(`powerSmartFuelSourceType${key}`)}
+            </span>
+          </button>
+        {/each}
+      </div>
+      {#if needsVoltage && FC.BATTERY_CONFIG.voltageMeterSource === 0}
+        <div class="note">{$i18n.t("setupWizardPowerNeedsVoltage")}</div>
+      {/if}
+    {/if}
+  </section>
 {/if}
 
 <style lang="scss">
