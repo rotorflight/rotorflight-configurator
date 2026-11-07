@@ -6,19 +6,27 @@
   import { i18n } from "@/js/i18n.js";
   import { usbDevices } from "@/js/port_handler.js";
   import {
+    askForControl,
+    giveControl,
+    handOver,
     killSession,
     openRemoteSupportTab,
     remote,
+    showsPeer,
     startWatching,
     stopSession,
     stopWatching,
+    takeControl,
   } from "@/js/protocols/RemoteView.svelte.js";
   import { serial } from "@/js/serial.js";
 
   // What a remote support session shows over the whole configurator, on
-  // every tab: the frame and badge that mark a session, and, while sharing,
-  // the supporter's screen in place of the pilot's own configurator (which
-  // lets go of the flight controller so the supporter can use it). Starting
+  // every tab: the frame and badge that mark a session, and the other side's
+  // screen in place of this configurator while the other side has control of
+  // the flight controller: the supporter's screen on the pilot's side (whose
+  // configurator lets go of the board so the supporter can use it), or the
+  // pilot's on the supporter's side once the pilot has taken control, e.g. to
+  // calibrate something. The buttons that hand control over are here. Starting
   // and ending sessions is the Remote Support tab's job
   // (src/tabs/remote_support/RemoteSupport.svelte); see RemoteSupport.js and
   // RemoteView.svelte.js for the session itself.
@@ -84,18 +92,21 @@
     viewerOpen = false;
   }
 
-  // Sharing: give up
-  // the flight controller and show the supporter's screen until it ends.
+  // Show the other side's screen while it has control. Sharing with the
+  // supporter in control: give up the flight controller.
   $effect(() => {
-    if (remote.role === "share" && !viewerOpen) {
-      if (GUI.connected_to || GUI.connecting_to) {
+    const show = showsPeer();
+    if (show && !viewerOpen) {
+      if (remote.role === "share" && (GUI.connected_to || GUI.connecting_to)) {
         document.querySelector("div#connectbutton a.connect")?.click();
       }
       watch();
-    } else if (remote.role !== "share" && viewerOpen) {
+    } else if (!show && viewerOpen) {
       stopWatch();
-      // Show how the session ended.
-      openRemoteSupportTab();
+      if (remote.role === null) {
+        // Show how the session ended.
+        openRemoteSupportTab();
+      }
     }
   });
 </script>
@@ -109,12 +120,43 @@
       <span>
         {#if remote.role === "join"}
           {$i18n.t("remoteSupportFrameJoined")}
+        {:else if remote.control === "pilot"}
+          {$i18n.t("remoteSupportFramePilotControl")}
         {:else if remote.peerConnected}
           {$i18n.t("remoteSupportFrameConnected")}
         {:else}
           {$i18n.t("remoteSupportFrameWaiting")}
         {/if}
       </span>
+      {#if remote.beingWatched && remote.role === "share"}
+        <span
+          class="fas fa-eye"
+          title={$i18n.t("remoteSupportBeingWatchedPilot")}
+        ></span>
+      {/if}
+      {#if remote.controlError}
+        <span class="control-error">{remote.controlError}</span>
+      {/if}
+      {#if remote.role === "join" && remote.control === "supporter" && remote.peerConnected}
+        <button
+          onclick={handOver}
+          disabled={remote.controlBusy}
+          title={$i18n.t("remoteSupportHandOverTitle")}
+        >
+          {$i18n.t("remoteSupportHandOver")}
+        </button>
+      {:else if remote.role === "share" && remote.control === "pilot"}
+        {#if remote.controlAsked}
+          <span class="asked">{$i18n.t("remoteSupportControlAsked")}</span>
+        {/if}
+        <button
+          class:highlight={remote.controlAsked}
+          onclick={giveControl}
+          disabled={remote.controlBusy}
+        >
+          {$i18n.t("remoteSupportGiveControl")}
+        </button>
+      {/if}
       <button onclick={killSession}>{$i18n.t("remoteSupportKill")}</button>
     </div>
   </div>
@@ -127,6 +169,10 @@
       <span class="label">
         {#if !remote.peerConnected}
           {$i18n.t("remoteSupportFrameWaiting")}
+        {:else if remote.role === "join"}
+          {remote.hasFrame
+            ? $i18n.t("remoteSupportWatchingPilot")
+            : $i18n.t("remoteSupportWatchWaitingPilot")}
         {:else if !remote.hasFrame}
           {$i18n.t("remoteSupportWatchWaiting")}
         {:else}
@@ -135,9 +181,35 @@
       </span>
       <span class="reminder">
         <span class="fas fa-exclamation-triangle"></span>
-        {$i18n.t("remoteSupportSafetyReminderPilot")}
+        {remote.role === "join"
+          ? $i18n.t("remoteSupportSafetyReminder")
+          : $i18n.t("remoteSupportSafetyReminderPilot")}
       </span>
-      {#if isWeb}
+      {#if remote.controlError}
+        <span class="control-error">{remote.controlError}</span>
+      {/if}
+      {#if remote.role === "share" && remote.peerConnected}
+        <button
+          class="btn"
+          onclick={takeControl}
+          disabled={remote.controlBusy}
+          title={$i18n.t("remoteSupportTakeControlTitle")}
+        >
+          <span class="fas fa-hand-paper"></span>
+          {$i18n.t("remoteSupportTakeControl")}
+        </button>
+      {:else if remote.role === "join"}
+        <button
+          class="btn"
+          onclick={askForControl}
+          disabled={remote.controlAskSent}
+        >
+          {remote.controlAskSent
+            ? $i18n.t("remoteSupportControlAskSent")
+            : $i18n.t("remoteSupportAskControl")}
+        </button>
+      {/if}
+      {#if isWeb && remote.role === "share"}
         <!-- The supporter only sees what the browser was allowed to share. -->
         <button class="btn" onclick={allowPort}>
           {$i18n.t("remoteSupportAllowPort")}
@@ -159,6 +231,8 @@
           {#if !remote.peerConnected}
             <p>{$i18n.t("remoteSupportViewerCodeHint")}</p>
             <p class="code">{remote.code || "..."}</p>
+          {:else if remote.role === "join"}
+            <p>{$i18n.t("remoteSupportWatchWaitingPilot")}</p>
           {:else}
             <p>{$i18n.t("remoteSupportWatchWaiting")}</p>
           {/if}
@@ -204,9 +278,31 @@
       border-radius: var(--radius-sm);
       cursor: pointer;
     }
+
+    button.highlight {
+      color: var(--color-accent-500);
+      background: #fff;
+      font-weight: 600;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .asked,
+    .control-error {
+      font-weight: 400;
+    }
+
+    .control-error {
+      max-width: 40vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
-  /* The supporter's screen looks just like the pilot's own configurator, so
+  /* The other side's screen looks just like this configurator, so
      frame it unmistakably. */
   .viewer {
     position: fixed;
@@ -245,6 +341,11 @@
       background: rgba(0, 0, 0, 0.45);
       font-weight: 600;
     }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
   }
 
   .viewer-body {
@@ -257,7 +358,7 @@
     position: absolute;
     inset: 0;
     overflow: hidden;
-    /* Read-only: nothing here can reach the supporter. */
+    /* Read-only: nothing here can reach the other side. */
     pointer-events: none;
   }
 

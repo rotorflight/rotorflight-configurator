@@ -6,6 +6,8 @@
   import { i18n } from "@/js/i18n.js";
   import { canShareDevices } from "@/js/protocols/RemoteSupport.js";
   import {
+    giveControl,
+    handOver,
     killSession,
     remote,
     startSession,
@@ -73,6 +75,12 @@
   }
 
   let status = $derived.by(() => {
+    if (remote.role === "share" && remote.control === "pilot") {
+      return $i18n.t("remoteSupportYouHaveControl");
+    }
+    if (remote.role === "join" && remote.control === "pilot") {
+      return $i18n.t("remoteSupportPilotHasControl");
+    }
     if (remote.role === "share") {
       return remote.peerConnected
         ? $i18n.t("remoteSupportSupporterConnected")
@@ -230,7 +238,28 @@
             : $i18n.t("remoteSupportNotWatched")}
         </p>
       {/if}
+      {#if remote.controlError}
+        <p class="message error">{remote.controlError}</p>
+      {/if}
       <div class="actions">
+        {#if remote.role === "join" && remote.control === "supporter" && remote.peerConnected}
+          <button
+            class="btn"
+            onclick={handOver}
+            disabled={remote.controlBusy}
+            title={$i18n.t("remoteSupportHandOverTitle")}
+          >
+            {$i18n.t("remoteSupportHandOver")}
+          </button>
+        {:else if remote.role === "share" && remote.control === "pilot"}
+          <button
+            class="btn primary"
+            onclick={giveControl}
+            disabled={remote.controlBusy}
+          >
+            {$i18n.t("remoteSupportGiveControl")}
+          </button>
+        {/if}
         <button class="btn danger" onclick={killSession}>
           {$i18n.t("remoteSupportKill")}
         </button>

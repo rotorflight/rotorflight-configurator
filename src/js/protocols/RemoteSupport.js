@@ -2,6 +2,7 @@ import { i18n } from '@/js/localization.js';
 import { SIDE } from '@/js/protocols/RemoteCrypto.js';
 import { RemoteDeviceHost, releaseAbandonedSerialConnections } from '@/js/protocols/RemoteDeviceHost.js';
 import {
+    CONTROL,
     MSG,
     RESULT_OK,
     RESULT_STALL,
@@ -34,7 +35,19 @@ import { getSerialProvider } from '@/js/protocols/WebSerial.js';
     and Firefox and Safari don't (see canShareDevices()).
 
     The same session also carries the screen mirroring messages used by
-    RemoteView.svelte.js.
+    RemoteView.svelte.js, and the CONTROL messages that hand the flight
+    controller back and forth:
+
+    - The supporter has control when a session starts.
+    - The pilot takes control (takeControl(), or when the supporter hands it
+      over): the device host makes the board safe, lets go of it and lists
+      no devices, so the pilot's own configurator can connect, e.g. to
+      calibrate something on the bench.
+    - The pilot gives control back (giveControl()) once their configurator
+      has let go of the board: the supporter sees the ports again.
+
+    The pilot's side decides; the supporter can hand control over or ask for
+    it back, but never takes it.
 */
 
 export const REMOTE_PORT_PREFIX = 'remote:';
@@ -193,6 +206,18 @@ class RemoteSupportClient {
         // The current session: { role, code, device, message, error }, role
         // being 'share', 'join' or null.
         this.session = { role: null };
+        // Who works on the flight controller: 'supporter' or 'pilot'. The
+        // pilot's side decides, and tells the supporter's side.
+        this.control = 'supporter';
+        // Pilot: the supporter has asked for control back.
+        this.controlAsked = false;
+        // Pilot: set by RemoteView.svelte.js, called when the supporter
+        // hands control over.
+        this.onHandOver = null;
+        // Pilot: the device host of the running session.
+        this.host = null;
+        // Pilot: control is being handed over right now.
+        this.switching = false;
         // Called when the status above changes, and with each screen
         // mirroring message.
         this.onChange = null;
@@ -253,6 +278,88 @@ class RemoteSupportClient {
         this.peerConnected = hostConnected;
         if (previous !== JSON.stringify(this.session) + this.peerConnected) {
             this.onChange?.();
+        }
+    }
+
+    /** A CONTROL message from the other side of the session. */
+    handleControl(code) {
+        if (this.session.role === 'share') {
+            if (code === CONTROL.HAND_OVER) {
+                this.onHandOver?.();
+            } else if (code === CONTROL.ASK && this.control === 'pilot') {
+                this.controlAsked = true;
+                this.onChange?.();
+            }
+        } else if (this.session.role === 'join') {
+            const control = { [CONTROL.PILOT]: 'pilot', [CONTROL.SUPPORTER]: 'supporter' }[code];
+            if (control && control !== this.control) {
+                this.control = control;
+                this.onChange?.();
+            }
+        }
+    }
+
+    sendControl(code) {
+        this.send(Uint8Array.of(MSG.CONTROL, code));
+    }
+
+    /**
+     * Pilot: takes control of the flight controller. Resolves once the
+     * board has been made safe and let go of, so this configurator can open
+     * it. Throws while the supporter may be flashing firmware: letting go of
+     * the board then would leave it half flashed.
+     */
+    async takeControl() {
+        if (this.session.role !== 'share' || !this.host || this.control === 'pilot' || this.switching) {
+            return;
+        }
+        if (this.host.usbInUse) {
+            throw new Error(i18n.getMessage('remoteSupportControlFlashing'));
+        }
+        this.switching = true;
+        try {
+            // Tell the supporter first, so they know why the port goes away.
+            this.sendControl(CONTROL.PILOT);
+            await this.host.pause();
+            this.control = 'pilot';
+            this.controlAsked = false;
+            this.onChange?.();
+        } finally {
+            this.switching = false;
+        }
+    }
+
+    /**
+     * Pilot: gives control back to the supporter. This configurator must
+     * have let go of the flight controller already.
+     */
+    async giveControl() {
+        if (this.session.role !== 'share' || !this.host || this.control !== 'pilot' || this.switching) {
+            return;
+        }
+        this.switching = true;
+        try {
+            this.control = 'supporter';
+            this.controlAsked = false;
+            this.sendControl(CONTROL.SUPPORTER);
+            this.onChange?.();
+            await this.host.resume();
+        } finally {
+            this.switching = false;
+        }
+    }
+
+    /** Supporter: hands control to the pilot. Disconnect from their board first. */
+    handOver() {
+        if (this.session.role === 'join' && this.control === 'supporter') {
+            this.sendControl(CONTROL.HAND_OVER);
+        }
+    }
+
+    /** Supporter: asks the pilot for control back. */
+    askForControl() {
+        if (this.session.role === 'join' && this.control === 'pilot') {
+            this.sendControl(CONTROL.ASK);
         }
     }
 
@@ -335,6 +442,10 @@ class RemoteSupportClient {
             onMessage: (message) => {
                 if (message[0] === MSG.VIEW_DATA || message[0] === MSG.VIEW_REQUEST) {
                     this.onView?.(message[0], message.subarray(1));
+                } else if (message[0] === MSG.CONTROL) {
+                    if (message.length >= 2) {
+                        this.handleControl(message[1]);
+                    }
                 } else if (host) {
                     host.handle(message);
                 } else {
@@ -358,12 +469,18 @@ class RemoteSupportClient {
         }
         host?.start();
 
+        this.host = host;
+        this.control = 'supporter';
+        this.controlAsked = false;
         this.embedded = session;
         this.applyStatus(false, false, { role, code: null, device: null, message: null, error: false });
         this.embeddedDone = session.run().then(async ({ message, error }) => {
             // Make the board safe and let go of it before saying the session is over.
             await host?.shutdown();
             this.embedded = null;
+            this.host = null;
+            this.control = 'supporter';
+            this.controlAsked = false;
             this.applyStatus(false, false, { role: null, code: null, device: null, message, error });
         });
     }

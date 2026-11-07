@@ -1,6 +1,8 @@
 import { record, Replayer } from 'rrweb';
 import { RemoteSupport, VIEW_DATA, VIEW_REQUEST } from '@/js/protocols/RemoteSupport.js';
 import { GUI } from '@/js/gui.js';
+import { i18n } from '@/js/localization.js';
+import { PortHandler } from '@/js/port_handler.js';
 import { serial } from '@/js/serial.js';
 
 /*
@@ -25,6 +27,11 @@ import { serial } from '@/js/serial.js';
     The pilot starts and stops the stream (VIEW_REQUEST), so nothing is
     recorded or sent unless someone is watching. The supporter's dialog shows
     when that is the case. Password fields are masked by rrweb.
+
+    While the pilot has control of the flight controller (see the CONTROL
+    messages in RemoteSupport.js), it goes the other way: the pilot's
+    configurator records and the supporter watches. Whoever has control is
+    recorded; the other side watches.
 
     Wire format (see PROTOCOL.md, RemoteSession.js): each message is `type kind payload`.
     VIEW_DATA carries one JSON-encoded rrweb event, split into fragments of
@@ -65,9 +72,30 @@ export const remote = $state({
     // Pilot: the viewer window is open and a frame has arrived.
     watching: false,
     hasFrame: false,
-    // Supporter: the pilot is watching this configurator.
+    // The other side is watching this configurator.
     beingWatched: false,
+    // Who works on the flight controller: 'supporter' or 'pilot'.
+    control: 'supporter',
+    // Pilot: the supporter asked for control back.
+    controlAsked: false,
+    // Supporter: asked the pilot for control back.
+    controlAskSent: false,
+    // Control is being handed over, and why that failed.
+    controlBusy: false,
+    controlError: null,
 });
+
+/** Whether this configurator works on the flight controller (and is watched). */
+export function hasControl() {
+    return (remote.role === 'join' && remote.control === 'supporter')
+        || (remote.role === 'share' && remote.control === 'pilot');
+}
+
+/** Whether this configurator shows the other side's screen. */
+export function showsPeer() {
+    return (remote.role === 'share' && remote.control === 'supporter')
+        || (remote.role === 'join' && remote.control === 'pilot' && remote.peerConnected);
+}
 
 function sync() {
     const { session } = RemoteSupport;
@@ -79,8 +107,18 @@ function sync() {
     remote.device = session.device ?? null;
     remote.message = session.message ?? null;
     remote.error = Boolean(session.error);
+    if (remote.control !== RemoteSupport.control) {
+        remote.controlAskSent = false;
+        remote.controlError = null;
+    }
+    remote.control = RemoteSupport.control;
+    remote.controlAsked = RemoteSupport.controlAsked;
+    if (remote.role === null) {
+        remote.controlBusy = false;
+        remote.controlError = null;
+    }
 
-    if (remote.role !== 'join' || !remote.peerConnected) {
+    if (!hasControl() || !remote.peerConnected) {
         stopRecording();
     }
     if (!remote.peerConnected) {
@@ -132,6 +170,73 @@ async function disconnect() {
 
 export function stopSession() {
     RemoteSupport.stopSession();
+}
+
+// ---- handing control back and forth -------------------------------------
+
+/**
+ * Pilot: takes control of the flight controller, e.g. to calibrate
+ * something here. The board is made safe and let go of first; then this
+ * configurator connects to it, if a port of this computer is selected.
+ */
+export async function takeControl() {
+    if (remote.role !== 'share' || remote.control === 'pilot' || remote.controlBusy) {
+        return;
+    }
+    remote.controlBusy = true;
+    remote.controlError = null;
+    try {
+        await RemoteSupport.takeControl();
+    } catch (err) {
+        remote.controlError = err.message;
+    } finally {
+        remote.controlBusy = false;
+    }
+    if (remote.control === 'pilot' && !GUI.connected_to && !GUI.connecting_to && PortHandler.devicePortSelected()) {
+        document.querySelector('div#connectbutton a.connect')?.click();
+    }
+}
+
+/** Pilot: lets go of the flight controller and gives control back to the supporter. */
+export async function giveControl() {
+    if (remote.role !== 'share' || remote.control !== 'pilot' || remote.controlBusy) {
+        return;
+    }
+    remote.controlBusy = true;
+    remote.controlError = null;
+    try {
+        if (!(await disconnect())) {
+            remote.controlError = i18n.getMessage('remoteSupportControlDisconnectFailed');
+            return;
+        }
+        await RemoteSupport.giveControl();
+    } finally {
+        remote.controlBusy = false;
+    }
+}
+
+/** Supporter: disconnects from the pilot's board and hands control to the pilot. */
+export async function handOver() {
+    if (remote.role !== 'join' || remote.control !== 'supporter' || remote.controlBusy) {
+        return;
+    }
+    remote.controlBusy = true;
+    remote.controlError = null;
+    try {
+        if (serial.connectionType === 'remote' && !(await disconnect())) {
+            remote.controlError = i18n.getMessage('remoteSupportControlDisconnectFailed');
+            return;
+        }
+        RemoteSupport.handOver();
+    } finally {
+        remote.controlBusy = false;
+    }
+}
+
+/** Supporter: asks the pilot for control back. */
+export function askForControl() {
+    RemoteSupport.askForControl();
+    remote.controlAskSent = true;
 }
 
 /** Switches to the Remote Support tab (from the Welcome and Maintenance tabs). */
@@ -262,7 +367,7 @@ function stopRecording() {
 }
 
 function handleRequest(code) {
-    if (remote.role !== 'join' || !remote.peerConnected) {
+    if (!hasControl() || !remote.peerConnected) {
         return;
     }
     if (code === REQUEST.START) {
@@ -464,4 +569,5 @@ function handleView(type, body) {
 }
 
 RemoteSupport.onChange = sync;
+RemoteSupport.onHandOver = takeControl;
 RemoteSupport.onView = handleView;
