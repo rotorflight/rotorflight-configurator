@@ -28,6 +28,17 @@
     }
   });
 
+  // Copies this axis's bank to the other two (#335), so the first axis is set once, not three
+  // times. Each axis stays editable afterwards.
+  function copyAxisToOthers() {
+    const source = $state.snapshot(notches.banks[axis]);
+    for (let other = 0; other < notches.banks.length; other++) {
+      if (other !== axis) {
+        notches.banks[other] = structuredClone(source);
+      }
+    }
+  }
+
   let notchCount = $derived.by(() => {
     if (!notches) {
       return 0;
@@ -116,6 +127,9 @@
               {$i18n.t(axisProp.label)}
             </button>
           {/each}
+          <button class="copy-axis" onclick={copyAxisToOthers}>
+            {$i18n.t("gyroRpmFilterCopyAxis")}
+          </button>
         </ul>
       {/if}
     </div>

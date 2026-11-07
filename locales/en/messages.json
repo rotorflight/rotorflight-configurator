@@ -8478,6 +8478,9 @@
     "gyroRpmFilterTailRotorMinRPMHelp": {
         "message": "Minimum Tail Rotor RPM accepted by the filters"
     },
+    "gyroRpmFilterCopyAxis": {
+        "message": "Copy to other axes"
+    },
     "gyroRpmFilterBanks": {
         "message": "RPM Filter Notches"
     },
