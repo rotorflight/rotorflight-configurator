@@ -6,8 +6,14 @@ import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { bit_check } from "@/js/serial_backend.js";
 
 import { listManufacturers } from "./manufacturers/index.js";
-import { buildManufacturerPayload } from "./engine.js";
-import { pollForEsc } from "./detection.js";
+import {
+    buildManufacturerPayload,
+    changedKeys,
+    mergeEditedValues,
+    mismatchedKeys,
+    parseManufacturerBuffer,
+} from "./engine.js";
+import { delay, pollForEsc, readEscParametersOnce } from "./detection.js";
 import { runEscSwitch, runPostSaveCycle, deselectTarget, HandshakeStatus } from "./handshake.js";
 
 export const View = {
@@ -24,6 +30,7 @@ class State {
     escTarget = $state(0);
     status = $state(HandshakeStatus.IDLE);
     error = $state(null);
+    saveMessage = $state(null);
     values = $state({});
 
     // initialValues must be reactive ($state): it's read inside the `changes` derived below,
@@ -152,24 +159,56 @@ class State {
         this.view = this.manufacturer?.group === "bridged" ? View.SELECTOR : View.PICKER;
     }
 
+    // Writes what the pilot changed. The ESC is read again first, so a change made to it
+    // since the load is kept rather than overwritten; the write is read back, and counts
+    // only when the ESC holds the changed values (#530). A refused write says so (#532).
     async onSave() {
-        const payload = buildManufacturerPayload(this.manufacturer, this.values, this.rawBuffer);
+        this.saveMessage = null;
+        const edited = changedKeys(this.initialValues, this.values);
+        if (edited.length === 0) return;
+
+        const before = await readEscParametersOnce();
+        const beforeDisplay = parseManufacturerBuffer(this.manufacturer, before).display;
+        const kept = changedKeys(this.initialValues, beforeDisplay).filter((k) => !edited.includes(k));
+        const display = mergeEditedValues(beforeDisplay, this.values, edited);
+        const payload = buildManufacturerPayload(this.manufacturer, display, before);
+
         // Firmware commits ESC EEPROM synchronously in the MSP_SET_ESC_PARAMETERS handler --
         // never call MSP_EEPROM_WRITE/reboot here, that subsystem is unrelated to ESC params
         // and would drop the bridge/serial link mid-write for no benefit.
-        await MSP.promise(MSPCodes.MSP_SET_ESC_PARAMETERS, Array.from(payload));
+        const reply = await MSP.promise(MSPCodes.MSP_SET_ESC_PARAMETERS, Array.from(payload));
+        if (reply?.unsupported) {
+            this.saveMessage = { kind: "error", key: "escProgrammingSaveRefused", keys: [] };
+            return;
+        }
 
         if (this.manufacturer.group === "bridged") {
             await runPostSaveCycle(this.manufacturer, this.escTarget, {});
         }
 
-        // Matches the Lua source: it never reads the ESC back after a save (every bridged
-        // manufacturer's postSaveFlushRead defaults to false, and the native/Group B pages
-        // don't re-read at all either). Reading immediately races the ESC's own commit and can
-        // show stale pre-write values -- trusting what was just written matches the reference
-        // tool exactly and sidesteps the race entirely.
-        this.rawBuffer = payload;
+        // The ESC may still be committing: read back a few times, a short wait apart.
+        let after = before;
+        let afterDisplay = beforeDisplay;
+        let mismatch = edited;
+        for (let attempt = 0; attempt < 3 && mismatch.length > 0; attempt++) {
+            await delay(attempt === 0 ? 300 : 600);
+            after = await readEscParametersOnce();
+            afterDisplay = parseManufacturerBuffer(this.manufacturer, after).display;
+            mismatch = mismatchedKeys(this.values, afterDisplay, edited);
+        }
+
+        // The screen shows what the ESC holds now.
+        this.rawBuffer = after;
+        this.values = { ...afterDisplay };
         this.initialValues = $state.snapshot(this.values);
+
+        if (mismatch.length > 0) {
+            this.saveMessage = { kind: "error", key: "escProgrammingSaveMismatch", keys: mismatch };
+        } else if (kept.length > 0) {
+            this.saveMessage = { kind: "info", key: "escProgrammingSaveKept", keys: kept };
+        } else {
+            this.saveMessage = { kind: "ok", key: "escProgrammingSaveDone", keys: [] };
+        }
     }
 
     onRevert() {

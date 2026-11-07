@@ -305,3 +305,28 @@ export function keepPageField(pageField, layoutRevision) {
     if (pageField.maxLayout != null && layoutRevision > pageField.maxLayout) return false;
     return true;
 }
+
+// Save helpers. A save writes only the values the pilot changed, on top of the block
+// the ESC holds now, and counts only when the ESC reads back those values (#530).
+export function sameValue(a, b) {
+    if (typeof a === "number" && typeof b === "number") return Math.abs(a - b) < 1e-9;
+    return a === b;
+}
+
+// The keys whose values differ between two display objects.
+export function changedKeys(before, after) {
+    const keys = new Set([...Object.keys(before ?? {}), ...Object.keys(after ?? {})]);
+    return [...keys].filter((k) => !sameValue(before?.[k], after?.[k]));
+}
+
+// `current` with the edited keys taken from `edited`.
+export function mergeEditedValues(current, edited, keys) {
+    const merged = { ...current };
+    for (const k of keys) merged[k] = edited[k];
+    return merged;
+}
+
+// The keys of `keys` whose read-back value is not what was written.
+export function mismatchedKeys(expected, actual, keys) {
+    return keys.filter((k) => !sameValue(expected[k], actual?.[k]));
+}

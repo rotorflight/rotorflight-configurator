@@ -80,11 +80,27 @@
   {:else if escState.view === View.DETECTING}
     <DetectionStatus />
   {:else if escState.view === View.FORM}
+    {#if escState.saveMessage}
+      <p
+        class={[
+          "save-message",
+          escState.saveMessage.kind === "error" && "error",
+        ]}
+      >
+        {$i18n.t(escState.saveMessage.key, {
+          1: escState.saveMessage.keys.join(", "),
+        })}
+      </p>
+    {/if}
     <ParameterForm />
   {/if}
 </Page>
 
 <style lang="scss">
+  .save-message.error {
+    color: var(--color-status-bad);
+  }
+
   .title {
     display: flex;
     flex-direction: column;

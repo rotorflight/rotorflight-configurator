@@ -2096,6 +2096,18 @@
     "escProgrammingStatusGuarding": {
         "message": "Checking ESC link..."
     },
+    "escProgrammingSaveRefused": {
+        "message": "The ESC refused the save. Nothing was written."
+    },
+    "escProgrammingSaveMismatch": {
+        "message": "The ESC does not hold these values after the save: $1. Check the ESC and save again."
+    },
+    "escProgrammingSaveKept": {
+        "message": "Saved. These values changed on the ESC since it was read, so they were kept as the ESC has them: $1."
+    },
+    "escProgrammingSaveDone": {
+        "message": "Saved and read back from the ESC."
+    },
     "escProgrammingStatusFailed": {
         "message": "Could not detect the ESC. Check wiring/power and try again."
     },
