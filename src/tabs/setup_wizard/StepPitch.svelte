@@ -30,29 +30,41 @@
   const TEST_DEGREES = 9;
 
   // `inputs`: the mixer inputs this calibration sets (both cyclic axes share
-  // one calibration). `hold`: the input held at TEST_DEGREES while
-  // measuring.
+  // one calibration). `hold`: the input held while measuring. Cyclic holds
+  // roll: with the blades along the boom, holding pitch gives the same
+  // reading with the head left where it stood.
   const CALIBRATIONS = [
     { key: "collective", inputs: [COLLECTIVE], hold: COLLECTIVE },
-    { key: "cyclic", inputs: [ROLL, PITCH], hold: PITCH },
+    { key: "cyclic", inputs: [ROLL, PITCH], hold: ROLL },
   ];
 
   let holding = $state(null);
   let measured = $state({ collective: TEST_DEGREES, cyclic: TEST_DEGREES });
   let applied = $state({});
+  // The angle each calibration holds. Only TEST_DEGREES can be calibrated;
+  // other angles are for checking the gauge. Not stored.
+  let heldAt = $state({ collective: TEST_DEGREES, cyclic: TEST_DEGREES });
 
   onMount(() => holdOnly(null));
 
-  // One axis at TEST_DEGREES, the others at 0.
-  function holdOnly(input) {
+  // One axis at `degrees`, the others at 0.
+  function holdOnly(input, degrees = 0) {
     for (const i of [ROLL, PITCH, COLLECTIVE]) {
-      wiz.holdMixer(i, i === input ? swashRaw(TEST_DEGREES) : 0);
+      wiz.holdMixer(i, i === input ? swashRaw(degrees) : 0);
     }
     holding = input;
   }
 
   function toggleHold(cal) {
-    holdOnly(holding === cal.hold ? null : cal.hold);
+    if (holding === cal.hold) holdOnly(null);
+    else holdOnly(cal.hold, heldAt[cal.key]);
+  }
+
+  // Bounded by the stored input limit, on both sides.
+  function setHeld(cal, degrees) {
+    const max = Math.abs(limitDegrees(FC.MIXER_INPUTS[cal.hold].max));
+    heldAt[cal.key] = Math.max(-max, Math.min(max, degrees));
+    if (holding === cal.hold) holdOnly(cal.hold, heldAt[cal.key]);
   }
 
   // From the held input: that is the axis the pilot measures, and the
@@ -172,11 +184,13 @@
     </h3>
     <div class="with-art">
       <div class="art">
-        <PitchArt angle={TEST_DEGREES} label="{TEST_DEGREES}°" />
+        <PitchArt angle={heldAt[cal.key]} label="{heldAt[cal.key]}°" />
       </div>
       <div class="text">
         <p>
-          {$i18n.t(`setupWizardPitchText_${cal.key}`, { 1: TEST_DEGREES })}
+          {$i18n.t(`setupWizardPitchText_${cal.key}`, {
+            1: heldAt[cal.key],
+          })}
         </p>
       </div>
     </div>
@@ -186,9 +200,23 @@
         onclick={() => toggleHold(cal)}
       >
         {holding === cal.hold
-          ? $i18n.t("setupWizardPitchHolding", { 1: TEST_DEGREES })
-          : $i18n.t("setupWizardPitchHold", { 1: TEST_DEGREES })}
+          ? $i18n.t("setupWizardPitchHolding", { 1: heldAt[cal.key] })
+          : $i18n.t("setupWizardPitchHold", { 1: heldAt[cal.key] })}
       </button>
+      <span class="angle">
+        <button class="btn" onclick={() => setHeld(cal, heldAt[cal.key] - 1)}>
+          −
+        </button>
+        <span class="value">{heldAt[cal.key]}°</span>
+        <button class="btn" onclick={() => setHeld(cal, heldAt[cal.key] + 1)}>
+          +
+        </button>
+      </span>
+      {#if heldAt[cal.key] !== TEST_DEGREES}
+        <span class="muted"
+          >{$i18n.t("setupWizardPitchHoldNote", { 1: TEST_DEGREES })}</span
+        >
+      {/if}
     </div>
     <div class="actions">
       <label class="measure">
@@ -203,7 +231,9 @@
       </label>
       <button
         class="btn"
-        disabled={holding !== cal.hold || measured[cal.key] === TEST_DEGREES}
+        disabled={holding !== cal.hold ||
+          heldAt[cal.key] !== TEST_DEGREES ||
+          measured[cal.key] === TEST_DEGREES}
         onclick={() => applyMeasured(cal)}
       >
         {$i18n.t("setupWizardPitchApply")}
@@ -305,6 +335,12 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
+  }
+
+  .angle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
 
   .limits {

@@ -984,13 +984,16 @@
         "message": "Collective"
     },
     "setupWizardPitchText_collective": {
-        "message": "Hold the collective at $1° and measure the blade pitch."
+        "message": "Turn the blades to point along the boom. Hold the collective at $1° and measure the blade pitch."
+    },
+    "setupWizardPitchHoldNote": {
+        "message": "Calibrate works at $1° only. Other angles are for checking the gauge."
     },
     "setupWizardPitchTitle_cyclic": {
         "message": "Cyclic"
     },
     "setupWizardPitchText_cyclic": {
-        "message": "Turn the blades to point left and right. Hold the pitch at $1° and measure the blade pitch."
+        "message": "Turn the blades to point left and right. Hold roll at $1° and measure the blade pitch."
     },
     "setupWizardPitchHold": {
         "message": "Hold at $1°"
