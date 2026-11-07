@@ -54,6 +54,17 @@
     },
     {
       "type": "pr",
+      "name": "535",
+      "path": "./pr/535/",
+      "branch": "ccr-bae5fa96-hoaal8",
+      "date": "2026-11-07T23:51:27Z",
+      "number": 535,
+      "title": "Remote support: hand control of the flight controller back and forth",
+      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/535",
+      "draft": false
+    },
+    {
+      "type": "pr",
       "name": "509",
       "path": "./pr/509/",
       "branch": "feature/srxl2-esc-config-v2",
