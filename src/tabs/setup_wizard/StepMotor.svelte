@@ -108,6 +108,7 @@
   //// pinion side x main gear. Tail: field 0 = the tail side, field 1 = the
   //// drive side. One stage is two stages with both intermediate gears at 1.
 
+  const MIN_TEETH = 6; // Minimum tooth count for gear visualization
   const MAX_TEETH = 500;
   const MAX_PRODUCT = 65535;
 
@@ -325,7 +326,7 @@
         >
           <span>{$i18n.t("setupWizardMotorPinion")}</span>
           <NumberInput
-            min="1"
+            min={MIN_TEETH}
             max={MAX_TEETH}
             bind:value={train.pinion}
             onchange={applyMain}
@@ -335,7 +336,7 @@
           {#if mainGearMode === 2}
             <span>{$i18n.t("setupWizardGearInterPinion")}</span>
             <NumberInput
-              min="1"
+              min={MIN_TEETH}
               max={MAX_TEETH}
               bind:value={train.pinionSide}
               onchange={applyMain}
@@ -344,7 +345,7 @@
 
             <span>{$i18n.t("setupWizardGearInterMain")}</span>
             <NumberInput
-              min="1"
+              min={MIN_TEETH}
               max={MAX_TEETH}
               bind:value={train.mainSide}
               onchange={applyMain}
@@ -354,7 +355,7 @@
 
           <span>{$i18n.t("setupWizardMotorMainGear")}</span>
           <NumberInput
-            min="1"
+            min={MIN_TEETH}
             max={MAX_TEETH}
             bind:value={train.main}
             onchange={applyMain}
@@ -363,7 +364,7 @@
         </div>
 
         <div
-          style="width: 200px; flex-shrink: 0; display: flex; justify-content: center; align-items: center;"
+          style="width: 160px; flex-shrink: 0; display: flex; justify-content: center; align-items: center;"
         >
           <GearVisualization
             teeth={mainGearMode === 2
@@ -433,7 +434,7 @@
             >
               <span>{$i18n.t("setupWizardGearDrivePulley")}</span>
               <NumberInput
-                min="1"
+                min={MIN_TEETH}
                 max={MAX_TEETH}
                 bind:value={tailShaft.drive}
                 onchange={applyTail}
@@ -442,7 +443,7 @@
 
               <span>{$i18n.t("setupWizardGearRotorPulley")}</span>
               <NumberInput
-                min="1"
+                min={MIN_TEETH}
                 max={MAX_TEETH}
                 bind:value={tailShaft.rotor}
                 onchange={applyTail}
@@ -451,7 +452,7 @@
             </div>
 
             <div
-              style="width: 200px; flex-shrink: 0; display: flex; justify-content: center; align-items: center;"
+              style="width: 160px; flex-shrink: 0; display: flex; justify-content: center; align-items: center;"
             >
               <GearVisualization
                 teeth={[tailShaft.drive, tailShaft.rotor]}
@@ -470,7 +471,7 @@
               {#if mainGearMode === 1}
                 <span>{$i18n.t("setupWizardGearMesh")}</span>
                 <NumberInput
-                  min="1"
+                  min={MIN_TEETH}
                   max={MAX_TEETH}
                   bind:value={tailShaft.mesh}
                   onchange={applyTail}
@@ -480,7 +481,7 @@
 
               <span>{$i18n.t("setupWizardGearDrivePulley")}</span>
               <NumberInput
-                min="1"
+                min={MIN_TEETH}
                 max={MAX_TEETH}
                 bind:value={tailShaft.drive}
                 onchange={applyTail}
@@ -489,7 +490,7 @@
 
               <span>{$i18n.t("setupWizardGearRotorPulley")}</span>
               <NumberInput
-                min="1"
+                min={MIN_TEETH}
                 max={MAX_TEETH}
                 bind:value={tailShaft.rotor}
                 onchange={applyTail}
@@ -498,7 +499,7 @@
             </div>
 
             <div
-              style="width: 200px; flex-shrink: 0; display: flex; justify-content: center; align-items: center;"
+              style="width: 160px; flex-shrink: 0; display: flex; justify-content: center; align-items: center;"
             >
               <GearVisualization
                 teeth={[

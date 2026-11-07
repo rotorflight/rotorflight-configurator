@@ -4,9 +4,9 @@
 
   let { poles = 12 } = $props();
 
-  // Clamp poles to valid range
-  const p = Math.max(2, Math.min(254, poles));
-  const polesArray = Array.from({ length: p }, (_, i) => i);
+  // Clamp poles to valid range and derive pole array
+  let p = $derived(Math.max(2, Math.min(254, poles)));
+  let polesArray = $derived(Array.from({ length: p }, (_, i) => i));
 </script>
 
 <svg

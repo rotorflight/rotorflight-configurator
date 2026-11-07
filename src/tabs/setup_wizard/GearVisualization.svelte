@@ -43,11 +43,11 @@
     const unitPx = 2;
     const r = t.map((n) => (n * unitPx) / 2);
 
-    // Layout: shafts at x positions
+    // Layout: shafts at x positions, compact
     // motor shaft (x_m), intermediate shaft (x_i), rotor shaft (x_r)
-    const x_m = 8 + r[0];
-    const x_i = x_m + r[0] + r[1] + 6;
-    const x_r = x_i + r[2] + r[3] + 6;
+    const x_m = 6 + r[0];
+    const x_i = x_m + r[0] + r[1] + 4;
+    const x_r = x_i + r[2] + r[3] + 4;
 
     const y_top = 15; // top gear (main side)
     const y_bot = 60; // bottom gear (pinion side)
@@ -112,7 +112,7 @@
   <!-- Two-stage train: side view -->
   {@const train = trainFx()}
   <svg
-    viewBox="0 0 160 90"
+    viewBox="0 0 140 100"
     class="gear-viz"
     aria-hidden="true"
     focusable="false"
@@ -155,8 +155,8 @@
         />
       {/each}
 
-      <!-- Tooth label -->
-      <text x={gear.x} y={gear.y + train.barH + 12} class="tooth-label">
+      <!-- Tooth label (below gears to avoid shaft overlap) -->
+      <text x={gear.x} y={gear.y + train.barH + 18} class="tooth-label">
         {gear.label}
       </text>
     {/each}
