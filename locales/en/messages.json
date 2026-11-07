@@ -1265,6 +1265,45 @@
     "setupWizardMotorRpmText": {
         "message": "Used for headspeed, the governor and the RPM filters. Count the magnets in the motor bell for the poles."
     },
+    "setupWizardGearStage": {
+        "message": "Gear train"
+    },
+    "setupWizardGearStageOne": {
+        "message": "One stage"
+    },
+    "setupWizardGearStageTwo": {
+        "message": "Two stages"
+    },
+    "setupWizardGearInterPinion": {
+        "message": "Intermediate gear, pinion side"
+    },
+    "setupWizardGearInterMain": {
+        "message": "Intermediate gear, main side"
+    },
+    "setupWizardGearRatio": {
+        "message": "Ratio, as 1 : x"
+    },
+    "setupWizardGearTail": {
+        "message": "Tail drive"
+    },
+    "setupWizardGearTailDirect": {
+        "message": "From the main shaft"
+    },
+    "setupWizardGearTailShaft": {
+        "message": "From the intermediate shaft"
+    },
+    "setupWizardGearDrivePulley": {
+        "message": "Drive pulley, on the shaft"
+    },
+    "setupWizardGearRotorPulley": {
+        "message": "Tail rotor pulley"
+    },
+    "setupWizardGearMesh": {
+        "message": "Intermediate gear meshing with the main gear"
+    },
+    "setupWizardGearOverflow": {
+        "message": "The tooth counts are too large for the firmware. Use smaller counts or a ratio."
+    },
     "setupWizardPowerTitle": {
         "message": "Battery and power"
     },

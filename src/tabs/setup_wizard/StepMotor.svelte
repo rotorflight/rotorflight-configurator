@@ -99,6 +99,99 @@
     FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1] /
       FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0],
   );
+
+  //// Gearing, as in the Ethos wizard. The firmware keeps two products per
+  //// ratio, and the ratio is field 1 / field 0 (flight/motors.c). Main gear:
+  //// field 0 = pinion x the gear on the main side, field 1 = the gear on the
+  //// pinion side x main gear. Tail: field 0 = the tail side, field 1 = the
+  //// drive side. One stage is two stages with both intermediate gears at 1.
+
+  const MAX_TEETH = 500;
+  const MAX_PRODUCT = 65535;
+
+  let stages = $state(1);
+  let train = $state({
+    pinion: FC.MOTOR_CONFIG.main_rotor_gear_ratio[0],
+    pinionSide: 1,
+    mainSide: 1,
+    main: FC.MOTOR_CONFIG.main_rotor_gear_ratio[1],
+  });
+  let ratioValue = $state(
+    FC.MOTOR_CONFIG.main_rotor_gear_ratio[1] /
+      FC.MOTOR_CONFIG.main_rotor_gear_ratio[0],
+  );
+  let tailFromShaft = $state(false);
+  let tailShaft = $state({ drive: 1, rotor: 1, mesh: 1 });
+  let tailRatioValue = $state(
+    FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1] /
+      FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0],
+  );
+
+  let gearOverflow = $derived(
+    train.pinion * train.mainSide > MAX_PRODUCT ||
+      train.pinionSide * train.main > MAX_PRODUCT,
+  );
+
+  // The smallest whole pair with this ratio: 9.70 is 10 and 97. Null when
+  // no pair up to MAX_TEETH gives it.
+  function wholePair(ratio) {
+    const hundredths = Math.round(ratio * 100);
+    for (let k = 1; k <= MAX_TEETH; k++) {
+      if ((hundredths * k) % 100 === 0) return [k, (hundredths * k) / 100];
+    }
+    return null;
+  }
+
+  function applyMain() {
+    const g = FC.MOTOR_CONFIG.main_rotor_gear_ratio;
+    g[0] = train.pinion * train.mainSide;
+    g[1] = train.pinionSide * train.main;
+    if (tailFromShaft) applyTail();
+    markChanged();
+  }
+
+  function setStages(count) {
+    if (stages === count) return;
+    stages = count;
+    // Both intermediate gears take the main gear's count, so the ratio stays.
+    train.pinionSide = count === 2 ? train.main : 1;
+    train.mainSide = count === 2 ? train.main : 1;
+    applyMain();
+  }
+
+  function setRatio(value) {
+    const pair = wholePair(value);
+    if (!pair) return;
+    train.pinion = pair[0];
+    train.main = pair[1];
+    applyMain();
+  }
+
+  function applyTail() {
+    const t = FC.MOTOR_CONFIG.tail_rotor_gear_ratio;
+    if (!tailFromShaft) return;
+    // From the intermediate shaft: the drive pulley on it, the tail rotor
+    // pulley, and the gear on the main side that the shaft turns through.
+    const mesh = stages === 2 ? train.mainSide : tailShaft.mesh;
+    t[0] = mesh * tailShaft.rotor;
+    t[1] = train.main * tailShaft.drive;
+    markChanged();
+  }
+
+  function setTailFromShaft(value) {
+    if (tailFromShaft === value) return;
+    tailFromShaft = value;
+    if (value) applyTail();
+    else markChanged();
+  }
+
+  function setTailRatio(value) {
+    const pair = wholePair(value);
+    if (!pair) return;
+    FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0] = pair[0];
+    FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1] = pair[1];
+    markChanged();
+  }
 </script>
 
 <div class="with-art">
@@ -166,44 +259,162 @@
     />
     <span></span>
 
+    <span>{$i18n.t("setupWizardGearStage")}</span>
+    <span class="stages">
+      <button
+        type="button"
+        class={["btn", stages === 1 && "primary"]}
+        onclick={() => setStages(1)}
+      >
+        {$i18n.t("setupWizardGearStageOne")}
+      </button>
+      <button
+        type="button"
+        class={["btn", stages === 2 && "primary"]}
+        onclick={() => setStages(2)}
+      >
+        {$i18n.t("setupWizardGearStageTwo")}
+      </button>
+    </span>
+    <span></span>
+
     <span>{$i18n.t("setupWizardMotorPinion")}</span>
     <NumberInput
       min="1"
-      max="50000"
-      bind:value={FC.MOTOR_CONFIG.main_rotor_gear_ratio[0]}
-      onchange={markChanged}
+      max={MAX_TEETH}
+      bind:value={train.pinion}
+      onchange={applyMain}
     />
     <span></span>
+
+    {#if stages === 2}
+      <span>{$i18n.t("setupWizardGearInterPinion")}</span>
+      <NumberInput
+        min="1"
+        max={MAX_TEETH}
+        bind:value={train.pinionSide}
+        onchange={applyMain}
+      />
+      <span></span>
+
+      <span>{$i18n.t("setupWizardGearInterMain")}</span>
+      <NumberInput
+        min="1"
+        max={MAX_TEETH}
+        bind:value={train.mainSide}
+        onchange={applyMain}
+      />
+      <span></span>
+    {/if}
 
     <span>{$i18n.t("setupWizardMotorMainGear")}</span>
     <NumberInput
       min="1"
-      max="50000"
-      bind:value={FC.MOTOR_CONFIG.main_rotor_gear_ratio[1]}
-      onchange={markChanged}
+      max={MAX_TEETH}
+      bind:value={train.main}
+      onchange={applyMain}
     />
     <span class="pill">1:{mainRatio.toFixed(2)}</span>
 
+    {#if stages === 1}
+      <span>{$i18n.t("setupWizardGearRatio")}</span>
+      <NumberInput
+        min="0.1"
+        max="500"
+        step="0.01"
+        bind:value={ratioValue}
+        onchange={() => setRatio(ratioValue)}
+      />
+      <span class="muted">:1</span>
+    {/if}
+
     {#if !wiz.motorised}
-      <span>{$i18n.t("motorsTailRotorGearRatio")}</span>
-      <span class="ratio">
-        <NumberInput
-          min="1"
-          max="50000"
-          bind:value={FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0]}
-          onchange={markChanged}
-        />
-        :
-        <NumberInput
-          min="1"
-          max="50000"
-          bind:value={FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1]}
-          onchange={markChanged}
-        />
+      <span>{$i18n.t("setupWizardGearTail")}</span>
+      <span class="stages">
+        <button
+          type="button"
+          class={["btn", !tailFromShaft && "primary"]}
+          onclick={() => setTailFromShaft(false)}
+        >
+          {$i18n.t("setupWizardGearTailDirect")}
+        </button>
+        <button
+          type="button"
+          class={["btn", tailFromShaft && "primary"]}
+          onclick={() => setTailFromShaft(true)}
+        >
+          {$i18n.t("setupWizardGearTailShaft")}
+        </button>
       </span>
-      <span class="pill">1:{tailRatio.toFixed(2)}</span>
+      <span></span>
+
+      {#if tailFromShaft}
+        <span>{$i18n.t("setupWizardGearDrivePulley")}</span>
+        <NumberInput
+          min="1"
+          max={MAX_TEETH}
+          bind:value={tailShaft.drive}
+          onchange={applyTail}
+        />
+        <span></span>
+
+        <span>{$i18n.t("setupWizardGearRotorPulley")}</span>
+        <NumberInput
+          min="1"
+          max={MAX_TEETH}
+          bind:value={tailShaft.rotor}
+          onchange={applyTail}
+        />
+        <span></span>
+
+        {#if stages === 1}
+          <span>{$i18n.t("setupWizardGearMesh")}</span>
+          <NumberInput
+            min="1"
+            max={MAX_TEETH}
+            bind:value={tailShaft.mesh}
+            onchange={applyTail}
+          />
+          <span></span>
+        {/if}
+
+        <span>{$i18n.t("motorsTailRotorGearRatio")}</span>
+        <span></span>
+        <span class="pill">1:{tailRatio.toFixed(2)}</span>
+      {:else}
+        <span>{$i18n.t("motorsTailRotorGearRatio")}</span>
+        <span class="ratio">
+          <NumberInput
+            min="1"
+            max={MAX_TEETH}
+            bind:value={FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0]}
+            onchange={markChanged}
+          />
+          :
+          <NumberInput
+            min="1"
+            max={MAX_TEETH}
+            bind:value={FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1]}
+            onchange={markChanged}
+          />
+        </span>
+        <span class="pill">1:{tailRatio.toFixed(2)}</span>
+
+        <span>{$i18n.t("setupWizardGearRatio")}</span>
+        <NumberInput
+          min="0.1"
+          max="500"
+          step="0.01"
+          bind:value={tailRatioValue}
+          onchange={() => setTailRatio(tailRatioValue)}
+        />
+        <span class="muted">:1</span>
+      {/if}
     {/if}
   </div>
+  {#if gearOverflow}
+    <div class="note">{$i18n.t("setupWizardGearOverflow")}</div>
+  {/if}
 </section>
 
 {#if govState.enabled}
@@ -268,5 +479,20 @@
     display: flex;
     align-items: center;
     gap: 6px;
+  }
+
+  .stages {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn {
+    @extend %button;
+  }
+
+  .btn.primary {
+    @extend %button-primary;
   }
 </style>
