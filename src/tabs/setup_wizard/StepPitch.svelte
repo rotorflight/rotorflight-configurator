@@ -13,6 +13,7 @@
   import MotorUnpluggedCheck from "./MotorUnpluggedCheck.svelte";
   import PitchArt from "./PitchArt.svelte";
   import TabButton from "./TabButton.svelte";
+  import { ADJ, profileMode, rangeOf } from "./adjust.js";
   import {
     COLLECTIVE,
     PITCH,
@@ -147,21 +148,31 @@
   }
 
   //// Collective pitch at full stick: the collective rate, in degrees.
-  //// One value per rate profile, as the Rates tab keeps its rates: each
-  //// profile is read when the step opens, and only the changed ones are
-  //// written on Save. The active profile is selected again afterwards.
+  //// One value per rate profile the profile switch picks, as in the Ethos
+  //// wizard: every one is read when the step opens, the active profile is
+  //// selected again, and on Save only the changed values are written. With
+  //// no rate switch, only the active profile has a row.
 
   let ratesLoaded = $state(false);
-  let rateCount = $state(0);
-  let fullSticks = $state([]);
-  let fullStickOrig = [];
+  let rateIndexes = $state([]);
+  let fullSticks = $state({});
+  let fullStickOrig = {};
   let fullStickChanged = false;
 
   onMount(async () => {
     const current = FC.CONFIG.rateProfile;
-    const count = FC.CONFIG.numRateProfiles || 1;
-    for (let i = 0; i < count; i++) {
-      await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [i + RATE_PROFILE_MASK]);
+    const rate = rangeOf(FC.ADJUSTMENT_RANGES, ADJ.RATE_PROFILE);
+    const indexes =
+      profileMode(FC.ADJUSTMENT_RANGES) === "both" && rate
+        ? Array.from(
+            { length: rate.adjMax - rate.adjMin + 1 },
+            (_, k) => rate.adjMin - 1 + k,
+          )
+        : [current];
+    for (const i of indexes) {
+      if (i !== current) {
+        await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [i + RATE_PROFILE_MASK]);
+      }
       await MSP.promise(MSPCodes.MSP_RC_TUNING);
       fullSticks[i] = collectiveAtFullStick(FC.RC_TUNING);
     }
@@ -169,8 +180,8 @@
       current + RATE_PROFILE_MASK,
     ]);
     await MSP.promise(MSPCodes.MSP_RC_TUNING);
-    fullStickOrig = [...fullSticks];
-    rateCount = count;
+    fullStickOrig = { ...fullSticks };
+    rateIndexes = indexes;
     ratesLoaded = true;
   });
 
@@ -182,9 +193,9 @@
   wiz.setCommit(async () => {
     if (!fullStickChanged) return;
     const current = FC.CONFIG.rateProfile;
-    for (let i = 0; i < rateCount; i++) {
+    for (const i of rateIndexes) {
       const value = fullSticks[i];
-      if (value === null || value === fullStickOrig[i]) continue;
+      if (value == null || value === fullStickOrig[i]) continue;
       await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [i + RATE_PROFILE_MASK]);
       await MSP.promise(MSPCodes.MSP_RC_TUNING);
       if (setCollectiveAtFullStick(FC.RC_TUNING, value)) {
@@ -342,7 +353,7 @@
   <h3><span class="num">4</span>{$i18n.t("setupWizardPitchFullStickTitle")}</h3>
   <p>{$i18n.t("setupWizardPitchFullStickText")}</p>
   {#if ratesLoaded}
-    {#each Array.from({ length: rateCount }, (_, i) => i) as i (i)}
+    {#each rateIndexes as i (i)}
       {#if fullSticks[i] === null}
         <div class="note">
           {$i18n.t("setupWizardPitchFullStickOther")}

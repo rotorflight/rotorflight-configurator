@@ -1,5 +1,7 @@
 <script>
-  import { getContext } from "svelte";
+  import { getContext, onMount } from "svelte";
+
+  import NumberInput from "@/components/NumberInput.svelte";
 
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
@@ -14,14 +16,71 @@
 
   const wiz = getContext("setupWizard");
 
-  // Only the two choices that decide how the motor is driven. Ramps,
-  // headspeed and gains stay in the Governor and Profiles tabs. The
-  // governor is set up at boot (governorInit), so this waits for the
-  // gate's reboot like the other typed-in steps.
+  // The mode and the throttle type, and the headspeed of each PID profile
+  // (as in the Ethos wizard). Ramps and gains stay in the Governor and
+  // Profiles tabs. The mode is set up at boot (governorInit), so it waits
+  // for the gate's reboot like the other typed-in steps.
 
   let changed = $state(false);
 
+  // The headspeed of each PID profile: the first three, read when the step
+  // opens. On Save only the changed ones are written.
+  const MAX_PROFILES = 3;
+  let profileIndexes = $state([]);
+  let headspeeds = $state({});
+  let headspeedOrig = {};
+  let headspeedChanged = false;
+  let profilesLoaded = $state(false);
+
+  onMount(async () => {
+    const active = FC.CONFIG.profile;
+    const count = Math.min(FC.CONFIG.numProfiles || 1, MAX_PROFILES);
+    const indexes = Array.from({ length: count }, (_, i) => i);
+    // Reading a profile replaces the profile fields in FC.GOVERNOR, so the
+    // values as they are now are kept, and put back after the reads.
+    const snapshot = { ...FC.GOVERNOR };
+    for (const i of indexes) {
+      await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [i]);
+      await MSP.promise(MSPCodes.MSP_GOVERNOR_PROFILE);
+      headspeeds[i] = FC.GOVERNOR.gov_headspeed;
+    }
+    await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [active]);
+    Object.assign(FC.GOVERNOR, snapshot);
+    headspeedOrig = { ...headspeeds };
+    profileIndexes = indexes;
+    profilesLoaded = true;
+  });
+
+  function changeHeadspeed() {
+    headspeedChanged = true;
+    wiz.markChanged();
+  }
+
+  // Each changed profile is selected, read, given its headspeed and written.
+  // Then the active profile is selected again, and the governor values from
+  // before the writes are put back, so the staged mode and throttle type stay.
+  async function writeHeadspeeds() {
+    const active = FC.CONFIG.profile;
+    const snapshot = { ...FC.GOVERNOR };
+    for (const i of profileIndexes) {
+      if (headspeeds[i] === headspeedOrig[i]) continue;
+      await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [i]);
+      await MSP.promise(MSPCodes.MSP_GOVERNOR_PROFILE);
+      FC.GOVERNOR.gov_headspeed = headspeeds[i];
+      await MSP.promise(
+        MSPCodes.MSP_SET_GOVERNOR_PROFILE,
+        mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR_PROFILE),
+      );
+      headspeedOrig[i] = headspeeds[i];
+    }
+    await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [active]);
+    snapshot.gov_headspeed = headspeeds[active] ?? snapshot.gov_headspeed;
+    Object.assign(FC.GOVERNOR, snapshot);
+    headspeedChanged = false;
+  }
+
   wiz.setCommit(async () => {
+    if (headspeedChanged) await writeHeadspeeds();
     if (!changed) return;
     for (const code of [
       MSPCodes.MSP_SET_GOVERNOR_CONFIG,
@@ -139,6 +198,28 @@
   </section>
 {/if}
 
+{#if govState.govHeadspeed && profilesLoaded}
+  <section class="card">
+    <h3>
+      <span class="num">3</span>{$i18n.t("setupWizardGovHeadspeedTitle")}
+    </h3>
+    <p>{$i18n.t("setupWizardGovHeadspeedText")}</p>
+    {#each profileIndexes as i (i)}
+      <div class="speed">
+        <span>{$i18n.t("setupWizardGovProfile", { 1: i + 1 })}</span>
+        <NumberInput
+          min="100"
+          max="50000"
+          step="10"
+          bind:value={headspeeds[i]}
+          onchange={changeHeadspeed}
+        />
+        <span class="muted">rpm</span>
+      </div>
+    {/each}
+  </section>
+{/if}
+
 {#if changed}
   <RebootLater />
 {/if}
@@ -148,3 +229,13 @@
     {$i18n.t("setupWizardOpenGovernor")}
   </TabButton>
 </div>
+
+<style lang="scss">
+  .speed {
+    display: grid;
+    grid-template-columns: auto 8rem auto;
+    justify-content: start;
+    align-items: center;
+    gap: 8px 12px;
+  }
+</style>

@@ -61,6 +61,15 @@
     if (motorState.throttleProtocols[index] === "DSHOT150") {
       FC.MOTOR_CONFIG.use_dshot_telemetry = false;
     }
+    // With a governor the RPM source follows the protocol, as in the Ethos
+    // wizard: DShot300 and DShot600 carry the RPM back, the others need the
+    // wire sensor.
+    if (govState.enabled) {
+      const carriesRpm = ["DSHOT300", "DSHOT600"].includes(
+        motorState.throttleProtocols[index],
+      );
+      setRpmSource(carriesRpm ? "dshot" : "sensor");
+    }
     markChanged();
   }
 

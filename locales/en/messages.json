@@ -588,7 +588,7 @@
         "message": "Open the Mixer tab"
     },
     "setupWizardGovIntro": {
-        "message": "How the flight controller drives the motor. Pick the governor mode and how the throttle switch works with it. Ramps, headspeed and gains are set later in the Governor and Profiles tabs."
+        "message": "How the flight controller drives the motor. Pick the governor mode and how the throttle switch works with it, then the headspeed of each PID profile. Ramps and gains are set later in the Governor and Profiles tabs."
     },
     "setupWizardGovMode_OFF": {
         "message": "No governor. The throttle goes straight to the ESC. Use this with the ESC's own governor."
@@ -1264,6 +1264,15 @@
     },
     "setupWizardMotorRpmText": {
         "message": "Used for headspeed, the governor and the RPM filters. Count the magnets in the motor bell for the poles."
+    },
+    "setupWizardGovHeadspeedTitle": {
+        "message": "Headspeed"
+    },
+    "setupWizardGovHeadspeedText": {
+        "message": "The headspeed the governor holds, for each PID profile. Ramps and gains stay in the Governor and Profiles tabs."
+    },
+    "setupWizardGovProfile": {
+        "message": "PID profile $1"
     },
     "setupWizardRpmSourceTitle": {
         "message": "RPM source"
