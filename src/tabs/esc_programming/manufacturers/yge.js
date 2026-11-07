@@ -12,6 +12,7 @@
 
 import { API_VERSION_12_7 } from "@/js/configurator.svelte.js";
 
+import { buildPayload, computeLayout, parseBuffer, sameValue } from "../engine.js";
 import { registerManufacturer } from "./registry.js";
 
 const escMode = ["Free (Attention!)", "Heli Ext Governor", "Heli Governor", "Heli Governor Store", "Aero Glider", "Aero Motor", "Aero F3A"];
@@ -36,9 +37,33 @@ const motorTiming = [
     [6, "30°"],
 ];
 
-// Word 0 of the timing is the same mode as 16 ("Auto Normal"), so it is shown as that.
-function parseRead(parsed) {
-    if (parsed.values.timing === 0) parsed.display.timing = "Auto Normal";
+// The block: a 2-byte header, then the ESC's count of U16 words, the count being the first of them
+// (esc_model + esc_version * 256). The count is the ESC's own, 1..64; the block must be exactly as long
+// as that count asks, and as long as the fields named here. Anything else is refused, not read in
+// part (Ethos suite #2458).
+const PARAM_HEADER_BYTES = 2;
+const MAX_PARAM_COUNT = 64;
+
+function parseRead(parsed, bytes) {
+    const { values, display } = parsed;
+    const count = (values.esc_model ?? 0) + (values.esc_version ?? 0) * 256;
+    const expected = PARAM_HEADER_BYTES + count * 2;
+    const layout = computeLayout(fields).totalBytes;
+    if (count < 1 || count > MAX_PARAM_COUNT) {
+        throw new Error(`The ESC reports ${count} parameters; the Configurator reads 1 to ${MAX_PARAM_COUNT}. Nothing was read.`);
+    }
+    if (bytes.length !== expected) {
+        throw new Error(
+            `The ESC block is ${bytes.length} bytes, but its ${count} parameters need ${expected}. Nothing was read or written.`,
+        );
+    }
+    if (expected !== layout) {
+        throw new Error(
+            `The ESC reports ${count} parameters (${expected} bytes), but the Configurator knows ${(layout - PARAM_HEADER_BYTES) / 2} (${layout} bytes). Nothing was read or written.`,
+        );
+    }
+    // Word 0 of the timing is the same mode as 16 ("Auto Normal"), so it is shown as that.
+    if (values.timing === 0) display.timing = "Auto Normal";
     return parsed;
 }
 const freewheel = ["Off", "Auto", "*Unused*", "Always On"];
@@ -83,6 +108,10 @@ const fields = [
     },
     { key: "unknown_4", type: "U8", enum: offOn },
     { key: "current_limit", type: "U16", min: 1, max: 65500, unit: "A", scale: 100 },
+    // Past the named fields: the block is 66 bytes for the 32 parameters the ESC reports
+    // (Ethos suite #2458). Kept as read, not shown.
+    { key: "unknown_5", type: "U32" },
+    { key: "unknown_6", type: "U32" },
 ];
 
 const pages = [
@@ -94,7 +123,6 @@ const pages = [
             { apikey: "lv_bec_voltage", label: "BEC" },
             { apikey: "f3cauto", label: "F3C Autorotation" },
             { apikey: "keepmah", label: "Keep mAh Count" },
-            { apikey: "bec12v", label: "12V BEC" },
             { apikey: "auto_restart_time", label: "Auto Restart Time" },
             { apikey: "cell_cutoff", label: "Cell Cutoff" },
             { apikey: "current_limit", label: "Current Limit" },
@@ -128,33 +156,42 @@ const pages = [
 // source reads these through a +2 "mspHeaderBytes" byte offset that, worked through against
 // this buffer's actual layout, lands exactly on the esc_type/firmware_version fields below --
 // so this reads those named fields directly instead of re-deriving raw byte offsets.
-const escTypeLabels = {
-    848: "YGE 35 LVT BEC",
-    1616: "YGE 65 LVT BEC",
-    2128: "YGE 85 LVT BEC",
-    2384: "YGE 95 LVT BEC",
-    4944: "YGE 135 LVT BEC",
-    2304: "YGE 90 HVT Opto",
-    4608: "YGE 120 HVT Opto",
-    5712: "YGE 165 HVT",
-    8272: "YGE 205 HVT",
-    8273: "YGE 205 HVT BEC",
-    4177: "YGE Aureus 105",
-    4179: "YGE Aureus 105v2",
-    5025: "YGE Aureus 135",
-    5027: "YGE Aureus 135v2",
-    5457: "YGE Saphir 155",
-    5459: "YGE Saphir 155v2",
-    4689: "YGE Saphir 125",
-    4928: "YGE Opto 135",
-    9552: "YGE Opto 255",
-    16464: "YGE Opto 405",
+// Per ESC id: the name, whether it has a BEC at all (an Opto has none, so its row is hidden),
+// and whether it can take the 12.0 V BEC. The table is the Ethos suite's (lib/msp_esc_parameters_yge.lua,
+// #2459). An id this table does not know keeps the row and the 8.4 V ceiling.
+const ESC_MODELS = {
+    848: { name: "YGE 35 LVT BEC", bec: true, bec12v: false },
+    1616: { name: "YGE 65 LVT BEC", bec: true, bec12v: false },
+    2128: { name: "YGE 85 LVT BEC", bec: true, bec12v: false },
+    2384: { name: "YGE 95 LVT BEC", bec: true, bec12v: false },
+    4944: { name: "YGE 135 LVT BEC", bec: true, bec12v: false },
+    8273: { name: "YGE 205 HVT BEC", bec: true, bec12v: true },
+    2304: { name: "YGE 90 HVT Opto", bec: false, bec12v: false },
+    4608: { name: "YGE 120 HVT Opto", bec: false, bec12v: false },
+    4928: { name: "YGE Opto 135", bec: false, bec12v: false },
+    9552: { name: "YGE Opto 255", bec: false, bec12v: false },
+    16464: { name: "YGE Opto 405", bec: false, bec12v: false },
+    4177: { name: "YGE Aureus 105", bec: true, bec12v: false },
+    4179: { name: "YGE Aureus 105v2", bec: true, bec12v: true },
+    4689: { name: "YGE Saphir 125", bec: true, bec12v: false },
+    4691: { name: "YGE Saphir 125v2", bec: true, bec12v: true },
+    5025: { name: "YGE Aureus 135", bec: true, bec12v: false },
+    5027: { name: "YGE Aureus 135v2", bec: true, bec12v: true },
+    5457: { name: "YGE Saphir 155", bec: true, bec12v: false },
+    5459: { name: "YGE Saphir 155v2", bec: true, bec12v: true },
+    5712: { name: "YGE 165 HVT", bec: true, bec12v: true },
+    8272: { name: "YGE 205 HVT v2", bec: true, bec12v: true },
 };
+
+// The model of the connected ESC, or undefined.
+function modelOf(values) {
+    return values?.esc_type == null ? undefined : ESC_MODELS[values.esc_type];
+}
 
 function describeEsc(values) {
     const parts = [];
     if (values.esc_type != null) {
-        parts.push(escTypeLabels[values.esc_type] ?? `YGE ESC (${values.esc_type})`);
+        parts.push(modelOf(values)?.name ?? `YGE ESC (${values.esc_type})`);
     } else {
         parts.push("YGE");
     }
@@ -191,7 +228,58 @@ const simResponse = [
     0, // flags
     0, // unknown_4
     2, 19, // current_limit
+    2, 0, 20, 0, // unknown_5
+    22, 0, 0, 0, // unknown_6
 ];
+
+// The BEC ceiling: 12.0 V for a model that can take it, 8.4 V for the rest. Raw units (tenths of a volt).
+function resolveFieldMeta(field, values) {
+    if (field.key !== "lv_bec_voltage") return field;
+    return modelOf(values)?.bec12v ? { ...field, max: BEC_VOLTAGE_MAX_12V } : field;
+}
+
+// The BEC row is shown for every model but the Opto ones, which have no BEC to set.
+function rowVisible(apikey, values) {
+    if (apikey !== "lv_bec_voltage") return true;
+    return modelOf(values)?.bec !== false;
+}
+
+// The flag bit that tells the ESC to run its 12 V BEC (bit 3 of the flags byte). It has no row:
+// it is the voltage's own decision, so it follows the voltage when the pilot moves it, and is
+// otherwise written back as the ESC holds it.
+const FLAG_BIT_BEC12V = 3;
+const BEC_VOLTAGE_MAX_12V = 120;
+
+function withBit(value, bit, on) {
+    const mask = 2 ** bit;
+    const set = Math.floor(value / mask) % 2 === 1;
+    if (on && !set) return value + mask;
+    if (!on && set) return value - mask;
+    return value;
+}
+
+function buildWritePayload(displayValues, previousRawBytes) {
+    const payload = buildPayload(fields, displayValues, previousRawBytes);
+    if (!previousRawBytes) return payload;
+    const layout = computeLayout(fields).fields;
+    const fieldAt = (key) => layout.find((field) => field.key === key);
+    const before = parseBuffer(fields, previousRawBytes);
+
+    // An untouched "Auto Normal" is written back as the ESC holds it (word 0), not as 16.
+    const timing = fieldAt("timing");
+    if (before.values.timing === 0 && displayValues.timing === "Auto Normal") {
+        const from = timing.byteOffset;
+        payload.set(previousRawBytes.subarray(from, from + timing.width), from);
+    }
+
+    // The 12 V flag follows the voltage only when the pilot moved it.
+    if (!sameValue(before.display.lv_bec_voltage, displayValues.lv_bec_voltage)) {
+        const flags = fieldAt("flags");
+        const on = Math.abs(displayValues.lv_bec_voltage - 12) < 1e-9;
+        payload[flags.byteOffset] = withBit(payload[flags.byteOffset], FLAG_BIT_BEC12V, on);
+    }
+    return payload;
+}
 
 const yge = {
     id: "yge",
@@ -205,6 +293,9 @@ const yge = {
     simResponse,
     describeEsc,
     parseRead,
+    resolveFieldMeta,
+    rowVisible,
+    buildWritePayload,
 };
 
 registerManufacturer(yge);

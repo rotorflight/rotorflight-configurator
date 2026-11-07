@@ -87,9 +87,12 @@
           escState.saveMessage.kind === "error" && "error",
         ]}
       >
-        {$i18n.t(escState.saveMessage.key, {
-          1: escState.saveMessage.labels.join(", "),
-        })}
+        {$i18n.t(
+          escState.saveMessage.key,
+          escState.saveMessage.params ?? {
+            1: escState.saveMessage.keys.join(", "),
+          },
+        )}
       </p>
     {/if}
     <ParameterForm />

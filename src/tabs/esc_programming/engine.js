@@ -341,3 +341,9 @@ export function mergeEditedValues(current, edited, keys) {
 export function mismatchedKeys(expected, actual, keys) {
     return keys.filter((k) => !sameValue(expected[k], actual?.[k]));
 }
+
+// A page row a module hides for the connected ESC (a YGE Opto has no BEC row). Modules
+// without the hook show every row.
+export function isPageRowVisible(manufacturer, apikey, values) {
+    return manufacturer.rowVisible ? manufacturer.rowVisible(apikey, values) : true;
+}

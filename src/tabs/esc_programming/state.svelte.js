@@ -177,6 +177,16 @@ class State {
     // only when the ESC holds the changed values (#530). A refused write says so (#532).
     async onSave() {
         this.saveMessage = null;
+        try {
+            await this.saveValues();
+        } catch (err) {
+            // A block the module refuses to write is reported with its reason. Nothing was sent.
+            if (!err?.refusal) throw err;
+            this.saveMessage = { kind: "error", key: err.key, params: err.params, keys: [] };
+        }
+    }
+
+    async saveValues() {
         const manufacturer = this.manufacturer;
         const edited = changedKeys(this.initialValues, this.values);
         if (edited.length === 0) return;
@@ -186,7 +196,7 @@ class State {
             // manufacturer's block: a write built from an empty reply would zero the ESC.
             const before = await readUsableEscParameters(manufacturer);
             if (!before) {
-                this.saveMessage = { kind: "error", key: "escProgrammingSaveNoRead", labels: [] };
+                this.saveMessage = { kind: "error", key: "escProgrammingSaveNoRead", keys: [] };
                 return;
             }
             const beforeDisplay = parseManufacturerBuffer(manufacturer, before).display;
@@ -199,7 +209,7 @@ class State {
             // and would drop the bridge/serial link mid-write for no benefit.
             const reply = await writeEscParametersForSave(payload);
             if (reply?.unsupported) {
-                this.saveMessage = { kind: "error", key: "escProgrammingSaveRefused", labels: [] };
+                this.saveMessage = { kind: "error", key: "escProgrammingSaveRefused", keys: [] };
                 return;
             }
 
@@ -221,7 +231,7 @@ class State {
 
             if (!confirmed) {
                 // Nothing usable came back: the form keeps the pilot's values, unconfirmed.
-                this.saveMessage = { kind: "error", key: "escProgrammingSaveUnconfirmed", labels: [] };
+                this.saveMessage = { kind: "error", key: "escProgrammingSaveUnconfirmed", keys: [] };
                 return;
             }
 
@@ -237,21 +247,24 @@ class State {
                 this.saveMessage = {
                     kind: "error",
                     key: "escProgrammingSaveMismatch",
-                    labels: mismatch.map((k) => this.fieldLabel(k)),
+                    keys: mismatch,
+                    params: { 1: mismatch.map((k) => this.fieldLabel(k)).join(", ") },
                 };
             } else if (kept.length > 0) {
                 this.saveMessage = {
                     kind: "info",
                     key: "escProgrammingSaveKept",
-                    labels: kept.map((k) => this.fieldLabel(k)),
+                    keys: kept,
+                    params: { 1: kept.map((k) => this.fieldLabel(k)).join(", ") },
                 };
             } else {
-                this.saveMessage = { kind: "ok", key: "escProgrammingSaveDone", labels: [] };
+                this.saveMessage = { kind: "ok", key: "escProgrammingSaveDone", keys: [] };
             }
         } catch (err) {
+            if (err?.refusal) throw err;
             // A write that timed out may or may not have reached the ESC; say so.
             console.error("esc_programming: save failed", err);
-            this.saveMessage = { kind: "error", key: "escProgrammingSaveNoAnswer", labels: [] };
+            this.saveMessage = { kind: "error", key: "escProgrammingSaveNoAnswer", keys: [] };
         }
     }
 
