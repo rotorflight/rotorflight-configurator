@@ -170,9 +170,12 @@ export function resolveEnumLabel(field, raw) {
     return field.enum[raw];
 }
 
+// The raw word for a label, or undefined when the label is not in the table (indexOf's -1
+// would otherwise be written as all ones).
 function resolveEnumRaw(field, label) {
     if (field.enumMap) return field.enumMap.find(([, text]) => text === label)?.[0];
-    return field.enum.indexOf(label);
+    const raw = field.enum.indexOf(label);
+    return raw < 0 ? undefined : raw;
 }
 
 // Normalizes either enum shape into {value, label} pairs for a Select component.
