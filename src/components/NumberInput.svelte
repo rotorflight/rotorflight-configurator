@@ -57,6 +57,15 @@
     update();
   }
 
+  // The mouse wheel steps the value, but only while this field has the focus, so a page
+  // scrolled over it keeps its value (#483).
+  function onwheel(e) {
+    if (document.activeElement !== elem || disabled) return;
+    e.preventDefault();
+    if (e.deltaY < 0) inc();
+    else dec();
+  }
+
   function inc() {
     setVal(numValue + step);
   }
@@ -231,6 +240,7 @@
     onblur={updateLocal}
     onchange={updateLocal}
     {onkeydown}
+    {onwheel}
     {disabled}
   />
   <button

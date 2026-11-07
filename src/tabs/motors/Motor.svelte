@@ -146,6 +146,8 @@
       {#if motorState.overrideEnabled}
         <span>-</span>
         <span>{FC.MOTOR_OVERRIDE[index] * 0.1}%</span>
+        <!-- The pulse the ESC gets: 1000 us at stop to 2000 us at full (#244). -->
+        <span>{1000 + FC.MOTOR_OVERRIDE[index]} µs</span>
       {/if}
     </div>
   {/snippet}

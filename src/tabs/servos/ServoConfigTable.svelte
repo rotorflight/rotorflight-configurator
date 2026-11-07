@@ -185,10 +185,27 @@
     return { min: 500, max: 2500 };
   }
 
+  // The bar is centred on the servo's own centre pulse (#356): the lower travel limit
+  // (mid + min) at 0 %, the centre at 50 %, the upper limit (mid + max) at 100 %. A
+  // 300 us or 200 us centre is then drawn in the middle, not off the chart.
   function meterPercent(servo) {
-    const { min, max } = meterRange(servo);
-    const value = FC.SERVO_DATA[servo.index] ?? min;
-    const percent = (100 * (value - min)) / (max - min);
+    if (servo.isBusServo) {
+      const { min, max } = meterRange(servo);
+      const value = FC.SERVO_DATA[servo.index] ?? min;
+      return Math.min(100, Math.max(0, (100 * (value - min)) / (max - min)));
+    }
+
+    const config = FC.SERVO_CONFIG[servo.index];
+    const mid = config.mid;
+    const low = mid + config.min;
+    const high = mid + config.max;
+    const value = FC.SERVO_DATA[servo.index] ?? low;
+    let percent;
+    if (value <= mid) {
+      percent = mid > low ? (50 * (value - low)) / (mid - low) : 50;
+    } else {
+      percent = high > mid ? 50 + (50 * (value - mid)) / (high - mid) : 50;
+    }
     return Math.min(100, Math.max(0, percent));
   }
 
