@@ -507,16 +507,17 @@
       <div class="batteries">
         {#each [0, 1, 2] as row (row)}
           {#each [row, row + 3] as index (index)}
-            <div class="battery" class:active={index === activeProfile}>
-              <span>{$i18n.t("powerBatteryProfile", { 1: index + 1 })}</span>
-              {#if index === activeProfile}
-                <i
-                  class="fas fa-check-circle"
-                  role="img"
-                  aria-label={$i18n.t("setupWizardPowerActive")}
-                  title={$i18n.t("setupWizardPowerActive")}
-                ></i>
-              {/if}
+            <div class="battery">
+              <!-- The active battery is blue, as on the Power tab. Choosing
+                   a battery here doesn't activate it: the wizard writes on Save. -->
+              <span
+                class={["battery-name", index === activeProfile && "active"]}
+                title={index === activeProfile
+                  ? $i18n.t("setupWizardPowerActive")
+                  : undefined}
+              >
+                {$i18n.t("powerBatteryProfile", { 1: index + 1 })}
+              </span>
               <NumberInput
                 min="0"
                 max="24"
@@ -633,8 +634,20 @@
     gap: 10px 24px;
   }
 
-  .battery.active > span:first-child {
-    font-weight: 700;
+  /* The battery name: the active one blue, as on the Power tab. */
+  .battery-name {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border: 1px solid var(--color-border-soft);
+    border-radius: 4px;
+    background-color: var(--color-surface-sunken);
+    color: var(--color-text-soft);
+  }
+
+  .battery-name.active {
+    color: var(--color-accent-fg);
+    background-color: var(--color-accent-500);
+    border-color: var(--color-accent-500);
   }
 
   .battery {
