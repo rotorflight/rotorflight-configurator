@@ -248,9 +248,12 @@ export function buildPayload(fields, displayValues, previousRawBytes) {
         }
 
         if (!(field.key in displayValues)) continue;
-        const raw = hasEnum(field)
-            ? resolveEnumRaw(field, displayValues[field.key])
-            : toRaw(field, displayValues[field.key]);
+        const value = displayValues[field.key];
+        // A word the module does not name (undefined, or a label not in its table) keeps the
+        // ESC's own word, rather than being written as zero.
+        if (value === undefined) continue;
+        const raw = hasEnum(field) ? resolveEnumRaw(field, value) : toRaw(field, value);
+        if (raw === undefined) continue;
         writeRawField(bytes, field.byteOffset, field, raw);
     }
 

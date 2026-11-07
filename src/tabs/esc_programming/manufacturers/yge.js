@@ -20,7 +20,27 @@ const cutoff = ["Off", "Slowdown", "Cutoff"];
 const cutoffVoltage = ["2.9 V", "3.0 V", "3.1 V", "3.2 V", "3.3 V", "3.4 V"];
 const offOn = ["Off", "On"];
 const throttleResponse = ["Slow", "Medium", "Fast", "Custom (PC Defined)"];
-const motorTiming = ["Auto Normal", "Auto Efficient", "Auto Power", "Auto Extreme", "0°", "6°", "12°", "18°", "24°", "30°"];
+// The ESC's own words, not list positions: automatic modes 16..19, fixed advance angles 1..6.
+// Word 0 is a second spelling of automatic mode 1, shown as "Auto Normal" by parseRead.
+// Words 7..15 and above 19 are not defined by the ESC and have no label.
+const motorTiming = [
+    [16, "Auto Normal"],
+    [17, "Auto Efficient"],
+    [18, "Auto Power"],
+    [19, "Auto Extreme"],
+    [1, "0°"],
+    [2, "6°"],
+    [3, "12°"],
+    [4, "18°"],
+    [5, "24°"],
+    [6, "30°"],
+];
+
+// Word 0 of the timing is the same mode as 16 ("Auto Normal"), so it is shown as that.
+function parseRead(parsed) {
+    if (parsed.values.timing === 0) parsed.display.timing = "Auto Normal";
+    return parsed;
+}
 const freewheel = ["Off", "Auto", "*Unused*", "Always On"];
 
 const fields = [
@@ -30,7 +50,7 @@ const fields = [
     { key: "esc_version", type: "U8" },
     { key: "governor", type: "U16", enum: escMode },
     { key: "lv_bec_voltage", type: "U16", min: 55, max: 84, unit: "v", scale: 10 },
-    { key: "timing", type: "U16", enum: motorTiming },
+    { key: "timing", type: "U16", enumMap: motorTiming },
     { key: "acceleration", type: "U16" },
     { key: "gov_p", type: "U16", min: 1, max: 10 },
     { key: "gov_i", type: "U16", min: 1, max: 10 },
@@ -184,6 +204,7 @@ const yge = {
     pages,
     simResponse,
     describeEsc,
+    parseRead,
 };
 
 registerManufacturer(yge);
