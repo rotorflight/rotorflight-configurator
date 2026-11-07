@@ -497,6 +497,8 @@
       {/each}
     </div>
 
+    <hr class="divider" />
+
     <p class="muted">
       {$i18n.t("setupWizardPowerProfile", { 1: activeProfile + 1 })}
     </p>
@@ -576,6 +578,8 @@
       {/if}
     {/if}
 
+    <hr class="divider" />
+
     {#if smartFuelSupported}
       <span class="muted">{$i18n.t("powerSmartFuelSource")}</span>
       <div class="tiles" role="radiogroup">
@@ -607,6 +611,14 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 8px 12px;
+  }
+
+  /* A rule between the parts of the power card. */
+  .divider {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    border-top: 1px solid var(--color-border-soft);
   }
 
   /* One battery per block: its cells and capacity on one line; two blocks a row. */
