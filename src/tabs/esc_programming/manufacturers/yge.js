@@ -37,34 +37,43 @@ const motorTiming = [
     [6, "30°"],
 ];
 
-// The block: a 2-byte header, then the ESC's count of U16 words, the count being the first of them
-// (esc_model + esc_version * 256). The count is the ESC's own, 1..64; the block must be exactly as long
-// as that count asks, and as long as the fields named here. Anything else is refused, not read in
-// part (Ethos suite #2458).
+// The block: a 2-byte header (signature, command), then the ESC's count of U16 words at bytes 2..3
+// (esc_model + esc_version * 256). The ESC decides the count, so the block is 2 + 2 * count bytes long
+// (rotorflight-lua-ethos-suite, msp_esc_parameters_yge.lua, #2458). The named fields below are the
+// first part of it; whatever follows them is the ESC's own tail, carried through a write unchanged.
 const PARAM_HEADER_BYTES = 2;
+const PARAM_COUNT_OFFSET = 2;
 const MAX_PARAM_COUNT = 64;
 
-function parseRead(parsed, bytes) {
+// A read keeps what the ESC sent: the named fields the block carries are shown, and nothing is
+// refused here. The write checks the block (see writePlan).
+function parseRead(parsed) {
     const { values, display } = parsed;
-    const count = (values.esc_model ?? 0) + (values.esc_version ?? 0) * 256;
-    const expected = PARAM_HEADER_BYTES + count * 2;
-    const layout = computeLayout(fields).totalBytes;
-    if (count < 1 || count > MAX_PARAM_COUNT) {
-        throw new Error(`The ESC reports ${count} parameters; the Configurator reads 1 to ${MAX_PARAM_COUNT}. Nothing was read.`);
-    }
-    if (bytes.length !== expected) {
-        throw new Error(
-            `The ESC block is ${bytes.length} bytes, but its ${count} parameters need ${expected}. Nothing was read or written.`,
-        );
-    }
-    if (expected !== layout) {
-        throw new Error(
-            `The ESC reports ${count} parameters (${expected} bytes), but the Configurator knows ${(layout - PARAM_HEADER_BYTES) / 2} (${layout} bytes). Nothing was read or written.`,
-        );
-    }
     // Word 0 of the timing is the same mode as 16 ("Auto Normal"), so it is shown as that.
     if (values.timing === 0) display.timing = "Auto Normal";
     return parsed;
+}
+
+// A write the Configurator refuses before anything is sent. The key and its values are an i18n
+// message, shown above the form.
+function refuse(key, params = {}) {
+    return Object.assign(new Error(key), { refusal: true, key, params });
+}
+
+// The block length a write must have, from the count the ESC reports. A count the Configurator
+// cannot write, or a block that is not that long, is refused: a write must be exactly the length
+// the ESC asked for.
+function writePlan(bytes) {
+    const count = bytes[PARAM_COUNT_OFFSET] + bytes[PARAM_COUNT_OFFSET + 1] * 256;
+    const expected = PARAM_HEADER_BYTES + count * 2;
+    const minCount = (NAMED_BYTES - PARAM_HEADER_BYTES) / 2;
+    if (count < minCount || count > MAX_PARAM_COUNT) {
+        throw refuse("escProgrammingBlockCount", { 1: count, 2: minCount, 3: MAX_PARAM_COUNT });
+    }
+    if (bytes.length !== expected) {
+        throw refuse("escProgrammingBlockLength", { 1: bytes.length, 2: count, 3: expected });
+    }
+    return expected;
 }
 const freewheel = ["Off", "Auto", "*Unused*", "Always On"];
 
@@ -108,11 +117,11 @@ const fields = [
     },
     { key: "unknown_4", type: "U8", enum: offOn },
     { key: "current_limit", type: "U16", min: 1, max: 65500, unit: "A", scale: 100 },
-    // Past the named fields: the block is 66 bytes for the 32 parameters the ESC reports
-    // (Ethos suite #2458). Kept as read, not shown.
-    { key: "unknown_5", type: "U32" },
-    { key: "unknown_6", type: "U32" },
 ];
+
+// The named fields: the first 58 bytes of the block. Past them comes the ESC's own tail, whose
+// length is the count's (8 bytes for the 32 parameters of the sim fixture; see writePlan).
+const NAMED_BYTES = computeLayout(fields).totalBytes;
 
 const pages = [
     {
@@ -228,8 +237,8 @@ const simResponse = [
     0, // flags
     0, // unknown_4
     2, 19, // current_limit
-    2, 0, 20, 0, // unknown_5
-    22, 0, 0, 0, // unknown_6
+    2, 0, 20, 0, // tail: 8 bytes for count 32
+    22, 0, 0, 0, // tail
 ];
 
 // The BEC ceiling: 12.0 V for a model that can take it, 8.4 V for the rest. Raw units (tenths of a volt).
@@ -259,8 +268,14 @@ function withBit(value, bit, on) {
 }
 
 function buildWritePayload(displayValues, previousRawBytes) {
-    const payload = buildPayload(fields, displayValues, previousRawBytes);
-    if (!previousRawBytes) return payload;
+    if (!previousRawBytes) throw refuse("escProgrammingBlockUnread");
+    const expected = writePlan(previousRawBytes);
+    const named = buildPayload(fields, displayValues, previousRawBytes);
+    const payload = new Uint8Array(expected);
+    payload.set(named, 0);
+    // The ESC's own tail goes back as it was read, not zeroed.
+    payload.set(previousRawBytes.subarray(NAMED_BYTES, expected), NAMED_BYTES);
+
     const layout = computeLayout(fields).fields;
     const fieldAt = (key) => layout.find((field) => field.key === key);
     const before = parseBuffer(fields, previousRawBytes);
