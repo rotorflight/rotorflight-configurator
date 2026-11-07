@@ -6224,6 +6224,21 @@
     "motorsRPMSensor": {
         "message": "RPM Sensor"
     },
+    "motorsRpmCheckTitle": {
+        "message": "RPM sensor test"
+    },
+    "motorsRpmCheckText": {
+        "message": "Turn the rotor by hand. The reading should follow the turning; it is shown on a low scale for this test."
+    },
+    "motorsRpmCheckMotor": {
+        "message": "Motor $1"
+    },
+    "motorsRpmCheckSignal": {
+        "message": "$1 RPM"
+    },
+    "motorsRpmCheckNoSignal": {
+        "message": "No signal yet"
+    },
     "motorsRPMSensorHelp": {
         "message": "Use the RPM Sensor input for motor RPM. You can connect an RPM signal from the ESC, or from an external RPM Sensor dongle."
     },
