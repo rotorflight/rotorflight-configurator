@@ -181,17 +181,13 @@
     return [m.pinion, m.main];
   }
 
-  // From the intermediate shaft the main gear drives the shaft through the
-  // tail's own gear on the main side. It is a separate gear from the main
-  // train's intermediate gears, which mesh the pinion and the main gear, so
-  // changing the main train does not change the tail's count.
-  function meshOf(t) {
-    return t.mesh;
-  }
-
-  function tailProducts(t, m) {
+  // The tail keeps its own counts throughout. From the intermediate shaft,
+  // the tail's gear on the main side (mesh) meshes with a main gear (wheel)
+  // that the tail stores for itself. Neither is read from, or written to,
+  // the main gear: a change on either side stays on that side.
+  function tailProducts(t) {
     if (t.mode === RATIO) return wholePair(t.ratio);
-    if (t.mode === TWO) return [meshOf(t) * t.rotor, m.main * t.drive];
+    if (t.mode === TWO) return [t.mesh * t.rotor, t.wheel * t.drive];
     return [t.rotor, t.drive];
   }
 
@@ -228,13 +224,21 @@
   function initTail(m) {
     const t = FC.MOTOR_CONFIG.tail_rotor_gear_ratio;
     const s = session.tail;
-    if (s && same(tailProducts(s, m), t)) return { ...s };
+    if (s && same(tailProducts(s), t)) return { ...s };
+    // The main gear is only a starting value for the tail's own copy.
     const ratio = clampRatio(t[1] / t[0]);
     if (fits(t[0]) && fits(t[1])) {
-      return { mode: ONE, drive: t[1], rotor: t[0], mesh: m.main, ratio };
+      return {
+        mode: ONE,
+        drive: t[1],
+        rotor: t[0],
+        mesh: m.main,
+        wheel: m.main,
+        ratio,
+      };
     }
     const [rotor, drive] = teethFor(ratio) ?? [MIN_TEETH, MIN_TEETH];
-    return { mode: RATIO, drive, rotor, mesh: m.main, ratio };
+    return { mode: RATIO, drive, rotor, mesh: m.main, wheel: m.main, ratio };
   }
 
   let main = $state(initMain());
@@ -242,7 +246,7 @@
 
   let mainOverflow = $derived(mainProducts(main).some((v) => v > MAX_PRODUCT));
   let tailOverflow = $derived(
-    !wiz.motorised && tailProducts(tail, main).some((v) => v > MAX_PRODUCT),
+    !wiz.motorised && tailProducts(tail).some((v) => v > MAX_PRODUCT),
   );
 
   function ratioText(pair) {
@@ -264,15 +268,14 @@
 
   function applyTail() {
     if (!wiz.motorised) {
-      store("tail_rotor_gear_ratio", tailProducts(tail, main));
+      store("tail_rotor_gear_ratio", tailProducts(tail));
     }
     remember();
   }
 
   function applyMain() {
     store("main_rotor_gear_ratio", mainProducts(main));
-    // A tail driven from the intermediate shaft turns with the main gear.
-    applyTail();
+    remember();
   }
 
   function setMainMode(mode) {
@@ -300,7 +303,7 @@
 
   function setTailMode(mode) {
     if (tail.mode === mode) return;
-    const [p0, p1] = tailProducts(tail, main);
+    const [p0, p1] = tailProducts(tail);
     if (mode === RATIO) {
       tail.ratio = clampRatio(p1 / p0);
     } else {
@@ -309,21 +312,31 @@
       else if (mode === ONE) pair = onePair(tail.rotor, p0, p1);
       if (!pair) return;
       [tail.rotor, tail.drive] = pair;
-      // Onto the intermediate shaft: its main-side gear takes the main
-      // gear's count (1:1), so the tail keeps its ratio.
-      if (mode === TWO && main.mode !== TWO) tail.mesh = main.main;
+      // Onto the intermediate shaft: both gears start at the main gear's
+      // count (1:1), so the tail keeps its ratio. After this they are the
+      // tail's own counts.
+      if (mode === TWO) tail.mesh = tail.wheel = main.main;
     }
     tail.mode = mode;
     applyTail();
   }
 
-  // The tail's gear on the main side, as the tail's own count.
+  // The tail's own counts on the intermediate shaft, shown in its row.
   function getMesh() {
-    return meshOf(tail);
+    return tail.mesh;
   }
 
   function setMesh(v) {
     tail.mesh = v;
+    applyTail();
+  }
+
+  function getWheel() {
+    return tail.wheel;
+  }
+
+  function setWheel(v) {
+    tail.wheel = v;
     applyTail();
   }
 </script>
@@ -533,8 +546,7 @@
               <NumberInput
                 min={MIN_TEETH}
                 max={MAX_TEETH}
-                bind:value={main.main}
-                onchange={applyMain}
+                bind:value={getWheel, setWheel}
               />
             </span>
             <span>{$i18n.t("setupWizardGearPairTailShaft")}</span>
@@ -579,7 +591,7 @@
             <!-- Left to right, as Ethos: tail rotor pulley, drive pulley on
                  the intermediate shaft, its gear on the main side, main gear. -->
             <GearVisualization
-              teeth={[tail.rotor, tail.drive, getMesh(), main.main]}
+              teeth={[tail.rotor, tail.drive, tail.mesh, tail.wheel]}
               train
             />
           {:else}
