@@ -1532,6 +1532,9 @@
     "setupWizardEscCastle": {
         "message": "Castle Link carries the telemetry on the throttle wire. Nothing more to set."
     },
+    "setupWizardEscProgrammableNote": {
+        "message": "This ESC is programmed over the telemetry wire, so it needs half-duplex telemetry; pin swap is set too, except on an F4 board. Both take effect with the restart. Not yet tested on a real ESC for this wiring."
+    },
     "setupWizardEscProtocolHelp": {
         "message": "The ESC's brand or telemetry protocol."
     },
