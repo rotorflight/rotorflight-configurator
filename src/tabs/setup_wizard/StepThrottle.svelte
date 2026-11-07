@@ -14,6 +14,13 @@
   import MainMotorTest from "./MainMotorTest.svelte";
   import MotorCheck from "./MotorCheck.svelte";
   import TabButton from "./TabButton.svelte";
+  import {
+    YGE_PROTOCOL,
+    rangeChanges,
+    readFcEndpoints,
+    setFcEndpoints,
+    writeYgeRange,
+  } from "./throttleLink.js";
 
   // A PWM ESC learns its throttle range at power-up: it sees full throttle
   // when the battery goes on, then low throttle. The full throttle comes
@@ -38,6 +45,48 @@
     motorState.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol],
   );
   let isPwm = $derived(protocolName === "PWM");
+
+  // The throttle range over the ESC link (#529): offered for a PWM output with a YGE ESC,
+  // before the manual steps, as an alternative to them.
+  let escIsYge = $derived(FC.ESC_SENSOR_CONFIG?.protocol === YGE_PROTOCOL);
+  let rangeReady = $derived(
+    FC.RC_CONFIG?.rc_min_throttle > 0 && FC.RC_CONFIG?.rc_max_throttle > 0,
+  );
+  // idle, busy, done, or failed:<reason>
+  let linkState = $state("idle");
+  let linkOffered = $derived(isPwm && escIsYge && stage === "idle");
+
+  async function startLink() {
+    const minUs = FC.RC_CONFIG.rc_min_throttle;
+    const maxUs = FC.RC_CONFIG.rc_max_throttle;
+    const { changes } = rangeChanges(minUs, maxUs);
+    if (!changes) {
+      linkState = "failed:range";
+      return;
+    }
+    linkState = "busy";
+    // The FC keeps the endpoints in RAM until saved; Save writes them with any pending
+    // receiver change, and throws when the FC refuses the EEPROM write.
+    try {
+      if (!(await setFcEndpoints(minUs, maxUs))) throw new Error("fc");
+      await wiz.save();
+    } catch {
+      linkState = "failed:fc";
+      return;
+    }
+    const fc = await readFcEndpoints();
+    if (fc.min !== minUs || fc.max !== maxUs) {
+      linkState = "failed:fc";
+      return;
+    }
+    const written = await writeYgeRange(changes);
+    if (written.reason) {
+      linkState = "failed:esc";
+      return;
+    }
+    linkState = "done";
+    stage = "done";
+  }
 
   // msp.c MSP_MOTOR: output + 1000, zero when the motor is disabled.
   let motorData = $derived(FC.MOTOR_DATA[MAIN_MOTOR] ?? 0);
@@ -123,6 +172,41 @@
 
   {#if !motorEnabled}
     <div class="note">{$i18n.t("setupWizardThrottleNoMotor")}</div>
+  {/if}
+
+  {#if linkOffered}
+    <section class={["card", linkState === "done" && "complete"]}>
+      <h3>{$i18n.t("setupWizardThrottleLinkTitle")}</h3>
+      <p>{$i18n.t("setupWizardThrottleLinkText")}</p>
+      <div class="note">{$i18n.t("setupWizardThrottleLinkNote")}</div>
+      <div class="actions">
+        <button
+          class="btn"
+          disabled={!rangeReady || wiz.armed || linkState === "busy"}
+          onclick={startLink}
+        >
+          {$i18n.t("setupWizardThrottleLinkButton")}
+        </button>
+        {#if !rangeReady}
+          <span class="muted">{$i18n.t("setupWizardThrottleLinkNoRange")}</span>
+        {:else if linkState === "busy"}
+          <span class="muted">{$i18n.t("setupWizardThrottleLinkBusy")}</span>
+        {:else if linkState === "done"}
+          <span class="muted">{$i18n.t("setupWizardThrottleLinkDone")}</span>
+        {:else if linkState === "failed:range"}
+          <span class="error"
+            >{$i18n.t("setupWizardThrottleLinkFailedRange")}</span
+          >
+        {:else if linkState === "failed:fc"}
+          <span class="error">{$i18n.t("setupWizardThrottleLinkFailedFc")}</span
+          >
+        {:else if linkState === "failed:esc"}
+          <span class="error"
+            >{$i18n.t("setupWizardThrottleLinkFailedEsc")}</span
+          >
+        {/if}
+      </div>
+    </section>
   {/if}
 
   <section class={["card", stage !== "idle" && "complete"]}>

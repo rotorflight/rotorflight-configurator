@@ -1466,6 +1466,36 @@
     "setupWizardThrottleNoMotor": {
         "message": "The main motor is off. Choose the ESC protocol in the Motor & ESC step, then reboot at the Connect the servos step."
     },
+    "setupWizardThrottleLinkTitle": {
+        "message": "Set over the ESC link"
+    },
+    "setupWizardThrottleLinkText": {
+        "message": "A YGE ESC can take the throttle range over its link. The range measured on the receiver step is written to the flight controller and to the ESC. It counts as set only when both read it back. This replaces the two steps below."
+    },
+    "setupWizardThrottleLinkNote": {
+        "message": "Not yet checked against a YGE ESC: the ESC fields and their meaning follow the EdgeTX suite."
+    },
+    "setupWizardThrottleLinkButton": {
+        "message": "Set over the ESC link"
+    },
+    "setupWizardThrottleLinkBusy": {
+        "message": "Writing the range to the flight controller and the ESC…"
+    },
+    "setupWizardThrottleLinkDone": {
+        "message": "Set on the flight controller and the ESC, and read back."
+    },
+    "setupWizardThrottleLinkNoRange": {
+        "message": "Measure the throttle range on the receiver step first."
+    },
+    "setupWizardThrottleLinkFailedRange": {
+        "message": "The measured range does not fit the ESC: the 0 % pulse must be 900 to 1900 µs and the span 600 to 1500 µs. Measure the receiver again."
+    },
+    "setupWizardThrottleLinkFailedFc": {
+        "message": "The flight controller did not keep the throttle range. The ESC was not changed."
+    },
+    "setupWizardThrottleLinkFailedEsc": {
+        "message": "The ESC did not keep the throttle range. The flight controller has it."
+    },
     "setupWizardThrottleFullTitle": {
         "message": "Full throttle"
     },
