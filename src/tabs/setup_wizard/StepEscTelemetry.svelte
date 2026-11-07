@@ -499,9 +499,6 @@
 
     <hr class="divider" />
 
-    <p class="muted">
-      {$i18n.t("setupWizardPowerProfile", { 1: activeProfile + 1 })}
-    </p>
     <div class="note">{$i18n.t("setupWizardPowerAutoCells")}</div>
 
     {#if FC.BATTERY_CONFIG.hasProfileCells}
@@ -510,8 +507,16 @@
       <div class="batteries">
         {#each [0, 1, 2] as row (row)}
           {#each [row, row + 3] as index (index)}
-            <div class="battery">
+            <div class="battery" class:active={index === activeProfile}>
               <span>{$i18n.t("powerBatteryProfile", { 1: index + 1 })}</span>
+              {#if index === activeProfile}
+                <i
+                  class="fas fa-check-circle"
+                  role="img"
+                  aria-label={$i18n.t("setupWizardPowerActive")}
+                  title={$i18n.t("setupWizardPowerActive")}
+                ></i>
+              {/if}
               <NumberInput
                 min="0"
                 max="24"
@@ -625,14 +630,18 @@
   .batteries {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px 32px;
+    gap: 10px 24px;
+  }
+
+  .battery.active > span:first-child {
+    font-weight: 700;
   }
 
   .battery {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 6px 8px;
+    gap: 6px 6px;
   }
 
   /* Six batteries in three rows, cells and capacity alike: label, field and unit, twice a row. */

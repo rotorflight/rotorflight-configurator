@@ -1352,8 +1352,8 @@
     "setupWizardPowerText": {
         "message": "The voltage and current sources, and the cells and capacity of the active battery profile. SmartFuel, if the flight controller has it. Saved with the step."
     },
-    "setupWizardPowerProfile": {
-        "message": "Battery profile $1 is active."
+    "setupWizardPowerActive": {
+        "message": "Active"
     },
     "setupWizardPowerAutoCells": {
         "message": "A cell count of 0 detects the cells automatically. Editing a battery does not activate it."
