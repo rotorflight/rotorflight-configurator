@@ -489,7 +489,7 @@
     <p class="muted">
       {$i18n.t("setupWizardPowerProfile", { 1: activeProfile + 1 })}
     </p>
-    <div class="fields">
+    <div class="line">
       <span>{$i18n.t("powerBatteryCellCount")}</span>
       <NumberInput
         min="0"
@@ -520,7 +520,7 @@
         {/each}
       </div>
     {:else}
-      <div class="fields">
+      <div class="line">
         <span>{$i18n.t("powerBatteryCapacity")}</span>
         <NumberInput
           min="0"
@@ -559,6 +559,14 @@
 {/if}
 
 <style lang="scss">
+  /* One line: a label, its field and its unit, e.g. "Cell count [3] S". */
+  .line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+  }
+
   /* Six battery capacities in three rows: label, field and unit, twice a row. */
   .capacities {
     display: grid;
