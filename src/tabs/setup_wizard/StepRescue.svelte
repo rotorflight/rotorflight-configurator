@@ -1,13 +1,13 @@
 <script>
   import { getContext, onMount } from "svelte";
 
-  import rescueFlip from "@/images/setup_wizard/rescue-flip.png";
-  import rescueUp from "@/images/setup_wizard/rescue-up.png";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
+
+  import HeliSide from "./HeliSide.svelte";
 
   // Rescue on or off, and whether it flips the helicopter upright. The rescue
   // settings are kept per PID profile on the FC, so each profile gets the
@@ -108,7 +108,7 @@
 
 <div class="with-art">
   <div class="art">
-    <img src={flip ? rescueFlip : rescueUp} alt="" width="220" height="160" />
+    <HeliSide scene={flip ? "rescueFlip" : "rescueUpright"} />
   </div>
   <div class="text"><p>{$i18n.t("setupWizardRescueIntro")}</p></div>
 </div>
