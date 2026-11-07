@@ -1,8 +1,6 @@
 import diff from "microdiff";
 
 import { FC } from "@/js/fc.svelte.js";
-import { MSP } from "@/js/msp.svelte.js";
-import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { bit_check } from "@/js/serial_backend.js";
 
 import { listManufacturers } from "./manufacturers/index.js";
@@ -13,7 +11,12 @@ import {
     mismatchedKeys,
     parseManufacturerBuffer,
 } from "./engine.js";
-import { delay, pollForEsc, readEscParametersOnce } from "./detection.js";
+import {
+    delay,
+    pollForEsc,
+    readUsableEscParameters,
+    writeEscParametersForSave,
+} from "./detection.js";
 import { runEscSwitch, runPostSaveCycle, deselectTarget, HandshakeStatus } from "./handshake.js";
 
 export const View = {
@@ -72,6 +75,16 @@ class State {
         this.values = {};
         this.initialValues = null;
         this.escLabel = "";
+        this.saveMessage = null;
+    }
+
+    // The name a pilot sees for a field: its label on the manufacturer's page, else the key.
+    fieldLabel(key) {
+        for (const page of this.manufacturer?.pages ?? []) {
+            const hit = page.fields.find((f) => f.apikey === key);
+            if (hit) return hit.label;
+        }
+        return key;
     }
 
     selectManufacturer(manufacturer) {
@@ -164,50 +177,81 @@ class State {
     // only when the ESC holds the changed values (#530). A refused write says so (#532).
     async onSave() {
         this.saveMessage = null;
+        const manufacturer = this.manufacturer;
         const edited = changedKeys(this.initialValues, this.values);
         if (edited.length === 0) return;
 
-        const before = await readEscParametersOnce();
-        const beforeDisplay = parseManufacturerBuffer(this.manufacturer, before).display;
-        const kept = changedKeys(this.initialValues, beforeDisplay).filter((k) => !edited.includes(k));
-        const display = mergeEditedValues(beforeDisplay, this.values, edited);
-        const payload = buildManufacturerPayload(this.manufacturer, display, before);
+        try {
+            // Nothing is written unless the block the ESC holds now can be read and is this
+            // manufacturer's block: a write built from an empty reply would zero the ESC.
+            const before = await readUsableEscParameters(manufacturer);
+            if (!before) {
+                this.saveMessage = { kind: "error", key: "escProgrammingSaveNoRead", labels: [] };
+                return;
+            }
+            const beforeDisplay = parseManufacturerBuffer(manufacturer, before).display;
+            const kept = changedKeys(this.initialValues, beforeDisplay).filter((k) => !edited.includes(k));
+            const display = mergeEditedValues(beforeDisplay, this.values, edited);
+            const payload = buildManufacturerPayload(manufacturer, display, before);
 
-        // Firmware commits ESC EEPROM synchronously in the MSP_SET_ESC_PARAMETERS handler --
-        // never call MSP_EEPROM_WRITE/reboot here, that subsystem is unrelated to ESC params
-        // and would drop the bridge/serial link mid-write for no benefit.
-        const reply = await MSP.promise(MSPCodes.MSP_SET_ESC_PARAMETERS, Array.from(payload));
-        if (reply?.unsupported) {
-            this.saveMessage = { kind: "error", key: "escProgrammingSaveRefused", keys: [] };
-            return;
-        }
+            // Firmware commits ESC EEPROM synchronously in the MSP_SET_ESC_PARAMETERS handler --
+            // never call MSP_EEPROM_WRITE/reboot here, that subsystem is unrelated to ESC params
+            // and would drop the bridge/serial link mid-write for no benefit.
+            const reply = await writeEscParametersForSave(payload);
+            if (reply?.unsupported) {
+                this.saveMessage = { kind: "error", key: "escProgrammingSaveRefused", labels: [] };
+                return;
+            }
 
-        if (this.manufacturer.group === "bridged") {
-            await runPostSaveCycle(this.manufacturer, this.escTarget, {});
-        }
+            if (manufacturer.group === "bridged") {
+                await runPostSaveCycle(manufacturer, this.escTarget, {});
+            }
 
-        // The ESC may still be committing: read back a few times, a short wait apart.
-        let after = before;
-        let afterDisplay = beforeDisplay;
-        let mismatch = edited;
-        for (let attempt = 0; attempt < 3 && mismatch.length > 0; attempt++) {
-            await delay(attempt === 0 ? 300 : 600);
-            after = await readEscParametersOnce();
-            afterDisplay = parseManufacturerBuffer(this.manufacturer, after).display;
-            mismatch = mismatchedKeys(this.values, afterDisplay, edited);
-        }
+            // The ESC may still be committing: read back a few times, a short wait apart. Only a
+            // usable read counts; the last one is what the ESC holds now.
+            let confirmed = null;
+            let mismatch = edited;
+            for (let attempt = 0; attempt < 3 && mismatch.length > 0; attempt++) {
+                await delay(attempt === 0 ? 300 : 600);
+                const buf = await readUsableEscParameters(manufacturer);
+                if (!buf) continue;
+                confirmed = { buf, display: parseManufacturerBuffer(manufacturer, buf).display };
+                mismatch = mismatchedKeys(this.values, confirmed.display, edited);
+            }
 
-        // The screen shows what the ESC holds now.
-        this.rawBuffer = after;
-        this.values = { ...afterDisplay };
-        this.initialValues = $state.snapshot(this.values);
+            if (!confirmed) {
+                // Nothing usable came back: the form keeps the pilot's values, unconfirmed.
+                this.saveMessage = { kind: "error", key: "escProgrammingSaveUnconfirmed", labels: [] };
+                return;
+            }
 
-        if (mismatch.length > 0) {
-            this.saveMessage = { kind: "error", key: "escProgrammingSaveMismatch", keys: mismatch };
-        } else if (kept.length > 0) {
-            this.saveMessage = { kind: "info", key: "escProgrammingSaveKept", keys: kept };
-        } else {
-            this.saveMessage = { kind: "ok", key: "escProgrammingSaveDone", keys: [] };
+            // The screen shows what the ESC holds. A value the ESC did not keep stays in the
+            // form as the pilot typed it, marked as changed, so it can be saved again.
+            const shown = { ...confirmed.display };
+            for (const k of mismatch) shown[k] = this.values[k];
+            this.rawBuffer = confirmed.buf;
+            this.initialValues = $state.snapshot(confirmed.display);
+            this.values = shown;
+
+            if (mismatch.length > 0) {
+                this.saveMessage = {
+                    kind: "error",
+                    key: "escProgrammingSaveMismatch",
+                    labels: mismatch.map((k) => this.fieldLabel(k)),
+                };
+            } else if (kept.length > 0) {
+                this.saveMessage = {
+                    kind: "info",
+                    key: "escProgrammingSaveKept",
+                    labels: kept.map((k) => this.fieldLabel(k)),
+                };
+            } else {
+                this.saveMessage = { kind: "ok", key: "escProgrammingSaveDone", labels: [] };
+            }
+        } catch (err) {
+            // A write that timed out may or may not have reached the ESC; say so.
+            console.error("esc_programming: save failed", err);
+            this.saveMessage = { kind: "error", key: "escProgrammingSaveNoAnswer", labels: [] };
         }
     }
 

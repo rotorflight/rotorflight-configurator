@@ -209,20 +209,15 @@
     );
   }
 
-  // Pin swap is not possible on an F4 board (the Configurator reads the board from the target name).
-  // Without a known target, pin swap is left alone rather than guessed.
-  function pinSwapPossible() {
-    const target = FC.CONFIG.targetName ?? "";
-    return target !== "" && !/F4/i.test(target);
-  }
-
+  // The board is read from the target name. Pin swap is set on a board that allows it and
+  // cleared on an F4 board, where it is not possible, so an earlier "on" is not kept. With no
+  // known target, pin swap is left alone rather than guessed.
   function setProtocol(index) {
     FC.ESC_SENSOR_CONFIG.protocol = index;
     if (isProgrammable(index)) {
       FC.ESC_SENSOR_CONFIG.half_duplex = true;
-      if (pinSwapPossible()) FC.ESC_SENSOR_CONFIG.pinswap = true;
-      else if (/F4/i.test(FC.CONFIG.targetName ?? ""))
-        FC.ESC_SENSOR_CONFIG.pinswap = false;
+      const target = FC.CONFIG.targetName ?? "";
+      if (target !== "") FC.ESC_SENSOR_CONFIG.pinswap = !/F4/i.test(target);
     }
     markChanged();
   }

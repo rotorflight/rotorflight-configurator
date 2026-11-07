@@ -267,6 +267,14 @@ export function matchesManufacturer(bytes, manufacturer) {
     return true;
 }
 
+// A block may be read back and written only when it is long enough for the mandatory
+// fields and carries this manufacturer's signature. An empty or foreign reply must never be
+// written back: every byte the form does not change would go out as zero (#530, #532).
+export function isUsableBuffer(manufacturer, bytes) {
+    if (!bytes || bytes.length < computeLayout(manufacturer.fields).minBytes) return false;
+    return matchesManufacturer(bytes, manufacturer);
+}
+
 // Dispatchers used by the tab instead of calling parseBuffer/buildPayload directly, so that
 // manufacturers with non-declarative logic (AM32's dual timing_advance encoding, Bluejay's
 // layout_revision-conditional retyping, HW5's profile system) can layer optional

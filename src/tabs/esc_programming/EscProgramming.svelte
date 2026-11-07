@@ -88,7 +88,7 @@
         ]}
       >
         {$i18n.t(escState.saveMessage.key, {
-          1: escState.saveMessage.keys.join(", "),
+          1: escState.saveMessage.labels.join(", "),
         })}
       </p>
     {/if}

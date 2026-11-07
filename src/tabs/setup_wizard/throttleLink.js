@@ -15,7 +15,14 @@ import {
   mismatchedKeys,
   parseManufacturerBuffer,
 } from "@/tabs/esc_programming/engine.js";
-import { delay, readEscParametersOnce } from "@/tabs/esc_programming/detection.js";
+import {
+  SAVE_READ_TIMEOUT_MS,
+  SAVE_WRITE_TIMEOUT_MS,
+  delay,
+  readUsableEscParameters,
+  withTimeout,
+  writeEscParametersForSave,
+} from "@/tabs/esc_programming/detection.js";
 
 // The ESC telemetry protocol of a YGE (manufacturers/yge.js escSensorProtocolIds).
 export const YGE_PROTOCOL = 9;
@@ -50,19 +57,27 @@ export function rangeChanges(minUs, maxUs) {
 }
 
 // Sets the FC's motor endpoints for the range. The caller saves them to EEPROM.
-// Resolves false when the FC refuses the write.
+// Resolves false when the FC refuses the write; rejects when it does not answer.
 export async function setFcEndpoints(minUs, maxUs) {
   const code = MSPCodes.MSP_SET_MOTOR_CONFIG;
   FC.MOTOR_CONFIG.mincommand = MINCOMMAND;
   FC.MOTOR_CONFIG.minthrottle = minUs;
   FC.MOTOR_CONFIG.maxthrottle = maxUs;
-  const reply = await MSP.promise(code, mspHelper.crunch(code));
+  const reply = await withTimeout(
+    MSP.promise(code, mspHelper.crunch(code)),
+    SAVE_WRITE_TIMEOUT_MS,
+    "throttle link: FC write timed out",
+  );
   return !reply?.unsupported;
 }
 
-// The FC's motor endpoints, read back from the FC.
+// The FC's motor endpoints, read back from the FC. Rejects when the FC does not answer.
 export async function readFcEndpoints() {
-  await MSP.promise(MSPCodes.MSP_MOTOR_CONFIG);
+  await withTimeout(
+    MSP.promise(MSPCodes.MSP_MOTOR_CONFIG),
+    SAVE_READ_TIMEOUT_MS,
+    "throttle link: FC read timed out",
+  );
   return {
     min: FC.MOTOR_CONFIG.minthrottle,
     max: FC.MOTOR_CONFIG.maxthrottle,
@@ -70,29 +85,40 @@ export async function readFcEndpoints() {
 }
 
 // Writes the range fields to the YGE, keeping every other field as the ESC holds it, and
-// reads them back up to three times. Resolves {} when the ESC holds them, else {reason}.
+// reads them back up to three times. Resolves {} when the ESC holds them, else {reason}:
+// "read" when no usable block came back, "write" when the ESC refused or did not answer,
+// "mismatch" when it reads back other values.
 export async function writeYgeRange(changes) {
   const yge = getManufacturer("yge");
-  const before = await readEscParametersOnce();
+  // Only this YGE's own block is written over: a reply that is empty or belongs to another
+  // ESC would turn the untouched bytes into zeros or into the wrong fields (#530, #529).
+  const before = await readUsableEscParameters(yge);
+  if (!before) return { reason: "read" };
   const current = parseManufacturerBuffer(yge, before).display;
   const payload = buildManufacturerPayload(
     yge,
     { ...current, ...changes },
     before,
   );
-  const reply = await MSP.promise(
-    MSPCodes.MSP_SET_ESC_PARAMETERS,
-    Array.from(payload),
-  );
+
+  let reply;
+  try {
+    reply = await writeEscParametersForSave(payload);
+  } catch {
+    return { reason: "write" };
+  }
   if (reply?.unsupported) return { reason: "write" };
 
   const keys = Object.keys(changes);
+  let confirmed = null;
   let mismatch = keys;
   for (let attempt = 0; attempt < 3 && mismatch.length > 0; attempt++) {
     await delay(attempt === 0 ? 300 : 600);
-    const after = await readEscParametersOnce();
-    const afterDisplay = parseManufacturerBuffer(yge, after).display;
-    mismatch = mismatchedKeys(changes, afterDisplay, keys);
+    const buf = await readUsableEscParameters(yge);
+    if (!buf) continue;
+    confirmed = parseManufacturerBuffer(yge, buf).display;
+    mismatch = mismatchedKeys(changes, confirmed, keys);
   }
+  if (!confirmed) return { reason: "read" };
   return mismatch.length > 0 ? { reason: "mismatch" } : {};
 }

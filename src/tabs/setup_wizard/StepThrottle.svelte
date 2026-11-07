@@ -54,7 +54,10 @@
   );
   // idle, busy, done, or failed:<reason>
   let linkState = $state("idle");
-  let linkOffered = $derived(isPwm && escIsYge && stage === "idle");
+  // Stays on screen after success, so the result is seen next to the manual steps.
+  let linkOffered = $derived(
+    isPwm && escIsYge && (stage === "idle" || linkState === "done"),
+  );
 
   async function startLink() {
     const minUs = FC.RC_CONFIG.rc_min_throttle;
@@ -65,21 +68,45 @@
       return;
     }
     linkState = "busy";
-    // The FC keeps the endpoints in RAM until saved; Save writes them with any pending
-    // receiver change, and throws when the FC refuses the EEPROM write.
+
+    // The FC keeps the endpoints in RAM until saved. wiz.save() writes them with any pending
+    // receiver change; it throws when the FC refuses the EEPROM write, and returns false when
+    // a step's commit reports something it could not do.
     try {
       if (!(await setFcEndpoints(minUs, maxUs))) throw new Error("fc");
-      await wiz.save();
     } catch {
       linkState = "failed:fc";
       return;
     }
-    const fc = await readFcEndpoints();
+    let saved;
+    try {
+      saved = await wiz.save();
+    } catch {
+      linkState = "failed:fc";
+      return;
+    }
+    if (saved === false) {
+      linkState = "failed:save";
+      return;
+    }
+
+    let fc;
+    try {
+      fc = await readFcEndpoints();
+    } catch {
+      linkState = "failed:fc";
+      return;
+    }
     if (fc.min !== minUs || fc.max !== maxUs) {
       linkState = "failed:fc";
       return;
     }
+
     const written = await writeYgeRange(changes);
+    if (written.reason === "read" || written.reason === "write") {
+      linkState = "failed:escnoanswer";
+      return;
+    }
     if (written.reason) {
       linkState = "failed:esc";
       return;
@@ -199,6 +226,14 @@
           >
         {:else if linkState === "failed:fc"}
           <span class="error">{$i18n.t("setupWizardThrottleLinkFailedFc")}</span
+          >
+        {:else if linkState === "failed:save"}
+          <span class="error"
+            >{$i18n.t("setupWizardThrottleLinkFailedSave")}</span
+          >
+        {:else if linkState === "failed:escnoanswer"}
+          <span class="error"
+            >{$i18n.t("setupWizardThrottleLinkFailedEscNoAnswer")}</span
           >
         {:else if linkState === "failed:esc"}
           <span class="error"
