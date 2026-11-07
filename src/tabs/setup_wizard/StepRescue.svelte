@@ -1,6 +1,8 @@
 <script>
   import { getContext, onMount } from "svelte";
 
+  import rescueFlip from "@/images/setup_wizard/rescue-flip.png";
+  import rescueUp from "@/images/setup_wizard/rescue-up.png";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import { MSP } from "@/js/msp.svelte.js";
@@ -104,8 +106,11 @@
   });
 </script>
 
-<div class="intro">
-  <p>{$i18n.t("setupWizardRescueIntro")}</p>
+<div class="with-art">
+  <div class="art">
+    <img src={flip ? rescueFlip : rescueUp} alt="" width="220" height="160" />
+  </div>
+  <div class="text"><p>{$i18n.t("setupWizardRescueIntro")}</p></div>
 </div>
 
 {#if !loaded}
