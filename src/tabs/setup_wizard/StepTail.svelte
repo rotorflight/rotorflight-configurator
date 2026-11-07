@@ -10,6 +10,7 @@
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
 
   import LiveBar from "./LiveBar.svelte";
+  import MotorUnpluggedCheck from "./MotorUnpluggedCheck.svelte";
   import TabButton from "./TabButton.svelte";
   import TailArt from "./TailArt.svelte";
   import TailFoldArt from "./TailFoldArt.svelte";
@@ -102,7 +103,11 @@
     FC.MIXER_INPUTS[YAW].max = limitRaw(ccwLimit, true);
     wiz.sendMixerInput(YAW);
   }
+
+  let unplugged = $state(false);
 </script>
+
+<MotorUnpluggedCheck bind:confirmed={unplugged} />
 
 {#if wiz.motorised}
   <div class="with-art">
@@ -115,7 +120,7 @@
     </div>
     <div class="text"><p>{$i18n.t("setupWizardTailMotorIntro")}</p></div>
   </div>
-  <TailMotorTest />
+  <TailMotorTest motorUnplugged={unplugged} />
   <div>
     <TabButton tab="mixer">
       {$i18n.t("setupWizardOpenMixer")}

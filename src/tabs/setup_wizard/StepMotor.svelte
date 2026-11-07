@@ -8,6 +8,7 @@
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import govState from "@/tabs/governor/state.svelte.js";
   import motorState from "@/tabs/motors/state.svelte.js";
 
   import HeliSide from "./HeliSide.svelte";
@@ -60,6 +61,24 @@
     if (motorState.throttleProtocols[index] === "DSHOT150") {
       FC.MOTOR_CONFIG.use_dshot_telemetry = false;
     }
+    markChanged();
+  }
+
+  // One RPM source, as in the Ethos wizard: the ESC's bidirectional DShot
+  // telemetry, or a wire RPM sensor on a frequency input. The firmware
+  // prefers the sensor when both are set; the wizard keeps one.
+  let rpmSource = $derived(
+    FC.FEATURE_CONFIG.features.FREQ_SENSOR
+      ? "sensor"
+      : FC.MOTOR_CONFIG.use_dshot_telemetry
+        ? "dshot"
+        : null,
+  );
+
+  function setRpmSource(source) {
+    if (rpmSource === source) return;
+    FC.FEATURE_CONFIG.features.FREQ_SENSOR = source === "sensor";
+    FC.MOTOR_CONFIG.use_dshot_telemetry = source === "dshot";
     markChanged();
   }
 
@@ -177,6 +196,45 @@
     {/if}
   </div>
 </section>
+
+{#if govState.enabled}
+  <section class="card">
+    <h3>
+      <span class="num">3</span>{$i18n.t("setupWizardRpmSourceTitle")}
+    </h3>
+    <p>{$i18n.t("setupWizardRpmSourceText")}</p>
+    <div class="tiles" role="radiogroup">
+      <button
+        type="button"
+        role="radio"
+        aria-checked={rpmSource === "dshot"}
+        class={["tile", rpmSource === "dshot" && "selected"]}
+        disabled={!motorState.bidirCapable}
+        onclick={() => setRpmSource("dshot")}
+      >
+        <span class="tile-name">
+          {$i18n.t("setupWizardRpmSourceDshot")}
+        </span>
+        <span class="muted">{$i18n.t("setupWizardRpmSourceDshotHelp")}</span>
+      </button>
+      <button
+        type="button"
+        role="radio"
+        aria-checked={rpmSource === "sensor"}
+        class={["tile", rpmSource === "sensor" && "selected"]}
+        onclick={() => setRpmSource("sensor")}
+      >
+        <span class="tile-name">
+          {$i18n.t("setupWizardRpmSourceSensor")}
+        </span>
+        <span class="muted">{$i18n.t("setupWizardRpmSourceSensorHelp")}</span>
+      </button>
+    </div>
+    {#if !rpmSource}
+      <div class="note">{$i18n.t("setupWizardRpmSourceNone")}</div>
+    {/if}
+  </section>
+{/if}
 
 {#if changed}
   <RebootLater />

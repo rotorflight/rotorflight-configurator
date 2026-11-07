@@ -10,6 +10,7 @@
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { RATE_PROFILE_MASK } from "@/tabs/rates/rateTypes.js";
 
+  import MotorUnpluggedCheck from "./MotorUnpluggedCheck.svelte";
   import PitchArt from "./PitchArt.svelte";
   import TabButton from "./TabButton.svelte";
   import {
@@ -146,16 +147,30 @@
   }
 
   //// Collective pitch at full stick: the collective rate, in degrees.
-  //// Written to every rate profile on Save, so a rates switch doesn't
-  //// change it.
+  //// One value per rate profile, as the Rates tab keeps its rates: each
+  //// profile is read when the step opens, and only the changed ones are
+  //// written on Save. The active profile is selected again afterwards.
 
   let ratesLoaded = $state(false);
-  let fullStick = $state(null);
+  let rateCount = $state(0);
+  let fullSticks = $state([]);
+  let fullStickOrig = [];
   let fullStickChanged = false;
 
   onMount(async () => {
+    const current = FC.CONFIG.rateProfile;
+    const count = FC.CONFIG.numRateProfiles || 1;
+    for (let i = 0; i < count; i++) {
+      await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [i + RATE_PROFILE_MASK]);
+      await MSP.promise(MSPCodes.MSP_RC_TUNING);
+      fullSticks[i] = collectiveAtFullStick(FC.RC_TUNING);
+    }
+    await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [
+      current + RATE_PROFILE_MASK,
+    ]);
     await MSP.promise(MSPCodes.MSP_RC_TUNING);
-    fullStick = collectiveAtFullStick(FC.RC_TUNING);
+    fullStickOrig = [...fullSticks];
+    rateCount = count;
     ratesLoaded = true;
   });
 
@@ -165,18 +180,20 @@
   }
 
   wiz.setCommit(async () => {
-    if (!fullStickChanged || fullStick === null) return;
+    if (!fullStickChanged) return;
     const current = FC.CONFIG.rateProfile;
-    const count = FC.CONFIG.numRateProfiles || 1;
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < rateCount; i++) {
+      const value = fullSticks[i];
+      if (value === null || value === fullStickOrig[i]) continue;
       await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [i + RATE_PROFILE_MASK]);
       await MSP.promise(MSPCodes.MSP_RC_TUNING);
-      if (setCollectiveAtFullStick(FC.RC_TUNING, fullStick)) {
+      if (setCollectiveAtFullStick(FC.RC_TUNING, value)) {
         await MSP.promise(
           MSPCodes.MSP_SET_RC_TUNING,
           mspHelper.crunch(MSPCodes.MSP_SET_RC_TUNING),
         );
       }
+      fullStickOrig[i] = value;
     }
     await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [
       current + RATE_PROFILE_MASK,
@@ -184,7 +201,11 @@
     await MSP.promise(MSPCodes.MSP_RC_TUNING);
     fullStickChanged = false;
   });
+
+  let unplugged = $state(false);
 </script>
+
+<MotorUnpluggedCheck bind:confirmed={unplugged} />
 
 <div class="intro">
   <p>{$i18n.t("setupWizardPitchIntro")}</p>
@@ -320,25 +341,36 @@
 <section class="card">
   <h3><span class="num">4</span>{$i18n.t("setupWizardPitchFullStickTitle")}</h3>
   <p>{$i18n.t("setupWizardPitchFullStickText")}</p>
-  {#if ratesLoaded && fullStick === null}
-    <div class="note">{$i18n.t("setupWizardPitchFullStickOther")}</div>
-  {:else if ratesLoaded}
-    <div class="limits">
-      <span>{$i18n.t("setupWizardPitchFullStickLabel")}</span>
-      <NumberInput
-        min="0"
-        max="25"
-        step="0.5"
-        bind:value={fullStick}
-        onchange={changeFullStick}
-      />
-      <span class="muted">°</span>
-    </div>
-    {#if fullStick > collectiveLimit}
-      <div class="note">
-        {$i18n.t("setupWizardPitchFullStickClipped", { 1: collectiveLimit })}
-      </div>
-    {/if}
+  {#if ratesLoaded}
+    {#each Array.from({ length: rateCount }, (_, i) => i) as i (i)}
+      {#if fullSticks[i] === null}
+        <div class="note">
+          {$i18n.t("setupWizardPitchFullStickOther")}
+        </div>
+      {:else}
+        <div class="limits">
+          <span>
+            {$i18n.t("setupWizardRatesProfile", { 1: i + 1 })}
+            · {$i18n.t("setupWizardPitchFullStickLabel")}
+          </span>
+          <NumberInput
+            min="0"
+            max="25"
+            step="0.5"
+            bind:value={fullSticks[i]}
+            onchange={changeFullStick}
+          />
+          <span class="muted">°</span>
+        </div>
+        {#if fullSticks[i] > collectiveLimit}
+          <div class="note">
+            {$i18n.t("setupWizardPitchFullStickClipped", {
+              1: collectiveLimit,
+            })}
+          </div>
+        {/if}
+      {/if}
+    {/each}
   {/if}
   <div>
     <TabButton tab="rates">{$i18n.t("setupWizardOpenRates")}</TabButton>

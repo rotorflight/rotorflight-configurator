@@ -73,6 +73,27 @@
       : null;
   }
 
+  // Geometry correction (servo flag bit 2), for the cyclic servos only. It
+  // corrects the arc of a rotary arm at its ends, so it is not for linear
+  // servos. The firmware reads it on every update: no reboot.
+  const FLAG_GEOCOR = 2;
+
+  let geoCor = $derived(
+    groupServos("swash").some(
+      (s) => (FC.SERVO_CONFIG[s.servo].flags & FLAG_GEOCOR) !== 0,
+    ),
+  );
+
+  function setGeoCor(enabled) {
+    for (const s of groupServos("swash")) {
+      const config = FC.SERVO_CONFIG[s.servo];
+      config.flags = enabled
+        ? config.flags | FLAG_GEOCOR
+        : config.flags & ~FLAG_GEOCOR;
+      wiz.sendServo(s.servo);
+    }
+  }
+
   function apply(kind, key) {
     const type = typesFor(kind).find((t) => t.key === key);
     const rate = rateOf(kind, key);
@@ -152,6 +173,33 @@
     </section>
   {/if}
 {/each}
+
+{#if groupServos("swash").length > 0}
+  <section class="card">
+    <h3>{$i18n.t("setupWizardGeoTitle")}</h3>
+    <p>{$i18n.t("setupWizardGeoText")}</p>
+    <div class="tiles" role="radiogroup">
+      <button
+        type="button"
+        role="radio"
+        aria-checked={!geoCor}
+        class={["tile", !geoCor && "selected"]}
+        onclick={() => setGeoCor(false)}
+      >
+        <span class="tile-name">{$i18n.t("setupWizardGeoOff")}</span>
+      </button>
+      <button
+        type="button"
+        role="radio"
+        aria-checked={geoCor}
+        class={["tile", geoCor && "selected"]}
+        onclick={() => setGeoCor(true)}
+      >
+        <span class="tile-name">{$i18n.t("setupWizardGeoOn")}</span>
+      </button>
+    </div>
+  </section>
+{/if}
 
 {#if wiz.servos.length === 0}
   <div class="note">{$i18n.t("setupWizardNoServos")}</div>

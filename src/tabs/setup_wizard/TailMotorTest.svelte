@@ -29,6 +29,8 @@
   // and the Mixer tab caps at 25. Above that the value wraps (30 % -> 4.4 %).
   const IDLE_MAX = 25;
 
+  let { motorUnplugged = false } = $props();
+
   let safe = $state(false);
   let percent = $state(10);
   // null, "forward", "reverse" or "idle"
@@ -44,7 +46,9 @@
     FC.MIXER_CONFIG.tail_rotor_mode === Mixer.TAIL_MODE_BIDIRECTIONAL,
   );
   let hasMotor = $derived((FC.CONFIG.motorCount ?? 0) >= 2);
-  let canSpin = $derived(safe && hasMotor && !wiz.armed);
+  // The step asks first whether the motor is unplugged; the tail never
+  // spins until that is confirmed.
+  let canSpin = $derived(safe && hasMotor && !wiz.armed && motorUnplugged);
 
   function overrideValue(kind) {
     if (kind === "forward") return percent * 10;

@@ -100,10 +100,11 @@
   let rebootPending = $state(false);
   let commitFn = null;
   let leaveFn = null;
-  // A step can hold Next back. It returns the i18n key of what is missing,
-  // or null. Read reactively, so the footer shows the reason as it changes.
-  let guardFn = $state(null);
-  let blocker = $derived(guardFn ? guardFn() : null);
+  // A step can hold Next back. Each guard returns the i18n key of what is
+  // missing, or null; the first one that returns a key is shown in the
+  // footer. Read reactively, so the reason follows the state.
+  let guards = $state([]);
+  let blocker = $derived(guards.reduce((key, guard) => key ?? guard(), null));
   let snapshot = null;
   let pollTimer;
   let stopped = false;
@@ -493,7 +494,7 @@
       leaveFn = fn;
     },
     setGuard(fn) {
-      guardFn = fn;
+      guards.push(fn);
     },
     servoLabel(servo) {
       return $i18n.t("setupWizardServoLabel", {
@@ -526,7 +527,7 @@
     leaveFn?.();
     leaveFn = null;
     commitFn = null;
-    guardFn = null;
+    guards = [];
     releaseAll();
     stepIndex = index;
     storeStep(index);

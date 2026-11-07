@@ -304,6 +304,13 @@
 
   let readings = $derived(FUNCTIONS.map((fn, i) => ({ ...fn, ...reading(i) })));
 
+  // A reading as a share of the travel: -100 % to +100 % is the full range
+  // either way, the same scale the bar uses.
+  function travelPercent(f) {
+    const value = Math.round(f * 100);
+    return `${value > 0 ? "+" : ""}${value} %`;
+  }
+
   //// Stick travel. Each stick has to reach both ends of its travel while
   //// this step is open, and Next waits for that. Throttle is left out: it is
   //// often a switch, and its range is measured in step 5.
@@ -602,6 +609,7 @@
     {/if}
 
     <p>{$i18n.t("setupWizardReceiverCheckText")}</p>
+    <p class="muted">{$i18n.t("setupWizardReceiverTravel")}</p>
     <div class="bars">
       {#each readings as r (r.key)}
         <span class="bar-name">{$i18n.t(r.label)}</span>
@@ -609,7 +617,7 @@
           {$i18n.t("setupWizardReceiverChannel", { 1: r.channel + 1 })}
         </span>
         <LiveBar f={r.f} />
-        <span class="raw">{r.known ? r.raw : "–"}</span>
+        <span class="raw">{r.known ? travelPercent(r.f) : "–"}</span>
         <span class="muted">{$i18n.t(`setupWizardReceiverHint_${r.key}`)}</span>
       {/each}
     </div>

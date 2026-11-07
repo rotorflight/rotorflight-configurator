@@ -749,6 +749,9 @@
     "setupWizardReceiverCheckText": {
         "message": "Now move each control: its bar should move the way shown."
     },
+    "setupWizardReceiverTravel": {
+        "message": "Each control has to reach +100 % and -100 % at its ends. A stick that stops short is fixed on the radio, in its travel and endpoints, not here."
+    },
     "setupWizardReceiverHint_roll": {
         "message": "Right → bar right"
     },
@@ -871,6 +874,30 @@
     },
     "setupWizardServoType_digital": {
         "message": "Digital"
+    },
+    "setupWizardUnpluggedTitle": {
+        "message": "Motor unplugged?"
+    },
+    "setupWizardUnpluggedText": {
+        "message": "This step runs with the blades fitted. Unplug the motor, or take the blades off, before going on, so that nothing can start by accident."
+    },
+    "setupWizardUnpluggedConfirm": {
+        "message": "The motor is unplugged"
+    },
+    "setupWizardGuardMotorUnplugged": {
+        "message": "Confirm first that the motor is unplugged."
+    },
+    "setupWizardGeoTitle": {
+        "message": "Geometry correction"
+    },
+    "setupWizardGeoText": {
+        "message": "Corrects the arc of a rotary servo arm at its ends, for the cyclic servos. Not for linear servos. Set the centre and travel first."
+    },
+    "setupWizardGeoOff": {
+        "message": "Off"
+    },
+    "setupWizardGeoOn": {
+        "message": "On"
     },
     "setupWizardServoTypeHelp_digital": {
         "message": "Most digital servos. Cyclic runs at 165 Hz, tail at 200 Hz."
@@ -1237,6 +1264,27 @@
     },
     "setupWizardMotorRpmText": {
         "message": "Used for headspeed, the governor and the RPM filters. Count the magnets in the motor bell for the poles."
+    },
+    "setupWizardRpmSourceTitle": {
+        "message": "RPM source"
+    },
+    "setupWizardRpmSourceText": {
+        "message": "The governor needs the rotor speed from one source: bidirectional DShot from the ESC, or a wire RPM sensor."
+    },
+    "setupWizardRpmSourceDshot": {
+        "message": "Bidirectional DShot"
+    },
+    "setupWizardRpmSourceDshotHelp": {
+        "message": "The ESC reports the rotor speed. Needs DShot300 or faster."
+    },
+    "setupWizardRpmSourceSensor": {
+        "message": "Wire RPM sensor"
+    },
+    "setupWizardRpmSourceSensorHelp": {
+        "message": "A sensor on a frequency input. Its input is set on the Motors tab."
+    },
+    "setupWizardRpmSourceNone": {
+        "message": "No RPM source is set. The governor can't hold the headspeed without one."
     },
     "setupWizardMotorPinion": {
         "message": "Pinion teeth"

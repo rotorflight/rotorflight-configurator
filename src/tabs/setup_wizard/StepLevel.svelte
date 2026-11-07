@@ -4,6 +4,7 @@
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
+  import MotorUnpluggedCheck from "./MotorUnpluggedCheck.svelte";
   import PitchArt from "./PitchArt.svelte";
   import SwashArt from "./SwashArt.svelte";
   import { COLLECTIVE, PITCH, ROLL } from "./heli.js";
@@ -36,7 +37,11 @@
     FC.MIXER_CONFIG.swash_trim[index] = 0;
     wiz.sendMixerConfig();
   }
+
+  let unplugged = $state(false);
 </script>
+
+<MotorUnpluggedCheck bind:confirmed={unplugged} />
 
 <p>{$i18n.t("setupWizardLevelIntro")}</p>
 <div class="tips">
