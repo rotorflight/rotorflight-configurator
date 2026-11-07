@@ -11,6 +11,7 @@
   import govState from "@/tabs/governor/state.svelte.js";
   import motorState from "@/tabs/motors/state.svelte.js";
 
+  import GearVisualization from "./GearVisualization.svelte";
   import HeliSide from "./HeliSide.svelte";
   import MotorGearArt from "./MotorGearArt.svelte";
   import RebootLater from "./RebootLater.svelte";
@@ -278,43 +279,65 @@
     </span>
     <span></span>
 
-    <span>{$i18n.t("setupWizardMotorPinion")}</span>
-    <NumberInput
-      min="1"
-      max={MAX_TEETH}
-      bind:value={train.pinion}
-      onchange={applyMain}
-    />
-    <span></span>
+    <!-- Main gear inputs with visualization -->
+    <div
+      style="grid-column: 1 / -1; display: flex; gap: 2rem; align-items: flex-start;"
+    >
+      <div
+        style="flex: 1; display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;"
+      >
+        <span>{$i18n.t("setupWizardMotorPinion")}</span>
+        <NumberInput
+          min="1"
+          max={MAX_TEETH}
+          bind:value={train.pinion}
+          onchange={applyMain}
+        />
+        <span></span>
 
-    {#if stages === 2}
-      <span>{$i18n.t("setupWizardGearInterPinion")}</span>
-      <NumberInput
-        min="1"
-        max={MAX_TEETH}
-        bind:value={train.pinionSide}
-        onchange={applyMain}
-      />
-      <span></span>
+        {#if stages === 2}
+          <span>{$i18n.t("setupWizardGearInterPinion")}</span>
+          <NumberInput
+            min="1"
+            max={MAX_TEETH}
+            bind:value={train.pinionSide}
+            onchange={applyMain}
+          />
+          <span></span>
 
-      <span>{$i18n.t("setupWizardGearInterMain")}</span>
-      <NumberInput
-        min="1"
-        max={MAX_TEETH}
-        bind:value={train.mainSide}
-        onchange={applyMain}
-      />
-      <span></span>
-    {/if}
+          <span>{$i18n.t("setupWizardGearInterMain")}</span>
+          <NumberInput
+            min="1"
+            max={MAX_TEETH}
+            bind:value={train.mainSide}
+            onchange={applyMain}
+          />
+          <span></span>
+        {/if}
 
-    <span>{$i18n.t("setupWizardMotorMainGear")}</span>
-    <NumberInput
-      min="1"
-      max={MAX_TEETH}
-      bind:value={train.main}
-      onchange={applyMain}
-    />
-    <span class="pill">1:{mainRatio.toFixed(2)}</span>
+        <span>{$i18n.t("setupWizardMotorMainGear")}</span>
+        <NumberInput
+          min="1"
+          max={MAX_TEETH}
+          bind:value={train.main}
+          onchange={applyMain}
+        />
+        <span class="pill">1:{mainRatio.toFixed(2)}</span>
+      </div>
+
+      <!-- Gear visualization: simple (1 stage) or train (2 stages) -->
+      <div
+        style="width: 200px; flex-shrink: 0; display: flex; justify-content: center; align-items: center;"
+      >
+        <GearVisualization
+          teeth={stages === 2
+            ? [train.pinion, train.pinionSide, train.mainSide, train.main]
+            : [train.pinion, train.main]}
+          stage={stages}
+          ratio={`1:${mainRatio.toFixed(2)}`}
+        />
+      </div>
+    </div>
 
     {#if stages === 1}
       <span>{$i18n.t("setupWizardGearRatio")}</span>
@@ -382,33 +405,56 @@
         <span></span>
         <span class="pill">1:{tailRatio.toFixed(2)}</span>
       {:else}
-        <span>{$i18n.t("motorsTailRotorGearRatio")}</span>
-        <span class="ratio">
-          <NumberInput
-            min="1"
-            max={MAX_TEETH}
-            bind:value={FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0]}
-            onchange={markChanged}
-          />
-          :
-          <NumberInput
-            min="1"
-            max={MAX_TEETH}
-            bind:value={FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1]}
-            onchange={markChanged}
-          />
-        </span>
-        <span class="pill">1:{tailRatio.toFixed(2)}</span>
+        <!-- Tail gear ratio-only with visualization -->
+        <div
+          style="grid-column: 1 / -1; display: flex; gap: 2rem; align-items: flex-start;"
+        >
+          <div
+            style="flex: 1; display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;"
+          >
+            <span>{$i18n.t("motorsTailRotorGearRatio")}</span>
+            <span class="ratio">
+              <NumberInput
+                min="1"
+                max={MAX_TEETH}
+                bind:value={FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0]}
+                onchange={markChanged}
+              />
+              :
+              <NumberInput
+                min="1"
+                max={MAX_TEETH}
+                bind:value={FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1]}
+                onchange={markChanged}
+              />
+            </span>
+            <span class="pill">1:{tailRatio.toFixed(2)}</span>
 
-        <span>{$i18n.t("setupWizardGearRatio")}</span>
-        <NumberInput
-          min="0.1"
-          max="500"
-          step="0.01"
-          bind:value={tailRatioValue}
-          onchange={() => setTailRatio(tailRatioValue)}
-        />
-        <span class="muted">:1</span>
+            <span>{$i18n.t("setupWizardGearRatio")}</span>
+            <NumberInput
+              min="0.1"
+              max="500"
+              step="0.01"
+              bind:value={tailRatioValue}
+              onchange={() => setTailRatio(tailRatioValue)}
+            />
+            <span class="muted">:1</span>
+          </div>
+
+          <!-- Tail gear visualization -->
+          <div
+            style="width: 200px; flex-shrink: 0; display: flex; justify-content: center; align-items: center;"
+          >
+            <GearVisualization
+              teeth={[
+                FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0],
+                FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1],
+              ]}
+              stage={1}
+              ratio={`1:${tailRatio.toFixed(2)}`}
+            />
+          </div>
+        </div>
       {/if}
     {/if}
   </div>
