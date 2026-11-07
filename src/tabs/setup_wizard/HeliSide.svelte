@@ -14,10 +14,14 @@
 
   // Lifting the tail swings the rotor up above the usual frame; the rescue
   // arrows go above the helicopter.
+  // The flipped helicopter keeps its full width, so the arc around it needs
+  // room on both sides.
   let viewBox = $derived(
-    scene === "tailLift" || scene.startsWith("rescue")
-      ? "0 -30 168 106"
-      : "0 0 168 76",
+    scene === "rescueFlip"
+      ? "-6 -14 200 90"
+      : scene === "tailLift" || scene === "rescueUpright"
+        ? "0 -30 168 106"
+        : "0 0 168 76",
   );
 </script>
 
@@ -87,9 +91,12 @@
     <line class="arrow" x1="108" y1="8" x2="108" y2="-16" />
     <path class="arrow-head" d="M101 -9 L108 -18 L115 -9" />
   {:else if scene === "rescueFlip"}
-    <g transform="rotate(180 108 38) translate(0 4)">{@render heli()}</g>
-    <path class="arc" d="M26 46 C 36 -20 150 -20 158 46" />
-    <path class="arrow-head" d="M151 38 L158 48 L165 38" />
+    <!-- Turned about its own middle (x 17 to 164, y 16 to 66), so it stays
+         in the frame; the arc runs outside it from the blade tip to past the
+         tail rotor. -->
+    <g transform="rotate(180 90.5 41)">{@render heli()}</g>
+    <path class="arc" d="M2 58 C 8 -30 174 -30 180 58" />
+    <path class="arrow-head" d="M173 50 L180 60 L187 50" />
   {/if}
 </svg>
 
