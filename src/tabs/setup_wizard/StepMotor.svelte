@@ -14,6 +14,7 @@
   import GearVisualization from "./GearVisualization.svelte";
   import HeliSide from "./HeliSide.svelte";
   import MotorGearArt from "./MotorGearArt.svelte";
+  import MotorPolesViz from "./MotorPolesViz.svelte";
   import RebootLater from "./RebootLater.svelte";
   import TabButton from "./TabButton.svelte";
 
@@ -249,17 +250,29 @@
     <div class="art"><MotorGearArt /></div>
     <div class="text"><p>{$i18n.t("setupWizardMotorRpmText")}</p></div>
   </div>
-  <div class="fields">
-    <span>{$i18n.t("motorsMotorPoles1Long")}</span>
-    <NumberInput
-      min="2"
-      max="255"
-      step="2"
-      bind:value={FC.MOTOR_CONFIG.motor_poles[0]}
-      onchange={markChanged}
-    />
-    <span></span>
 
+  <!-- Motor poles with visualization -->
+  <div
+    style="display: flex; gap: 2rem; align-items: center; margin-bottom: 2rem;"
+  >
+    <div style="flex: 1;">
+      <label style="display: block; font-weight: 500; margin-bottom: 0.5rem;">
+        {$i18n.t("motorsMotorPoles1Long")}
+      </label>
+      <NumberInput
+        min="2"
+        max="255"
+        step="2"
+        bind:value={FC.MOTOR_CONFIG.motor_poles[0]}
+        onchange={markChanged}
+      />
+    </div>
+    <div style="width: 150px; flex-shrink: 0;">
+      <MotorPolesViz poles={FC.MOTOR_CONFIG.motor_poles[0]} />
+    </div>
+  </div>
+
+  <div class="fields">
     <span>{$i18n.t("setupWizardGearStage")}</span>
     <span class="stages">
       <button
@@ -334,7 +347,6 @@
             ? [train.pinion, train.pinionSide, train.mainSide, train.main]
             : [train.pinion, train.main]}
           stage={stages}
-          ratio={`1:${mainRatio.toFixed(2)}`}
         />
       </div>
     </div>
@@ -451,7 +463,6 @@
                 FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1],
               ]}
               stage={1}
-              ratio={`1:${tailRatio.toFixed(2)}`}
             />
           </div>
         </div>

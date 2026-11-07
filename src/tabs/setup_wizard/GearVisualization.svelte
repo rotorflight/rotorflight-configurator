@@ -7,7 +7,7 @@
   //   stage: 1 or 2 (one stage or two-stage train)
   //   ratio: display text (e.g. "2.50:1")
 
-  let { teeth = [], stage = 1, ratio = "" } = $props();
+  let { teeth = [], stage = 1 } = $props();
 
   // Clamp tooth count: min 6, max 60 for display
   const clamp = (n) => Math.max(6, Math.min(60, n || 6));
@@ -39,15 +39,15 @@
       clamp(teeth[2] || 20), // intermediate main-side
       clamp(teeth[3] || 50), // main
     ];
-    // Pitch diameter proportional to tooth count; unit = 3px per tooth
-    const unitPx = 3;
+    // Pitch diameter proportional to tooth count; unit = 2px per tooth (smaller)
+    const unitPx = 2;
     const r = t.map((n) => (n * unitPx) / 2);
 
     // Layout: shafts at x positions
     // motor shaft (x_m), intermediate shaft (x_i), rotor shaft (x_r)
-    const x_m = 10 + r[0];
-    const x_i = x_m + r[0] + r[1] + 8;
-    const x_r = x_i + r[2] + r[3] + 8;
+    const x_m = 8 + r[0];
+    const x_i = x_m + r[0] + r[1] + 6;
+    const x_r = x_i + r[2] + r[3] + 6;
 
     const y_top = 15; // top gear (main side)
     const y_bot = 60; // bottom gear (pinion side)
@@ -66,10 +66,6 @@
     aria-hidden="true"
     focusable="false"
   >
-    {#if ratio}
-      <text x="90" y="12" class="ratio-label">{ratio}</text>
-    {/if}
-
     <!-- Main gear: rim + teeth outline + hub -->
     <circle cx={gear.cx_main} cy="45" r={gear.r_main} class="gear-rim" />
     <circle cx={gear.cx_main} cy="45" r={gear.r_main - 2} class="gear-rim" />
@@ -116,15 +112,11 @@
   <!-- Two-stage train: side view -->
   {@const train = trainFx()}
   <svg
-    viewBox="0 0 200 90"
+    viewBox="0 0 160 90"
     class="gear-viz"
     aria-hidden="true"
     focusable="false"
   >
-    {#if ratio}
-      <text x="100" y="12" class="ratio-label">{ratio}</text>
-    {/if}
-
     <!-- Shafts: vertical lines -->
     <line x1={train.x_m} y1="5" x2={train.x_m} y2="80" class="shaft" />
     <line x1={train.x_i} y1="5" x2={train.x_i} y2="80" class="shaft" />
@@ -180,13 +172,6 @@
     color: var(--color-text-muted);
   }
 
-  .ratio-label {
-    font-size: 11px;
-    font-weight: 600;
-    fill: var(--color-text-muted);
-    text-anchor: middle;
-  }
-
   /* Simple gears */
   .gear-rim {
     fill: var(--color-surface);
@@ -224,8 +209,9 @@
 
   /* Two-stage train */
   .shaft {
-    stroke: var(--color-surface);
-    stroke-width: 3;
+    stroke: currentColor;
+    stroke-width: 2;
+    opacity: 0.7;
   }
 
   .gear-bar {
