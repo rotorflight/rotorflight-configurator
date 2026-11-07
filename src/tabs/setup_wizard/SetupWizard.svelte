@@ -501,16 +501,22 @@
 
   // Staged edits go to the FC before the step is left, so Back or the step
   // list can't drop them. They stay unsaved (pending) until the next Save
-  // writes the EEPROM.
+  // writes the EEPROM. A commit that reports a failure (false) keeps the
+  // step open, as Next does; its error is shown on the step.
   async function goTo(index) {
-    if (index === stepIndex || index < 0 || index >= STEPS.length) return;
+    if (saving || index === stepIndex || index < 0 || index >= STEPS.length) {
+      return;
+    }
     if (pending && commitFn) {
+      saving = true;
       try {
-        await commitFn();
+        if ((await commitFn()) === false) return;
       } catch (err) {
         console.error("Setup Wizard step commit failed", err);
         showErrorDialog($i18n.t("setupWizardCommitFailed"));
         return;
+      } finally {
+        saving = false;
       }
     }
     leaveFn?.();
@@ -529,7 +535,7 @@
   // The gate reboots and reopens on itself: the servos are plugged in only
   // once the FC runs their new frame rate.
   async function next() {
-    if (blocker) return;
+    if (saving || blocker) return;
     if (rebootOnNext) {
       await saveAndReboot();
       return;
@@ -554,7 +560,7 @@
   }
 
   export async function onSave() {
-    await save();
+    return save();
   }
 
   export async function onRevert() {
