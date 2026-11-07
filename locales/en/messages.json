@@ -908,6 +908,18 @@
     "setupWizardServoTypeHelp_narrow": {
         "message": "560 Hz. Only for servos made for a 760 µs center, usually tail servos."
     },
+    "setupWizardServoType_specific_digital": {
+        "message": "Specific digital"
+    },
+    "setupWizardServoTypeHelp_specific_digital": {
+        "message": "333 Hz on a 760 µs center pulse, for tail servos."
+    },
+    "setupWizardServoType_hiend_digital": {
+        "message": "Hi-End specific digital"
+    },
+    "setupWizardServoTypeHelp_hiend_digital": {
+        "message": "560 Hz on a 760 µs center pulse, high-speed tail servo."
+    },
     "setupWizardServoTypeCustom": {
         "message": "Now: $1 µs, $2 Hz. Choose a type to change it, or keep it if your servo maker says so."
     },

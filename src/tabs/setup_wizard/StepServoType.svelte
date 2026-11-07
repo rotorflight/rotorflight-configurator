@@ -14,18 +14,20 @@
   // Centre pulse and frame rate. A narrow band servo (760 us centre) needs
   // its own limits and scale too; those are reset only when the band
   // changes, so a type change within a band keeps any calibration.
-  const TYPES = [
+  const CYCLIC_TYPES = [
     { key: "analog", band: "wide" },
     { key: "digital", band: "wide" },
     { key: "narrow", band: "narrow" },
   ];
-  // Frame rate (Hz) per group and type. Digital is 165 Hz on cyclic and
-  // 200 Hz on tail. These values are not yet checked against the radio
-  // suites. A servo already at a rate no tile offers (333 Hz, say) shows as
-  // custom until a type is chosen. The tail doesn't offer Analog.
+  const TAIL_TYPES = [
+    { key: "digital", band: "wide" },
+    { key: "specific_digital", band: "narrow" },
+    { key: "hiend_digital", band: "narrow" },
+  ];
+  // Frame rate (Hz) per group and type, as in the Ethos suite.
   const RATES = {
     swash: { analog: 50, digital: 165, narrow: 560 },
-    tail: { digital: 200, narrow: 560 },
+    tail: { digital: 200, specific_digital: 333, hiend_digital: 560 },
   };
   const BANDS = {
     wide: { mid: 1520, travel: 700, scale: 500, minHz: 50, maxHz: 560 },
@@ -47,9 +49,9 @@
     return wiz.servos.filter((s) => s.kind === kind);
   }
 
-  // The types a group offers, in TYPES order.
+  // The types a group offers per kind.
   function typesFor(kind) {
-    return TYPES.filter((t) => t.key in RATES[kind]);
+    return kind === "tail" ? TAIL_TYPES : CYCLIC_TYPES;
   }
 
   function rateOf(kind, key) {
@@ -173,17 +175,19 @@
       {/if}
 
       <!-- Frame rate: custom value within the band's range -->
-      <div style="margin-top: 1rem;">
-        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">
+      <div
+        style="margin-top: 1rem; display: flex; gap: 1rem; align-items: center;"
+      >
+        <label style="font-weight: 500; white-space: nowrap;">
           {$i18n.t("setupWizardServoTypeFrameRate")}
         </label>
-        <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <div style="display: flex; gap: 0.3rem; align-items: center;">
           <input
             type="number"
             min={band.minHz}
             max={band.maxHz}
             value={FC.SERVO_CONFIG[servos[0].servo].rate || 0}
-            style="padding: 0.5rem; flex: 1;"
+            style="padding: 0.4rem; width: 70px;"
             onchange={(e) => {
               const v = parseInt(e.currentTarget.value);
               if (!isNaN(v) && v >= band.minHz && v <= band.maxHz) {
@@ -203,7 +207,9 @@
               }
             }}
           />
-          <span class="unit">{$i18n.t("setupWizardServoTypeHzUnit")}</span>
+          <span class="unit" style="font-size: 0.9rem;">
+            {$i18n.t("setupWizardServoTypeHzUnit")}
+          </span>
         </div>
       </div>
 
