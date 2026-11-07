@@ -45,7 +45,10 @@
   // The throttle types the current mode reads. Limit only limits the
   // throttle (governorUpdate -> govUpdateLimitedThrottle), so neither type
   // applies there. Switch also needs a headspeed (flight/governor.c).
+  // The throttle type exists from API 12.9 only; the section is hidden below
+  // that, so nothing is restricted there.
   function typeAllowed(index) {
+    if (!govState.is_12_9) return true;
     if (index === GOV_THROTTLE_TYPE.SWITCH) return govState.govHeadspeed;
     if (index === GOV_THROTTLE_TYPE.FUNCTION) {
       return govState.govMode !== "LIMIT";

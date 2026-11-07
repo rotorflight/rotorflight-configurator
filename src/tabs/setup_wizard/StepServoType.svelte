@@ -20,8 +20,9 @@
     { key: "narrow", band: "narrow" },
   ];
   // Frame rate (Hz) per group and type. Digital is 165 Hz on cyclic and
-  // 200 Hz on tail, as in the radio suites. 333 Hz is a separate hi-end type
-  // this step doesn't offer. The tail doesn't offer Analog.
+  // 200 Hz on tail. These values are not yet checked against the radio
+  // suites. A servo already at a rate no tile offers (333 Hz, say) shows as
+  // custom until a type is chosen. The tail doesn't offer Analog.
   const RATES = {
     swash: { analog: 50, digital: 165, narrow: 560 },
     tail: { digital: 200, narrow: 560 },
