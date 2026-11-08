@@ -1466,6 +1466,42 @@
     "setupWizardThrottleNoMotor": {
         "message": "The main motor is off. Choose the ESC protocol in the Motor & ESC step, then reboot at the Connect the servos step."
     },
+    "setupWizardThrottleLinkTitle": {
+        "message": "Set over the ESC link"
+    },
+    "setupWizardThrottleLinkText": {
+        "message": "A YGE ESC can take the throttle range over its link. The range measured on the receiver step is written to the flight controller and to the ESC. It counts as set only when both read it back. The motor's stop command is set to idle (1000 µs). This replaces the two steps below."
+    },
+    "setupWizardThrottleLinkNote": {
+        "message": "Not yet checked against a YGE ESC: the ESC fields and their meaning follow the EdgeTX suite."
+    },
+    "setupWizardThrottleLinkButton": {
+        "message": "Set over the ESC link"
+    },
+    "setupWizardThrottleLinkBusy": {
+        "message": "Writing the range to the flight controller and the ESC…"
+    },
+    "setupWizardThrottleLinkDone": {
+        "message": "Set on the flight controller and the ESC, and read back."
+    },
+    "setupWizardThrottleLinkNoRange": {
+        "message": "Measure the throttle range on the receiver step first."
+    },
+    "setupWizardThrottleLinkFailedRange": {
+        "message": "The measured range does not fit the ESC: the 0 % pulse must be 900 to 1900 µs and the span 600 to 1500 µs. Measure the receiver again."
+    },
+    "setupWizardThrottleLinkFailedFc": {
+        "message": "The flight controller did not keep the throttle range. The ESC was not changed."
+    },
+    "setupWizardThrottleLinkFailedSave": {
+        "message": "The flight controller did not confirm the save. The ESC was not changed."
+    },
+    "setupWizardThrottleLinkFailedEscNoAnswer": {
+        "message": "The ESC did not confirm the throttle range. The flight controller has it. Check the ESC before you try again."
+    },
+    "setupWizardThrottleLinkFailedEsc": {
+        "message": "The ESC did not keep the throttle range. The flight controller has it."
+    },
     "setupWizardThrottleFullTitle": {
         "message": "Full throttle"
     },
@@ -1501,6 +1537,9 @@
     },
     "setupWizardEscCastle": {
         "message": "Castle Link carries the telemetry on the throttle wire. Nothing more to set."
+    },
+    "setupWizardEscProgrammableNote": {
+        "message": "This ESC is programmed over the telemetry wire, so it needs half-duplex telemetry; pin swap is set too, except on an F4 board. Both take effect with the restart. Not yet tested on a real ESC for this wiring."
     },
     "setupWizardEscProtocolHelp": {
         "message": "The ESC's brand or telemetry protocol."
@@ -2095,6 +2134,27 @@
     },
     "escProgrammingStatusGuarding": {
         "message": "Checking ESC link..."
+    },
+    "escProgrammingSaveRefused": {
+        "message": "The ESC refused the save. Nothing was written."
+    },
+    "escProgrammingSaveNoRead": {
+        "message": "The ESC's values could not be read, so nothing was written. Check the connection and try again."
+    },
+    "escProgrammingSaveNoAnswer": {
+        "message": "The ESC did not answer the save. Its values may or may not have changed: check the ESC before you save again."
+    },
+    "escProgrammingSaveUnconfirmed": {
+        "message": "The save could not be confirmed: the ESC did not return its values. Check the ESC before you save again."
+    },
+    "escProgrammingSaveMismatch": {
+        "message": "The ESC does not hold these values after the save: $1. Your values are still in the form, marked as changed: check the ESC and save again."
+    },
+    "escProgrammingSaveKept": {
+        "message": "Saved. These values changed on the ESC since it was read, so they were kept as the ESC has them: $1."
+    },
+    "escProgrammingSaveDone": {
+        "message": "Saved and read back from the ESC."
     },
     "escProgrammingStatusFailed": {
         "message": "Could not detect the ESC. Check wiring/power and try again."

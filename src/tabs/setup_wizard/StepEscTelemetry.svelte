@@ -16,6 +16,7 @@
     VCP_PORT_IDENTIFIER,
     getPortFunc,
   } from "@/tabs/configuration/util.js";
+  import { listManufacturers } from "@/tabs/esc_programming/manufacturers/index.js";
   import EscWiringDetectWizard from "@/tabs/motors/EscWiringDetectWizard.svelte";
   import motorState from "@/tabs/motors/state.svelte.js";
 
@@ -200,8 +201,24 @@
     }
   }
 
+  // A protocol with a parameter family in the ESC Programming tab (#534): its ESC needs
+  // half-duplex telemetry to be programmed, as the EdgeTX suite sets it when the type is chosen.
+  function isProgrammable(index) {
+    return listManufacturers().some((m) =>
+      m.escSensorProtocolIds?.includes(index),
+    );
+  }
+
+  // The board is read from the target name. Pin swap is set on a board that allows it and
+  // cleared on an F4 board, where it is not possible, so an earlier "on" is not kept. With no
+  // known target, pin swap is left alone rather than guessed.
   function setProtocol(index) {
     FC.ESC_SENSOR_CONFIG.protocol = index;
+    if (isProgrammable(index)) {
+      FC.ESC_SENSOR_CONFIG.half_duplex = true;
+      const target = FC.CONFIG.targetName ?? "";
+      if (target !== "") FC.ESC_SENSOR_CONFIG.pinswap = !/F4/i.test(target);
+    }
     markChanged();
   }
 
@@ -358,6 +375,9 @@
         </select>
         <span class="muted">{$i18n.t("setupWizardEscProtocolHelp")}</span>
       </div>
+      {#if isProgrammable(FC.ESC_SENSOR_CONFIG.protocol)}
+        <div class="note">{$i18n.t("setupWizardEscProgrammableNote")}</div>
+      {/if}
     {/if}
   {/if}
 </section>

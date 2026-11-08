@@ -267,6 +267,14 @@ export function matchesManufacturer(bytes, manufacturer) {
     return true;
 }
 
+// A block may be read back and written only when it is long enough for the mandatory
+// fields and carries this manufacturer's signature. An empty or foreign reply must never be
+// written back: every byte the form does not change would go out as zero (#530, #532).
+export function isUsableBuffer(manufacturer, bytes) {
+    if (!bytes || bytes.length < computeLayout(manufacturer.fields).minBytes) return false;
+    return matchesManufacturer(bytes, manufacturer);
+}
+
 // Dispatchers used by the tab instead of calling parseBuffer/buildPayload directly, so that
 // manufacturers with non-declarative logic (AM32's dual timing_advance encoding, Bluejay's
 // layout_revision-conditional retyping, HW5's profile system) can layer optional
@@ -304,4 +312,29 @@ export function keepPageField(pageField, layoutRevision) {
     if (pageField.minLayout != null && layoutRevision < pageField.minLayout) return false;
     if (pageField.maxLayout != null && layoutRevision > pageField.maxLayout) return false;
     return true;
+}
+
+// Save helpers. A save writes only the values the pilot changed, on top of the block
+// the ESC holds now, and counts only when the ESC reads back those values (#530).
+export function sameValue(a, b) {
+    if (typeof a === "number" && typeof b === "number") return Math.abs(a - b) < 1e-9;
+    return a === b;
+}
+
+// The keys whose values differ between two display objects.
+export function changedKeys(before, after) {
+    const keys = new Set([...Object.keys(before ?? {}), ...Object.keys(after ?? {})]);
+    return [...keys].filter((k) => !sameValue(before?.[k], after?.[k]));
+}
+
+// `current` with the edited keys taken from `edited`.
+export function mergeEditedValues(current, edited, keys) {
+    const merged = { ...current };
+    for (const k of keys) merged[k] = edited[k];
+    return merged;
+}
+
+// The keys of `keys` whose read-back value is not what was written.
+export function mismatchedKeys(expected, actual, keys) {
+    return keys.filter((k) => !sameValue(expected[k], actual?.[k]));
 }
