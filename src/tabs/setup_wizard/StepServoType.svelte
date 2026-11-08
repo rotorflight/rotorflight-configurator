@@ -9,6 +9,7 @@
   import PulseTrain from "./PulseTrain.svelte";
   import RebootLater from "./RebootLater.svelte";
   import ServoArt from "./ServoArt.svelte";
+  import ServoTypeArt from "./ServoTypeArt.svelte";
   import TabButton from "./TabButton.svelte";
 
   const wiz = getContext("setupWizard");
@@ -227,17 +228,35 @@
         {/each}
       </div>
       {#if !current}
-        <p class="muted">
-          {$i18n.t("setupWizardServoTypeCustom", {
-            1: FC.SERVO_CONFIG[servos[0].servo].mid,
-            2: FC.SERVO_CONFIG[servos[0].servo].rate,
-          })}
+        <!-- A rate that matches no type: the closest type's picture, its name and
+             the servos' own values, as Ethos' pictureFor. -->
+        <div class="custom">
           {#if nearest}
-            {$i18n.t("setupWizardServoTypeNearest", {
-              1: $i18n.t(`setupWizardServoType_${nearest.key}`),
-            })}
+            <figure class="nearest">
+              <ServoTypeArt
+                rate={nearest.rate}
+                width={BANDS[nearest.band].mid}
+              />
+              <figcaption>
+                <span class="tile-name">
+                  {$i18n.t("setupWizardServoTypeNearest", {
+                    1: $i18n.t(`setupWizardServoType_${nearest.key}`),
+                  })}
+                </span>
+                <span class="pill">
+                  {FC.SERVO_CONFIG[servos[0].servo].mid} µs ·
+                  {FC.SERVO_CONFIG[servos[0].servo].rate} Hz
+                </span>
+              </figcaption>
+            </figure>
           {/if}
-        </p>
+          <p class="muted">
+            {$i18n.t("setupWizardServoTypeCustom", {
+              1: FC.SERVO_CONFIG[servos[0].servo].mid,
+              2: FC.SERVO_CONFIG[servos[0].servo].rate,
+            })}
+          </p>
+        </div>
       {/if}
 
       <div class="rows">
@@ -306,6 +325,33 @@
 </div>
 
 <style lang="scss">
+  /* A rate that matches no type: the closest type's picture with its caption,
+     the note beside it; they stack on a narrow card. */
+  .custom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+
+    p {
+      flex: 1 1 220px;
+      margin: 0;
+    }
+  }
+
+  .nearest {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+
+    figcaption {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+
   /* Frame rate and geometry correction: a label, its control beside it. */
   .rows {
     display: grid;
