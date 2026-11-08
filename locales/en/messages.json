@@ -588,7 +588,7 @@
         "message": "Open the Mixer tab"
     },
     "setupWizardGovIntro": {
-        "message": "How the flight controller drives the motor. Pick the governor mode and how the throttle switch works with it. Ramps, headspeed and gains are set later in the Governor and Profiles tabs."
+        "message": "How the flight controller drives the motor. Pick the governor mode and how the throttle switch works with it, then the headspeed of each PID profile. Ramps and gains are set later in the Governor and Profiles tabs."
     },
     "setupWizardGovMode_OFF": {
         "message": "No governor. The throttle goes straight to the ESC. Use this with the ESC's own governor."
@@ -749,6 +749,9 @@
     "setupWizardReceiverCheckText": {
         "message": "Now move each control: its bar should move the way shown."
     },
+    "setupWizardReceiverTravel": {
+        "message": "Each control has to reach +100 % and -100 % at its ends. A stick that stops short is fixed on the radio, in its travel and endpoints, not here."
+    },
     "setupWizardReceiverHint_roll": {
         "message": "Right → bar right"
     },
@@ -872,6 +875,30 @@
     "setupWizardServoType_digital": {
         "message": "Digital"
     },
+    "setupWizardUnpluggedTitle": {
+        "message": "Motor unplugged?"
+    },
+    "setupWizardUnpluggedText": {
+        "message": "This step runs with the blades fitted. Unplug the motor, or take the blades off, before going on, so that nothing can start by accident."
+    },
+    "setupWizardUnpluggedConfirm": {
+        "message": "The motor is unplugged"
+    },
+    "setupWizardGuardMotorUnplugged": {
+        "message": "Confirm first that the motor is unplugged."
+    },
+    "setupWizardGeoTitle": {
+        "message": "Geometry correction"
+    },
+    "setupWizardGeoText": {
+        "message": "Corrects the arc of a rotary servo arm at its ends, for the cyclic servos. Not for linear servos. Set the centre and travel first."
+    },
+    "setupWizardGeoOff": {
+        "message": "Off"
+    },
+    "setupWizardGeoOn": {
+        "message": "On"
+    },
     "setupWizardServoTypeHelp_digital": {
         "message": "Most digital servos. Cyclic runs at 165 Hz, tail at 200 Hz."
     },
@@ -881,11 +908,38 @@
     "setupWizardServoTypeHelp_narrow": {
         "message": "560 Hz. Only for servos made for a 760 µs center, usually tail servos."
     },
+    "setupWizardServoType_hiend": {
+        "message": "Hi-End digital"
+    },
+    "setupWizardServoTypeHelp_hiend": {
+        "message": "333 Hz. Only for servos their maker rates for 333 Hz."
+    },
+    "setupWizardServoType_specific": {
+        "message": "Specific digital"
+    },
+    "setupWizardServoTypeHelp_specific": {
+        "message": "333 Hz on a 760 µs center, for tail servos made for it."
+    },
+    "setupWizardServoType_hiend_specific": {
+        "message": "Hi-End specific digital"
+    },
+    "setupWizardServoTypeHelp_hiend_specific": {
+        "message": "560 Hz on a 760 µs center, for fast tail servos made for it."
+    },
     "setupWizardServoTypeCustom": {
         "message": "Now: $1 µs, $2 Hz. Choose a type to change it, or keep it if your servo maker says so."
     },
+    "setupWizardServoTypeNearest": {
+        "message": "Closest type: $1."
+    },
     "setupWizardServoTypeCheckMaker": {
         "message": "If the servo maker gives other values, set them on the Servos tab."
+    },
+    "setupWizardServoTypeFrameRate": {
+        "message": "Frame rate"
+    },
+    "setupWizardServoTypeHzUnit": {
+        "message": "Hz"
     },
     "setupWizardServosIntro": {
         "message": "Each servo is held at its center. Check that it moves the right way, then set the center so the arm is square."
@@ -1236,13 +1290,142 @@
         "message": "Motor and gearing"
     },
     "setupWizardMotorRpmText": {
-        "message": "Used for headspeed, the governor and the RPM filters. Count the magnets in the motor bell for the poles."
+        "message": "Used for headspeed, the governor and the RPM filters."
     },
-    "setupWizardMotorPinion": {
-        "message": "Pinion teeth"
+    "setupWizardPolesTitle": {
+        "message": "Motor poles"
     },
-    "setupWizardMotorMainGear": {
-        "message": "Main gear teeth"
+    "setupWizardPolesText": {
+        "message": "Magnet poles of the main motor, from its data sheet (often 10 or 12)."
+    },
+    "setupWizardGearMainTitle": {
+        "message": "Main gear ratio"
+    },
+    "setupWizardGearMainText": {
+        "message": "Count the teeth on the pinion and the main gear."
+    },
+    "setupWizardGearTailTitle": {
+        "message": "Tail gear ratio"
+    },
+    "setupWizardGearTailText": {
+        "message": "Ratio from the main rotor to the tail, always counted from the main rotor shaft. Count the teeth or pulleys of the tail drive."
+    },
+    "setupWizardGearStage": {
+        "message": "Gear train"
+    },
+    "setupWizardGearStageOne": {
+        "message": "One stage"
+    },
+    "setupWizardGearStageTwo": {
+        "message": "Two stages"
+    },
+    "setupWizardGearStageRatio": {
+        "message": "Ratio only"
+    },
+    "setupWizardGearPairSingle": {
+        "message": "Pinion : main gear"
+    },
+    "setupWizardGearPairStage1": {
+        "message": "Pinion : intermediate"
+    },
+    "setupWizardGearPairStage2": {
+        "message": "Intermediate : main gear"
+    },
+    "setupWizardGearPairTail": {
+        "message": "Drive : tail rotor gear"
+    },
+    "setupWizardGearPairMainMesh": {
+        "message": "Intermediate : main gear"
+    },
+    "setupWizardGearPairTailShaft": {
+        "message": "Pulley : tail rotor pulley"
+    },
+    "setupWizardGearRatioDirect": {
+        "message": "Gear ratio"
+    },
+    "setupWizardGearMinTeeth": {
+        "message": "At least 6 teeth per gear. For anything else, use Ratio only."
+    },
+    "setupWizardGearOverflow": {
+        "message": "The tooth counts are too large for the firmware. Use smaller counts or a ratio."
+    },
+    "setupWizardPowerTitle": {
+        "message": "Battery and power"
+    },
+    "setupWizardPowerText": {
+        "message": "The voltage and current sources, and the cells and capacity of the active battery profile. SmartFuel, if the flight controller has it. Saved with the step."
+    },
+    "setupWizardPowerActive": {
+        "message": "Active"
+    },
+    "setupWizardPowerAutoCells": {
+        "message": "A cell count of 0 detects the cells automatically. Editing a battery does not activate it."
+    },
+    "setupWizardPowerCapacityText": {
+        "message": "Capacity in mAh for each battery. Editing a battery does not activate it."
+    },
+    "setupWizardPowerNeedsVoltage": {
+        "message": "SmartFuel on voltage needs a voltage source. Pick one above."
+    },
+    "setupWizardStep_rescue": {
+        "message": "Rescue"
+    },
+    "setupWizardRescueIntro": {
+        "message": "Rescue brings the helicopter back to a safe hover after a fault. The settings are written to every PID profile on Save."
+    },
+    "setupWizardRescueLoading": {
+        "message": "Reading the rescue settings of each PID profile..."
+    },
+    "setupWizardRescueEnableTitle": {
+        "message": "Rescue"
+    },
+    "setupWizardRescueFlipTitle": {
+        "message": "Flip to upright"
+    },
+    "setupWizardRescueOff": {
+        "message": "Off"
+    },
+    "setupWizardRescueOn": {
+        "message": "On"
+    },
+    "setupWizardRescueNoFlip": {
+        "message": "No flip"
+    },
+    "setupWizardRescueFlip": {
+        "message": "Flip"
+    },
+    "setupWizardRescueNoSwitch": {
+        "message": "Assign a rescue switch in the Mode switches step first. Rescue can't be set up without one."
+    },
+    "setupWizardGovHeadspeedTitle": {
+        "message": "Headspeed"
+    },
+    "setupWizardGovHeadspeedText": {
+        "message": "The headspeed the governor holds, for each PID profile. Ramps and gains stay in the Governor and Profiles tabs."
+    },
+    "setupWizardGovProfile": {
+        "message": "PID profile $1"
+    },
+    "setupWizardRpmSourceTitle": {
+        "message": "RPM source"
+    },
+    "setupWizardRpmSourceText": {
+        "message": "The governor needs the rotor speed from one source: bidirectional DShot from the ESC, or a wire RPM sensor."
+    },
+    "setupWizardRpmSourceDshot": {
+        "message": "Bidirectional DShot"
+    },
+    "setupWizardRpmSourceDshotHelp": {
+        "message": "The ESC reports the rotor speed. Needs DShot300 or faster."
+    },
+    "setupWizardRpmSourceSensor": {
+        "message": "Wire RPM sensor"
+    },
+    "setupWizardRpmSourceSensorHelp": {
+        "message": "A sensor on a frequency input. Its input is set on the Motors tab."
+    },
+    "setupWizardRpmSourceNone": {
+        "message": "No RPM source is set. The governor can't hold the headspeed without one."
     },
     "setupWizardConnectIntro": {
         "message": "Everything that is only typed in is set. From here on you work on the helicopter itself."

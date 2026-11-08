@@ -6,6 +6,9 @@
     min: minRaw = 0,
     max: maxRaw = 100,
     step: stepRaw = 1,
+    // A strict field refuses a value outside its range or off its step and keeps the last
+    // good one, instead of clamping it (as Ethos' frame rate field).
+    strict = false,
     disabled,
     onchange,
     id,
@@ -122,7 +125,21 @@
     return wip();
   }
 
+  function takes(v) {
+    return (
+      v >= min && v <= max && Math.abs(v / step - Math.round(v / step)) < 1e-9
+    );
+  }
+
   function update() {
+    if (strict && !takes(numValue)) {
+      // Refused: the field goes back to the value it had.
+      numValue = parseFloat(value);
+      textValue = numValue.toFixed(prec);
+      lastGoodTextValue = textValue;
+      return;
+    }
+
     // Fix NaN
     if (isNaN(numValue)) {
       numValue = 0;

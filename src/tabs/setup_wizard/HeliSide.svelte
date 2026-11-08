@@ -5,13 +5,24 @@
   //  - "tailLift": skids' front on the ground, tail lifted 20 degrees;
   //  - "bladesOff": main blades dashed and crossed out ("blades off");
   //  - "tailBladesOff": the tail rotor dashed and crossed out;
-  //  - "flying": in the air, level, with motion lines.
+  //  - "flying": in the air, level, with motion lines;
+  //  - "rescueUpright": on its skids, with an arrow up (rescue, no flip);
+  //  - "rescueFlip": upside down, with an arc turning it upright (rescue, flip).
   let { scene = "level" } = $props();
 
   const GROUND = 70;
 
-  // Lifting the tail swings the rotor up above the usual frame.
-  let viewBox = $derived(scene === "tailLift" ? "0 -30 168 106" : "0 0 168 76");
+  // Lifting the tail swings the rotor up above the usual frame; the rescue
+  // arrows go above the helicopter.
+  // The flipped helicopter keeps its full width, so the arc around it needs
+  // room on both sides.
+  let viewBox = $derived(
+    scene === "rescueFlip"
+      ? "-6 -14 200 90"
+      : scene === "tailLift" || scene === "rescueUpright"
+        ? "0 -30 168 106"
+        : "0 0 168 76",
+  );
 </script>
 
 {#snippet heli(blades = true, tailBlades = true)}
@@ -49,7 +60,7 @@
 {/snippet}
 
 <svg {viewBox} class="heli-side" aria-hidden="true" focusable="false">
-  {#if scene !== "flying"}
+  {#if scene !== "flying" && scene !== "rescueFlip"}
     <line class="ground" x1="6" y1={GROUND} x2="164" y2={GROUND} />
   {/if}
 
@@ -75,6 +86,17 @@
     <line class="speed" x1="4" y1="56" x2="18" y2="56" />
     <line class="speed" x1="0" y1="64" x2="20" y2="64" />
     <line class="ref" x1="6" y1="74" x2="164" y2="74" />
+  {:else if scene === "rescueUpright"}
+    <g transform="translate(0 4)">{@render heli()}</g>
+    <line class="arrow" x1="108" y1="8" x2="108" y2="-16" />
+    <path class="arrow-head" d="M101 -9 L108 -18 L115 -9" />
+  {:else if scene === "rescueFlip"}
+    <!-- Turned about its own middle (x 17 to 164, y 16 to 66), so it stays
+         in the frame; the arc runs outside it from the blade tip to past the
+         tail rotor. -->
+    <g transform="rotate(180 90.5 41)">{@render heli()}</g>
+    <path class="arc" d="M2 58 C 8 -30 174 -30 180 58" />
+    <path class="arrow-head" d="M173 50 L180 60 L187 50" />
   {/if}
 </svg>
 
@@ -166,6 +188,20 @@
     fill: var(--color-accent-500);
     font-size: 10px;
     font-weight: 700;
+  }
+
+  .arrow {
+    stroke: var(--color-accent-500);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .arrow-head {
+    fill: none;
+    stroke: var(--color-accent-500);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   .speed {

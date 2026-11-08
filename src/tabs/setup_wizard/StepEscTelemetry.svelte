@@ -1,6 +1,10 @@
 <script>
+  import semver from "semver";
   import { getContext, mount, onDestroy, onMount, unmount } from "svelte";
 
+  import NumberInput from "@/components/NumberInput.svelte";
+
+  import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import { MSP } from "@/js/msp.svelte.js";
@@ -34,7 +38,121 @@
       if (!stopped) pollTimer = setTimeout(poll, POLL_MS);
     }
     poll();
+    loadPower();
   });
+
+  //// Battery and SmartFuel, as the Ethos wizard's power screens set them:
+  //// the voltage and current sources, the cells and capacity of the active
+  //// battery profile, and the SmartFuel mode. Written on Save.
+
+  const SMARTFUEL_KEYS = ["None", "Voltage", "Current", "Combined"];
+  const smartFuelSupported = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9);
+  // FBUS meters exist from API 12.9, as in the Power tab.
+  const meterKeys = smartFuelSupported
+    ? ["None", "Adc", "Esc", "Fbus"]
+    : ["None", "Adc", "Esc"];
+
+  let powerLoaded = $state(false);
+  let powerChanged = false;
+  // The cell counts per battery profile, when the FC keeps one per profile
+  // (hasProfileCells, from the length of its reply, not from the API). Older
+  // firmware keeps one cell count for all profiles: the single field.
+  let cellInputs = $state(Array(6).fill(0));
+  // The six battery profiles' capacities, as Ethos's capacity screen shows
+  // them. Before API 12.9 there is one capacity, the active battery's.
+  const capacitiesSupported = smartFuelSupported;
+  const BATTERY_PROFILES = 6;
+  let capacityInputs = $state(Array(BATTERY_PROFILES).fill(0));
+
+  let activeProfile = $derived(FC.BATTERY_STATE.batteryProfile ?? 0);
+  let needsVoltage = $derived(
+    smartFuelSupported && [1, 3].includes(FC.SMARTFUEL_CONFIG?.mode),
+  );
+
+  async function loadPower() {
+    await MSP.promise(MSPCodes.MSP_BATTERY_CONFIG);
+    await MSP.promise(MSPCodes.MSP_BATTERY_STATE);
+    if (smartFuelSupported) await MSP.promise(MSPCodes.MSP2_SMARTFUEL_CONFIG);
+    cellInputs = Array.from({ length: BATTERY_PROFILES }, (_, i) => {
+      if (FC.BATTERY_CONFIG.hasProfileCells) {
+        return FC.BATTERY_CONFIG.cellCounts?.[i] ?? 0;
+      }
+      return i === activeProfile ? FC.BATTERY_CONFIG.cellCount : 0;
+    });
+    const stored = FC.BATTERY_CONFIG.capacities ?? [];
+    capacityInputs = Array.from({ length: BATTERY_PROFILES }, (_, i) => {
+      if (capacitiesSupported) return stored[i] ?? 0;
+      return i === activeProfile ? (FC.BATTERY_CONFIG.capacity ?? 0) : 0;
+    });
+    powerLoaded = true;
+  }
+
+  function changePower(apply) {
+    apply();
+    powerChanged = true;
+    wiz.markChanged();
+  }
+
+  function setVoltageSource(value) {
+    changePower(() => {
+      FC.BATTERY_CONFIG.voltageMeterSource = value;
+    });
+  }
+
+  function setCurrentSource(value) {
+    changePower(() => {
+      FC.BATTERY_CONFIG.currentMeterSource = value;
+    });
+  }
+
+  // Editing a battery doesn't activate it. Without per-profile cells the one
+  // count is the legacy field, which applies to every profile.
+  function setCells(index, value) {
+    const count = Math.max(0, Math.min(24, Math.round(value)));
+    cellInputs[index] = count;
+    changePower(() => {
+      if (FC.BATTERY_CONFIG.hasProfileCells) {
+        FC.BATTERY_CONFIG.cellCounts[index] = count;
+      }
+      // The legacy field mirrors the active profile, as the Power tab saves it.
+      if (!FC.BATTERY_CONFIG.hasProfileCells || index === activeProfile) {
+        FC.BATTERY_CONFIG.cellCount = count;
+      }
+    });
+  }
+
+  // Editing a battery doesn't activate it. The legacy field mirrors the active
+  // one, as the Power tab saves it.
+  function setCapacity(index, value) {
+    const mah = Math.max(0, Math.min(40000, Math.round(value)));
+    capacityInputs[index] = mah;
+    changePower(() => {
+      if (capacitiesSupported) FC.BATTERY_CONFIG.capacities[index] = mah;
+      if (!capacitiesSupported || index === activeProfile) {
+        FC.BATTERY_CONFIG.capacity = mah;
+      }
+    });
+  }
+
+  function setSmartFuel(mode) {
+    changePower(() => {
+      FC.SMARTFUEL_CONFIG.mode = mode;
+    });
+  }
+
+  async function writePower() {
+    await MSP.promise(
+      MSPCodes.MSP_SET_BATTERY_CONFIG,
+      mspHelper.crunch(MSPCodes.MSP_SET_BATTERY_CONFIG),
+    );
+    if (smartFuelSupported) {
+      await MSP.promise(
+        MSPCodes.MSP2_SET_SMARTFUEL_CONFIG,
+        mspHelper.crunch(MSPCodes.MSP2_SET_SMARTFUEL_CONFIG),
+      );
+    }
+    powerChanged = false;
+  }
 
   onDestroy(() => {
     stopped = true;
@@ -44,6 +162,7 @@
   });
 
   wiz.setCommit(async () => {
+    if (powerChanged) await writePower();
     if (!changed) return;
     motorState.fixConfig();
     for (const code of [
@@ -333,7 +452,225 @@
   </div>
 {/if}
 
+{#if powerLoaded}
+  <section class="card">
+    <h3>{$i18n.t("setupWizardPowerTitle")}</h3>
+    <p>{$i18n.t("setupWizardPowerText")}</p>
+
+    <span class="muted">{$i18n.t("powerBatteryVoltageMeterSource")}</span>
+    <div class="tiles" role="radiogroup">
+      {#each meterKeys as key, value (key)}
+        <button
+          type="button"
+          role="radio"
+          aria-checked={FC.BATTERY_CONFIG.voltageMeterSource === value}
+          class={[
+            "tile",
+            FC.BATTERY_CONFIG.voltageMeterSource === value && "selected",
+          ]}
+          onclick={() => setVoltageSource(value)}
+        >
+          <span class="tile-name">
+            {$i18n.t(`powerBatteryVoltageMeterType${key}`)}
+          </span>
+        </button>
+      {/each}
+    </div>
+
+    <span class="muted">{$i18n.t("powerBatteryCurrentMeterSource")}</span>
+    <div class="tiles" role="radiogroup">
+      {#each meterKeys as key, value (key)}
+        <button
+          type="button"
+          role="radio"
+          aria-checked={FC.BATTERY_CONFIG.currentMeterSource === value}
+          class={[
+            "tile",
+            FC.BATTERY_CONFIG.currentMeterSource === value && "selected",
+          ]}
+          onclick={() => setCurrentSource(value)}
+        >
+          <span class="tile-name">
+            {$i18n.t(`powerBatteryCurrentMeterType${key}`)}
+          </span>
+        </button>
+      {/each}
+    </div>
+
+    <hr class="divider" />
+
+    <div class="note">{$i18n.t("setupWizardPowerAutoCells")}</div>
+
+    {#if FC.BATTERY_CONFIG.hasProfileCells}
+      <!-- Each battery: its cells and capacity on one line. Batteries 1 to 3
+           on the left, 4 to 6 on the right, as Ethos. -->
+      <div class="batteries">
+        {#each [0, 1, 2] as row (row)}
+          {#each [row, row + 3] as index (index)}
+            <div class="battery">
+              <!-- The active battery is blue, as on the Power tab. Choosing
+                   a battery here doesn't activate it: the wizard writes on Save. -->
+              <span
+                class={["battery-name", index === activeProfile && "active"]}
+                title={index === activeProfile
+                  ? $i18n.t("setupWizardPowerActive")
+                  : undefined}
+              >
+                {$i18n.t("powerBatteryProfile", { 1: index + 1 })}
+              </span>
+              <NumberInput
+                min="0"
+                max="24"
+                step="1"
+                bind:value={cellInputs[index]}
+                onchange={() => setCells(index, cellInputs[index])}
+              />
+              <span class="muted">S</span>
+              <NumberInput
+                min="0"
+                max="40000"
+                step="1"
+                bind:value={capacityInputs[index]}
+                onchange={() => setCapacity(index, capacityInputs[index])}
+              />
+              <span class="muted">mAh</span>
+            </div>
+          {/each}
+        {/each}
+      </div>
+    {:else}
+      <!-- One cell count for all batteries on this firmware. -->
+      <div class="line">
+        <span>{$i18n.t("powerBatteryCellCount")}</span>
+        <NumberInput
+          min="0"
+          max="24"
+          step="1"
+          bind:value={cellInputs[activeProfile]}
+          onchange={() => setCells(activeProfile, cellInputs[activeProfile])}
+        />
+        <span class="muted">S</span>
+      </div>
+      {#if capacitiesSupported}
+        <p class="muted">{$i18n.t("setupWizardPowerCapacityText")}</p>
+        <div class="profiles">
+          {#each [0, 1, 2] as row (row)}
+            {#each [row, row + 3] as index (index)}
+              <span>{$i18n.t("powerBatteryProfile", { 1: index + 1 })}</span>
+              <NumberInput
+                min="0"
+                max="40000"
+                step="1"
+                bind:value={capacityInputs[index]}
+                onchange={() => setCapacity(index, capacityInputs[index])}
+              />
+              <span class="muted">mAh</span>
+            {/each}
+          {/each}
+        </div>
+      {:else}
+        <div class="line">
+          <span>{$i18n.t("powerBatteryCapacity")}</span>
+          <NumberInput
+            min="0"
+            max="40000"
+            step="1"
+            bind:value={capacityInputs[activeProfile]}
+            onchange={() =>
+              setCapacity(activeProfile, capacityInputs[activeProfile])}
+          />
+          <span class="muted">mAh</span>
+        </div>
+      {/if}
+    {/if}
+
+    <hr class="divider" />
+
+    {#if smartFuelSupported}
+      <span class="muted">{$i18n.t("powerSmartFuelSource")}</span>
+      <div class="tiles" role="radiogroup">
+        {#each SMARTFUEL_KEYS as key, mode (key)}
+          <button
+            type="button"
+            role="radio"
+            aria-checked={FC.SMARTFUEL_CONFIG.mode === mode}
+            class={["tile", FC.SMARTFUEL_CONFIG.mode === mode && "selected"]}
+            onclick={() => setSmartFuel(mode)}
+          >
+            <span class="tile-name">
+              {$i18n.t(`powerSmartFuelSourceType${key}`)}
+            </span>
+          </button>
+        {/each}
+      </div>
+      {#if needsVoltage && FC.BATTERY_CONFIG.voltageMeterSource === 0}
+        <div class="note">{$i18n.t("setupWizardPowerNeedsVoltage")}</div>
+      {/if}
+    {/if}
+  </section>
+{/if}
+
 <style lang="scss">
+  /* One line: a label, its field and its unit, e.g. "Cell count [3] S". */
+  .line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+  }
+
+  /* A rule between the parts of the power card. */
+  .divider {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    border-top: 1px solid var(--color-border-soft);
+  }
+
+  /* One battery per block: its cells and capacity on one line; two blocks a row. */
+  .batteries {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 24px;
+  }
+
+  /* The battery name: the active one blue, as on the Power tab. */
+  .battery-name {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border: 1px solid var(--color-border-soft);
+    border-radius: 4px;
+    background-color: var(--color-surface-sunken);
+    color: var(--color-text-soft);
+  }
+
+  .battery-name.active {
+    color: var(--color-accent-fg);
+    background-color: var(--color-accent-500);
+    border-color: var(--color-accent-500);
+  }
+
+  .battery {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 6px;
+  }
+
+  /* Six batteries in three rows, cells and capacity alike: label, field and unit, twice a row. */
+  .profiles {
+    display: grid;
+    grid-template-columns: max-content 7rem max-content max-content 7rem max-content;
+    justify-content: start;
+    align-items: center;
+    gap: 8px 12px;
+
+    /* The unit of the left battery: room before the right battery's label. */
+    > .muted:nth-child(3) {
+      margin-right: 1.5rem;
+    }
+  }
+
   .btn {
     @extend %button;
   }

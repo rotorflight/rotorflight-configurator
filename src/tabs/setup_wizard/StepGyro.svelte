@@ -4,6 +4,7 @@
   import { i18n } from "@/js/i18n.js";
 
   import GyroArt from "./GyroArt.svelte";
+  import MotorUnpluggedCheck from "./MotorUnpluggedCheck.svelte";
 
   // No overrides here: the stabilizer drives the swash (the PID runs while
   // disarmed too). On the ground the I-term decays, so the swash only
@@ -22,7 +23,11 @@
       ? null
       : "setupWizardGuardGyro",
   );
+
+  let unplugged = $state(false);
 </script>
+
+<MotorUnpluggedCheck bind:confirmed={unplugged} />
 
 <div class="intro">
   <p>{$i18n.t("setupWizardGyroIntro")}</p>
