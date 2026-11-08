@@ -39,6 +39,10 @@ const fields = [
     { key: "bailout", type: "U16", min: 0, max: 100000, unit: "s", scale: 1000 },
     { key: "gov_proportional", type: "U32", min: 30, max: 180, scale: 100 },
     { key: "gov_integral", type: "U32", min: 150, max: 250, scale: 100 },
+    // The block is 84 bytes; these two U32s close the gap (Ethos suite #2457). They
+    // have no row on the page: they are kept as read and written back unchanged.
+    { key: "stick_max", type: "U32" },
+    { key: "stick_zero", type: "U32" },
 ];
 
 const pages = [
@@ -121,6 +125,8 @@ const simResponse = [
     208, 7, // bailout
     100, 0, 0, 0, // gov_proportional
     200, 0, 0, 0, // gov_integral
+    1, 0, 0, 0, // stick_max
+    200, 250, 0, 0, // stick_zero
 ];
 
 const scorpion = {

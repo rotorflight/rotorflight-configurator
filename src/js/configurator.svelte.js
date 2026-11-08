@@ -33,5 +33,7 @@ export const CONFIGURATOR = $state({
     "https://github.com/rotorflight/rotorflight-configurator/releases",
   allReleasesUrl:
     "https://github.com/rotorflight/rotorflight-configurator/releases",
+  // See user_level.js. expertMode is true only on "advanced".
+  userLevel: "intermediate",
   expertMode: false,
 });

@@ -1,0 +1,425 @@
+<script>
+  import { getContext, onMount } from "svelte";
+
+  import NumberInput from "@/components/NumberInput.svelte";
+
+  import { FC } from "@/js/fc.svelte.js";
+  import { i18n } from "@/js/i18n.js";
+  import { MSP } from "@/js/msp.svelte.js";
+  import { MSPCodes } from "@/js/msp/MSPCodes.js";
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import { RATE_PROFILE_MASK } from "@/tabs/rates/rateTypes.js";
+
+  import MotorUnpluggedCheck from "./MotorUnpluggedCheck.svelte";
+  import PitchArt from "./PitchArt.svelte";
+  import TabButton from "./TabButton.svelte";
+  import { ADJ, profileMode, rangeOf } from "./adjust.js";
+  import {
+    COLLECTIVE,
+    PITCH,
+    ROLL,
+    calibratedRate,
+    collectiveAtFullStick,
+    limitDegrees,
+    limitRaw,
+    setCollectiveAtFullStick,
+    swashRaw,
+  } from "./heli.js";
+
+  const wiz = getContext("setupWizard");
+
+  // As in the Mixer Setup docs: command 9° and measure what the blades do.
+  const TEST_DEGREES = 9;
+
+  // `inputs`: the mixer inputs this calibration sets (both cyclic axes share
+  // one calibration). `hold`: the input held while measuring. Cyclic holds
+  // roll: the blades point left and right, across the boom. Roll moves them
+  // fully and pitch not at all in the ideal geometry, so holding pitch would
+  // measure nothing. The swash phase setting can shift this; the hardware
+  // check covers it.
+  const CALIBRATIONS = [
+    { key: "collective", inputs: [COLLECTIVE], hold: COLLECTIVE },
+    { key: "cyclic", inputs: [ROLL, PITCH], hold: ROLL },
+  ];
+
+  let holding = $state(null);
+  let measured = $state({ collective: TEST_DEGREES, cyclic: TEST_DEGREES });
+  let applied = $state({});
+  // The angle each calibration holds. Only TEST_DEGREES can be calibrated;
+  // other angles are for checking the gauge. Not stored.
+  let heldAt = $state({ collective: TEST_DEGREES, cyclic: TEST_DEGREES });
+
+  onMount(() => holdOnly(null));
+
+  // One axis at `degrees`, the others at 0.
+  function holdOnly(input, degrees = 0) {
+    for (const i of [ROLL, PITCH, COLLECTIVE]) {
+      wiz.holdMixer(i, i === input ? swashRaw(degrees) : 0);
+    }
+    holding = input;
+  }
+
+  function toggleHold(cal) {
+    if (holding === cal.hold) holdOnly(null);
+    else holdOnly(cal.hold, heldAt[cal.key]);
+  }
+
+  // Bounded by the stored input limits of the inputs the calibration sets,
+  // on both sides. The tightest one wins, so both cyclic axes stay in range.
+  function heldLimit(cal) {
+    return Math.min(
+      ...cal.inputs.map((i) => Math.abs(limitDegrees(FC.MIXER_INPUTS[i].max))),
+    );
+  }
+
+  function setHeld(cal, degrees) {
+    const max = heldLimit(cal);
+    heldAt[cal.key] = Math.max(-max, Math.min(max, degrees));
+    if (holding === cal.hold) holdOnly(cal.hold, heldAt[cal.key]);
+  }
+
+  // After a limit change, pull any held angle beyond the new limit back in.
+  function clampHeld() {
+    for (const cal of CALIBRATIONS) setHeld(cal, heldAt[cal.key]);
+  }
+
+  // From the held input: that is the axis the pilot measures, and the
+  // cyclic inputs can differ after edits on the Mixer tab.
+  function percent(cal) {
+    return Math.abs(FC.MIXER_INPUTS[cal.hold].rate) / 10;
+  }
+
+  function setRates(cal, magnitude) {
+    for (const input of cal.inputs) {
+      const sign = FC.MIXER_INPUTS[input].rate < 0 ? -1 : 1;
+      FC.MIXER_INPUTS[input].rate = sign * magnitude;
+      wiz.sendMixerInput(input);
+    }
+  }
+
+  function applyMeasured(cal) {
+    const rate = FC.MIXER_INPUTS[cal.hold].rate;
+    setRates(
+      cal,
+      Math.abs(calibratedRate(rate, TEST_DEGREES, measured[cal.key])),
+    );
+    // The blades should now be at TEST_DEGREES: measure again to check.
+    measured[cal.key] = TEST_DEGREES;
+    applied[cal.key] = true;
+  }
+
+  function nudge(cal, delta) {
+    const next = Math.round(percent(cal) * 10) + delta;
+    setRates(cal, Math.max(200, Math.min(2000, next)));
+  }
+
+  //// Limits, in degrees of blade pitch.
+
+  // The Mixer tab's labels carry an HTML entity for the degree sign.
+  function label(key) {
+    return $i18n.t(key).replaceAll("&deg;", "°");
+  }
+
+  let cyclicLimit = $state(limitDegrees(FC.MIXER_INPUTS[PITCH].max));
+  let collectiveLimit = $state(limitDegrees(FC.MIXER_INPUTS[COLLECTIVE].max));
+  let totalLimit = $state(limitDegrees(FC.MIXER_CONFIG.blade_pitch_limit));
+
+  function applyCyclicLimit() {
+    const raw = limitRaw(cyclicLimit);
+    for (const input of [ROLL, PITCH]) {
+      FC.MIXER_INPUTS[input].min = -raw;
+      FC.MIXER_INPUTS[input].max = raw;
+      wiz.sendMixerInput(input);
+    }
+    clampHeld();
+  }
+
+  function applyCollectiveLimit() {
+    const raw = limitRaw(collectiveLimit);
+    FC.MIXER_INPUTS[COLLECTIVE].min = -raw;
+    FC.MIXER_INPUTS[COLLECTIVE].max = raw;
+    wiz.sendMixerInput(COLLECTIVE);
+    clampHeld();
+  }
+
+  function applyTotalLimit() {
+    FC.MIXER_CONFIG.blade_pitch_limit = limitRaw(totalLimit);
+    wiz.sendMixerConfig();
+  }
+
+  //// Collective pitch at full stick: the collective rate, in degrees.
+  //// One value per rate profile the profile switch picks, as in the Ethos
+  //// wizard: every one is read when the step opens, the active profile is
+  //// selected again, and on Save only the changed values are written. With
+  //// no rate switch, only the active profile has a row.
+
+  let ratesLoaded = $state(false);
+  let rateIndexes = $state([]);
+  let fullSticks = $state({});
+  let fullStickOrig = {};
+  let fullStickChanged = false;
+
+  onMount(async () => {
+    const current = FC.CONFIG.rateProfile;
+    const rate = rangeOf(FC.ADJUSTMENT_RANGES, ADJ.RATE_PROFILE);
+    const indexes =
+      profileMode(FC.ADJUSTMENT_RANGES) === "both" && rate
+        ? Array.from(
+            { length: rate.adjMax - rate.adjMin + 1 },
+            (_, k) => rate.adjMin - 1 + k,
+          )
+        : [current];
+    for (const i of indexes) {
+      if (i !== current) {
+        await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [i + RATE_PROFILE_MASK]);
+      }
+      await MSP.promise(MSPCodes.MSP_RC_TUNING);
+      fullSticks[i] = collectiveAtFullStick(FC.RC_TUNING);
+    }
+    await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [
+      current + RATE_PROFILE_MASK,
+    ]);
+    await MSP.promise(MSPCodes.MSP_RC_TUNING);
+    fullStickOrig = { ...fullSticks };
+    rateIndexes = indexes;
+    ratesLoaded = true;
+  });
+
+  function changeFullStick() {
+    fullStickChanged = true;
+    wiz.markChanged();
+  }
+
+  wiz.setCommit(async () => {
+    if (!fullStickChanged) return;
+    const current = FC.CONFIG.rateProfile;
+    for (const i of rateIndexes) {
+      const value = fullSticks[i];
+      if (value == null || value === fullStickOrig[i]) continue;
+      await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [i + RATE_PROFILE_MASK]);
+      await MSP.promise(MSPCodes.MSP_RC_TUNING);
+      if (setCollectiveAtFullStick(FC.RC_TUNING, value)) {
+        await MSP.promise(
+          MSPCodes.MSP_SET_RC_TUNING,
+          mspHelper.crunch(MSPCodes.MSP_SET_RC_TUNING),
+        );
+      }
+      fullStickOrig[i] = value;
+    }
+    await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [
+      current + RATE_PROFILE_MASK,
+    ]);
+    await MSP.promise(MSPCodes.MSP_RC_TUNING);
+    fullStickChanged = false;
+  });
+
+  let unplugged = $state(false);
+</script>
+
+<MotorUnpluggedCheck bind:confirmed={unplugged} />
+
+<div class="intro">
+  <p>{$i18n.t("setupWizardPitchIntro")}</p>
+  <p class="muted">{$i18n.t("setupWizardPitchZeroFirst")}</p>
+</div>
+
+{#each CALIBRATIONS as cal, i (cal.key)}
+  <section class={["card", applied[cal.key] && "complete"]}>
+    <h3>
+      <span class="num">{i + 1}</span>
+      {$i18n.t(`setupWizardPitchTitle_${cal.key}`)}
+      <span class="pill">{percent(cal).toFixed(1)} %</span>
+    </h3>
+    <div class="with-art">
+      <div class="art">
+        <PitchArt angle={heldAt[cal.key]} label="{heldAt[cal.key]}°" />
+      </div>
+      <div class="text">
+        <p>
+          {$i18n.t(`setupWizardPitchText_${cal.key}`, {
+            1: heldAt[cal.key],
+          })}
+        </p>
+      </div>
+    </div>
+    <div class="actions">
+      <button
+        class={["btn", holding === cal.hold && "primary"]}
+        onclick={() => toggleHold(cal)}
+      >
+        {holding === cal.hold
+          ? $i18n.t("setupWizardPitchHolding", { 1: heldAt[cal.key] })
+          : $i18n.t("setupWizardPitchHold", { 1: heldAt[cal.key] })}
+      </button>
+      <span class="angle">
+        <button
+          class="btn"
+          aria-label={$i18n.t("setupWizardPitchHoldLess")}
+          onclick={() => setHeld(cal, heldAt[cal.key] - 1)}
+        >
+          −
+        </button>
+        <span class="value">{heldAt[cal.key]}°</span>
+        <button
+          class="btn"
+          aria-label={$i18n.t("setupWizardPitchHoldMore")}
+          onclick={() => setHeld(cal, heldAt[cal.key] + 1)}
+        >
+          +
+        </button>
+      </span>
+      {#if heldAt[cal.key] !== TEST_DEGREES}
+        <span class="muted"
+          >{$i18n.t("setupWizardPitchHoldNote", { 1: TEST_DEGREES })}</span
+        >
+      {/if}
+    </div>
+    <div class="actions">
+      <label class="measure">
+        <span>{$i18n.t("setupWizardPitchMeasured")}</span>
+        <NumberInput
+          min="1"
+          max="30"
+          step="0.1"
+          bind:value={measured[cal.key]}
+        />
+        <span class="muted">°</span>
+      </label>
+      <button
+        class="btn"
+        disabled={holding !== cal.hold ||
+          heldAt[cal.key] !== TEST_DEGREES ||
+          measured[cal.key] === TEST_DEGREES}
+        onclick={() => applyMeasured(cal)}
+      >
+        {$i18n.t("setupWizardPitchApply")}
+      </button>
+    </div>
+    <div class="actions">
+      <span class="muted">{$i18n.t("setupWizardPitchFine")}</span>
+      <span class="nudges">
+        {#each [-10, -1] as delta (delta)}
+          <button class="btn" onclick={() => nudge(cal, delta)}>
+            {delta / 10}
+          </button>
+        {/each}
+        <span class="value">{percent(cal).toFixed(1)} %</span>
+        {#each [1, 10] as delta (delta)}
+          <button class="btn" onclick={() => nudge(cal, delta)}>
+            +{delta / 10}
+          </button>
+        {/each}
+      </span>
+    </div>
+  </section>
+{/each}
+
+<section class="card">
+  <h3><span class="num">3</span>{$i18n.t("setupWizardPitchLimitsTitle")}</h3>
+  <p>{$i18n.t("setupWizardPitchLimitsText")}</p>
+  <div class="limits">
+    <span>{label("mixerCyclicLimit")}</span>
+    <NumberInput
+      min="0"
+      max="20"
+      step="0.1"
+      bind:value={cyclicLimit}
+      onchange={applyCyclicLimit}
+    />
+    <span class="muted">°</span>
+    <span>{label("mixerCollectiveLimit")}</span>
+    <NumberInput
+      min="0"
+      max="20"
+      step="0.1"
+      bind:value={collectiveLimit}
+      onchange={applyCollectiveLimit}
+    />
+    <span class="muted">°</span>
+    <span>{label("mixerTotalPitchLimit")}</span>
+    <NumberInput
+      min="0"
+      max="36"
+      step="0.1"
+      bind:value={totalLimit}
+      onchange={applyTotalLimit}
+    />
+    <span class="muted">°</span>
+  </div>
+  <p class="muted">{$i18n.t("setupWizardPitchLimitsBinding")}</p>
+</section>
+
+<section class="card">
+  <h3><span class="num">4</span>{$i18n.t("setupWizardPitchFullStickTitle")}</h3>
+  <p>{$i18n.t("setupWizardPitchFullStickText")}</p>
+  {#if ratesLoaded}
+    {#each rateIndexes as i (i)}
+      {#if fullSticks[i] === null}
+        <div class="note">
+          {$i18n.t("setupWizardPitchFullStickOther")}
+        </div>
+      {:else}
+        <div class="limits">
+          <span>
+            {$i18n.t("setupWizardRatesProfile", { 1: i + 1 })}
+            · {$i18n.t("setupWizardPitchFullStickLabel")}
+          </span>
+          <NumberInput
+            min="0"
+            max="25"
+            step="0.5"
+            bind:value={fullSticks[i]}
+            onchange={changeFullStick}
+          />
+          <span class="muted">°</span>
+        </div>
+        {#if fullSticks[i] > collectiveLimit}
+          <div class="note">
+            {$i18n.t("setupWizardPitchFullStickClipped", {
+              1: collectiveLimit,
+            })}
+          </div>
+        {/if}
+      {/if}
+    {/each}
+  {/if}
+  <div>
+    <TabButton tab="rates">{$i18n.t("setupWizardOpenRates")}</TabButton>
+  </div>
+</section>
+
+<style lang="scss">
+  .btn {
+    @extend %button;
+    min-width: 2.5rem;
+  }
+
+  .btn.primary {
+    @extend %button-primary;
+  }
+
+  .measure {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .angle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .angle .value {
+    min-width: 3ch;
+    text-align: center;
+  }
+
+  .limits {
+    display: grid;
+    grid-template-columns: auto 8rem auto;
+    justify-content: start;
+    align-items: center;
+    gap: 8px 12px;
+  }
+</style>
