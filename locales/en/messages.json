@@ -3105,6 +3105,9 @@
     "statusServoOutput": {
         "message": "Servo $1"
     },
+    "numberInputRange": {
+        "message": "Range: $1 to $2"
+    },
     "statusReceiverHead": {
         "message": "Receiver"
     },

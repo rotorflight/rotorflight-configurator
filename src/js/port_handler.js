@@ -8,9 +8,8 @@ import { generateVirtualApiVersions, getTextWidth } from "@/js/utils/common.js";
 
 const TIMEOUT_CHECK = 500 ; // With 250 it seems that it produces a memory leak and slowdown in some versions, reason unknown
 
-// The Virtual FC is a developer tool on desktop; on the web it doubles as a
-// no-hardware demo of every tab.
-const SHOW_VIRTUAL_PORT = import.meta.env.DEV || __BACKEND__ === "web";
+// The Virtual FC is a no-hardware demo of every tab (#90), offered in every build.
+const SHOW_VIRTUAL_PORT = true;
 
 // The flasher owns the port while it's open, or being opened (it reboots the FC
 // into the bootloader itself).
