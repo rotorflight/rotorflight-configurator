@@ -26,11 +26,11 @@
   import TelemetrySensors from "./TelemetrySensors/TelemetrySensors.svelte";
   import TelemetrySettings from "./TelemetrySettings.svelte";
   import { channelOrderFor } from "./channelPresets.js";
-  import { telemetryOnFor } from "./protocols.js";
   import {
     EXTERNAL_TELEMETRY_PROTOCOLS,
     RX_PROTOCOLS,
     TelemetryType,
+    enableDefaultTelemetry,
   } from "./protocols.js";
 
   let loading = $state(true);
@@ -284,11 +284,7 @@
       // TBS CRSF comes with the ELRS channel order (#307).
       const order = channelOrderFor(newRxProto.id, FC.RC_MAP);
       if (order) FC.RC_MAP = [...order];
-      const telem = telemetryOnFor(newRxProto.id);
-      if (telem) {
-        FC.FEATURE_CONFIG.features.setFeature("TELEMETRY", true);
-        if (telem.crsfCustom) FC.TELEMETRY_CONFIG.crsf_telemetry_mode = 1;
-      }
+      enableDefaultTelemetry(newRxProto.id);
     } else if (newRxProto.feature === "RX_SPI") {
       FC.RX_CONFIG.rxSpiProtocol = newRxProto.id;
     }

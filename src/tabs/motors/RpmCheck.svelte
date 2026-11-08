@@ -41,5 +41,9 @@
     p {
       margin: 0 0 4px 0;
     }
+
+    .muted {
+      color: var(--color-text-soft);
+    }
   }
 </style>
