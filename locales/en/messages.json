@@ -3090,6 +3090,21 @@
     "statusInfoHead": {
         "message": "Info"
     },
+    "statusHeadspeedHead": {
+        "message": "Headspeed"
+    },
+    "statusHeadRotor": {
+        "message": "Head rotor"
+    },
+    "statusTailRotor": {
+        "message": "Tail rotor"
+    },
+    "statusOutputsHead": {
+        "message": "Outputs"
+    },
+    "statusServoOutput": {
+        "message": "Servo $1"
+    },
     "statusReceiverHead": {
         "message": "Receiver"
     },
@@ -5781,16 +5796,16 @@
         "message": "Yaw calibration [%]"
     },
     "mixerTailRotorCalibrationHelp": {
-        "message": "Adjust the yaw gain to match the mechanical gain. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors."
+        "message": "Adjust the yaw gain so that the values on the Yaw slider below match the pitch angle of the tail blades. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors."
     },
     "mixerTailRotorMinYaw": {
-        "message": "CW Yaw Blade Angle Limit"
+        "message": "CW Yaw Blade Angle Limit (°)"
     },
     "mixerTailRotorMinYawHelp": {
         "message": "An angle limit for clockwise yaw."
     },
     "mixerTailRotorMaxYaw": {
-        "message": "CCW Yaw Blade Angle Limit"
+        "message": "CCW Yaw Blade Angle Limit (°)"
     },
     "mixerTailRotorMaxYawHelp": {
         "message": "An angle limit for counter-clockwise yaw."
