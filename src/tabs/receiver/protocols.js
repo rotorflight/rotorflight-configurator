@@ -361,3 +361,13 @@ export const EXTERNAL_TELEMETRY_PROTOCOLS = [
     telemetry: { type: TelemetryType.TOGGLE, external: true },
   },
 ];
+
+// Receivers whose telemetry is on from the start (#277): F.Bus and F.Port2 (16, 17) and
+// TBS CRSF (9). Choosing one turns the telemetry feature on; TBS CRSF also gets its custom
+// telemetry mode. Other receivers keep what the pilot set.
+// Only call this from the RX_SERIAL branch: id 16 is also LTM in EXTERNAL_TELEMETRY_PROTOCOLS.
+export function enableDefaultTelemetry(protocolId) {
+  if (protocolId !== 9 && protocolId !== 16 && protocolId !== 17) return;
+  FC.FEATURE_CONFIG.features.setFeature("TELEMETRY", true);
+  if (protocolId === 9) FC.TELEMETRY_CONFIG.crsf_telemetry_mode = 1;
+}

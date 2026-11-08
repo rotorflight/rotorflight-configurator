@@ -30,6 +30,7 @@
     EXTERNAL_TELEMETRY_PROTOCOLS,
     RX_PROTOCOLS,
     TelemetryType,
+    enableDefaultTelemetry,
   } from "./protocols.js";
 
   let loading = $state(true);
@@ -283,6 +284,7 @@
       // TBS CRSF comes with the ELRS channel order (#307).
       const order = channelOrderFor(newRxProto.id, FC.RC_MAP);
       if (order) FC.RC_MAP = [...order];
+      enableDefaultTelemetry(newRxProto.id);
     } else if (newRxProto.feature === "RX_SPI") {
       FC.RX_CONFIG.rxSpiProtocol = newRxProto.id;
     }

@@ -24,7 +24,10 @@
     CHANNEL_PRESETS,
     channelOrderFor,
   } from "@/tabs/receiver/channelPresets.js";
-  import { RX_PROTOCOLS } from "@/tabs/receiver/protocols.js";
+  import {
+    RX_PROTOCOLS,
+    enableDefaultTelemetry,
+  } from "@/tabs/receiver/protocols.js";
 
   import BladesOffWarning from "./BladesOffWarning.svelte";
   import LiveBar from "./LiveBar.svelte";
@@ -166,6 +169,7 @@
     FC.RX_CONFIG.serialrx_provider = proto.id;
     const order = channelOrderFor(proto.id, FC.RC_MAP);
     if (order) setMap(order);
+    enableDefaultTelemetry(proto.id);
     changeConnection();
   }
 
