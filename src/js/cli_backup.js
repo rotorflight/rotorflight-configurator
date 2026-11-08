@@ -50,6 +50,10 @@ const CLI_IDLE_MS = 750;
 // for CLI_IDLE_MS; the whole read is capped at BACKUP_MAX_WAIT_MS (#331).
 const FIRST_BYTE_MS = 10000;
 const BACKUP_MAX_WAIT_MS = 120000;
+// Reasons a backup read is rejected (on the rejected Error's `code`), so the caller can say why.
+export const BACKUP_NO_ANSWER = "no-answer";
+export const BACKUP_STOPPED = "stopped";
+const CAPTURE_WAIT_OPTIONS = { requireOutput: true, maxWaitMs: BACKUP_MAX_WAIT_MS };
 // A freshly-flashed FC has a lot to bring up on boot (mixer, gyro RPM notch
 // filters, etc.), and how long that takes varies with the board and firmware. These used to allow ~28s of total
 // retry budget (3 attempts, 2s apart), which was routinely not enough --
@@ -124,10 +128,10 @@ function waitForIdle(cliEngine, idleMs, { requireOutput = false, maxWaitMs = 0 }
       const now = performance.now();
       if (requireOutput && !received && now - start > FIRST_BYTE_MS) {
         finish();
-        reject(new Error("the flight controller did not answer"));
+        reject(Object.assign(new Error("the flight controller did not answer"), { code: BACKUP_NO_ANSWER }));
       } else if (maxWaitMs && now - start > maxWaitMs) {
         finish();
-        reject(new Error("the flight controller stopped answering"));
+        reject(Object.assign(new Error("the output did not end within the maximum wait"), { code: BACKUP_STOPPED }));
       } else if ((!requireOutput || received) && now - lastReceived > idleMs) {
         finish();
         resolve();
@@ -155,13 +159,12 @@ function closeSerial() {
 /**
  * Sends a `dump all`/`diff all` on an already-connected, already-in-CLI-mode
  * `cliEngine` and resolves with the captured output once it settles.
+ *
+ * Rejects (with `code` BACKUP_NO_ANSWER or BACKUP_STOPPED) when the FC does not answer
+ * in time, so the caller never saves an empty or cut-off backup (#331).
  */
-// Rejects when the FC does not answer: the caller must not save an empty backup (#331).
 export async function runBackupCommand(cliEngine, backupType) {
-  return runCliCommand(cliEngine, BACKUP_COMMANDS[backupType], {
-    requireOutput: true,
-    maxWaitMs: BACKUP_MAX_WAIT_MS,
-  });
+  return runCliCommand(cliEngine, BACKUP_COMMANDS[backupType], CAPTURE_WAIT_OPTIONS);
 }
 
 async function runCliCommand(cliEngine, command, waitOptions) {
@@ -277,7 +280,14 @@ async function captureOverSerial(port, baud, command, onStatus) {
   }
 
   onStatus?.("running");
-  const text = await runCliCommand(cliEngine, command);
+  // Same wait as the CLI tab's backup: an FC that does not answer must not hand back an
+  // empty capture (#331). A failed read resolves null, which the callers already treat as failed.
+  let text = null;
+  try {
+    text = await runCliCommand(cliEngine, command, CAPTURE_WAIT_OPTIONS);
+  } catch (err) {
+    console.log("Capture not read", err);
+  }
 
   // Leaving CLI mode (however we do it) reboots the flight controller -- see
   // CLI_REBOOT_WAIT_MS above -- so disconnect first and then wait, rather

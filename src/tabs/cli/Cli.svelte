@@ -6,6 +6,7 @@
 
   import { CliAutoComplete } from "@/js/CliAutoComplete.js";
   import {
+    BACKUP_STOPPED,
     BACKUP_TYPES,
     replayBackup,
     runBackupCommand,
@@ -143,8 +144,14 @@
     try {
       text = await runBackupCommand(engine, backupType);
     } catch (err) {
-      // No file for a backup the FC did not answer: an empty file looks like a backup (#331).
-      GUI.log($i18n.t("cliBackupNoAnswer"));
+      // No file for a backup that was not read: an empty file looks like a backup (#331).
+      GUI.log(
+        $i18n.t(
+          err?.code === BACKUP_STOPPED
+            ? "cliBackupStopped"
+            : "cliBackupNoAnswer",
+        ),
+      );
       console.log("Backup not read", err);
       return;
     }
