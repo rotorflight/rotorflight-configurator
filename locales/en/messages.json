@@ -2147,6 +2147,15 @@
     "escProgrammingSaveUnconfirmed": {
         "message": "The save could not be confirmed: the ESC did not return its values. Check the ESC before you save again."
     },
+    "escProgrammingBlockUnread": {
+        "message": "The ESC block was not read. Nothing was written."
+    },
+    "escProgrammingBlockCount": {
+        "message": "The ESC reports $1 parameters; the Configurator writes $2 to $3. Nothing was written."
+    },
+    "escProgrammingBlockLength": {
+        "message": "The ESC block is $1 bytes, but its $2 parameters need $3 bytes. Nothing was written."
+    },
     "escProgrammingSaveMismatch": {
         "message": "The ESC does not hold these values after the save: $1. Your values are still in the form, marked as changed: check the ESC and save again."
     },

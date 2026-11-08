@@ -170,9 +170,12 @@ export function resolveEnumLabel(field, raw) {
     return field.enum[raw];
 }
 
+// The raw word for a label, or undefined when the label is not in the table (indexOf's -1
+// would otherwise be written as all ones).
 function resolveEnumRaw(field, label) {
     if (field.enumMap) return field.enumMap.find(([, text]) => text === label)?.[0];
-    return field.enum.indexOf(label);
+    const raw = field.enum.indexOf(label);
+    return raw < 0 ? undefined : raw;
 }
 
 // Normalizes either enum shape into {value, label} pairs for a Select component.
@@ -248,9 +251,12 @@ export function buildPayload(fields, displayValues, previousRawBytes) {
         }
 
         if (!(field.key in displayValues)) continue;
-        const raw = hasEnum(field)
-            ? resolveEnumRaw(field, displayValues[field.key])
-            : toRaw(field, displayValues[field.key]);
+        const value = displayValues[field.key];
+        // A word the module does not name (undefined, or a label not in its table) keeps the
+        // ESC's own word, rather than being written as zero.
+        if (value === undefined) continue;
+        const raw = hasEnum(field) ? resolveEnumRaw(field, value) : toRaw(field, value);
+        if (raw === undefined) continue;
         writeRawField(bytes, field.byteOffset, field, raw);
     }
 
@@ -337,4 +343,10 @@ export function mergeEditedValues(current, edited, keys) {
 // The keys of `keys` whose read-back value is not what was written.
 export function mismatchedKeys(expected, actual, keys) {
     return keys.filter((k) => !sameValue(expected[k], actual?.[k]));
+}
+
+// A page row a module hides for the connected ESC (a YGE Opto has no BEC row). Modules
+// without the hook show every row.
+export function isPageRowVisible(manufacturer, apikey, values) {
+    return manufacturer.rowVisible ? manufacturer.rowVisible(apikey, values) : true;
 }
