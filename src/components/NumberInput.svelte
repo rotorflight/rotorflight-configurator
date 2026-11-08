@@ -1,6 +1,8 @@
 <script>
   import { onDestroy, onMount } from "svelte";
 
+  import { i18n } from "@/js/i18n.js";
+
   let {
     value = $bindable(0),
     min: minRaw = 0,
@@ -15,8 +17,12 @@
   } = $props();
 
   let step = $derived(parseFloat(stepRaw));
+
   let min = $derived(parseFloat(minRaw));
   let max = $derived(parseFloat(maxRaw));
+
+  // The value range as a tooltip on the field (#69).
+  let rangeTitle = $derived($i18n.t("numberInputRange", { 1: min, 2: max }));
 
   function precision(a) {
     if (!isFinite(a)) return 0;
@@ -258,6 +264,7 @@
     autocomplete="off"
     bind:this={elem}
     bind:value={textValue}
+    title={rangeTitle}
     {oninput}
     onblur={updateLocal}
     onchange={updateLocal}

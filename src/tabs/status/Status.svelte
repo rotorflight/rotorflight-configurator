@@ -20,6 +20,7 @@
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import { rotorSpeeds } from "@/js/rotor_speed.js";
   import { RC_COMMAND } from "@/tabs/receiver/rc_command.svelte.js";
 
   const AXIS_NAMES = [
@@ -111,6 +112,9 @@
   let fastInterval;
   let slowInterval;
 
+  let outputsPollerTimer;
+  let outputsPollerStopped = false;
+
   let numChs = $derived(Math.min(FC.RC.active_channels ?? 0, 18));
   let numBars = $derived(Math.max(numChs, 8));
 
@@ -138,6 +142,38 @@
   }
 
   let rssiPercent = $derived(((FC.ANALOG?.rssi ?? 0) / 1023) * 100);
+
+  // Headspeed box (#28): head and tail rotor RPM, the scale growing past the value.
+  let speeds = $derived(rotorSpeeds());
+  let headMax = $derived(
+    Math.max(3000, Math.ceil(speeds.head / 1000) * 1000 + 1000),
+  );
+  let tailMax = $derived(
+    Math.max(5000, Math.ceil(speeds.tail / 1000) * 1000 + 1000),
+  );
+
+  // Outputs box (#31): the servos' pulses, and the motors' throttles.
+  const SERVO_PULSE_MIN = 750;
+  const SERVO_PULSE_SPAN = 1500;
+  let servoCount = $derived(
+    Math.min(FC.CONFIG.servoCount ?? 0, FC.SERVO_DATA?.length ?? 0),
+  );
+  let motorIndexes = $derived(
+    Array.from({ length: FC.CONFIG.motorCount ?? 0 }, (_, i) => i),
+  );
+
+  function servoPercent(i) {
+    const pulse = FC.SERVO_DATA[i] ?? SERVO_PULSE_MIN;
+    return Math.min(
+      100,
+      Math.max(0, ((pulse - SERVO_PULSE_MIN) / SERVO_PULSE_SPAN) * 100),
+    );
+  }
+
+  function motorPercent(i) {
+    const pulse = FC.MOTOR_DATA[i] ?? 0;
+    return pulse > 0 ? Math.min(100, Math.max(0, (pulse - 1000) / 10)) : 0;
+  }
 
   let disarmFlags = $derived.by(() => {
     const flags = getDisarmFlags();
@@ -207,10 +243,23 @@
     updateArming(false);
   }
 
+  // Motor and servo data for the headspeed and outputs boxes. Self-rescheduling,
+  // like the Motors tab's poller, so a slow link never piles up requests.
+  async function pollOutputs() {
+    if (outputsPollerStopped) return;
+    await MSP.promise(MSPCodes.MSP_MOTOR);
+    await MSP.promise(MSPCodes.MSP_MOTOR_TELEMETRY);
+    await MSP.promise(MSPCodes.MSP_SERVO);
+    if (!outputsPollerStopped) {
+      outputsPollerTimer = setTimeout(pollOutputs, 100);
+    }
+  }
+
   onMount(async () => {
     await MSP.promise(MSPCodes.MSP_STATUS);
     await MSP.promise(MSPCodes.MSP_FEATURE_CONFIG);
     await MSP.promise(MSPCodes.MSP_MIXER_CONFIG);
+    await MSP.promise(MSPCodes.MSP_MOTOR_CONFIG);
     await MSP.promise(MSPCodes.MSP_ACC_TRIM);
     await MSP.promise(MSPCodes.MSP_NAME);
     await MSP.promise(MSPCodes.MSP_FLIGHT_STATS);
@@ -260,11 +309,15 @@
       // Usually altimeter indicates feet. We show centimeters, as it is more useful here.
       altitudeIndicator.setAltitude(FC.SENSOR_DATA.altitude * 100);
     }, 250);
+
+    pollOutputs();
   });
 
   onDestroy(() => {
     clearInterval(fastInterval);
     clearInterval(slowInterval);
+    outputsPollerStopped = true;
+    clearTimeout(outputsPollerTimer);
   });
 
   function onClickHelp() {
@@ -463,6 +516,42 @@
           rightLabel={`${rssiPercent.toFixed(0)}%`}
           value={rssiPercent}
         />
+      </div>
+    </Section>
+
+    <Section label="statusHeadspeedHead">
+      <div class="bars">
+        <Meter
+          title={$i18n.t("statusHeadRotor")}
+          leftLabel={`${speeds.head.toLocaleString()} RPM`}
+          rightLabel={`${headMax.toLocaleString()} RPM`}
+          value={(100 * speeds.head) / headMax}
+        />
+        <Meter
+          title={$i18n.t("statusTailRotor")}
+          leftLabel={`${speeds.tail.toLocaleString()} RPM`}
+          rightLabel={`${tailMax.toLocaleString()} RPM`}
+          value={(100 * speeds.tail) / tailMax}
+        />
+      </div>
+    </Section>
+
+    <Section label="statusOutputsHead">
+      <div class="bars">
+        {#each Array.from({ length: servoCount }, (_, i) => i) as i (i)}
+          <Meter
+            title={$i18n.t("statusServoOutput", { 1: i + 1 })}
+            leftLabel={`${FC.SERVO_DATA[i] ?? 0} µs`}
+            value={servoPercent(i)}
+          />
+        {/each}
+        {#each motorIndexes as i (i)}
+          <Meter
+            title={$i18n.t("motors.motor.heading", { index: i + 1 })}
+            leftLabel={`${motorPercent(i).toFixed(0)}%`}
+            value={motorPercent(i)}
+          />
+        {/each}
       </div>
     </Section>
   </div>
