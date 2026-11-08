@@ -318,7 +318,7 @@
     <p>{$i18n.t("setupWizardProfilesSwitchText")}</p>
     {#if pidRange}
       <span class="pill">
-        CH {channelNumber(pidRange.adjChannel)} · {$i18n.t(
+        CH {channelNumber(pidRange.adjChannel, FC.RC_MAP)} · {$i18n.t(
           "setupWizardProfilesCount",
           { 1: profileCount },
         )}
@@ -341,7 +341,7 @@
       {:else if profileAux !== null}
         <span class="listening">
           {$i18n.t("setupWizardProfilesPositions", {
-            1: channelNumber(profileAux),
+            1: channelNumber(profileAux, FC.RC_MAP),
             2: Math.min(positions.length, MAX_PROFILE_POSITIONS),
           })}
         </span>
@@ -451,7 +451,7 @@
     {/if}
 
     {#if gainChannel !== null}
-      <span class="pill">CH {channelNumber(gainChannel)}</span>
+      <span class="pill">CH {channelNumber(gainChannel, FC.RC_MAP)}</span>
     {/if}
     <div class="actions">
       {#if listening === gain}
@@ -484,7 +484,7 @@
     <ul class="plan">
       {#each channelPlan as c (c.aux)}
         <li>
-          <span class="pill">CH {channelNumber(c.aux)}</span>
+          <span class="pill">CH {channelNumber(c.aux, FC.RC_MAP)}</span>
           {c.names.join(", ")}
         </li>
       {/each}

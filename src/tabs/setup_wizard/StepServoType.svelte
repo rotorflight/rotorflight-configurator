@@ -13,13 +13,20 @@
 
   // Centre pulse and frame rate. A narrow band servo (760 us centre) needs
   // its own limits and scale too; those are reset only when the band
-  // changes, so a type change within a band keeps any calibration. The
-  // usual values are the Servos tab's (servoType() there).
+  // changes, so a type change within a band keeps any calibration.
   const TYPES = [
-    { key: "analog", rate: 50, band: "wide" },
-    { key: "digital", rate: 333, band: "wide" },
-    { key: "narrow", rate: 560, band: "narrow" },
+    { key: "analog", band: "wide" },
+    { key: "digital", band: "wide" },
+    { key: "narrow", band: "narrow" },
   ];
+  // Frame rate (Hz) per group and type. Digital is 165 Hz on cyclic and
+  // 200 Hz on tail. These values are not yet checked against the radio
+  // suites. A servo already at a rate no tile offers (333 Hz, say) shows as
+  // custom until a type is chosen. The tail doesn't offer Analog.
+  const RATES = {
+    swash: { analog: 50, digital: 165, narrow: 560 },
+    tail: { digital: 200, narrow: 560 },
+  };
   const BANDS = {
     wide: { mid: 1520, travel: 700, scale: 500 },
     narrow: { mid: 760, travel: 250, scale: 250 },
@@ -40,28 +47,42 @@
     return wiz.servos.filter((s) => s.kind === kind);
   }
 
+  // The types a group offers, in TYPES order.
+  function typesFor(kind) {
+    return TYPES.filter((t) => t.key in RATES[kind]);
+  }
+
+  function rateOf(kind, key) {
+    return RATES[kind][key];
+  }
+
   // The type every servo of the group already has, or null.
   function currentType(kind) {
     const configs = groupServos(kind).map((s) => FC.SERVO_CONFIG[s.servo]);
     if (configs.length === 0) return null;
-    const type = TYPES.find(
-      (t) => t.rate === configs[0].rate && t.band === bandOf(configs[0]),
+    const type = typesFor(kind).find(
+      (t) =>
+        rateOf(kind, t.key) === configs[0].rate &&
+        t.band === bandOf(configs[0]),
     );
     return type &&
-      configs.every((c) => c.rate === type.rate && bandOf(c) === type.band)
+      configs.every(
+        (c) => c.rate === rateOf(kind, type.key) && bandOf(c) === type.band,
+      )
       ? type.key
       : null;
   }
 
   function apply(kind, key) {
-    const type = TYPES.find((t) => t.key === key);
+    const type = typesFor(kind).find((t) => t.key === key);
+    const rate = rateOf(kind, key);
     for (const s of groupServos(kind)) {
       const config = FC.SERVO_CONFIG[s.servo];
-      if (config.rate !== type.rate) {
+      if (config.rate !== rate) {
         rebootNeeded = true;
         wiz.requestReboot();
       }
-      config.rate = type.rate;
+      config.rate = rate;
       if (bandOf(config) !== type.band) {
         const band = BANDS[type.band];
         config.mid = band.mid;
@@ -93,7 +114,7 @@
         {servos.map((s) => wiz.servoLabel(s)).join(" · ")}
       </span>
       <div class="tiles" role="radiogroup">
-        {#each TYPES as type (type.key)}
+        {#each typesFor(group.kind) as type (type.key)}
           <button
             type="button"
             role="radio"
@@ -107,8 +128,13 @@
                 <i class="fas fa-check-circle" aria-hidden="true"></i>
               {/if}
             </span>
-            <PulseTrain rate={type.rate} width={BANDS[type.band].mid} />
-            <span class="pill">{BANDS[type.band].mid} µs · {type.rate} Hz</span>
+            <PulseTrain
+              rate={rateOf(group.kind, type.key)}
+              width={BANDS[type.band].mid}
+            />
+            <span class="pill"
+              >{BANDS[type.band].mid} µs · {rateOf(group.kind, type.key)} Hz</span
+            >
             <span class="muted">
               {$i18n.t(`setupWizardServoTypeHelp_${type.key}`)}
             </span>

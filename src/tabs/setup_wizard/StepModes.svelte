@@ -215,8 +215,8 @@
       <p class="muted">{$i18n.t(`setupWizardModeHelp_${mode.key}`)}</p>
       {#if range}
         <span class="pill">
-          CH {channelNumber(range.auxChannelIndex)} · {range.range.start}–{range
-            .range.end} µs
+          CH {channelNumber(range.auxChannelIndex, FC.RC_MAP)} · {range.range
+            .start}–{range.range.end} µs
         </span>
       {/if}
       <div class="actions">
