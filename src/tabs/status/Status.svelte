@@ -20,6 +20,7 @@
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import { RC_COMMAND } from "@/tabs/receiver/rc_command.svelte.js";
 
   const AXIS_NAMES = [
     "controlAxisRoll",
@@ -121,14 +122,17 @@
   }
 
   function channelLabel2(i) {
-    if (!Number.isFinite(FC.RC_COMMAND[i])) {
-      return "";
-    }
     if (i < 4) {
+      if (!Number.isFinite(FC.RC_COMMAND[i])) {
+        return "";
+      }
       return `${(FC.RC_COMMAND[i] / 5).toFixed(1)}%`;
     }
+    // The throttle reads as the Receiver tab reads it: the raw channel between the
+    // throttle endpoints (#308), not the FC command, whose scale differs.
     if (i === 4) {
-      return `${(FC.RC_COMMAND[i] / 10 + 50).toFixed(1)}%`;
+      const percent = RC_COMMAND.throttle?.percent;
+      return Number.isFinite(percent) ? `${(100 * percent).toFixed(1)}%` : "";
     }
     return "";
   }

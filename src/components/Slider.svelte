@@ -7,8 +7,12 @@
   let node;
   let slider;
 
+  // Read `value` first: with the optional call alone, the effect ran before the slider
+  // existed and never tracked `value`, so a change made elsewhere (a NumberInput) did not
+  // move the slider (#483).
   $effect(() => {
-    slider?.set(value);
+    const current = value;
+    slider?.set(current);
   });
 
   onMount(() => {
@@ -22,7 +26,45 @@
     slider.set(value);
   });
 
+  // The mouse wheel steps the value while a handle of this slider has the focus (a click on
+  // it gives the focus), so a page scrolled over it keeps its value (#483). The handle moves
+  // at once; the value is committed once the wheel has settled, as a drag is with
+  // changeOnSlide={false}, so a trackpad does not send one update per tick.
+  let pending = null;
+  let wheelTimer = null;
+
+  function commitWheel() {
+    clearTimeout(wheelTimer);
+    wheelTimer = null;
+    if (pending === null) return;
+    const next = pending;
+    pending = null;
+    value = next;
+    onchange?.(next);
+  }
+
+  function onwheel(e) {
+    if (!node.contains(document.activeElement) || !slider) return;
+    e.preventDefault();
+    const range = opts?.range ?? {};
+    const step = opts?.step ?? 1;
+    let next = Number(slider.get()) + (e.deltaY < 0 ? step : -step);
+    if (range.min !== undefined) next = Math.max(range.min, next);
+    if (range.max !== undefined) next = Math.min(range.max, next);
+    // set() fires no change event, so the handle is moved here and the value passed on later.
+    slider.set(next);
+    pending = next;
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(commitWheel, 250);
+  }
+
+  onMount(() => {
+    node.addEventListener("wheel", onwheel, { passive: false });
+  });
+
   onDestroy(() => {
+    node.removeEventListener("wheel", onwheel);
+    commitWheel();
     slider.destroy();
   });
 

@@ -72,6 +72,9 @@ function getSmartportTelemetry() {
   };
 }
 
+// serialrx_provider value of the TBS CRSF protocol (ELRS and Crossfire receivers).
+export const TBS_CRSF_ID = 9;
+
 export const RX_PROTOCOLS = [
   { name: "None", id: 0 },
   {
@@ -89,7 +92,7 @@ export const RX_PROTOCOLS = [
   },
   {
     name: "TBS CRSF",
-    id: 9,
+    id: TBS_CRSF_ID,
     feature: "RX_SERIAL",
     get telemetry() {
       return getCrsfTelemetry();

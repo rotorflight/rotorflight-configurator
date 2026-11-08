@@ -20,7 +20,10 @@
     getPortFunc,
   } from "@/tabs/configuration/util.js";
   import RxWiringDetectWizard from "@/tabs/receiver/RxWiringDetectWizard.svelte";
-  import { CHANNEL_PRESETS } from "@/tabs/receiver/channelPresets.js";
+  import {
+    CHANNEL_PRESETS,
+    channelOrderFor,
+  } from "@/tabs/receiver/channelPresets.js";
   import { RX_PROTOCOLS } from "@/tabs/receiver/protocols.js";
 
   import BladesOffWarning from "./BladesOffWarning.svelte";
@@ -161,6 +164,8 @@
     FC.FEATURE_CONFIG.features.setGroup("RX_PROTO", false);
     FC.FEATURE_CONFIG.features.setFeature("RX_SERIAL", true);
     FC.RX_CONFIG.serialrx_provider = proto.id;
+    const order = channelOrderFor(proto.id, FC.RC_MAP);
+    if (order) setMap(order);
     changeConnection();
   }
 
