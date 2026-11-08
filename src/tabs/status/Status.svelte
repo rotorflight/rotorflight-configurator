@@ -122,10 +122,10 @@
   }
 
   function channelLabel2(i) {
-    if (!Number.isFinite(FC.RC_COMMAND[i])) {
-      return "";
-    }
     if (i < 4) {
+      if (!Number.isFinite(FC.RC_COMMAND[i])) {
+        return "";
+      }
       return `${(FC.RC_COMMAND[i] / 5).toFixed(1)}%`;
     }
     // The throttle reads as the Receiver tab reads it: the raw channel between the

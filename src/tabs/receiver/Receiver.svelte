@@ -281,7 +281,7 @@
     if (newRxProto.feature === "RX_SERIAL") {
       FC.RX_CONFIG.serialrx_provider = newRxProto.id;
       // TBS CRSF comes with the ELRS channel order (#307).
-      const order = channelOrderFor(newRxProto.id);
+      const order = channelOrderFor(newRxProto.id, FC.RC_MAP);
       if (order) FC.RC_MAP = [...order];
     } else if (newRxProto.feature === "RX_SPI") {
       FC.RX_CONFIG.rxSpiProtocol = newRxProto.id;

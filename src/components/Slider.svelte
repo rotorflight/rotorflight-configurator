@@ -27,8 +27,22 @@
   });
 
   // The mouse wheel steps the value while a handle of this slider has the focus (a click on
-  // it gives the focus), so a page scrolled over it keeps its value (#483). set() fires no
-  // change event, so the new value is passed on here.
+  // it gives the focus), so a page scrolled over it keeps its value (#483). The handle moves
+  // at once; the value is committed once the wheel has settled, as a drag is with
+  // changeOnSlide={false}, so a trackpad does not send one update per tick.
+  let pending = null;
+  let wheelTimer = null;
+
+  function commitWheel() {
+    clearTimeout(wheelTimer);
+    wheelTimer = null;
+    if (pending === null) return;
+    const next = pending;
+    pending = null;
+    value = next;
+    onchange?.(next);
+  }
+
   function onwheel(e) {
     if (!node.contains(document.activeElement) || !slider) return;
     e.preventDefault();
@@ -37,9 +51,11 @@
     let next = Number(slider.get()) + (e.deltaY < 0 ? step : -step);
     if (range.min !== undefined) next = Math.max(range.min, next);
     if (range.max !== undefined) next = Math.min(range.max, next);
+    // set() fires no change event, so the handle is moved here and the value passed on later.
     slider.set(next);
-    value = next;
-    onchange?.(next);
+    pending = next;
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(commitWheel, 250);
   }
 
   onMount(() => {
@@ -48,6 +64,7 @@
 
   onDestroy(() => {
     node.removeEventListener("wheel", onwheel);
+    commitWheel();
     slider.destroy();
   });
 

@@ -44,6 +44,7 @@
 
   onDestroy(() => {
     stopIncrement();
+    commitWheel();
   });
 
   $effect(() => {
@@ -58,12 +59,33 @@
   }
 
   // The mouse wheel steps the value, but only while this field has the focus, so a page
-  // scrolled over it keeps its value (#483).
+  // scrolled over it keeps its value (#483). The value is set at once; onchange fires once
+  // the wheel has settled, so a trackpad does not send one update per tick.
+  let wheelTimer = null;
+  let wheelPending = false;
+
+  function commitWheel() {
+    clearTimeout(wheelTimer);
+    wheelTimer = null;
+    if (!wheelPending) return;
+    wheelPending = false;
+    onchange?.();
+  }
+
   function onwheel(e) {
     if (document.activeElement !== elem || disabled) return;
     e.preventDefault();
-    if (e.deltaY < 0) inc();
-    else dec();
+    const next = Math.max(
+      min,
+      Math.min(max, numValue + (e.deltaY < 0 ? step : -step)),
+    );
+    numValue = parseFloat(next.toFixed(prec));
+    textValue = numValue.toFixed(prec);
+    lastGoodTextValue = textValue;
+    value = numValue;
+    wheelPending = true;
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(commitWheel, 250);
   }
 
   function inc() {

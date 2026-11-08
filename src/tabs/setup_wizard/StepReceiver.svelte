@@ -164,7 +164,7 @@
     FC.FEATURE_CONFIG.features.setGroup("RX_PROTO", false);
     FC.FEATURE_CONFIG.features.setFeature("RX_SERIAL", true);
     FC.RX_CONFIG.serialrx_provider = proto.id;
-    const order = channelOrderFor(proto.id);
+    const order = channelOrderFor(proto.id, FC.RC_MAP);
     if (order) setMap(order);
     changeConnection();
   }

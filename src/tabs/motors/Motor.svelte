@@ -146,8 +146,11 @@
       {#if motorState.overrideEnabled}
         <span>-</span>
         <span>{FC.MOTOR_OVERRIDE[index] * 0.1}%</span>
-        <!-- The pulse the ESC gets: 1000 us at stop to 2000 us at full (#244). -->
-        <span>{1000 + FC.MOTOR_OVERRIDE[index]} µs</span>
+        <!-- Only for standard PWM: the ESC gets 1000 us at stop to 2000 us at full (#244). DShot and
+             the other protocols send no pulse width. -->
+        {#if motorState.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol] === "PWM"}
+          <span>{1000 + FC.MOTOR_OVERRIDE[index]} µs</span>
+        {/if}
       {/if}
     </div>
   {/snippet}
