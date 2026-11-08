@@ -588,7 +588,7 @@
         "message": "Open the Mixer tab"
     },
     "setupWizardGovIntro": {
-        "message": "How the flight controller drives the motor. Pick the governor mode and how the throttle switch works with it. Ramps, headspeed and gains are set later in the Governor and Profiles tabs."
+        "message": "How the flight controller drives the motor. Pick the governor mode and how the throttle switch works with it, then the headspeed of each PID profile. Ramps and gains are set later in the Governor and Profiles tabs."
     },
     "setupWizardGovMode_OFF": {
         "message": "No governor. The throttle goes straight to the ESC. Use this with the ESC's own governor."
@@ -749,6 +749,9 @@
     "setupWizardReceiverCheckText": {
         "message": "Now move each control: its bar should move the way shown."
     },
+    "setupWizardReceiverTravel": {
+        "message": "Each control has to reach +100 % and -100 % at its ends. A stick that stops short is fixed on the radio, in its travel and endpoints, not here."
+    },
     "setupWizardReceiverHint_roll": {
         "message": "Right → bar right"
     },
@@ -872,8 +875,32 @@
     "setupWizardServoType_digital": {
         "message": "Digital"
     },
+    "setupWizardUnpluggedTitle": {
+        "message": "Motor unplugged?"
+    },
+    "setupWizardUnpluggedText": {
+        "message": "This step runs with the blades fitted. Unplug the motor, or take the blades off, before going on, so that nothing can start by accident."
+    },
+    "setupWizardUnpluggedConfirm": {
+        "message": "The motor is unplugged"
+    },
+    "setupWizardGuardMotorUnplugged": {
+        "message": "Confirm first that the motor is unplugged."
+    },
+    "setupWizardGeoTitle": {
+        "message": "Geometry correction"
+    },
+    "setupWizardGeoText": {
+        "message": "Corrects the arc of a rotary servo arm at its ends, for the cyclic servos. Not for linear servos. Set the centre and travel first."
+    },
+    "setupWizardGeoOff": {
+        "message": "Off"
+    },
+    "setupWizardGeoOn": {
+        "message": "On"
+    },
     "setupWizardServoTypeHelp_digital": {
-        "message": "333 Hz. Most digital cyclic servos."
+        "message": "Most digital servos. Cyclic runs at 165 Hz, tail at 200 Hz."
     },
     "setupWizardServoType_narrow": {
         "message": "Narrow band"
@@ -881,11 +908,38 @@
     "setupWizardServoTypeHelp_narrow": {
         "message": "560 Hz. Only for servos made for a 760 µs center, usually tail servos."
     },
+    "setupWizardServoType_hiend": {
+        "message": "Hi-End digital"
+    },
+    "setupWizardServoTypeHelp_hiend": {
+        "message": "333 Hz. Only for servos their maker rates for 333 Hz."
+    },
+    "setupWizardServoType_specific": {
+        "message": "Specific digital"
+    },
+    "setupWizardServoTypeHelp_specific": {
+        "message": "333 Hz on a 760 µs center, for tail servos made for it."
+    },
+    "setupWizardServoType_hiend_specific": {
+        "message": "Hi-End specific digital"
+    },
+    "setupWizardServoTypeHelp_hiend_specific": {
+        "message": "560 Hz on a 760 µs center, for fast tail servos made for it."
+    },
     "setupWizardServoTypeCustom": {
         "message": "Now: $1 µs, $2 Hz. Choose a type to change it, or keep it if your servo maker says so."
     },
+    "setupWizardServoTypeNearest": {
+        "message": "Closest type: $1."
+    },
     "setupWizardServoTypeCheckMaker": {
         "message": "If the servo maker gives other values, set them on the Servos tab."
+    },
+    "setupWizardServoTypeFrameRate": {
+        "message": "Frame rate"
+    },
+    "setupWizardServoTypeHzUnit": {
+        "message": "Hz"
     },
     "setupWizardServosIntro": {
         "message": "Each servo is held at its center. Check that it moves the right way, then set the center so the arm is square."
@@ -984,13 +1038,22 @@
         "message": "Collective"
     },
     "setupWizardPitchText_collective": {
-        "message": "Hold the collective at $1° and measure the blade pitch."
+        "message": "Turn the blades to point along the boom. Hold the collective at $1° and measure the blade pitch."
+    },
+    "setupWizardPitchHoldNote": {
+        "message": "Calibrate works at $1° only. Other angles are for checking the gauge."
+    },
+    "setupWizardPitchHoldLess": {
+        "message": "Lower the held angle"
+    },
+    "setupWizardPitchHoldMore": {
+        "message": "Raise the held angle"
     },
     "setupWizardPitchTitle_cyclic": {
         "message": "Cyclic"
     },
     "setupWizardPitchText_cyclic": {
-        "message": "Turn the blades to point left and right. Hold the pitch at $1° and measure the blade pitch."
+        "message": "Turn the blades to point left and right. Hold roll at $1° and measure the blade pitch."
     },
     "setupWizardPitchHold": {
         "message": "Hold at $1°"
@@ -1227,13 +1290,142 @@
         "message": "Motor and gearing"
     },
     "setupWizardMotorRpmText": {
-        "message": "Used for headspeed, the governor and the RPM filters. Count the magnets in the motor bell for the poles."
+        "message": "Used for headspeed, the governor and the RPM filters."
     },
-    "setupWizardMotorPinion": {
-        "message": "Pinion teeth"
+    "setupWizardPolesTitle": {
+        "message": "Motor poles"
     },
-    "setupWizardMotorMainGear": {
-        "message": "Main gear teeth"
+    "setupWizardPolesText": {
+        "message": "Magnet poles of the main motor, from its data sheet (often 10 or 12)."
+    },
+    "setupWizardGearMainTitle": {
+        "message": "Main gear ratio"
+    },
+    "setupWizardGearMainText": {
+        "message": "Count the teeth on the pinion and the main gear."
+    },
+    "setupWizardGearTailTitle": {
+        "message": "Tail gear ratio"
+    },
+    "setupWizardGearTailText": {
+        "message": "Ratio from the main rotor to the tail, always counted from the main rotor shaft. Count the teeth or pulleys of the tail drive."
+    },
+    "setupWizardGearStage": {
+        "message": "Gear train"
+    },
+    "setupWizardGearStageOne": {
+        "message": "One stage"
+    },
+    "setupWizardGearStageTwo": {
+        "message": "Two stages"
+    },
+    "setupWizardGearStageRatio": {
+        "message": "Ratio only"
+    },
+    "setupWizardGearPairSingle": {
+        "message": "Pinion : main gear"
+    },
+    "setupWizardGearPairStage1": {
+        "message": "Pinion : intermediate"
+    },
+    "setupWizardGearPairStage2": {
+        "message": "Intermediate : main gear"
+    },
+    "setupWizardGearPairTail": {
+        "message": "Drive : tail rotor gear"
+    },
+    "setupWizardGearPairMainMesh": {
+        "message": "Intermediate : main gear"
+    },
+    "setupWizardGearPairTailShaft": {
+        "message": "Pulley : tail rotor pulley"
+    },
+    "setupWizardGearRatioDirect": {
+        "message": "Gear ratio"
+    },
+    "setupWizardGearMinTeeth": {
+        "message": "At least 6 teeth per gear. For anything else, use Ratio only."
+    },
+    "setupWizardGearOverflow": {
+        "message": "The tooth counts are too large for the firmware. Use smaller counts or a ratio."
+    },
+    "setupWizardPowerTitle": {
+        "message": "Battery and power"
+    },
+    "setupWizardPowerText": {
+        "message": "The voltage and current sources, and the cells and capacity of the active battery profile. SmartFuel, if the flight controller has it. Saved with the step."
+    },
+    "setupWizardPowerActive": {
+        "message": "Active"
+    },
+    "setupWizardPowerAutoCells": {
+        "message": "A cell count of 0 detects the cells automatically. Editing a battery does not activate it."
+    },
+    "setupWizardPowerCapacityText": {
+        "message": "Capacity in mAh for each battery. Editing a battery does not activate it."
+    },
+    "setupWizardPowerNeedsVoltage": {
+        "message": "SmartFuel on voltage needs a voltage source. Pick one above."
+    },
+    "setupWizardStep_rescue": {
+        "message": "Rescue"
+    },
+    "setupWizardRescueIntro": {
+        "message": "Rescue brings the helicopter back to a safe hover after a fault. The settings are written to every PID profile on Save."
+    },
+    "setupWizardRescueLoading": {
+        "message": "Reading the rescue settings of each PID profile..."
+    },
+    "setupWizardRescueEnableTitle": {
+        "message": "Rescue"
+    },
+    "setupWizardRescueFlipTitle": {
+        "message": "Flip to upright"
+    },
+    "setupWizardRescueOff": {
+        "message": "Off"
+    },
+    "setupWizardRescueOn": {
+        "message": "On"
+    },
+    "setupWizardRescueNoFlip": {
+        "message": "No flip"
+    },
+    "setupWizardRescueFlip": {
+        "message": "Flip"
+    },
+    "setupWizardRescueNoSwitch": {
+        "message": "Assign a rescue switch in the Mode switches step first. Rescue can't be set up without one."
+    },
+    "setupWizardGovHeadspeedTitle": {
+        "message": "Headspeed"
+    },
+    "setupWizardGovHeadspeedText": {
+        "message": "The headspeed the governor holds, for each PID profile. Ramps and gains stay in the Governor and Profiles tabs."
+    },
+    "setupWizardGovProfile": {
+        "message": "PID profile $1"
+    },
+    "setupWizardRpmSourceTitle": {
+        "message": "RPM source"
+    },
+    "setupWizardRpmSourceText": {
+        "message": "The governor needs the rotor speed from one source: bidirectional DShot from the ESC, or a wire RPM sensor."
+    },
+    "setupWizardRpmSourceDshot": {
+        "message": "Bidirectional DShot"
+    },
+    "setupWizardRpmSourceDshotHelp": {
+        "message": "The ESC reports the rotor speed. Needs DShot300 or faster."
+    },
+    "setupWizardRpmSourceSensor": {
+        "message": "Wire RPM sensor"
+    },
+    "setupWizardRpmSourceSensorHelp": {
+        "message": "A sensor on a frequency input. Its input is set on the Motors tab."
+    },
+    "setupWizardRpmSourceNone": {
+        "message": "No RPM source is set. The governor can't hold the headspeed without one."
     },
     "setupWizardConnectIntro": {
         "message": "Everything that is only typed in is set. From here on you work on the helicopter itself."
@@ -1274,6 +1466,42 @@
     "setupWizardThrottleNoMotor": {
         "message": "The main motor is off. Choose the ESC protocol in the Motor & ESC step, then reboot at the Connect the servos step."
     },
+    "setupWizardThrottleLinkTitle": {
+        "message": "Set over the ESC link"
+    },
+    "setupWizardThrottleLinkText": {
+        "message": "A YGE ESC can take the throttle range over its link. The range measured on the receiver step is written to the flight controller and to the ESC. It counts as set only when both read it back. The motor's stop command is set to idle (1000 µs). This replaces the two steps below."
+    },
+    "setupWizardThrottleLinkNote": {
+        "message": "Not yet checked against a YGE ESC: the ESC fields and their meaning follow the EdgeTX suite."
+    },
+    "setupWizardThrottleLinkButton": {
+        "message": "Set over the ESC link"
+    },
+    "setupWizardThrottleLinkBusy": {
+        "message": "Writing the range to the flight controller and the ESC…"
+    },
+    "setupWizardThrottleLinkDone": {
+        "message": "Set on the flight controller and the ESC, and read back."
+    },
+    "setupWizardThrottleLinkNoRange": {
+        "message": "Measure the throttle range on the receiver step first."
+    },
+    "setupWizardThrottleLinkFailedRange": {
+        "message": "The measured range does not fit the ESC: the 0 % pulse must be 900 to 1900 µs and the span 600 to 1500 µs. Measure the receiver again."
+    },
+    "setupWizardThrottleLinkFailedFc": {
+        "message": "The flight controller did not keep the throttle range. The ESC was not changed."
+    },
+    "setupWizardThrottleLinkFailedSave": {
+        "message": "The flight controller did not confirm the save. The ESC was not changed."
+    },
+    "setupWizardThrottleLinkFailedEscNoAnswer": {
+        "message": "The ESC did not confirm the throttle range. The flight controller has it. Check the ESC before you try again."
+    },
+    "setupWizardThrottleLinkFailedEsc": {
+        "message": "The ESC did not keep the throttle range. The flight controller has it."
+    },
     "setupWizardThrottleFullTitle": {
         "message": "Full throttle"
     },
@@ -1309,6 +1537,9 @@
     },
     "setupWizardEscCastle": {
         "message": "Castle Link carries the telemetry on the throttle wire. Nothing more to set."
+    },
+    "setupWizardEscProgrammableNote": {
+        "message": "This ESC is programmed over the telemetry wire, so it needs half-duplex telemetry; pin swap is set too, except on an F4 board. Both take effect with the restart. Not yet tested on a real ESC for this wiring."
     },
     "setupWizardEscProtocolHelp": {
         "message": "The ESC's brand or telemetry protocol."
@@ -1401,7 +1632,7 @@
         "message": "The wizard sees which switch moved and where it ended up."
     },
     "setupWizardModesFit8": {
-        "message": "On an 8-channel radio, channels 1–5 are the sticks and throttle, which leaves three switches: ARM on CH 6, the profile switch on CH 7 (next step), and Rescue and Trainer on two positions of one 3-position switch on CH 8."
+        "message": "On an 8-channel radio, five channels are the sticks and throttle, which leaves three switches: ARM, the profile switch, and Rescue and Trainer on two positions of one 3-position switch. The channel numbers shown follow the channel order chosen on the Receiver step."
     },
     "setupWizardProfilesIntro": {
         "message": "One switch picks the flight profile: the PID profile, and with it the rates. Press Assign, then move the switch through every position."
@@ -1903,6 +2134,36 @@
     },
     "escProgrammingStatusGuarding": {
         "message": "Checking ESC link..."
+    },
+    "escProgrammingSaveRefused": {
+        "message": "The ESC refused the save. Nothing was written."
+    },
+    "escProgrammingSaveNoRead": {
+        "message": "The ESC's values could not be read, so nothing was written. Check the connection and try again."
+    },
+    "escProgrammingSaveNoAnswer": {
+        "message": "The ESC did not answer the save. Its values may or may not have changed: check the ESC before you save again."
+    },
+    "escProgrammingSaveUnconfirmed": {
+        "message": "The save could not be confirmed: the ESC did not return its values. Check the ESC before you save again."
+    },
+    "escProgrammingBlockUnread": {
+        "message": "The ESC block was not read. Nothing was written."
+    },
+    "escProgrammingBlockCount": {
+        "message": "The ESC reports $1 parameters; the Configurator writes $2 to $3. Nothing was written."
+    },
+    "escProgrammingBlockLength": {
+        "message": "The ESC block is $1 bytes, but its $2 parameters need $3 bytes. Nothing was written."
+    },
+    "escProgrammingSaveMismatch": {
+        "message": "The ESC does not hold these values after the save: $1. Your values are still in the form, marked as changed: check the ESC and save again."
+    },
+    "escProgrammingSaveKept": {
+        "message": "Saved. These values changed on the ESC since it was read, so they were kept as the ESC has them: $1."
+    },
+    "escProgrammingSaveDone": {
+        "message": "Saved and read back from the ESC."
     },
     "escProgrammingStatusFailed": {
         "message": "Could not detect the ESC. Check wiring/power and try again."
@@ -2828,6 +3089,24 @@
     },
     "statusInfoHead": {
         "message": "Info"
+    },
+    "statusHeadspeedHead": {
+        "message": "Headspeed"
+    },
+    "statusHeadRotor": {
+        "message": "Head rotor"
+    },
+    "statusTailRotor": {
+        "message": "Tail rotor"
+    },
+    "statusOutputsHead": {
+        "message": "Outputs"
+    },
+    "statusServoOutput": {
+        "message": "Servo $1"
+    },
+    "numberInputRange": {
+        "message": "Range: $1 to $2"
     },
     "statusReceiverHead": {
         "message": "Receiver"
@@ -5498,6 +5777,12 @@
     "tailOutputResult_6": {
         "message": "the ESC protocol is DShot, and the pin has no DMA to drive it. Turn on DShot bitbang, or use a different pin on the Remap FC tab."
     },
+    "tailOutputResult_7": {
+        "message": "the ESC protocol is DShot, and the pin's DMA stream is already used by another function. Turn on DShot bitbang, or use a different pin on the Remap FC tab."
+    },
+    "tailOutputResult_8": {
+        "message": "the helicopter is armed. Disarm first, then try again."
+    },
     "motorOutputProblem_main": {
         "message": "No motor output started, so the helicopter can't arm. One of the motor pins can't be driven with this ESC protocol, which stops all motors. Check the motor pins on the Remap FC tab, or choose another ESC protocol."
     },
@@ -5514,16 +5799,16 @@
         "message": "Yaw calibration [%]"
     },
     "mixerTailRotorCalibrationHelp": {
-        "message": "Adjust the yaw gain to match the mechanical gain. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors."
+        "message": "Adjust the yaw gain so that the values on the Yaw slider below match the pitch angle of the tail blades. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors."
     },
     "mixerTailRotorMinYaw": {
-        "message": "CW Yaw Blade Angle Limit"
+        "message": "CW Yaw Blade Angle Limit (°)"
     },
     "mixerTailRotorMinYawHelp": {
         "message": "An angle limit for clockwise yaw."
     },
     "mixerTailRotorMaxYaw": {
-        "message": "CCW Yaw Blade Angle Limit"
+        "message": "CCW Yaw Blade Angle Limit (°)"
     },
     "mixerTailRotorMaxYawHelp": {
         "message": "An angle limit for counter-clockwise yaw."
@@ -5956,6 +6241,21 @@
     },
     "motorsRPMSensor": {
         "message": "RPM Sensor"
+    },
+    "motorsRpmCheckTitle": {
+        "message": "RPM sensor test"
+    },
+    "motorsRpmCheckText": {
+        "message": "Turn the rotor by hand. The reading should follow the turning; it is shown on a low scale for this test."
+    },
+    "motorsRpmCheckMotor": {
+        "message": "Motor $1"
+    },
+    "motorsRpmCheckSignal": {
+        "message": "$1 RPM"
+    },
+    "motorsRpmCheckNoSignal": {
+        "message": "No signal yet"
     },
     "motorsRPMSensorHelp": {
         "message": "Use the RPM Sensor input for motor RPM. You can connect an RPM signal from the ESC, or from an external RPM Sensor dongle."
@@ -6496,6 +6796,18 @@
     },
     "cliReboot": {
         "message": "CLI reboot detected"
+    },
+    "cliBackupNoAnswer": {
+        "message": "The backup was not saved: the flight controller did not answer."
+    },
+    "cliBackupStopped": {
+        "message": "The backup was not saved: the output did not end within 2 minutes."
+    },
+    "cliBackupEmpty": {
+        "message": "The backup was not saved: it came back empty."
+    },
+    "cliSaveConfigurationBtn": {
+        "message": "Save configuration"
     },
     "cliSaveToFileBtn": {
         "message": "Save to File"
@@ -8183,6 +8495,12 @@
     },
     "gyroRpmFilterTailRotorMinRPMHelp": {
         "message": "Minimum Tail Rotor RPM accepted by the filters"
+    },
+    "gyroRpmFilterCopyAxis": {
+        "message": "Copy to other axes"
+    },
+    "gyroRpmFilterCopyAxisConfirm": {
+        "message": "Copy this axis's notches to the other two axes? Their current notches will be replaced."
     },
     "gyroRpmFilterBanks": {
         "message": "RPM Filter Notches"
