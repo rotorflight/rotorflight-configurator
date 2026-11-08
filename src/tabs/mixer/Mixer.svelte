@@ -306,7 +306,10 @@
 
   // Before the EEPROM write: the pin switch and TTA are unsaved changes,
   // and both need the reboot the tail mode change asks for anyway.
+  // Returns false when the FC refuses the pin switch, so the caller doesn't
+  // write the new tail mode to EEPROM with the pin still on its old output.
   async function applyTailMotor() {
+    let switched = true;
     if (
       tailOutput !== null &&
       tailOutput !== TAIL_OUTPUT.NONE &&
@@ -318,6 +321,7 @@
         needSave = true;
         needReboot = true;
       } else if (reply) {
+        switched = false;
         GUI.log(
           $i18n.t("tailOutputFailed", {
             1: $i18n.t(`tailOutputResult_${reply.result}`),
@@ -330,6 +334,7 @@
       origMotorised = motorised;
       needSave = true;
     }
+    return switched;
   }
 
   // Config and inputs only -- deliberately not the rules table.
@@ -362,7 +367,8 @@
   export async function onSave() {
     await sendDirtyConfig();
     await customRules?.sendDirty();
-    await applyTailMotor();
+    // A refused pin switch keeps the tab dirty, so Save can be tried again.
+    if (!(await applyTailMotor())) return;
     if (needSave) {
       await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
       GUI.log($i18n.t("eepromSaved"));

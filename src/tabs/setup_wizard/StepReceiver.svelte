@@ -306,7 +306,7 @@
 
   //// Stick travel. Each stick has to reach both ends of its travel while
   //// this step is open, and Next waits for that. Throttle is left out: it is
-  //// often a switch, and its range is measured in step 4.
+  //// often a switch, and its range is measured in step 5.
   const TRAVEL_KEYS = ["roll", "pitch", "yaw", "collective"];
   const TRAVEL_FULL = 0.95;
   // key -> lowest and highest fraction of the deflection seen on this step.
@@ -337,7 +337,7 @@
       : "setupWizardGuardTravel",
   );
 
-  //// 4. Throttle range. The FC arms only with the throttle channel below
+  //// 5. Throttle range. The FC arms only with the throttle channel below
   //// its 0 % point less RC_THROTTLE_DEADBAND (fc/rc.c isThrottleOff), and
   //// 0 % defaults to rc_center - 0.9 * rc_deflection (1041 us): a radio
   //// whose off / hold position sits higher never arms. The range is put on
@@ -618,7 +618,7 @@
 
   <section class={["card", armsNow && "complete"]}>
     <h3>
-      <span class="num">4</span>{$i18n.t("setupWizardThrottleRangeTitle")}
+      <span class="num">5</span>{$i18n.t("setupWizardThrottleRangeTitle")}
       {#if throttleNow > 0}
         <span class={["badge", armsNow ? "good" : "bad"]}>
           {$i18n.t(

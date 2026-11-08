@@ -47,11 +47,15 @@
 
   // A motor pin the protocol can't drive stops every motor (see
   // tail_motor.js), so say so instead of showing motors that never move.
+  // The protocol is the one the FC runs (initialState), not the one being
+  // edited here, which only takes effect after a save and reboot.
   let motorProblem = $derived(
-    loading
+    loading || !initialState
       ? null
       : motorOutputProblem(
-          motorState.throttleEnabled,
+          motorState.throttleProtocols[
+            initialState.MOTOR_CONFIG.motor_pwm_protocol
+          ] !== "DISABLED",
           FC.MIXER_CONFIG.tail_rotor_mode !== Mixer.TAIL_MODE_VARIABLE,
         ),
   );

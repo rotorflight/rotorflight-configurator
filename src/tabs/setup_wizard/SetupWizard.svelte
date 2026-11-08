@@ -172,6 +172,8 @@
       RC_MAP: FC.RC_MAP,
       MOTOR_CONFIG: FC.MOTOR_CONFIG,
       ESC_SENSOR_CONFIG: FC.ESC_SENSOR_CONFIG,
+      GOVERNOR: FC.GOVERNOR,
+      RC_CONFIG: FC.RC_CONFIG,
       features: FC.FEATURE_CONFIG.features.bitfield,
     });
   }
@@ -423,6 +425,8 @@
     FC.RC_MAP = snapshot.RC_MAP;
     FC.MOTOR_CONFIG = snapshot.MOTOR_CONFIG;
     FC.ESC_SENSOR_CONFIG = snapshot.ESC_SENSOR_CONFIG;
+    FC.GOVERNOR = snapshot.GOVERNOR;
+    FC.RC_CONFIG = snapshot.RC_CONFIG;
     FC.FEATURE_CONFIG.features.bitfield = snapshot.features;
     pending = false;
     takeSnapshot();
