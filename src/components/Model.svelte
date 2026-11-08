@@ -28,6 +28,10 @@
         canvas,
         alpha: true,
         antialias: true,
+        // The model is only drawn on changes; remote support's screen
+        // mirroring reads the canvas in between, which needs the picture
+        // kept rather than cleared after compositing.
+        preserveDrawingBuffer: true,
       });
     } catch (err) {
       console.log("Failed to create WebGLRenderer", err);

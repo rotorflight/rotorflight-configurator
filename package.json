@@ -8,6 +8,7 @@
   "scripts": {
     "lint": "eslint --cache src \"./*.mjs\"",
     "lint:fix": "eslint --fix src \"./*.mjs\"",
+    "test": "node --test test/*.test.mjs",
     "start": "concurrently --kill-others 'pnpm vite' 'pnpm gulp dev_client'",
     "prepare": "husky || true"
   },
@@ -54,12 +55,16 @@
     }
   },
   "dependencies": {
+    "@noble/ciphers": "2.4.0",
+    "@noble/curves": "2.4.0",
+    "@noble/hashes": "2.4.0",
     "jbox": "^1.3.3",
     "jquery": "^3.6.0",
     "jquery-textcomplete": "^1.8.5",
     "jquery-touchswipe": "^1.6.19",
     "jquery-ui-npm": "^1.12.0",
     "lru_map": "^0.3.3",
+    "rrweb": "2.1.7",
     "select2": "^4.0.13",
     "switchery-latest": "^0.8.2"
   },
