@@ -4,8 +4,7 @@
 
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
-
-  import { rotorSpeeds } from "./rotorSpeed.js";
+  import { rotorSpeeds } from "@/js/rotor_speed.js";
 
   let headspeed = $derived(rotorSpeeds().head);
   let tailspeed = $derived(rotorSpeeds().tail);

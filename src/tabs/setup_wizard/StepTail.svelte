@@ -262,7 +262,6 @@
         bind:value={cwLimit}
         onchange={applyLimits}
       />
-      <span class="muted">°</span>
       <span>{$i18n.t("mixerTailRotorMaxYaw")}</span>
       <NumberInput
         min="0"
@@ -271,7 +270,6 @@
         bind:value={ccwLimit}
         onchange={applyLimits}
       />
-      <span class="muted">°</span>
     </div>
   </section>
 {/if}

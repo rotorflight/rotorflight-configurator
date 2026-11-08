@@ -18,10 +18,11 @@
 
   let step = $derived(parseFloat(stepRaw));
 
-  // The value range as a tooltip on the field (#69).
-  let rangeTitle = $derived($i18n.t("numberInputRange", { 1: min, 2: max }));
   let min = $derived(parseFloat(minRaw));
   let max = $derived(parseFloat(maxRaw));
+
+  // The value range as a tooltip on the field (#69).
+  let rangeTitle = $derived($i18n.t("numberInputRange", { 1: min, 2: max }));
 
   function precision(a) {
     if (!isFinite(a)) return 0;

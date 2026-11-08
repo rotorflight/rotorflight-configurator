@@ -20,7 +20,7 @@
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
-  import { rotorSpeeds } from "@/tabs/motors/rotorSpeed.js";
+  import { rotorSpeeds } from "@/js/rotor_speed.js";
   import { RC_COMMAND } from "@/tabs/receiver/rc_command.svelte.js";
 
   const AXIS_NAMES = [
@@ -111,6 +111,9 @@
 
   let fastInterval;
   let slowInterval;
+
+  let outputsPollerTimer;
+  let outputsPollerStopped = false;
 
   let numChs = $derived(Math.min(FC.RC.active_channels ?? 0, 18));
   let numBars = $derived(Math.max(numChs, 8));
@@ -240,10 +243,23 @@
     updateArming(false);
   }
 
+  // Motor and servo data for the headspeed and outputs boxes. Self-rescheduling,
+  // like the Motors tab's poller, so a slow link never piles up requests.
+  async function pollOutputs() {
+    if (outputsPollerStopped) return;
+    await MSP.promise(MSPCodes.MSP_MOTOR);
+    await MSP.promise(MSPCodes.MSP_MOTOR_TELEMETRY);
+    await MSP.promise(MSPCodes.MSP_SERVO);
+    if (!outputsPollerStopped) {
+      outputsPollerTimer = setTimeout(pollOutputs, 100);
+    }
+  }
+
   onMount(async () => {
     await MSP.promise(MSPCodes.MSP_STATUS);
     await MSP.promise(MSPCodes.MSP_FEATURE_CONFIG);
     await MSP.promise(MSPCodes.MSP_MIXER_CONFIG);
+    await MSP.promise(MSPCodes.MSP_MOTOR_CONFIG);
     await MSP.promise(MSPCodes.MSP_ACC_TRIM);
     await MSP.promise(MSPCodes.MSP_NAME);
     await MSP.promise(MSPCodes.MSP_FLIGHT_STATS);
@@ -293,11 +309,15 @@
       // Usually altimeter indicates feet. We show centimeters, as it is more useful here.
       altitudeIndicator.setAltitude(FC.SENSOR_DATA.altitude * 100);
     }, 250);
+
+    pollOutputs();
   });
 
   onDestroy(() => {
     clearInterval(fastInterval);
     clearInterval(slowInterval);
+    outputsPollerStopped = true;
+    clearTimeout(outputsPollerTimer);
   });
 
   function onClickHelp() {
