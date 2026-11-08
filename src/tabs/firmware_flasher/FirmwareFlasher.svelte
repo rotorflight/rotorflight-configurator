@@ -1796,8 +1796,8 @@
 
   function disconnectDetect() {
     clearTimeout(detectConnectDelayTimer);
-    // The lock is released whatever the disconnect does: a port that never opened can
-    // make the close throw, and then the configurator stayed locked until a restart (#214).
+    // The lock is released whatever the disconnect does: an exception thrown while closing
+    // must not leave the configurator locked until a restart (#214).
     try {
       serial.disconnect(onDetectClose);
       MSP.disconnect_cleanup();
