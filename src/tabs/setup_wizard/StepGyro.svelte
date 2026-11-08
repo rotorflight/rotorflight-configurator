@@ -14,6 +14,14 @@
 
   let checks = $derived(["roll", "pitch", ...(wiz.motorised ? [] : ["yaw"])]);
   let anyWrong = $derived(checks.some((axis) => results[axis] === false));
+
+  // Every axis has to read "against" the stick. A wrong one is fixed on the
+  // Sensors step, so Next waits until each is answered correctly.
+  wiz.setGuard(() =>
+    checks.every((axis) => results[axis] === true)
+      ? null
+      : "setupWizardGuardGyro",
+  );
 </script>
 
 <div class="intro">

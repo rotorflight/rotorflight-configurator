@@ -29,15 +29,19 @@ const tab = {
     callback?.();
   },
 
-  // A failed save or revert (a step's commit throwing, the EEPROM write
-  // failing) is logged rather than left as an unhandled rejection; the
-  // tab switch still goes on, as on the other tabs.
+  // The tab switch goes on only when the save went through. A refused save
+  // (the FC refuses the EEPROM write while armed, or a step's commit reports
+  // a failure) keeps the pilot on the wizard, so the unsaved changes are not
+  // lost. The error itself is shown by the wizard; a thrown error is logged
+  // rather than left as an unhandled rejection.
   save(callback) {
     if (this.svelteComponent?.onSave) {
-      this.svelteComponent
-        .onSave()
-        .catch((err) => console.error("Setup Wizard save failed", err))
-        .finally(() => callback?.());
+      this.svelteComponent.onSave().then(
+        (saved) => {
+          if (saved) callback?.();
+        },
+        (err) => console.error("Setup Wizard save failed", err),
+      );
     } else {
       callback?.();
     }

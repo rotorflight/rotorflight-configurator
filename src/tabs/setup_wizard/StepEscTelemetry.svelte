@@ -55,9 +55,12 @@
     }
   });
 
+  // Port, feature and protocol are read at power-up only. This step comes
+  // after the gate, so Next has to ask for the reboot (see SetupWizard).
   function markChanged() {
     changed = true;
     wiz.markChanged();
+    wiz.requestReboot();
   }
 
   //// 1. Used or not, then the protocol. Castle Link carries its telemetry

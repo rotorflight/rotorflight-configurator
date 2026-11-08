@@ -155,13 +155,15 @@
     await sendSlot(index);
   }
 
+  // Every slot of the function, not only the first: a second one is still
+  // processed by the firmware, so it has to go too.
   async function removeFunction(adjFunction) {
-    const index = FC.ADJUSTMENT_RANGES.findIndex(
-      (r) => r?.adjFunction === adjFunction,
-    );
-    if (index < 0) return;
-    resetToOff(FC.ADJUSTMENT_RANGES[index]);
-    await sendSlot(index);
+    for (let index = 0; index < FC.ADJUSTMENT_RANGES.length; index++) {
+      const range = FC.ADJUSTMENT_RANGES[index];
+      if (range?.adjFunction !== adjFunction) continue;
+      resetToOff(range);
+      await sendSlot(index);
+    }
   }
 
   //// Profile switch.

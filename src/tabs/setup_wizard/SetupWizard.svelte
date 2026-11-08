@@ -15,6 +15,7 @@
   import { GUI } from "@/js/gui.js";
   import { getTabHelpURL } from "@/js/help.js";
   import { i18n } from "@/js/i18n.js";
+  import { showErrorDialog } from "@/js/main.js";
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
@@ -99,6 +100,10 @@
   let rebootPending = $state(false);
   let commitFn = null;
   let leaveFn = null;
+  // A step can hold Next back. It returns the i18n key of what is missing,
+  // or null. Read reactively, so the footer shows the reason as it changes.
+  let guardFn = $state(null);
+  let blocker = $derived(guardFn ? guardFn() : null);
   let snapshot = null;
   let pollTimer;
   let stopped = false;
@@ -345,6 +350,8 @@
 
   // False when the step's commit reports something it couldn't do: the
   // rest is still saved, but Next stays on the step so it's seen.
+  // Throws when the FC refuses the EEPROM write (it does while armed). The
+  // pilot is told here, pending stays set, and the caller stops.
   async function save() {
     saving = true;
     try {
@@ -352,7 +359,12 @@
       if (commitFn) {
         ok = (await commitFn()) !== false;
       }
-      await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
+      // An FC refusal resolves with unsupported set, it does not reject.
+      const reply = await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
+      if (reply?.unsupported) {
+        showErrorDialog($i18n.t("setupWizardEepromFailed"));
+        throw new Error("MSP_EEPROM_WRITE refused by the FC");
+      }
       GUI.log($i18n.t("eepromSaved"));
       pending = false;
       takeSnapshot();
@@ -368,7 +380,12 @@
   // the result before moving on.
   async function saveAndReboot() {
     releaseAll();
-    await save();
+    try {
+      await save();
+    } catch {
+      // Reported by save(). No reboot: the FC keeps what it has.
+      return;
+    }
     storeStep(stepIndex);
     rebootPending = false;
     // A virtual FC doesn't reboot or reconnect, so nothing would use it.
@@ -395,6 +412,12 @@
       mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG),
     );
     FC.BOARD_ALIGNMENT_CONFIG = snapshot.BOARD_ALIGNMENT_CONFIG;
+    // Board auto-align applies its result on the FC straight away, so the
+    // reverted alignment has to go back to the FC, not only to the JS copy.
+    await MSP.promise(
+      MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG,
+      mspHelper.crunch(MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG),
+    );
     FC.SERIAL_CONFIG = snapshot.SERIAL_CONFIG;
     FC.RX_CONFIG = snapshot.RX_CONFIG;
     FC.RC_MAP = snapshot.RC_MAP;
@@ -465,6 +488,9 @@
     setLeave(fn) {
       leaveFn = fn;
     },
+    setGuard(fn) {
+      guardFn = fn;
+    },
     servoLabel(servo) {
       return $i18n.t("setupWizardServoLabel", {
         1: servo.servo + 1,
@@ -473,27 +499,54 @@
     },
   });
 
-  function goTo(index) {
-    if (index === stepIndex || index < 0 || index >= STEPS.length) return;
+  // Staged edits go to the FC before the step is left, so Back or the step
+  // list can't drop them. They stay unsaved (pending) until the next Save
+  // writes the EEPROM. A commit that reports a failure (false) keeps the
+  // step open, as Next does; its error is shown on the step.
+  async function goTo(index) {
+    if (saving || index === stepIndex || index < 0 || index >= STEPS.length) {
+      return;
+    }
+    if (pending && commitFn) {
+      saving = true;
+      try {
+        if ((await commitFn()) === false) return;
+      } catch (err) {
+        console.error("Setup Wizard step commit failed", err);
+        showErrorDialog($i18n.t("setupWizardCommitFailed"));
+        return;
+      } finally {
+        saving = false;
+      }
+    }
     leaveFn?.();
     leaveFn = null;
     commitFn = null;
+    guardFn = null;
     releaseAll();
     stepIndex = index;
     storeStep(index);
   }
 
-  let rebootOnNext = $derived(STEPS[stepIndex].gate && rebootPending);
+  // A reboot requested by a step before the gate waits for the gate. One
+  // requested after it (the ESC telemetry step) is done by the step's Next.
+  let rebootOnNext = $derived(stepIndex >= GATE_INDEX && rebootPending);
 
   // The gate reboots and reopens on itself: the servos are plugged in only
   // once the FC runs their new frame rate.
   async function next() {
+    if (saving || blocker) return;
     if (rebootOnNext) {
       await saveAndReboot();
       return;
     }
-    if (pending && !(await save())) {
-      return;
+    if (pending) {
+      try {
+        if (!(await save())) return;
+      } catch {
+        // Reported by save(). Stay on the step.
+        return;
+      }
     }
     goTo(stepIndex + 1);
   }
@@ -507,7 +560,7 @@
   }
 
   export async function onSave() {
-    await save();
+    return save();
   }
 
   export async function onRevert() {
@@ -620,10 +673,16 @@
           <div class="grow"></div>
           <!-- The last step has its own Finish button. -->
           {#if stepIndex < STEPS.length - 1}
-            {#if pending}
+            {#if blocker}
+              <span class="unsaved">{$i18n.t(blocker)}</span>
+            {:else if pending}
               <span class="unsaved">{$i18n.t("setupWizardUnsaved")}</span>
             {/if}
-            <button class="btn primary" disabled={saving} onclick={next}>
+            <button
+              class="btn primary"
+              disabled={saving || !!blocker}
+              onclick={next}
+            >
               {rebootOnNext
                 ? $i18n.t("setupWizardRebootNext")
                 : pending
