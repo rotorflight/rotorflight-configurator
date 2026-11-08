@@ -39,26 +39,20 @@
   let needReboot = $state(false);
   let initialConfig;
 
-  // The collective trim (#61) is the mixer's, saved with the servos. It is kept here so
-  // Discard can put it back.
-  let collectiveTrimChanged = $state(false);
+  // The collective trim (#61) is the mixer's value. Like on the Mixer tab, it is sent to the
+  // FC as it changes, so both tabs share one state and no unsaved value is left behind for
+  // another tab to send. Save writes the EEPROM; Discard sends the loaded value back.
   let initialCollectiveTrim = 0;
 
   function setCollectiveTrim(value) {
     FC.MIXER_CONFIG.swash_trim[2] = Math.round(value * 10);
-    collectiveTrimChanged = true;
     dirty = true;
-  }
-
-  async function saveCollectiveTrim() {
-    if (!collectiveTrimChanged) return;
-    await MSP.promise(
+    MSP.send_message(
       MSPCodes.MSP_SET_MIXER_CONFIG,
       mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG),
     );
-    collectiveTrimChanged = false;
-    initialCollectiveTrim = FC.MIXER_CONFIG.swash_trim[2];
   }
+
   let poller;
 
   let overrideEnabled = $state(false);
@@ -332,10 +326,10 @@
   }
 
   export async function onSave() {
-    await saveCollectiveTrim();
     await new Promise((resolve) => mspHelper.sendServoConfigurations(resolve));
     await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
     GUI.log($i18n.t("eepromSaved"));
+    initialCollectiveTrim = FC.MIXER_CONFIG.swash_trim[2];
 
     if (needReboot) {
       MSP.send_message(MSPCodes.MSP_SET_REBOOT);
@@ -349,9 +343,12 @@
   }
 
   export async function onRevert() {
-    if (collectiveTrimChanged) {
+    if (FC.MIXER_CONFIG.swash_trim[2] !== initialCollectiveTrim) {
       FC.MIXER_CONFIG.swash_trim[2] = initialCollectiveTrim;
-      collectiveTrimChanged = false;
+      await MSP.promise(
+        MSPCodes.MSP_SET_MIXER_CONFIG,
+        mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG),
+      );
     }
     FC.SERVO_CONFIG = initialConfig;
     await new Promise((resolve) => mspHelper.sendServoConfigurations(resolve));
@@ -418,14 +415,14 @@
       <!-- The swash moved up or down as a whole, for a centre hover (#61). -->
       <div class="collective-trim">
         <Slider
-          value={FC.MIXER_CONFIG.swash_trim[2] * 0.1}
+          value={Math.round(FC.MIXER_CONFIG.swash_trim[2]) / 10}
           opts={{
             range: { min: -100, max: 100 },
             start: 0,
             step: 0.1,
             behaviour: "snap-drag",
           }}
-          changeOnSlide={true}
+          changeOnSlide={false}
           onchange={(v) => setCollectiveTrim(v)}
         />
         <NumberInput
@@ -434,7 +431,7 @@
           max="100"
           step="0.1"
           bind:value={
-            () => FC.MIXER_CONFIG.swash_trim[2] * 0.1,
+            () => Math.round(FC.MIXER_CONFIG.swash_trim[2]) / 10,
             (v) => setCollectiveTrim(v)
           }
         />

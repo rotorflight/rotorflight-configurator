@@ -8481,6 +8481,9 @@
     "gyroRpmFilterCopyAxis": {
         "message": "Copy to other axes"
     },
+    "gyroRpmFilterCopyAxisConfirm": {
+        "message": "Copy this axis's notches to the other two axes? Their current notches will be replaced."
+    },
     "gyroRpmFilterBanks": {
         "message": "RPM Filter Notches"
     },

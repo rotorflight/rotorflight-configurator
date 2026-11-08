@@ -29,8 +29,9 @@
   });
 
   // Copies this axis's bank to the other two (#335), so the first axis is set once, not three
-  // times. Each axis stays editable afterwards.
+  // times. Each axis stays editable afterwards. It replaces the other banks, so it asks first.
   function copyAxisToOthers() {
+    if (!confirm($i18n.t("gyroRpmFilterCopyAxisConfirm"))) return;
     const source = $state.snapshot(notches.banks[axis]);
     for (let other = 0; other < notches.banks.length; other++) {
       if (other !== axis) {
