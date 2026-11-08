@@ -194,6 +194,8 @@ test('lists the granted ports and DFU devices', async () => {
     assert.deepEqual(list.dfu, [
         { id: 'webusb_1155_57105_0', vid: 1155, pid: 57105, product: 'STM32 BOOTLOADER', serial: 'ABC123' },
     ]);
+    // The browser shares only what the pilot allowed: the supporter may ask for more.
+    assert.deepEqual(list.allow, { serial: true, dfu: true });
 });
 
 test('opens a port, forwards both ways and makes the board safe on close', async () => {

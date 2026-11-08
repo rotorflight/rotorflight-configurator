@@ -2,6 +2,7 @@ import { record, Replayer } from 'rrweb';
 import { RemoteSupport, VIEW_DATA, VIEW_REQUEST } from '@/js/protocols/RemoteSupport.js';
 import { GUI } from '@/js/gui.js';
 import { i18n } from '@/js/localization.js';
+import { attention, clearAllAttention, clearAttention, isMuted, setMuted, unlockSound } from '@/js/protocols/RemoteAttention.js';
 import { PortHandler } from '@/js/port_handler.js';
 import { serial } from '@/js/serial.js';
 
@@ -78,12 +79,74 @@ export const remote = $state({
     control: 'supporter',
     // Pilot: the supporter asked for control back.
     controlAsked: false,
-    // Supporter: asked the pilot for control back.
+    // Supporter: asked the pilot for control back (for a while, see
+    // ASK_COOLDOWN), and the pilot answered "not now".
     controlAskSent: false,
+    controlDeclined: false,
     // Control is being handed over, and why that failed.
     controlBusy: false,
     controlError: null,
+    // Pilot: the supporter asked to allow a port / DFU device.
+    allowRequests: { serial: false, dfu: false },
+    // Pilot: what the supporter can see, once known.
+    shared: { serial: 0, dfu: 0 },
+    sharedKnown: false,
+    // Supporter: what the pilot shares, and whether they can allow more.
+    peerShared: { serial: 0, dfu: 0 },
+    peerCanAllow: { serial: false, dfu: false },
+    // Supporter: asked the pilot to allow one (for a while).
+    allowAskSent: { serial: false, dfu: false },
+    // Pilot: no chime.
+    muted: isMuted(),
 });
+
+// How long the supporter waits before asking the same thing again.
+const ASK_COOLDOWN = 15000;
+const askTimers = {};
+// Supporter: how many were shared when asking to allow one more.
+const askBaseline = { serial: 0, dfu: 0 };
+
+function cooldown(key, apply) {
+    clearTimeout(askTimers[key]);
+    apply(true);
+    askTimers[key] = setTimeout(() => apply(false), ASK_COOLDOWN);
+}
+
+/**
+ * Pilot: something to do that came from the supporter (or the browser
+ * shares nothing yet). Brings them back to the window (RemoteAttention.js)
+ * until it is done; the overlay shows what to do.
+ */
+export function pendingForPilot() {
+    if (remote.role !== 'share' || !remote.peerConnected) {
+        return {};
+    }
+    const supporter = remote.control === 'supporter';
+    return {
+        control: remote.control === 'pilot' && remote.controlAsked,
+        // The browser shares nothing yet: the supporter can't do anything.
+        nothingShared: __BACKEND__ === 'web' && supporter && remote.sharedKnown
+            && remote.shared.serial === 0 && remote.shared.dfu === 0,
+        serial: supporter && remote.allowRequests.serial,
+        dfu: supporter && remote.allowRequests.dfu,
+    };
+}
+
+function updateAttention() {
+    const pending = pendingForPilot();
+    for (const key of ['control', 'nothingShared', 'serial', 'dfu']) {
+        if (pending[key]) {
+            attention(key, i18n.getMessage('remoteSupportActionNeeded'));
+        } else {
+            clearAttention(key);
+        }
+    }
+}
+
+export function setSoundMuted(value) {
+    setMuted(value);
+    remote.muted = isMuted();
+}
 
 /** Whether this configurator works on the flight controller (and is watched). */
 export function hasControl() {
@@ -113,9 +176,29 @@ function sync() {
     }
     remote.control = RemoteSupport.control;
     remote.controlAsked = RemoteSupport.controlAsked;
+    remote.controlDeclined = RemoteSupport.controlDeclined;
+    remote.allowRequests = { ...RemoteSupport.allowRequests };
+    remote.shared = { ...RemoteSupport.shared };
+    remote.sharedKnown = RemoteSupport.sharedKnown;
+    remote.peerShared = { serial: RemoteSupport.serialPorts.length, dfu: RemoteSupport.dfuDevices.length };
+    remote.peerCanAllow = { ...RemoteSupport.peerCanAllow };
+    for (const kind of ['serial', 'dfu']) {
+        if (remote.allowAskSent[kind] && remote.peerShared[kind] > askBaseline[kind]) {
+            clearTimeout(askTimers[kind]);
+            remote.allowAskSent = { ...remote.allowAskSent, [kind]: false };
+        }
+    }
     if (remote.role === null) {
         remote.controlBusy = false;
         remote.controlError = null;
+        remote.controlAskSent = false;
+        remote.allowAskSent = { serial: false, dfu: false };
+        for (const key of Object.keys(askTimers)) {
+            clearTimeout(askTimers[key]);
+        }
+        clearAllAttention();
+    } else {
+        updateAttention();
     }
 
     if (!hasControl() || !remote.peerConnected) {
@@ -139,6 +222,8 @@ export function startSession(code) {
  * otherwise.
  */
 export async function startSharing() {
+    // Still within the click: lets the chime play later.
+    unlockSound();
     if (!(await disconnect())) {
         RemoteSupport.applyStatus(false, false, {
             role: null,
@@ -236,8 +321,37 @@ export async function handOver() {
 /** Supporter: asks the pilot for control back. */
 export function askForControl() {
     RemoteSupport.askForControl();
-    remote.controlAskSent = true;
+    cooldown('control', (on) => {
+        remote.controlAskSent = on;
+    });
 }
+
+/** Pilot: not ready to give control back yet. */
+export function declineControl() {
+    RemoteSupport.declineControl();
+}
+
+/** Pilot: closes a request to allow a port ('serial') or DFU device ('dfu'). */
+export function dismissAllowRequest(kind) {
+    RemoteSupport.dismissAllowRequest(kind);
+}
+
+/** Supporter: asks the pilot to allow a port ('serial') or DFU device ('dfu'). */
+export function askToAllow(kind) {
+    askBaseline[kind] = remote.peerShared[kind];
+    RemoteSupport.askToAllow(kind);
+    cooldown(kind, (on) => {
+        remote.allowAskSent = { ...remote.allowAskSent, [kind]: on };
+    });
+}
+
+/** Supporter: closes the "not now" answer. */
+export function dismissDeclined() {
+    RemoteSupport.controlDeclined = false;
+    remote.controlDeclined = false;
+}
+
+export { unlockSound };
 
 /** Switches to the Remote Support tab (from the Welcome and Maintenance tabs). */
 export function openRemoteSupportTab() {
@@ -413,10 +527,10 @@ export function startWatching(container) {
         showWarning: false,
         // Keep rrweb's default sandbox (no scripts): see startRecording().
         UNSAFE_replayCanvas: false,
-        // The supporter's page has its own session frame and badge
-        // (RemoteSupportOverlay.svelte). The pilot already has theirs around
-        // the viewer, so don't show a second one inside it.
-        insertStyleRules: ['.session-frame { display: none !important; }'],
+        // The other side's page has its own session frame, badge and request
+        // cards (RemoteSupportOverlay.svelte). This side has its own around
+        // the viewer, so don't show a second set inside it.
+        insertStyleRules: ['.session-frame, .notices { display: none !important; }'],
     });
     replayer.on('resize', (size) => {
         viewerSize = size;

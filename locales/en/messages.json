@@ -9962,5 +9962,68 @@
     },
     "remoteSupportControlFlashing": {
         "message": "The supporter is using a board in bootloader (DFU) mode and may be flashing firmware. Wait until they are done, or use Kill connection."
+    },
+    "remoteSupportNotNow": {
+        "message": "Not now",
+        "description": "Pilot's answer when the supporter asks for control back"
+    },
+    "remoteSupportDismiss": {
+        "message": "Dismiss"
+    },
+    "remoteSupportAllowPortRequest": {
+        "message": "The supporter needs access to your flight controller's port. Click \"Allow a port...\" and pick it in the browser's list.",
+        "description": "Request shown to a pilot sharing from the web configurator"
+    },
+    "remoteSupportAllowDfuRequest": {
+        "message": "The supporter needs your board in bootloader (DFU) mode. Click \"Allow a DFU device...\" and pick it in the browser's list (often \"STM32 BOOTLOADER\").",
+        "description": "Request shown to a pilot sharing from the web configurator, e.g. while the supporter flashes firmware"
+    },
+    "remoteSupportAllowPromptTitle": {
+        "message": "Let the supporter reach your flight controller",
+        "description": "Large prompt shown to a pilot sharing from the web configurator while no port is shared"
+    },
+    "remoteSupportAllowPromptText": {
+        "message": "Your browser only shares the ports you allow. Click the button, pick your flight controller in the list and confirm."
+    },
+    "remoteSupportAllowPromptDfu": {
+        "message": "Board in bootloader (DFU) mode?"
+    },
+    "remoteSupportControlDeclined": {
+        "message": "The pilot isn't ready to give control back yet.",
+        "description": "Shown to the supporter when the pilot answers \"Not now\""
+    },
+    "remoteSupportAskAllowPort": {
+        "message": "Ask pilot to allow the port",
+        "description": "Supporter's button; the pilot's browser only shares the ports they allowed"
+    },
+    "remoteSupportAskAllowDfu": {
+        "message": "Ask pilot to allow the DFU device",
+        "description": "Supporter's button for a board in bootloader mode on the pilot's side"
+    },
+    "remoteSupportAllowPortAskSent": {
+        "message": "Asked the pilot to allow their port. Waiting for them..."
+    },
+    "remoteSupportAllowDfuAskSent": {
+        "message": "Asked the pilot to allow the board in bootloader (DFU) mode. Waiting for them..."
+    },
+    "remoteSupportDfuAskedPilot": {
+        "message": "Remote support: asked the pilot to allow the board in bootloader (DFU) mode. Waiting for them...",
+        "description": "Log line while flashing a board shared from the pilot's browser"
+    },
+    "remoteSupportSoundOn": {
+        "message": "Turn sound on"
+    },
+    "remoteSupportSoundOff": {
+        "message": "Turn sound off"
+    },
+    "remoteSupportActionNeeded": {
+        "message": "Remote support: action needed",
+        "description": "Flashing window title when the pilot has to do something"
+    },
+    "remoteSupportPilotShares": {
+        "message": "The pilot shares $1 port(s) and $2 bootloader (DFU) device(s)."
+    },
+    "remoteSupportPilotMustAllow": {
+        "message": "The pilot shares from a browser, which only shares what they allow. Ask them for more if you need it."
     }
 }

@@ -6,6 +6,7 @@
   import { i18n } from "@/js/i18n.js";
   import { canShareDevices } from "@/js/protocols/RemoteSupport.js";
   import {
+    askToAllow,
     giveControl,
     handOver,
     killSession,
@@ -221,7 +222,7 @@
       {/if}
       <p class="status">{status}</p>
       {#if remote.device}
-        <p>{$i18n.t("remoteSupportDevice", [remote.device])}</p>
+        <p>{$i18n.t("remoteSupportDevice", { 1: remote.device })}</p>
       {/if}
       {#if remote.role === "join"}
         <div class="safety">
@@ -230,6 +231,40 @@
             {$i18n.t("remoteSupportSafetyReminder")}
           </p>
         </div>
+        {#if remote.control === "supporter" && remote.peerConnected}
+          <div class="pilot-devices">
+            <p>
+              {$i18n.t("remoteSupportPilotShares", {
+                1: remote.peerShared.serial,
+                2: remote.peerShared.dfu,
+              })}
+            </p>
+            {#if remote.peerCanAllow.serial || remote.peerCanAllow.dfu}
+              <p class="hint">{$i18n.t("remoteSupportPilotMustAllow")}</p>
+              <div class="actions">
+                {#if remote.peerCanAllow.serial}
+                  <button
+                    class="btn"
+                    class:primary={remote.peerShared.serial === 0}
+                    onclick={() => askToAllow("serial")}
+                    disabled={remote.allowAskSent.serial}
+                  >
+                    {$i18n.t("remoteSupportAskAllowPort")}
+                  </button>
+                {/if}
+                {#if remote.peerCanAllow.dfu}
+                  <button
+                    class="btn"
+                    onclick={() => askToAllow("dfu")}
+                    disabled={remote.allowAskSent.dfu}
+                  >
+                    {$i18n.t("remoteSupportAskAllowDfu")}
+                  </button>
+                {/if}
+              </div>
+            {/if}
+          </div>
+        {/if}
         <p class="watched" class:on={remote.beingWatched}>
           <span class="fas {remote.beingWatched ? 'fa-eye' : 'fa-eye-slash'}"
           ></span>
@@ -396,6 +431,18 @@
 
   .unsupported {
     color: var(--color-text-soft);
+  }
+
+  .pilot-devices {
+    margin: 12px 0;
+
+    p {
+      margin: 0 0 6px;
+    }
+
+    .hint {
+      opacity: 0.8;
+    }
   }
 
   .actions {

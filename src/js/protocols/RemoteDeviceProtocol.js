@@ -41,6 +41,13 @@ export const CONTROL = {
     HAND_OVER: 3,
     // supporter -> pilot: the supporter asks for control back.
     ASK: 4,
+    // supporter -> pilot: please allow the browser a serial port (web).
+    ALLOW_PORT: 5,
+    // supporter -> pilot: please allow the browser the board in bootloader
+    // (DFU) mode (web), e.g. while flashing.
+    ALLOW_DFU: 6,
+    // pilot -> supporter: not ready to give control back yet.
+    NOT_NOW: 7,
 };
 
 // What a device host lists, and why it refuses to open anything, while the
