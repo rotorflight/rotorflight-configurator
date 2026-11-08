@@ -6779,6 +6779,18 @@
     "cliReboot": {
         "message": "CLI reboot detected"
     },
+    "cliBackupNoAnswer": {
+        "message": "The backup was not saved: the flight controller did not answer."
+    },
+    "cliBackupStopped": {
+        "message": "The backup was not saved: the output did not end within 2 minutes."
+    },
+    "cliBackupEmpty": {
+        "message": "The backup was not saved: it came back empty."
+    },
+    "cliSaveConfigurationBtn": {
+        "message": "Save configuration"
+    },
     "cliSaveToFileBtn": {
         "message": "Save to File"
     },

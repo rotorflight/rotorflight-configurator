@@ -201,7 +201,12 @@
   <button class="btn" onclick={onRevert} disabled={motorState.overrideEnabled}>
     {$i18n.t("buttonRevert")}
   </button>
-  <button class="btn" onclick={onSave} disabled={motorState.overrideEnabled}>
+  <button
+    class="btn"
+    onclick={onSave}
+    data-save
+    disabled={motorState.overrideEnabled}
+  >
     {$i18n.t("buttonSaveReboot")}
   </button>
 {/snippet}
