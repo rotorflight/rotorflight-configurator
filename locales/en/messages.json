@@ -929,6 +929,9 @@
     "setupWizardServoTypeCustom": {
         "message": "Now: $1 µs, $2 Hz. Choose a type to change it, or keep it if your servo maker says so."
     },
+    "setupWizardServoTypeNearest": {
+        "message": "Closest type: $1."
+    },
     "setupWizardServoTypeCheckMaker": {
         "message": "If the servo maker gives other values, set them on the Servos tab."
     },

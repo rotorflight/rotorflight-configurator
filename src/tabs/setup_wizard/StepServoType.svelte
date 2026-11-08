@@ -36,6 +36,19 @@
     wide: { mid: 1520, travel: 700, scale: 500, minHz: 50, maxHz: 333 },
     narrow: { mid: 760, travel: 250, scale: 250, minHz: 200, maxHz: 560 },
   };
+  // Ethos' presets (lib/setup_wizard_heli.lua SERVO_TYPES): a servo at one of
+  // these rates and bands has that type; any other setting is custom.
+  const PRESETS = [
+    { band: "wide", rate: 50 },
+    { band: "wide", rate: 165 },
+    { band: "wide", rate: 200 },
+    { band: "wide", rate: 333 },
+    { band: "narrow", rate: 333 },
+    { band: "narrow", rate: 560 },
+  ];
+  // The wizards whose groups already had their first type set, once per wizard as
+  // Ethos' openedStore.
+  const shownWizards = new WeakSet();
 
   const GROUPS = [
     { kind: "swash", title: "setupWizardServoTypeCyclic" },
@@ -52,17 +65,47 @@
     return wiz.servos.filter((s) => s.kind === kind);
   }
 
+  // What one servo is set to: its preset as "band:rate", or "custom" when it
+  // matches none (as Ethos' servoTypeOf).
+  function stateOf(config) {
+    const band = bandOf(config);
+    const preset = PRESETS.find(
+      (p) => p.band === band && p.rate === config.rate,
+    );
+    return preset ? `${preset.band}:${preset.rate}` : "custom";
+  }
+
+  // The group's state: the servos' shared state, or "mixed" when they differ (as Ethos).
+  function groupState(kind) {
+    const states = groupServos(kind).map((s) =>
+      stateOf(FC.SERVO_CONFIG[s.servo]),
+    );
+    return states.every((state) => state === states[0]) ? states[0] : "mixed";
+  }
+
   // The type every servo of the group already has, or null.
   function currentType(kind) {
-    const configs = groupServos(kind).map((s) => FC.SERVO_CONFIG[s.servo]);
-    if (configs.length === 0) return null;
-    const type = TYPES[kind].find(
-      (t) => t.rate === configs[0].rate && t.band === bandOf(configs[0]),
+    const state = groupState(kind);
+    return (
+      TYPES[kind].find((t) => `${t.band}:${t.rate}` === state)?.key ?? null
     );
-    return type &&
-      configs.every((c) => c.rate === type.rate && bandOf(c) === type.band)
-      ? type.key
-      : null;
+  }
+
+  // The type of the group nearest to a servo's rate within its band, shown for a
+  // rate that matches none (as Ethos' pictureFor).
+  function nearestType(kind, config) {
+    const band = bandOf(config);
+    let best = null;
+    for (const t of TYPES[kind]) {
+      if (t.band !== band) continue;
+      if (
+        best === null ||
+        Math.abs(t.rate - config.rate) < Math.abs(best.rate - config.rate)
+      ) {
+        best = t;
+      }
+    }
+    return best;
   }
 
   // The group's frame rate, as its first servo has it.
@@ -125,6 +168,20 @@
       wiz.sendServo(s.servo);
     }
   }
+
+  // Ethos: a group whose servos match no type gets its first type once, when the step
+  // first shows it. A group in a mixed state is left as it is.
+  if (!shownWizards.has(wiz)) {
+    shownWizards.add(wiz);
+    for (const group of GROUPS) {
+      if (
+        groupServos(group.kind).length > 0 &&
+        groupState(group.kind) === "custom"
+      ) {
+        apply(group.kind, TYPES[group.kind][0].key);
+      }
+    }
+  }
 </script>
 
 <div class="with-art">
@@ -139,6 +196,7 @@
   {@const servos = groupServos(group.kind)}
   {#if servos.length > 0}
     {@const current = currentType(group.kind)}
+    {@const nearest = nearestType(group.kind, FC.SERVO_CONFIG[servos[0].servo])}
     {@const band = BANDS[bandOf(FC.SERVO_CONFIG[servos[0].servo])]}
     <section class="card">
       <h3>{$i18n.t(group.title)}</h3>
@@ -174,6 +232,11 @@
             1: FC.SERVO_CONFIG[servos[0].servo].mid,
             2: FC.SERVO_CONFIG[servos[0].servo].rate,
           })}
+          {#if nearest}
+            {$i18n.t("setupWizardServoTypeNearest", {
+              1: $i18n.t(`setupWizardServoType_${nearest.key}`),
+            })}
+          {/if}
         </p>
       {/if}
 
@@ -182,6 +245,7 @@
         <span>{$i18n.t("setupWizardServoTypeFrameRate")}</span>
         <span class="row-control">
           <NumberInput
+            strict
             min={band.minHz}
             max={band.maxHz}
             bind:value={
