@@ -1053,7 +1053,7 @@
         "message": "Cyclic"
     },
     "setupWizardPitchText_cyclic": {
-        "message": "Turn the blades to point along the boom. Hold roll at $1° and measure the blade pitch."
+        "message": "Turn the rotor head until moving roll changes the blade pitch most. Hold roll at $1° and measure the blade pitch."
     },
     "setupWizardPitchHold": {
         "message": "Hold at $1°"
