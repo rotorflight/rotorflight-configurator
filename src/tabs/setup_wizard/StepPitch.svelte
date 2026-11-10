@@ -34,8 +34,8 @@
   // `inputs`: the mixer inputs this calibration sets (both cyclic axes share
   // one calibration). `hold`: the input held while measuring. Cyclic holds
   // roll with the blades along the boom, as for collective. Roll moves them,
-  // so holding pitch would measure nothing. The EdgeTX and Ethos suites do the
-  // same. The swash phase setting can shift this; the hardware check covers it.
+  // so holding pitch would measure nothing. The EdgeTX suite does the same.
+  // The swash phase setting can shift this; the hardware check covers it.
   const CALIBRATIONS = [
     { key: "collective", inputs: [COLLECTIVE], hold: COLLECTIVE },
     { key: "cyclic", inputs: [ROLL, PITCH], hold: ROLL },
