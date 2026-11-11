@@ -620,6 +620,28 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             }
 
+            case MSPCodes.MSP2_GET_SRXL2_ESC_CONFIG: {
+                // Firmware without the message answers unsupported with no
+                // payload; SRXL2_ESC_CONFIG then stays null and the Motors
+                // tab hides the section.
+                if (data.byteLength < 5) {
+                    FC.SRXL2_ESC_CONFIG = null;
+                    break;
+                }
+                data.readU8(); // payload version 1
+                FC.SRXL2_ESC_CONFIG = {
+                    throttle_rate_hz: data.readU16(),
+                    telem_interval_frames: data.readU8(),
+                    motor2_channel: data.readU8(),
+                };
+                break;
+            }
+
+            case MSPCodes.MSP2_SET_SRXL2_ESC_CONFIG: {
+                console.log('SRXL2 ESC config saved');
+                break;
+            }
+
             case MSPCodes.MSP_SET_BATTERY_PROFILE: {
                 console.log('Battery profile set');
                 break;
@@ -2310,6 +2332,14 @@ MspHelper.prototype.crunch = function(code) {
             for (let i = 0; i < 8; i++) {
                 buffer.push8(FC.FBUS_MASTER_CONFIG.forwardedSensors[i] ?? 0xFF);
             }
+            break;
+        }
+
+        case MSPCodes.MSP2_SET_SRXL2_ESC_CONFIG: {
+            // Same fields as the read, without its version byte.
+            buffer.push16(FC.SRXL2_ESC_CONFIG.throttle_rate_hz)
+                  .push8(FC.SRXL2_ESC_CONFIG.telem_interval_frames)
+                  .push8(FC.SRXL2_ESC_CONFIG.motor2_channel);
             break;
         }
 
