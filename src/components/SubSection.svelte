@@ -1,15 +1,19 @@
 <script>
   import { slide } from "svelte/transition";
 
+  import { watchEmpty } from "@/js/emptyContent.js";
   import { i18n } from "@/js/i18n.js";
 
   // actions: optional snippet for a right-aligned action (e.g. a button) on
   // the label row itself - for something that acts specifically on this
   // subsection's own fields, as opposed to the whole Section header above it.
   let { children, label, actions } = $props();
+
+  // Label and all, not shown when nothing under it is (see emptyContent.js).
+  let empty = $state(false);
 </script>
 
-<div class="container">
+<div class={["container", empty && "empty"]}>
   {#if label}
     <div transition:slide class="header">
       <span>{$i18n.t(label)}</span>
@@ -18,10 +22,16 @@
       {/if}
     </div>
   {/if}
-  <div class="content">{@render children?.()}</div>
+  <div class="content" use:watchEmpty={(e) => (empty = e)}>
+    {@render children?.()}
+  </div>
 </div>
 
 <style lang="scss">
+  .container.empty {
+    display: none;
+  }
+
   .header {
     display: flex;
     align-items: center;

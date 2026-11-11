@@ -168,7 +168,7 @@
 
 {#snippet toolbar()}
   <button class="btn" onclick={onRevert}>{$i18n.t("buttonRevert")}</button>
-  <button class="btn" disabled={disableSave} onclick={onSave}>
+  <button class="btn" disabled={disableSave} onclick={onSave} data-save>
     {$i18n.t("buttonSaveReboot")}
   </button>
 {/snippet}

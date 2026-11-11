@@ -80,6 +80,9 @@ export type Config = {
   showLegacyTargets: boolean;
   showPresetsWarningBackup: boolean;
   trackedPresets: unknown[];
+  // "beginner", "intermediate" or "advanced" (user_level.js); null until
+  // first set, when it is derived from expertMode.
+  userLevel: string | null;
   zoomLevel: number;
 };
 
@@ -117,6 +120,7 @@ const _config: Config = $state({
   showLegacyTargets: false,
   showPresetsWarningBackup: true,
   trackedPresets: [],
+  userLevel: null,
   zoomLevel: 100,
 });
 
@@ -143,6 +147,11 @@ const handler: ProxyHandler<Config> = {
 };
 
 export const config = new Proxy(_config, handler);
+
+// Whether a setting has been stored, as opposed to reading its default.
+export function isConfigSet(prop: keyof Config) {
+  return get(prop) !== undefined;
+}
 
 function snapshot() {
   return Object.fromEntries(

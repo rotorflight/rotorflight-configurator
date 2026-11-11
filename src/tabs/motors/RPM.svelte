@@ -10,6 +10,7 @@
 
   import { FC } from "@/js/fc.svelte.js";
 
+  import RpmCheck from "./RpmCheck.svelte";
   import motorState from "./state.svelte.js";
 </script>
 
@@ -24,6 +25,14 @@
         bind:checked={FC.FEATURE_CONFIG.features.FREQ_SENSOR}
       />
     </Field>
+
+    {#if FC.FEATURE_CONFIG.features.FREQ_SENSOR}
+      <div transition:slide>
+        <SubSection label="motorsRpmCheckTitle">
+          <RpmCheck />
+        </SubSection>
+      </div>
+    {/if}
 
     {#if motorState.isDshot}
       <div transition:slide>

@@ -5,7 +5,9 @@
   import { slide } from "svelte/transition";
 
   import Page from "@/components/Page.svelte";
+  import WarningNote from "@/components/notes/WarningNote.svelte";
 
+  import { Mixer } from "@/js/Mixer.js";
   import { API_VERSION_12_10 } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
@@ -15,6 +17,7 @@
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { bit_check, reinitialiseConnection } from "@/js/serial_backend";
+  import { motorOutputProblem } from "@/js/tail_motor.js";
 
   import Motor from "./Motor.svelte";
   import Override from "./Override.svelte";
@@ -42,6 +45,21 @@
 
   let isEnabled = $derived(
     motorState.throttleEnabled && FC.CONFIG.motorCount > 0,
+  );
+
+  // A motor pin the protocol can't drive stops every motor (see
+  // tail_motor.js), so say so instead of showing motors that never move.
+  // The protocol is the one the FC runs (initialState), not the one being
+  // edited here, which only takes effect after a save and reboot.
+  let motorProblem = $derived(
+    loading || !initialState
+      ? null
+      : motorOutputProblem(
+          motorState.throttleProtocols[
+            initialState.MOTOR_CONFIG.motor_pwm_protocol
+          ] !== "DISABLED",
+          FC.MIXER_CONFIG.tail_rotor_mode !== Mixer.TAIL_MODE_VARIABLE,
+        ),
   );
 
   let rpmAvailable = $derived(
@@ -198,12 +216,20 @@
   <button class="btn" onclick={onRevert} disabled={motorState.overrideEnabled}>
     {$i18n.t("buttonRevert")}
   </button>
-  <button class="btn" onclick={onSave} disabled={motorState.overrideEnabled}>
+  <button
+    class="btn"
+    onclick={onSave}
+    data-save
+    disabled={motorState.overrideEnabled}
+  >
     {$i18n.t("buttonSaveReboot")}
   </button>
 {/snippet}
 
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
+  {#if motorProblem}
+    <WarningNote message={`motorOutputProblem_${motorProblem}`} />
+  {/if}
   <div class="content">
     <div>
       <Throttle />

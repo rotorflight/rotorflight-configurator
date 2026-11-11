@@ -232,6 +232,9 @@ export const MSPCodes = {
     // action: 0 = poll only, 1 = (re)start - detects the board alignment
     // from a level baseline followed by a tail lift.
     MSP2_BOARD_AUTO_ALIGN:              0x5F13,
+    // action: 0 = read, 1 = tail pin to SERVO 4, 2 = tail pin to MOTOR 2.
+    // Replies where the pin is and the result (see tail_motor.js).
+    MSP2_TAIL_MOTOR_OUTPUT:             0x5F14,
     MSP2_GET_FBUS_SENSORS:              0x5F07,
     MSP2_CLEAR_FBUS_SENSORS:            0x5F08,
     MSP2_GET_FBUS_MASTER_CONFIG:        0x5F09,

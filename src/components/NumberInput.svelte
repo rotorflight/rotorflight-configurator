@@ -1,19 +1,28 @@
 <script>
   import { onDestroy, onMount } from "svelte";
 
+  import { i18n } from "@/js/i18n.js";
+
   let {
     value = $bindable(0),
     min: minRaw = 0,
     max: maxRaw = 100,
     step: stepRaw = 1,
+    // A strict field refuses a value outside its range or off its step and keeps the last
+    // good one, instead of clamping it (as Ethos' frame rate field).
+    strict = false,
     disabled,
     onchange,
     id,
   } = $props();
 
   let step = $derived(parseFloat(stepRaw));
+
   let min = $derived(parseFloat(minRaw));
   let max = $derived(parseFloat(maxRaw));
+
+  // The value range as a tooltip on the field (#69).
+  let rangeTitle = $derived($i18n.t("numberInputRange", { 1: min, 2: max }));
 
   function precision(a) {
     if (!isFinite(a)) return 0;
@@ -41,6 +50,7 @@
 
   onDestroy(() => {
     stopIncrement();
+    commitWheel();
   });
 
   $effect(() => {
@@ -52,6 +62,36 @@
   function setVal(v) {
     numValue = v;
     update();
+  }
+
+  // The mouse wheel steps the value, but only while this field has the focus, so a page
+  // scrolled over it keeps its value (#483). The value is set at once; onchange fires once
+  // the wheel has settled, so a trackpad does not send one update per tick.
+  let wheelTimer = null;
+  let wheelPending = false;
+
+  function commitWheel() {
+    clearTimeout(wheelTimer);
+    wheelTimer = null;
+    if (!wheelPending) return;
+    wheelPending = false;
+    onchange?.();
+  }
+
+  function onwheel(e) {
+    if (document.activeElement !== elem || disabled) return;
+    e.preventDefault();
+    const next = Math.max(
+      min,
+      Math.min(max, numValue + (e.deltaY < 0 ? step : -step)),
+    );
+    numValue = parseFloat(next.toFixed(prec));
+    textValue = numValue.toFixed(prec);
+    lastGoodTextValue = textValue;
+    value = numValue;
+    wheelPending = true;
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(commitWheel, 250);
   }
 
   function inc() {
@@ -122,7 +162,21 @@
     return wip();
   }
 
+  function takes(v) {
+    return (
+      v >= min && v <= max && Math.abs(v / step - Math.round(v / step)) < 1e-9
+    );
+  }
+
   function update() {
+    if (strict && !takes(numValue)) {
+      // Refused: the field goes back to the value it had.
+      numValue = parseFloat(value);
+      textValue = numValue.toFixed(prec);
+      lastGoodTextValue = textValue;
+      return;
+    }
+
     // Fix NaN
     if (isNaN(numValue)) {
       numValue = 0;
@@ -210,10 +264,12 @@
     autocomplete="off"
     bind:this={elem}
     bind:value={textValue}
+    title={rangeTitle}
     {oninput}
     onblur={updateLocal}
     onchange={updateLocal}
     {onkeydown}
+    {onwheel}
     {disabled}
   />
   <button
