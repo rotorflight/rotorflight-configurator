@@ -101,7 +101,7 @@
             bind:value={FC.SRXL2_ESC_CONFIG.motor2_channel}
           >
             <option value={0}>{$i18n.t("motorsSrxl2Motor2ChannelOff")}</option>
-            {#each Array.from({ length: 31 }, (_, i) => i + 1) as ch (ch)}
+            {#each Array.from({ length: 31 }, (_, i) => i + 2) as ch (ch)}
               <option value={ch}>{ch}</option>
             {/each}
           </select>

@@ -673,11 +673,13 @@ export function handleVirtualMessage(code, data) {
       return decodedReply(code, encodeSrxl2EscConfig());
 
     // Exactly four bytes, as msp.c requires: u16 rate, u8 interval, u8 channel.
+    // Motor 2 channel: 0 = off, 2..32 (channel 1 is motor 1), as the firmware.
     case MSPCodes.MSP2_SET_SRXL2_ESC_CONFIG:
       if (bytes.length === 4) {
         virtualSrxl2EscConfig.throttle_rate_hz = bytes[0] | (bytes[1] << 8);
         virtualSrxl2EscConfig.telem_interval_frames = bytes[2];
-        virtualSrxl2EscConfig.motor2_channel = bytes[3] < 32 ? bytes[3] : 0;
+        virtualSrxl2EscConfig.motor2_channel =
+          bytes[3] >= 2 && bytes[3] <= 32 ? bytes[3] : 0;
       }
       break;
 
