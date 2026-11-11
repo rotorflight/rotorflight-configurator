@@ -746,7 +746,8 @@ input[type="number"]::-webkit-inner-spin-button {
 #dataflash_wrapper_global {
     color: var(--chrome-fg);
     font-size:10px;
-    width:125px;
+    min-width:125px;
+    width: max-content;
     margin-right: 5px;
     line-height: 12px;
     height: 33px;
@@ -827,9 +828,40 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-top:2px;
 }
 
-#expert-mode {
-    margin-top: 25px;
-    width: 90px;
+/* Beginner | Intermediate | Advanced, hanging below the dataflash box like
+   the Expert Mode switch it replaced. The box widens to fit it. */
+#user-level {
+    display: flex;
+    width: max-content;
+    margin-top: 22px;
+    border: 1px solid var(--chrome-border);
+    border-radius: var(--radius-md);
+    background-color: var(--chrome-bg-sunken);
+    overflow: hidden;
+}
+
+#user-level button {
+    padding: 2px 6px;
+    border: 0;
+    background: none;
+    color: var(--chrome-fg-muted);
+    font: inherit;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+#user-level button + button {
+    border-left: 1px solid var(--chrome-border);
+}
+
+#user-level button:hover {
+    background-color: var(--chrome-hover);
+    color: var(--chrome-fg);
+}
+
+#user-level button.active {
+    background-color: var(--chrome-accent);
+    color: var(--chrome-accent-fg);
 }
 
 /* Battery element styling*/
