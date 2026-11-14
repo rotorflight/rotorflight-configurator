@@ -11375,7 +11375,7 @@
         "message": "This configurator lets go of the flight controller, and the supporter uses it from theirs."
     },
     "remoteSupportShareStep2": {
-        "message": "You watch the supporter's screen until the session ends."
+        "message": "You watch the supporter's screen. To use the flight controller yourself for a while, e.g. to calibrate something, take control, and give it back when you are done. While you have control, the supporter sees your screen."
     },
     "remoteSupportBeforeShare": {
         "message": "Before you share",
@@ -11498,5 +11498,122 @@
     "remoteSupportFrameJoined": {
         "message": "Remote support: working on the pilot's flight controller",
         "description": "Banner on the frame around the supporter's window while joined to a session"
+    },
+    "remoteSupportTakeControl": {
+        "message": "Take control",
+        "description": "Button for the pilot to take the flight controller back from the supporter for a while, e.g. to calibrate something"
+    },
+    "remoteSupportTakeControlTitle": {
+        "message": "Make the flight controller safe, take it from the supporter and use it from here, e.g. to calibrate something. The supporter sees your screen meanwhile. Give control back when you are done."
+    },
+    "remoteSupportGiveControl": {
+        "message": "Give control back",
+        "description": "Button for the pilot to hand the flight controller back to the supporter"
+    },
+    "remoteSupportHandOver": {
+        "message": "Hand control to pilot",
+        "description": "Button for the supporter to let the pilot use the flight controller from their own configurator"
+    },
+    "remoteSupportHandOverTitle": {
+        "message": "Disconnect from the pilot's flight controller so they can use it from their own configurator, e.g. to calibrate something. You see their screen meanwhile, and they give control back when they are done."
+    },
+    "remoteSupportAskControl": {
+        "message": "Ask for control back",
+        "description": "Button for the supporter, while the pilot has control"
+    },
+    "remoteSupportControlAskSent": {
+        "message": "Asked for control back"
+    },
+    "remoteSupportControlAsked": {
+        "message": "The supporter asks for control back.",
+        "description": "Shown to the pilot while they have control"
+    },
+    "remoteSupportFramePilotControl": {
+        "message": "Remote support: you have control of your flight controller",
+        "description": "Banner on the frame around the pilot's window while the pilot has taken control"
+    },
+    "remoteSupportBeingWatchedPilot": {
+        "message": "The supporter is watching your screen."
+    },
+    "remoteSupportWatchingPilot": {
+        "message": "Pilot's screen (read-only): the pilot has control"
+    },
+    "remoteSupportWatchWaitingPilot": {
+        "message": "The pilot has control. Waiting for their screen..."
+    },
+    "remoteSupportYouHaveControl": {
+        "message": "You have control of your flight controller: connect and use it as usual. Give control back when you are done."
+    },
+    "remoteSupportPilotHasControl": {
+        "message": "The pilot has control of their flight controller."
+    },
+    "remoteSupportControlDisconnectFailed": {
+        "message": "Could not disconnect from the flight controller, so control was not handed over. Disconnect and try again."
+    },
+    "remoteSupportControlFlashing": {
+        "message": "The supporter is using a board in bootloader (DFU) mode and may be flashing firmware. Wait until they are done, or use Kill connection."
+    },
+    "remoteSupportNotNow": {
+        "message": "Not now",
+        "description": "Pilot's answer when the supporter asks for control back"
+    },
+    "remoteSupportDismiss": {
+        "message": "Dismiss"
+    },
+    "remoteSupportAllowPortRequest": {
+        "message": "The supporter needs access to your flight controller's port. Click \"Allow a port...\" and pick it in the browser's list.",
+        "description": "Request shown to a pilot sharing from the web configurator"
+    },
+    "remoteSupportAllowDfuRequest": {
+        "message": "The supporter needs your board in bootloader (DFU) mode. Click \"Allow a DFU device...\" and pick it in the browser's list (often \"STM32 BOOTLOADER\").",
+        "description": "Request shown to a pilot sharing from the web configurator, e.g. while the supporter flashes firmware"
+    },
+    "remoteSupportAllowPromptTitle": {
+        "message": "Let the supporter reach your flight controller",
+        "description": "Large prompt shown to a pilot sharing from the web configurator while no port is shared"
+    },
+    "remoteSupportAllowPromptText": {
+        "message": "Your browser only shares the ports you allow. Click the button, pick your flight controller in the list and confirm."
+    },
+    "remoteSupportAllowPromptDfu": {
+        "message": "Board in bootloader (DFU) mode?"
+    },
+    "remoteSupportControlDeclined": {
+        "message": "The pilot isn't ready to give control back yet.",
+        "description": "Shown to the supporter when the pilot answers \"Not now\""
+    },
+    "remoteSupportAskAllowPort": {
+        "message": "Ask pilot to allow the port",
+        "description": "Supporter's button; the pilot's browser only shares the ports they allowed"
+    },
+    "remoteSupportAskAllowDfu": {
+        "message": "Ask pilot to allow the DFU device",
+        "description": "Supporter's button for a board in bootloader mode on the pilot's side"
+    },
+    "remoteSupportAllowPortAskSent": {
+        "message": "Asked the pilot to allow their port. Waiting for them..."
+    },
+    "remoteSupportAllowDfuAskSent": {
+        "message": "Asked the pilot to allow the board in bootloader (DFU) mode. Waiting for them..."
+    },
+    "remoteSupportDfuAskedPilot": {
+        "message": "Remote support: asked the pilot to allow the board in bootloader (DFU) mode. Waiting for them...",
+        "description": "Log line while flashing a board shared from the pilot's browser"
+    },
+    "remoteSupportSoundOn": {
+        "message": "Turn sound on"
+    },
+    "remoteSupportSoundOff": {
+        "message": "Turn sound off"
+    },
+    "remoteSupportActionNeeded": {
+        "message": "Remote support: action needed",
+        "description": "Flashing window title when the pilot has to do something"
+    },
+    "remoteSupportPilotShares": {
+        "message": "The pilot shares $1 port(s) and $2 bootloader (DFU) device(s)."
+    },
+    "remoteSupportPilotMustAllow": {
+        "message": "The pilot shares from a browser, which only shares what they allow. Ask them for more if you need it."
     }
 }

@@ -6,7 +6,8 @@ import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { MSPConnectorImpl } from '@/js/msp/MSPConnector.js';
 import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
-import { REMOTE_PORT_PREFIX } from "@/js/protocols/RemoteSupport.js";
+import { RemoteSupport, REMOTE_PORT_PREFIX } from "@/js/protocols/RemoteSupport.js";
+import { askToAllow } from "@/js/protocols/RemoteView.svelte.js";
 import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
 import { serial } from "@/js/serial.js";
 import { bit_check } from "@/js/serial_backend.js";
@@ -25,6 +26,10 @@ import { TABS } from "@/js/tabs/tabs.js";
 // so permission is asked for sooner there.
 const DFU_WAIT_INTERVAL_MS = 500;
 const DFU_WAIT_ATTEMPTS = 20;
+// A remote board shared from a browser: the pilot has to allow the DFU device
+// before it shows up. Ask them after a short wait, then give them time.
+const DFU_REMOTE_ASK_ATTEMPT = 4;
+const DFU_WAIT_ATTEMPTS_REMOTE_ALLOW = 180;
 const DFU_WAIT_ATTEMPTS_WEB = 4;
 // A port still listed this many checks after the first is a USB-UART
 // board's, whose ROM bootloader answers on it.
@@ -149,9 +154,22 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
                     // A board shared in a remote support session is never
                     // this browser's to ask permission for: wait as long as
                     // the desktop app does, then give up.
+                    // If the pilot shares from a browser, they have to allow
+                    // the DFU device: ask them (RemoteSupport.js) and wait
+                    // longer.
                     const remote = self.port.startsWith(REMOTE_PORT_PREFIX);
                     const askWebPermission = __BACKEND__ === "web" && !remote;
-                    const maxAttempts = askWebPermission ? DFU_WAIT_ATTEMPTS_WEB : DFU_WAIT_ATTEMPTS;
+                    const askPilot = remote && RemoteSupport.peerCanAllow.dfu;
+                    if (askPilot && !portPresent && attempt === DFU_REMOTE_ASK_ATTEMPT) {
+                        askToAllow('dfu');
+                        GUI.log(i18n.getMessage('remoteSupportDfuAskedPilot'));
+                    }
+                    let maxAttempts = DFU_WAIT_ATTEMPTS;
+                    if (askWebPermission) {
+                        maxAttempts = DFU_WAIT_ATTEMPTS_WEB;
+                    } else if (askPilot) {
+                        maxAttempts = DFU_WAIT_ATTEMPTS_REMOTE_ALLOW;
+                    }
                     if (!portPresent && attempt < maxAttempts) {
                         setTimeout(() => startFlashing(attempt + 1), DFU_WAIT_INTERVAL_MS);
                     } else if (!portPresent && !askWebPermission) {

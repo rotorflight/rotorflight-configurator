@@ -26,7 +26,34 @@ export const MSG = {
     // Screen mirroring (RemoteView.svelte.js), not for the device hosts.
     VIEW_DATA:     0x50,
     VIEW_REQUEST:  0x51,
+    // Handing control of the flight controller back and forth between the
+    // two configurators (RemoteSupport.js), not for the device hosts.
+    CONTROL:       0x52,
 };
+
+/** The one-byte payload of a CONTROL message. */
+export const CONTROL = {
+    // pilot -> supporter: the pilot has control now; the board was let go of.
+    PILOT: 1,
+    // pilot -> supporter: the supporter has control (again).
+    SUPPORTER: 2,
+    // supporter -> pilot: the supporter hands control to the pilot.
+    HAND_OVER: 3,
+    // supporter -> pilot: the supporter asks for control back.
+    ASK: 4,
+    // supporter -> pilot: please allow the browser a serial port (web).
+    ALLOW_PORT: 5,
+    // supporter -> pilot: please allow the browser the board in bootloader
+    // (DFU) mode (web), e.g. while flashing.
+    ALLOW_DFU: 6,
+    // pilot -> supporter: not ready to give control back yet.
+    NOT_NOW: 7,
+};
+
+// What a device host lists, and why it refuses to open anything, while the
+// pilot has control of the flight controller.
+export const EMPTY_DEVICE_LIST = JSON.stringify({ serial: [], dfu: [] });
+export const PILOT_HAS_CONTROL = 'The pilot has control of the flight controller';
 
 export const RESULT_OK = 0;
 export const RESULT_STALL = 1;

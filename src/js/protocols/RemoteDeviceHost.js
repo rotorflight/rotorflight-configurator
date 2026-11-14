@@ -1,6 +1,8 @@
 import { safeStopGroups } from '@/js/msp/safe_stop.js';
 import {
+    EMPTY_DEVICE_LIST,
     MSG,
+    PILOT_HAS_CONTROL,
     RESULT_OK,
     RESULT_STALL,
     concat,
@@ -99,6 +101,8 @@ export class RemoteDeviceHost {
         this.onDevice = onDevice;
         this.dfuFilters = dfuFilters;
         this.peer = false;
+        // True while the pilot has control: nothing is listed or opened.
+        this.paused = false;
         this.serial = null; // { id, path, cli, stopped, settling }
         this.closing = null; // the link being closed, while it drains
         this.usb = null; // { handle, claimed: [] }
@@ -136,9 +140,52 @@ export class RemoteDeviceHost {
         this.enqueue(async () => {
             await this.closeAll();
             this.peer = true;
-            this.lastList = await this.listDevices();
+            this.lastList = await this.deviceList();
             this.send(withReq(MSG.DEVICE_LIST, 0, textEncoder.encode(this.lastList)));
         });
+    }
+
+    /**
+     * The pilot takes control: makes the board safe, lets go of it (like
+     * any other close, see closeSerial()) and shows the supporter no devices
+     * until resume(). Resolves once everything is closed, so the pilot's own
+     * configurator can open the port.
+     */
+    pause() {
+        return this.enqueue(async () => {
+            this.paused = true;
+            // The supporter's configurator didn't close the port, so tell it.
+            const supporterOpen = this.serial !== null && !this.serial.stopped;
+            await this.closeAll();
+            if (supporterOpen && this.peer) {
+                this.send(concat(Uint8Array.of(MSG.SERIAL_CLOSED), textEncoder.encode(PILOT_HAS_CONTROL)));
+            }
+            this.lastList = EMPTY_DEVICE_LIST;
+            if (this.peer) {
+                this.send(withReq(MSG.DEVICE_LIST, 0, textEncoder.encode(this.lastList)));
+            }
+        });
+    }
+
+    /** The supporter gets control back: tell them what's here again. */
+    resume() {
+        return this.enqueue(async () => {
+            this.paused = false;
+            this.lastList = await this.listDevices();
+            if (this.peer) {
+                this.send(withReq(MSG.DEVICE_LIST, 0, textEncoder.encode(this.lastList)));
+            }
+        });
+    }
+
+    /** A DFU device is open: the supporter may be flashing firmware. */
+    get usbInUse() {
+        return this.usb !== null;
+    }
+
+    /** What the supporter may see: nothing while the pilot has control. */
+    deviceList() {
+        return this.paused ? Promise.resolve(EMPTY_DEVICE_LIST) : this.listDevices();
     }
 
     /** A request from the supporter. */
@@ -190,6 +237,9 @@ export class RemoteDeviceHost {
     }
 
     async poll() {
+        if (this.paused) {
+            return;
+        }
         const list = await this.listDevices();
         if (list !== this.lastList) {
             this.lastList = list;
@@ -216,10 +266,11 @@ export class RemoteDeviceHost {
         try {
             switch (request.type) {
                 case MSG.LIST_DEVICES:
-                    this.lastList = await this.listDevices();
+                    this.lastList = await this.deviceList();
                     this.send(withReq(MSG.DEVICE_LIST, req, textEncoder.encode(this.lastList)));
                     return;
                 case MSG.SERIAL_OPEN:
+                    this.refuseWhilePaused();
                     await this.closeAll();
                     await this.openSerial(request);
                     break;
@@ -227,6 +278,7 @@ export class RemoteDeviceHost {
                     await this.closeSerial();
                     break;
                 case MSG.USB_OPEN:
+                    this.refuseWhilePaused();
                     await this.closeAll();
                     await this.openUsb(request.id);
                     break;
@@ -268,6 +320,12 @@ export class RemoteDeviceHost {
             this.send(result(req, RESULT_OK));
         } catch (err) {
             this.send(error(req, err));
+        }
+    }
+
+    refuseWhilePaused() {
+        if (this.paused) {
+            throw new Error(PILOT_HAS_CONTROL);
         }
     }
 

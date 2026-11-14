@@ -2,7 +2,9 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { WebRemoteDeviceHost } from '../src/js/protocols/WebRemoteDeviceHost.js';
 import {
+    EMPTY_DEVICE_LIST,
     MSG,
+    PILOT_HAS_CONTROL,
     RESULT_ERROR,
     RESULT_OK,
     RESULT_STALL,
@@ -192,6 +194,8 @@ test('lists the granted ports and DFU devices', async () => {
     assert.deepEqual(list.dfu, [
         { id: 'webusb_1155_57105_0', vid: 1155, pid: 57105, product: 'STM32 BOOTLOADER', serial: 'ABC123' },
     ]);
+    // The browser shares only what the pilot allowed: the supporter may ask for more.
+    assert.deepEqual(list.allow, { serial: true, dfu: true });
 });
 
 test('opens a port, forwards both ways and makes the board safe on close', async () => {
@@ -343,4 +347,57 @@ test('answers a request it cannot carry out with an error', async () => {
     assert.equal(textDecoder.decode(resultFor(sent, 21).payload), 'Port webserial_0_0_0 not found');
     assert.equal(resultFor(sent, 22).status, RESULT_ERROR);
     assert.equal(textDecoder.decode(resultFor(sent, 22).payload), 'No USB device is open');
+});
+
+test('lets go of the board while the pilot has control, and lists it again after', async () => {
+    const port = new FakePort({ usbVendorId: 1155, usbProductId: 22336 });
+    const { host, sent, devices } = makeHost({ port, device: new FakeUsbDevice() });
+    host.peerJoined();
+    await host.queue;
+    host.handle(serialOpen(20, PORT_PATH));
+    await host.queue;
+    assert.equal(resultFor(sent, 20).status, RESULT_OK);
+
+    // The pilot takes control: the board is made safe and closed, and the
+    // supporter is told the port is gone and sees no devices.
+    await host.pause();
+    assert.deepEqual(port.written.map(hex), safeStopGroups({ disarm: true }).map(hex));
+    assert.equal(port.closed, 1);
+    assert.equal(devices.at(-1), null);
+    const closed = sent.find((m) => m[0] === MSG.SERIAL_CLOSED);
+    assert.equal(textDecoder.decode(closed.subarray(1)), PILOT_HAS_CONTROL);
+    assert.equal(textDecoder.decode(sent.at(-1).subarray(5)), EMPTY_DEVICE_LIST);
+
+    // Nothing can be opened or listed meanwhile.
+    host.handle(serialOpen(21, PORT_PATH));
+    host.handle(withReq(MSG.USB_OPEN, 22, textEncoder.encode('webusb_1155_57105_0')));
+    host.handle(withReq(MSG.LIST_DEVICES, 23));
+    await host.queue;
+    assert.equal(resultFor(sent, 21).status, RESULT_ERROR);
+    assert.equal(textDecoder.decode(resultFor(sent, 21).payload), PILOT_HAS_CONTROL);
+    assert.equal(resultFor(sent, 22).status, RESULT_ERROR);
+    const list = sent.find((m) => m[0] === MSG.DEVICE_LIST && reply(m).req === 23);
+    assert.equal(textDecoder.decode(list.subarray(5)), EMPTY_DEVICE_LIST);
+    assert.equal(port.opened, false);
+
+    // Control goes back: the supporter sees the devices again and can open them.
+    await host.resume();
+    const again = JSON.parse(textDecoder.decode(sent.at(-1).subarray(5)));
+    assert.equal(sent.at(-1)[0], MSG.DEVICE_LIST);
+    assert.equal(again.serial.length, 1);
+    assert.equal(again.dfu.length, 1);
+    host.handle(serialOpen(24, PORT_PATH));
+    await host.queue;
+    assert.equal(resultFor(sent, 24).status, RESULT_OK);
+    await host.shutdown();
+});
+
+test('does not tell the supporter about a port they had not open', async () => {
+    const port = new FakePort({ usbVendorId: 1155, usbProductId: 22336 });
+    const { host, sent } = makeHost({ port });
+    host.peerJoined();
+    await host.queue;
+    await host.pause();
+    assert.equal(sent.find((m) => m[0] === MSG.SERIAL_CLOSED), undefined);
+    assert.deepEqual(port.written, []);
 });
