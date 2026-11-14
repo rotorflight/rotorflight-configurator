@@ -52,7 +52,12 @@
 
     {#if isEnabled && motorState.hasSyncedPwmToggle}
       <div transition:slide>
-        <Field id="throttle-unsynced-pwm" label="motorsUnsyncedPwm">
+        <Field
+          expert
+          changed={FC.MOTOR_CONFIG.use_unsynced_pwm}
+          id="throttle-unsynced-pwm"
+          label="motorsUnsyncedPwm"
+        >
           {#snippet tooltip()}
             <Tooltip help="motorsUnsyncedPwmHelp" />
           {/snippet}
@@ -66,7 +71,13 @@
 
     {#if isEnabled && !motorState.isDshot && !(motorState.hasSyncedPwmToggle && !FC.MOTOR_CONFIG.use_unsynced_pwm)}
       <div transition:slide>
-        <Field id="pwm-freq" label="motorsUnsyncedPWMFreq" unit="Hz">
+        <Field
+          expert
+          changed={FC.MOTOR_CONFIG.motor_pwm_rate !== 250}
+          id="pwm-freq"
+          label="motorsUnsyncedPWMFreq"
+          unit="Hz"
+        >
           {#snippet tooltip()}
             <Tooltip
               help="motorsUnsyncedPWMFreqHelp"
@@ -106,6 +117,8 @@
           />
         </Field>
         <Field
+          expert
+          changed={FC.MOTOR_CONFIG.mincommand !== 1000}
           id="throttle-off-pwm"
           label="motorsThrottleMinimumCommand"
           unit="μs"

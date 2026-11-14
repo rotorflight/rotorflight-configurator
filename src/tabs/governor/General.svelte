@@ -69,7 +69,13 @@
 
     {#if !is_12_9 && govState.enabled}
       <div transition:slide>
-        <Field id="gov-handover-throttle" label="govHandoverThrottle" unit="%">
+        <Field
+          expert
+          changed={FC.GOVERNOR.gov_handover_throttle !== 20}
+          id="gov-handover-throttle"
+          label="govHandoverThrottle"
+          unit="%"
+        >
           {#snippet tooltip()}
             <Tooltip
               help="govHandoverThrottleHelp"
@@ -92,6 +98,8 @@
     {#if semver.eq(FC.CONFIG.apiVersion, API_VERSION_12_8) && govState.enabled}
       <div transition:slide>
         <Field
+          expert
+          changed={FC.GOVERNOR.gov_spoolup_min_throttle !== 5}
           id="gov-spoolup-min-throttle"
           label="govSpoolupMinThrottle"
           unit="%"
@@ -117,6 +125,8 @@
 
     {#if !is_12_9}
       <Field
+        expert
+        changed={FC.GOVERNOR.gov_zero_throttle_timeout !== 30}
         id="gov-zero-throttle-timeout"
         label="govZeroThrottleTimeout"
         unit="s"
@@ -139,6 +149,8 @@
         />
       </Field>
       <Field
+        expert
+        changed={FC.GOVERNOR.gov_lost_headspeed_timeout !== 10}
         id="gov-lost-headspeed-timeout"
         label="govLostHeadspeedTimeout"
         unit="s"
@@ -164,7 +176,13 @@
 
     {#if is_12_9 && govState.govRamps}
       <div transition:slide>
-        <Field id="gov-autorotation-timeout" label="govAutoTimeout" unit="s">
+        <Field
+          expert
+          changed={FC.GOVERNOR.gov_autorotation_timeout !== 15}
+          id="gov-autorotation-timeout"
+          label="govAutoTimeout"
+          unit="s"
+        >
           {#snippet tooltip()}
             <Tooltip
               help="govAutoTimeoutHelp"
@@ -184,6 +202,8 @@
       </div>
       <div transition:slide>
         <Field
+          expert
+          changed={FC.GOVERNOR.gov_throttle_hold_timeout !== 50}
           id="gov-throttle-hold-timeout"
           label="govThrottleHoldTimeout"
           unit="s"
@@ -210,7 +230,13 @@
 
     {#if govState.enabled && !is_12_9}
       <div transition:slide>
-        <Field id="gov-autorotation-timeout" label="govAutoTimeout" unit="s">
+        <Field
+          expert
+          changed={FC.GOVERNOR.gov_autorotation_timeout !== 0}
+          id="gov-autorotation-timeout"
+          label="govAutoTimeout"
+          unit="s"
+        >
           {#snippet tooltip()}
             <Tooltip
               help="govAutoTimeoutHelp"
@@ -231,6 +257,8 @@
       </div>
       <div transition:slide>
         <Field
+          expert
+          changed={FC.GOVERNOR.gov_autorotation_min_entry_time !== 50}
           id="gov-auto-min-entry-time"
           label="govAutoMinEntryTime"
           unit="s"
@@ -321,6 +349,8 @@
           {#if FC.GOVERNOR.gov_mode > 1}
             <div transition:slide>
               <Field
+                expert
+                changed={FC.GOVERNOR.gov_handover_throttle !== 25}
                 id="gov-handover-throttle"
                 label="govHandoverThrottle"
                 unit="%"

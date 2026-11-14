@@ -1,30 +1,22 @@
-LICENSE text eol=lf
-*.md text eol=lf
-*.c text eol=lf
-*.cc text eol=lf
-*.h text eol=lf
-*.cc text eol=lf
-*.S text eol=lf
-*.s text eol=lf
-*.hex -crlf -diff
-*.elf -crlf -diff
-*.ld text eol=lf
-Makefile text eol=lf
-*.mk text eol=lf
-*.nomk text eol=lf
-*.pl text eol=lf
-*.js text eol=lf
-*.json text eol=lf
-*.html text eol=lf
-*.css text eol=lf
-*.svg text eol=lf
-*.png -crlf -diff
-*.yml text eol=lf
-*.xml text eol=lf
-*.mcm text eol=lf
-*.nsi text eol=lf
-*.nsh text eol=lf
-*.lua text eol=lf
-*.txt text eol=lf
-*.sh text eol=lf
-*.config text eol=lf
+# Check out every text file with LF line endings, on Windows and in WSL,
+# whatever core.autocrlf is set to. Git detects binary files itself.
+* text=auto eol=lf
+
+# Inno Setup installer script is kept with CRLF line endings.
+assets/windows/installer.iss -text
+
+# Binary files
+*.hex binary
+*.elf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.icns binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.glb binary
+*.zip binary

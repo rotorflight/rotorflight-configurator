@@ -62,7 +62,8 @@
 
 {#snippet toolbar()}
   <button class="btn" onclick={onRevert}>{$i18n.t("buttonRevert")}</button>
-  <button class="btn" onclick={onSave}>{$i18n.t("buttonSave")}</button>
+  <button class="btn" onclick={onSave} data-save>{$i18n.t("buttonSave")}</button
+  >
 {/snippet}
 
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
@@ -80,11 +81,30 @@
   {:else if escState.view === View.DETECTING}
     <DetectionStatus />
   {:else if escState.view === View.FORM}
+    {#if escState.saveMessage}
+      <p
+        class={[
+          "save-message",
+          escState.saveMessage.kind === "error" && "error",
+        ]}
+      >
+        {$i18n.t(
+          escState.saveMessage.key,
+          escState.saveMessage.params ?? {
+            1: escState.saveMessage.keys.join(", "),
+          },
+        )}
+      </p>
+    {/if}
     <ParameterForm />
   {/if}
 </Page>
 
 <style lang="scss">
+  .save-message.error {
+    color: var(--color-status-bad);
+  }
+
   .title {
     display: flex;
     flex-direction: column;

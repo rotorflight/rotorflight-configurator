@@ -49,3 +49,17 @@ When you:
 - **Add a flight mode, feature-gated box, or MSP constant** (profile counts,
   arming flags, debug modes), update the matching table or constant at the
   top of `virtual_fc.js`.
+
+## Agent skills
+
+Step-by-step skills for tasks that need local tools are in
+[rotorflight-agent-skills](https://github.com/rotorflight/rotorflight-agent-skills).
+In Claude Code, install them with `/plugin marketplace add rotorflight/rotorflight-agent-skills`
+and `/plugin install rotorflight-dev@rotorflight`. Other agents: clone that repository and read
+the skill's `SKILL.md` before starting the task.
+
+| Skill | Use it to |
+| --- | --- |
+| [firmware-sitl](https://github.com/rotorflight/rotorflight-agent-skills/blob/master/skills/firmware-sitl/SKILL.md) | build and run the firmware on a PC, drive it over MSP/CRSF/UDP |
+| [blackbox-decode](https://github.com/rotorflight/rotorflight-agent-skills/blob/master/skills/blackbox-decode/SKILL.md) | decode and analyse blackbox logs in Python |
+| [firmware-toolchain](https://github.com/rotorflight/rotorflight-agent-skills/blob/master/skills/firmware-toolchain/SKILL.md) | install the Arm toolchain, build and flash, platform pitfalls |

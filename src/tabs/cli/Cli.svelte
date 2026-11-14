@@ -6,6 +6,7 @@
 
   import { CliAutoComplete } from "@/js/CliAutoComplete.js";
   import {
+    BACKUP_STOPPED,
     BACKUP_TYPES,
     replayBackup,
     runBackupCommand,
@@ -139,7 +140,25 @@
     // whatever was already in the terminal.
     engine.clearOutputHistory();
 
-    const text = await runBackupCommand(engine, backupType);
+    let text;
+    try {
+      text = await runBackupCommand(engine, backupType);
+    } catch (err) {
+      // No file for a backup that was not read: an empty file looks like a backup (#331).
+      GUI.log(
+        $i18n.t(
+          err?.code === BACKUP_STOPPED
+            ? "cliBackupStopped"
+            : "cliBackupNoAnswer",
+        ),
+      );
+      console.log("Backup not read", err);
+      return;
+    }
+    if (!text.trim()) {
+      GUI.log($i18n.t("cliBackupEmpty"));
+      return;
+    }
 
     try {
       await saveBackupToFile(text, `cli_backup_${backupType}`);
@@ -165,6 +184,11 @@
 
 {#snippet toolbar()}
   <button class="btn" onclick={onSave}>{$i18n.t("cliSaveToFileBtn")}</button>
+  <!-- The configuration as `diff all` gives it, clearing the CLI first; the file is named
+       after the craft and the date (#358). -->
+  <button class="btn" onclick={() => runBackupAndSave(BACKUP_TYPES.DIFF)}>
+    {$i18n.t("cliSaveConfigurationBtn")}
+  </button>
   <button class="btn" onclick={onLoad}>{$i18n.t("cliLoadFromFileBtn")}</button>
   <button class="btn" onclick={() => backupDialogEl.showModal()}>
     {$i18n.t("cliBackupToFileBtn")}

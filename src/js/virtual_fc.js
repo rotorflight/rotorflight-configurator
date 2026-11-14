@@ -8,6 +8,7 @@ import {
 } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { mspHelper } from "@/js/msp/MSPHelper.js";
 import {
   BUS_SERVO_OFFSET,
   clampServoConfig,
@@ -26,6 +27,7 @@ const MAX_SUPPORTED_MOTORS = 4;
 const MAX_SUPPORTED_PWM_SERVOS = 8;
 const BUS_SERVO_CHANNELS = 18;
 const MAX_SUPPORTED_SERVOS = MAX_SUPPORTED_PWM_SERVOS + BUS_SERVO_CHANNELS;
+const VIRTUAL_PWM_SERVO_COUNT = 4;
 const MIXER_INPUT_COUNT = 29;
 const MIXER_RULE_COUNT = 32;
 const MAX_MODE_ACTIVATION_CONDITION_COUNT = 20;
@@ -43,6 +45,8 @@ const RC_CHANNEL_COUNT = 16; // CRSF
 const TELEM_SENSOR_SLOT_COUNT = 40;
 const ARMING_DISABLE_FLAGS_COUNT = 27;
 const ARMING_DISABLED_MSP = 1 << 16;
+const ARMING_DISABLED_OVERRIDE = 1 << 25; // API 12.9+
+const ARMING_DISABLED_MOTOR_PROTOCOL = 1 << 24;
 const DEBUG_COUNT = 82;
 const DEBUG_VALUE_COUNT = 8;
 const RATE_PROFILE_MASK = 1 << 7;
@@ -50,6 +54,15 @@ const FREQ_SENSOR_PORT_COUNT = 4;
 
 const MIXER_OVERRIDE_OFF = 2501;
 const SERVO_OVERRIDE_OFF = 2001;
+
+// flight/servos.h tailOutput_e, tailOutputResult_e
+const TAIL_OUTPUT_SERVO = 0;
+const TAIL_OUTPUT_MOTOR = 1;
+const TAIL_RESULT_OK = 0;
+const TAIL_RESULT_INVALID = 5;
+
+// Where the tail pin is: the board default is SERVO 4.
+let tailOutput = TAIL_OUTPUT_SERVO;
 
 // src/main/msp/msp_box.c: name, permanent id, active when
 const BOXES = [
@@ -384,6 +397,112 @@ function dataflashReadReply(address, blockSize) {
   return buffer;
 }
 
+// flight/servos.c servoUpdate(), disarmed: an override puts the servo at
+// mid + scale * override, a servo without one stays at mid (there is no
+// mixer here to move it).
+function updateServoOutput(index) {
+  const config = FC.SERVO_CONFIG[index];
+  if (!config) return;
+  const raw = FC.SERVO_OVERRIDE[index];
+  let pos = raw >= -2000 && raw <= 2000 ? raw / 1000 : 0;
+  if (config.flags & 1) pos = -pos;
+  const travel = (pos > 0 ? config.rpos : config.rneg) * pos;
+  FC.SERVO_DATA[index] = Math.round(
+    config.mid + Math.max(config.min, Math.min(config.max, travel)),
+  );
+}
+
+// flight/servos.c, flight/mixer.c (API 12.10+): an override sent with a
+// trailing U16 timeout lapses unless it is re-sent in time; one without
+// stays. Keyed "servo:N" / "mixer:N".
+const overrideLapse = new Map();
+
+function lapseOverride(key, bytes, clear) {
+  clearTimeout(overrideLapse.get(key));
+  overrideLapse.delete(key);
+  if (
+    bytes.length < 5 ||
+    !semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
+  ) {
+    return;
+  }
+  const timeoutMs = Math.min(30000, Math.max(500, bytes[3] | (bytes[4] << 8)));
+  overrideLapse.set(
+    key,
+    setTimeout(() => {
+      overrideLapse.delete(key);
+      clear();
+      updateOverrideFlag();
+    }, timeoutMs),
+  );
+}
+
+// flight/motors.c motorUpdate(), disarmed: the output follows the override,
+// rising at most MOTOR_OVERRIDE_RATE per second and dropping at once. From
+// API 12.9 an override that isn't re-sent within MOTOR_OVERRIDE_TIMEOUT
+// lapses. Motor overrides don't block arming.
+const MOTOR_OVERRIDE_RATE = 0.25;
+const MOTOR_OVERRIDE_TIMEOUT_MS = 1000;
+const motorOverride = new Array(MAX_SUPPORTED_MOTORS).fill(0);
+const motorOutput = new Array(MAX_SUPPORTED_MOTORS).fill(0);
+let motorOverrideTime = 0;
+let motorUpdateTime = 0;
+
+function resetMotors() {
+  motorOverride.fill(0);
+  motorOutput.fill(0);
+}
+
+function updateMotorOutputs() {
+  const now = performance.now();
+  const dt = (now - motorUpdateTime) / 1000;
+  motorUpdateTime = now;
+  if (
+    semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) &&
+    now - motorOverrideTime > MOTOR_OVERRIDE_TIMEOUT_MS
+  ) {
+    motorOverride.fill(0);
+  }
+  for (let i = 0; i < MAX_SUPPORTED_MOTORS; i++) {
+    const target = Math.max(-1000, Math.min(1000, motorOverride[i])) / 1000;
+    const rise = MOTOR_OVERRIDE_RATE * dt;
+    motorOutput[i] =
+      target > motorOutput[i] + rise ? motorOutput[i] + rise : target;
+    // msp.c MSP_MOTOR: zero means disabled, otherwise output ± 1000.
+    if (i < FC.CONFIG.motorCount) {
+      const throttle = Math.round(motorOutput[i] * 1000);
+      FC.MOTOR_DATA[i] = throttle < 0 ? throttle - 1000 : throttle + 1000;
+    }
+  }
+}
+
+// fc/core.c updateArmingStatus() (API 12.10): a motorised tail needs a
+// MOTOR 2, reported as MOTOR_PROTO. The FC only clears it on a reboot,
+// which the virtual FC doesn't have, so it follows the tail at once.
+function updateTailMotorFlag() {
+  if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) return;
+  const motorised = (FC.MIXER_CONFIG.tail_rotor_mode ?? 0) !== 0;
+  if (motorised && FC.CONFIG.motorCount < 2) {
+    FC.CONFIG.armingDisableFlags |= ARMING_DISABLED_MOTOR_PROTOCOL;
+  } else {
+    FC.CONFIG.armingDisableFlags &= ~ARMING_DISABLED_MOTOR_PROTOCOL;
+  }
+}
+
+// fc/core.c updateArmingStatus(): any servo or mixer override blocks arming.
+function updateOverrideFlag() {
+  if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) return;
+  const servo = FC.SERVO_OVERRIDE.some((v) => v >= -2000 && v <= 2000);
+  const mixer = FC.MIXER_OVERRIDE.some(
+    (v, i) => i > 0 && v !== MIXER_OVERRIDE_OFF,
+  );
+  if (servo || mixer) {
+    FC.CONFIG.armingDisableFlags |= ARMING_DISABLED_OVERRIDE;
+  } else {
+    FC.CONFIG.armingDisableFlags &= ~ARMING_DISABLED_OVERRIDE;
+  }
+}
+
 function reply(code, buffer = new ArrayBuffer(0)) {
   const data = new DataView(buffer);
   return {
@@ -392,6 +511,117 @@ function reply(code, buffer = new ArrayBuffer(0)) {
     length: data.byteLength,
     crcError: false,
   };
+}
+
+// Sensors on the virtual FBUS bus, as fbusSensorGetName() names them. A
+// real sensor answers its poll a few times a second; packet counts grow with
+// time from connect (or the last clear) so the page looks live.
+const VIRTUAL_FBUS_SENSORS = [
+  { physicalId: 0x01, name: "FLVSS", appIds: [0x0300], rate: 4 },
+  {
+    physicalId: 0x03,
+    name: "GPS",
+    appIds: [0x0800, 0x0820, 0x0830, 0x0840, 0x0850, 0x0860],
+    rate: 6,
+  },
+  {
+    physicalId: 0x07,
+    name: "FAS_150S",
+    appIds: [0x0200, 0x0210, 0x0220],
+    rate: 5,
+  },
+  { physicalId: 0x0a, name: "ESC", appIds: [0x0b50, 0x0b60, 0x0b70], rate: 5 },
+];
+
+let virtualFbusClearedAt = Date.now();
+
+// MSP2_GET_FBUS_SENSORS: count, then per sensor physical ID, source,
+// forwarded, packet count, name and app IDs.
+function encodeFbusSensors() {
+  const seconds = (Date.now() - virtualFbusClearedAt) / 1000;
+  const forwarded = FC.FBUS_MASTER_CONFIG?.forwardedSensors ?? [];
+  const buffer = [];
+  buffer.push8(VIRTUAL_FBUS_SENSORS.length);
+  for (const sensor of VIRTUAL_FBUS_SENSORS) {
+    buffer.push8(sensor.physicalId);
+    buffer.push8(0); // source: FBUS
+    buffer.push8(forwarded.includes(sensor.physicalId) ? 1 : 0);
+    buffer.push32(Math.floor(seconds * sensor.rate * sensor.appIds.length));
+    buffer.push8(sensor.name.length);
+    for (const char of sensor.name) buffer.push8(char.charCodeAt(0));
+    buffer.push8(sensor.appIds.length);
+    for (const appId of sensor.appIds) buffer.push16(appId);
+  }
+  return Uint8Array.from(buffer);
+}
+
+// MSP2_GET_FBUS_SENSORS_STATUS, for the sensors above: a 6S pack on a
+// FAS-150S and FLVSS, a GPS with a fix and an idling ESC. Values drift a
+// little so the page shows them updating. The XACT servo block reports no data.
+function encodeFbusSensorsStatus() {
+  const now = new Date();
+  const t = now.getTime() / 1000;
+  const wobble = (amplitude, period) =>
+    Math.round(amplitude * Math.sin((2 * Math.PI * t) / period));
+  const cells = [415, 414, 416, 415, 413, 415].map(
+    (cell, i) => cell + wobble(1, 7 + i),
+  );
+  const pack = cells.reduce((sum, cell) => sum + cell, 0);
+
+  const buffer = [];
+  buffer.push8(1); // payload version
+
+  buffer.push8(0x6f); // GPS: position, altitude, speed, course, time, date
+  buffer.push32(-337_867_000 + wobble(20, 11)); // latitude, deg * 1e7
+  buffer.push32(1_511_234_000 + wobble(20, 13)); // longitude, deg * 1e7
+  buffer.push32(4_520 + wobble(30, 9)); // altitude, cm
+  buffer.push32(1_200 + wobble(300, 5)); // speed, knots * 1000
+  buffer.push16(1_850 + wobble(20, 8)); // course, deg * 10
+  buffer.push8(0); // satellites, not decoded by the RF firmware
+  buffer.push8(now.getUTCHours());
+  buffer.push8(now.getUTCMinutes());
+  buffer.push8(now.getUTCSeconds());
+  buffer.push8(now.getUTCDate());
+  buffer.push8(now.getUTCMonth() + 1);
+  buffer.push16(now.getUTCFullYear());
+
+  buffer.push8(0x07); // current: current, voltage, high-precision current
+  buffer.push32(35 + wobble(3, 4)); // 0.1 A
+  buffer.push32(pack - 4); // 0.01 V, a little under the cells' sum
+  buffer.push16(3_480 + wobble(250, 4)); // 0.001 A
+
+  buffer.push8(0x01); // FLVSS
+  buffer.push8(cells.length);
+  for (const cell of cells) buffer.push16(cell);
+  buffer.push32(pack);
+
+  buffer.push8(0x0f); // ESC: power, RPM, consumption, temperature
+  buffer.push16(pack - 10); // 0.01 V
+  buffer.push16(340 + wobble(25, 4)); // 0.01 A
+  buffer.push32(4_200 + wobble(50, 6)); // RPM
+  buffer.push16(127); // mAh
+  buffer.push8(38);
+  buffer.push8(0); // second temperature, not decoded
+
+  buffer.push8(0); // XACT servo: no data
+  buffer.push16(0);
+  buffer.push16(0);
+  buffer.push16(0);
+
+  return Uint8Array.from(buffer);
+}
+
+// Runs a virtual reply through the real decoder, so FC is updated exactly as it
+// would be by hardware (and a payload that drifts from the wire format shows up
+// here), and returns it as the tab's reply.
+function decodedReply(code, payload) {
+  mspHelper.process_data({
+    code,
+    dataView: new DataView(payload.buffer),
+    crcError: false,
+    callbacks: [],
+  });
+  return reply(code, payload.buffer);
 }
 
 /**
@@ -447,8 +677,87 @@ export function handleVirtualMessage(code, data) {
       if (config && firmwareLimitsTravel(FC.CONFIG.apiVersion)) {
         clampServoConfig(config, index >= BUS_SERVO_OFFSET);
       }
+      updateServoOutput(index);
       break;
     }
+
+    case MSPCodes.MSP_SET_SERVO_OVERRIDE: {
+      const index = bytes[0];
+      lapseOverride(`servo:${index}`, bytes, () => {
+        FC.SERVO_OVERRIDE[index] = SERVO_OVERRIDE_OFF;
+        updateServoOutput(index);
+      });
+      updateServoOutput(index);
+      updateOverrideFlag();
+      break;
+    }
+
+    case MSPCodes.MSP_SET_MIXER_OVERRIDE: {
+      const index = bytes[0];
+      lapseOverride(`mixer:${index}`, bytes, () => {
+        FC.MIXER_OVERRIDE[index] = MIXER_OVERRIDE_OFF;
+      });
+      updateOverrideFlag();
+      break;
+    }
+
+    case MSPCodes.MSP_SET_MOTOR_OVERRIDE: {
+      const index = bytes[0];
+      if (index < MAX_SUPPORTED_MOTORS) {
+        updateMotorOutputs();
+        motorOverride[index] = ((bytes[1] | (bytes[2] << 8)) << 16) >> 16;
+        motorOverrideTime = performance.now();
+      }
+      break;
+    }
+
+    case MSPCodes.MSP_MOTOR:
+      updateMotorOutputs();
+      break;
+
+    case MSPCodes.MSP_STATUS:
+      updateTailMotorFlag();
+      break;
+
+    // flight/servos.c setTailOutput() (API 12.10): moves the tail pin
+    // between SERVO 4 and MOTOR 2. The FC uses it after a reboot, which
+    // the virtual FC doesn't have, so the motor count follows at once.
+    case MSPCodes.MSP2_TAIL_MOTOR_OUTPUT: {
+      if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) break;
+      const action = bytes[0] ?? 0;
+      let result = TAIL_RESULT_OK;
+      if (action === 1) {
+        tailOutput = TAIL_OUTPUT_SERVO;
+      } else if (action === 2) {
+        tailOutput = TAIL_OUTPUT_MOTOR;
+      } else if (action !== 0) {
+        result = TAIL_RESULT_INVALID;
+      }
+      FC.CONFIG.motorCount = tailOutput === TAIL_OUTPUT_MOTOR ? 2 : 1;
+      return reply(code, Uint8Array.from([tailOutput, result]).buffer);
+    }
+    // An SBUS/FBUS output port turns on bus servos: from then on the FC
+    // reports its PWM servos plus all 18 bus channels (msp.c, MSP_STATUS
+    // and hasBusServosConfigured()).
+    case MSPCodes.MSP_SET_SERIAL_CONFIG: {
+      const hasBusPort =
+        semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) &&
+        FC.SERIAL_CONFIG.ports.some(
+          (port) =>
+            port.functions.includes("SBUS_OUT") ||
+            port.functions.includes("FBUS_OUT"),
+        );
+      FC.CONFIG.servoCount =
+        VIRTUAL_PWM_SERVO_COUNT + (hasBusPort ? BUS_SERVO_CHANNELS : 0);
+      break;
+    }
+
+    // [index, sourceType], as msp.c reads it.
+    case MSPCodes.MSP_SET_BUS_SERVO_CONFIG:
+      if (bytes[0] < BUS_SERVO_CHANNELS) {
+        FC.BUS_SERVO_CONFIG[bytes[0]] = bytes[1];
+      }
+      break;
 
     case MSPCodes.MSP_SET_RESET_CURR_PID:
       pidProfiles[currentPidProfile] = defaultPidProfileBank();
@@ -517,6 +826,17 @@ export function handleVirtualMessage(code, data) {
       break;
     }
 
+    case MSPCodes.MSP2_GET_FBUS_SENSORS:
+      return decodedReply(code, encodeFbusSensors());
+
+    case MSPCodes.MSP2_GET_FBUS_SENSORS_STATUS:
+      return decodedReply(code, encodeFbusSensorsStatus());
+
+    // The sensors keep answering, so they show again at once with fresh counts
+    case MSPCodes.MSP2_CLEAR_FBUS_SENSORS:
+      virtualFbusClearedAt = Date.now();
+      break;
+
     case MSPCodes.MSP_SET_ESC_PARAMETERS:
       if (virtualEscManufacturerId && data) {
         virtualEscBuffers.set(virtualEscManufacturerId, Uint8Array.from(bytes));
@@ -538,7 +858,7 @@ export function applyVirtualConfig() {
     flightControllerIdentifier: "RTFL",
     apiVersion: CONFIGURATOR.virtualApiVersion,
     motorCount: 1,
-    servoCount: 4,
+    servoCount: VIRTUAL_PWM_SERVO_COUNT,
     sampleRateHz: 4000,
     activeSensors: 63, // activate all sensors
     profile: 0,
@@ -791,6 +1111,8 @@ export function applyVirtualConfig() {
   // Motors
   FC.MOTOR_DATA = [1000, 0, 0, 0, 0, 0, 0, 0];
   FC.MOTOR_OVERRIDE = new Array(MAX_SUPPORTED_MOTORS).fill(0);
+  resetMotors();
+  tailOutput = TAIL_OUTPUT_SERVO;
   Object.assign(FC.MOTOR_CONFIG, {
     mincommand: 1000,
     minthrottle: 1070,
@@ -962,7 +1284,10 @@ export function applyVirtualConfig() {
   FC.SERVO_DATA = new Array(MAX_SUPPORTED_SERVOS).fill(1500);
   FC.SERVO_OVERRIDE = new Array(MAX_SUPPORTED_SERVOS).fill(SERVO_OVERRIDE_OFF);
 
-  FC.BUS_SERVO_CONFIG = new Array(BUS_SERVO_CHANNELS).fill(0); // BUS_SERVO_SOURCE_MIXER
+  // pg/bus_servo.c: channels 1-8 follow the mixer, 9-18 pass the RX through
+  FC.BUS_SERVO_CONFIG = Array.from({ length: BUS_SERVO_CHANNELS }, (_, i) =>
+    i < 8 ? 0 : 1,
+  ); // BUS_SERVO_SOURCE_MIXER : BUS_SERVO_SOURCE_RX
 
   // Modes, src/main/msp/msp.c: unused slots report ARM on channel 0
   FC.MODE_RANGES = Array.from(

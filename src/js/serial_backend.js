@@ -6,9 +6,10 @@ import { API_VERSION_12_10, CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
-import { updateTabList } from "@/js/main.js";
+import { filterTabsByUserLevel, updateTabList } from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { releaseOverrides } from "@/js/msp/release_overrides.js";
 import { mspHelper, resetMspHelper } from "@/js/msp/MSPHelper.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
 import { PortHandler, usbDevices } from "@/js/port_handler.js";
@@ -264,6 +265,9 @@ export async function handleConnectClick({ openLanding = true } = {}) {
                     await callbackOrTimeout((done) => GUI.tab_switch_cleanup(done), 2000);
                     GUI.tab_switch_in_progress = false;
 
+                    // Whatever the tab left behind: stop the motors and
+                    // release every override before letting go of the FC.
+                    await releaseOverrides();
                     await callbackOrTimeout((done) => mspHelper.setArmingEnabled(true, done), 1000);
 
                     // Wait for the port to actually finish closing before letting the
@@ -627,7 +631,7 @@ function onOpenVirtual() {
 
     update_dataflash_global();
     sensor_status(FC.CONFIG.activeSensors);
-    updateTabList(FC.FEATURE_CONFIG.features);
+    updateTabList();
 }
 
 function abortConnect() {
@@ -799,6 +803,7 @@ async function onConnect() {
 
         return found;
     }).show();
+    filterTabsByUserLevel();
 
     if (FC.CONFIG.flightControllerVersion !== '') {
         FC.BEEPER_CONFIG.beepers = new Beepers(FC.CONFIG);
@@ -813,8 +818,8 @@ async function onConnect() {
         await MSP.promise(MSPCodes.MSP_STATUS, false);
         await MSP.promise(MSPCodes.MSP_DATAFLASH_SUMMARY, false);
         // Needed here (rather than left to each tab's own fetch) so updateTabList can
-        // decide whether to show the XACT servo tab, which is gated on FBUS receiver
-        // mode or the FBUS_OUT serial port function.
+        // decide whether to show the XACT servo and FBUS Sensors tabs, which are gated on
+        // FBUS receiver mode or the FBUS_OUT/SPORT_MASTER serial port functions.
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
             await MSP.promise(MSPCodes.MSP_SERIAL_CONFIG, false);
             await MSP.promise(MSPCodes.MSP_RX_CONFIG, false);

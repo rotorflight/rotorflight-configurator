@@ -170,9 +170,12 @@ export function resolveEnumLabel(field, raw) {
     return field.enum[raw];
 }
 
+// The raw word for a label, or undefined when the label is not in the table (indexOf's -1
+// would otherwise be written as all ones).
 function resolveEnumRaw(field, label) {
     if (field.enumMap) return field.enumMap.find(([, text]) => text === label)?.[0];
-    return field.enum.indexOf(label);
+    const raw = field.enum.indexOf(label);
+    return raw < 0 ? undefined : raw;
 }
 
 // Normalizes either enum shape into {value, label} pairs for a Select component.
@@ -248,9 +251,12 @@ export function buildPayload(fields, displayValues, previousRawBytes) {
         }
 
         if (!(field.key in displayValues)) continue;
-        const raw = hasEnum(field)
-            ? resolveEnumRaw(field, displayValues[field.key])
-            : toRaw(field, displayValues[field.key]);
+        const value = displayValues[field.key];
+        // A word the module does not name (undefined, or a label not in its table) keeps the
+        // ESC's own word, rather than being written as zero.
+        if (value === undefined) continue;
+        const raw = hasEnum(field) ? resolveEnumRaw(field, value) : toRaw(field, value);
+        if (raw === undefined) continue;
         writeRawField(bytes, field.byteOffset, field, raw);
     }
 
@@ -265,6 +271,14 @@ export function matchesManufacturer(bytes, manufacturer) {
     if (bytes[0] !== manufacturer.signature) return false;
     if (manufacturer.disambiguate) return manufacturer.disambiguate(bytes) === true;
     return true;
+}
+
+// A block may be read back and written only when it is long enough for the mandatory
+// fields and carries this manufacturer's signature. An empty or foreign reply must never be
+// written back: every byte the form does not change would go out as zero (#530, #532).
+export function isUsableBuffer(manufacturer, bytes) {
+    if (!bytes || bytes.length < computeLayout(manufacturer.fields).minBytes) return false;
+    return matchesManufacturer(bytes, manufacturer);
 }
 
 // Dispatchers used by the tab instead of calling parseBuffer/buildPayload directly, so that
@@ -304,4 +318,35 @@ export function keepPageField(pageField, layoutRevision) {
     if (pageField.minLayout != null && layoutRevision < pageField.minLayout) return false;
     if (pageField.maxLayout != null && layoutRevision > pageField.maxLayout) return false;
     return true;
+}
+
+// Save helpers. A save writes only the values the pilot changed, on top of the block
+// the ESC holds now, and counts only when the ESC reads back those values (#530).
+export function sameValue(a, b) {
+    if (typeof a === "number" && typeof b === "number") return Math.abs(a - b) < 1e-9;
+    return a === b;
+}
+
+// The keys whose values differ between two display objects.
+export function changedKeys(before, after) {
+    const keys = new Set([...Object.keys(before ?? {}), ...Object.keys(after ?? {})]);
+    return [...keys].filter((k) => !sameValue(before?.[k], after?.[k]));
+}
+
+// `current` with the edited keys taken from `edited`.
+export function mergeEditedValues(current, edited, keys) {
+    const merged = { ...current };
+    for (const k of keys) merged[k] = edited[k];
+    return merged;
+}
+
+// The keys of `keys` whose read-back value is not what was written.
+export function mismatchedKeys(expected, actual, keys) {
+    return keys.filter((k) => !sameValue(expected[k], actual?.[k]));
+}
+
+// A page row a module hides for the connected ESC (a YGE Opto has no BEC row). Modules
+// without the hook show every row.
+export function isPageRowVisible(manufacturer, apikey, values) {
+    return manufacturer.rowVisible ? manufacturer.rowVisible(apikey, values) : true;
 }

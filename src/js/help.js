@@ -6,6 +6,7 @@ const tabHelpURLs = {
 
     tabStatus:          'https://doc.rotorflight.org/2.4/configurator/tabs/status/',
     tabSetup:           'https://doc.rotorflight.org/2.4/configurator/tabs/setup/',
+    tabSetupWizard:     'https://doc.rotorflight.org/2.4/setup/setup-servos/',
     tabConfiguration:   'https://doc.rotorflight.org/2.4/configurator/tabs/configuration/',
     tabPresets:         'https://doc.rotorflight.org/2.4/configurator/tabs/presets/',
     tabReceiver:        'https://doc.rotorflight.org/2.4/configurator/tabs/receiver/',
@@ -26,6 +27,7 @@ const tabHelpURLs = {
     tabGPS:             'https://doc.rotorflight.org/2.4/configurator/tabs/gps/',
     tabSensors:         'https://doc.rotorflight.org/2.4/configurator/tabs/sensors/',
     tabCrsfSensors:     'https://doc.rotorflight.org/2.4/configurator/tabs/crsf-sensors/',
+    tabFbusSensors:     'https://doc.rotorflight.org/2.4/configurator/tabs/fbus-sensors/',
     tabBlackbox:        'https://doc.rotorflight.org/2.4/configurator/tabs/blackbox/',
     tabRemapFC:         'https://doc.rotorflight.org/2.4/configurator/tabs/remap-fc/',
     tabCli:             'https://doc.rotorflight.org/2.4/configurator/tabs/cli/',

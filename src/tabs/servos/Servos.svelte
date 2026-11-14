@@ -2,11 +2,14 @@
   import semver from "semver";
   import { onDestroy, onMount } from "svelte";
 
+  import NumberInput from "@/components/NumberInput.svelte";
   import Page from "@/components/Page.svelte";
   import Section from "@/components/Section.svelte";
+  import Slider from "@/components/Slider.svelte";
   import SwashServoDiagram from "@/components/SwashServoDiagram.svelte";
   import Switch from "@/components/Switch.svelte";
 
+  import { Mixer } from "@/js/Mixer.js";
   import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
@@ -35,6 +38,21 @@
   let dirty = $state(false);
   let needReboot = $state(false);
   let initialConfig;
+
+  // The collective trim (#61) is the mixer's value. Like on the Mixer tab, it is sent to the
+  // FC as it changes, so both tabs share one state and no unsaved value is left behind for
+  // another tab to send. Save writes the EEPROM; Discard sends the loaded value back.
+  let initialCollectiveTrim = 0;
+
+  function setCollectiveTrim(value) {
+    FC.MIXER_CONFIG.swash_trim[2] = Math.round(value * 10);
+    dirty = true;
+    MSP.send_message(
+      MSPCodes.MSP_SET_MIXER_CONFIG,
+      mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG),
+    );
+  }
+
   let poller;
 
   let overrideEnabled = $state(false);
@@ -269,6 +287,7 @@
     await MSP.promise(MSPCodes.MSP_SERVO);
 
     initialConfig = $state.snapshot(FC.SERVO_CONFIG);
+    initialCollectiveTrim = FC.MIXER_CONFIG.swash_trim[2];
     overrideEnabled = allServos.some((servo) => {
       const raw = FC.SERVO_OVERRIDE[servo.mspIndex];
       return raw >= -2000 && raw <= 2000;
@@ -310,6 +329,7 @@
     await new Promise((resolve) => mspHelper.sendServoConfigurations(resolve));
     await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
     GUI.log($i18n.t("eepromSaved"));
+    initialCollectiveTrim = FC.MIXER_CONFIG.swash_trim[2];
 
     if (needReboot) {
       MSP.send_message(MSPCodes.MSP_SET_REBOOT);
@@ -323,6 +343,13 @@
   }
 
   export async function onRevert() {
+    if (FC.MIXER_CONFIG.swash_trim[2] !== initialCollectiveTrim) {
+      FC.MIXER_CONFIG.swash_trim[2] = initialCollectiveTrim;
+      await MSP.promise(
+        MSPCodes.MSP_SET_MIXER_CONFIG,
+        mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG),
+      );
+    }
     FC.SERVO_CONFIG = initialConfig;
     await new Promise((resolve) => mspHelper.sendServoConfigurations(resolve));
     dirty = false;
@@ -344,7 +371,7 @@
 
 {#snippet toolbar()}
   <button class="btn" onclick={onRevert}>{$i18n.t("buttonRevert")}</button>
-  <button class="btn" onclick={onSave}>
+  <button class="btn" onclick={onSave} data-save>
     {needReboot ? $i18n.t("buttonSaveReboot") : $i18n.t("buttonSave")}
   </button>
 {/snippet}
@@ -381,6 +408,34 @@
       <div class="note">
         <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         <p>{@html $i18n.t("servoRateRebootNote")}</p>
+      </div>
+    {/if}
+
+    {#if FC.MIXER_CONFIG.swash_type !== Mixer.SWASH_TYPE_NONE}
+      <!-- The swash moved up or down as a whole, for a centre hover (#61). -->
+      <div class="collective-trim">
+        <Slider
+          value={Math.round(FC.MIXER_CONFIG.swash_trim[2]) / 10}
+          opts={{
+            range: { min: -100, max: 100 },
+            start: 0,
+            step: 0.1,
+            behaviour: "snap-drag",
+          }}
+          changeOnSlide={false}
+          onchange={(v) => setCollectiveTrim(v)}
+        />
+        <NumberInput
+          id="servo-collective-trim"
+          min="-100"
+          max="100"
+          step="0.1"
+          bind:value={
+            () => Math.round(FC.MIXER_CONFIG.swash_trim[2]) / 10,
+            (v) => setCollectiveTrim(v)
+          }
+        />
+        <span class="unit">{$i18n.t("mixerSwashCollectiveTrim")}</span>
       </div>
     {/if}
 
@@ -451,6 +506,19 @@
 </Page>
 
 <style lang="scss">
+  .collective-trim {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content max-content;
+    align-items: center;
+    gap: 8px 12px;
+    max-width: 560px;
+    margin-bottom: 12px;
+  }
+
+  .collective-trim .unit {
+    font-size: 0.85rem;
+    color: var(--color-text-soft);
+  }
   h1 {
     font-weight: 600;
   }
