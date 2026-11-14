@@ -1,1 +1,1 @@
-import{St as e}from"./client.js";e();
+import{Dt as e}from"./client.js";e();
