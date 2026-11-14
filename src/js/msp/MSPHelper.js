@@ -201,6 +201,22 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             }
 
+            case MSPCodes.MSP_FREQ_SENSOR_STATUS: {
+                const portCount = data.readU8();
+                const ports = [];
+                for (let i = 0; i < portCount; i++) {
+                    const flags = data.readU8();
+                    ports.push({
+                        active: (flags & 1) !== 0,
+                        pinHigh: (flags & 2) !== 0,
+                        edges: data.readU16(),                                     // wraps at 65536
+                    });
+                }
+                FC.FREQ_SENSOR_STATUS.ports = ports;
+                FC.FREQ_SENSOR_STATUS.supported = true;
+                break;
+            }
+
             case MSPCodes.MSP_RC: {
                 FC.RC.active_channels = data.byteLength / 2;
                 for (let i = 0; i < FC.RC.active_channels; i++) {
@@ -890,6 +906,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
             }
             case MSPCodes.MSP_SELECT_SETTING: {
                 console.log('Profile selected');
+                break;
+            }
+            case MSPCodes.MSP2_TAIL_MOTOR_OUTPUT: {
+                // The caller reads the reply (tail_motor.js).
                 break;
             }
             case MSPCodes.MSP_SET_SERVO_CONFIGURATION: {
@@ -2856,13 +2876,18 @@ MspHelper.prototype.resetServoOverrides = function(onCompleteCallback)
     this.sendServoOverrides(onCompleteCallback);
 };
 
-MspHelper.prototype.sendServoOverride = function(servoIndex, onCompleteCallback)
+// timeoutMs (API 12.10+): the FC drops the override unless it is re-sent
+// within that time. Without it the override stays until cleared.
+MspHelper.prototype.sendServoOverride = function(servoIndex, onCompleteCallback, timeoutMs)
 {
     const value = FC.SERVO_OVERRIDE[servoIndex];
     const buffer = [];
 
     buffer.push8(servoIndex)
           .push16(value);
+    if (timeoutMs) {
+        buffer.push16(timeoutMs);
+    }
 
     MSP.send_message(MSPCodes.MSP_SET_SERVO_OVERRIDE, buffer, false, onCompleteCallback);
 };
@@ -2981,13 +3006,17 @@ MspHelper.prototype.resetMixerOverrides = function(onCompleteCallback)
     this.sendMixerOverrides(onCompleteCallback);
 };
 
-MspHelper.prototype.sendMixerOverride = function(mixerIndex, onCompleteCallback)
+// timeoutMs (API 12.10+): as for sendServoOverride().
+MspHelper.prototype.sendMixerOverride = function(mixerIndex, onCompleteCallback, timeoutMs)
 {
     const value = FC.MIXER_OVERRIDE[mixerIndex];
     const buffer = [];
 
     buffer.push8(mixerIndex)
           .push16(value);
+    if (timeoutMs) {
+        buffer.push16(timeoutMs);
+    }
 
     MSP.send_message(MSPCodes.MSP_SET_MIXER_OVERRIDE, buffer, false, onCompleteCallback);
 };

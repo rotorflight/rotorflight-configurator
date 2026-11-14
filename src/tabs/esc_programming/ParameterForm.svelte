@@ -13,6 +13,7 @@
     fieldOptions,
     hasEnum,
     isFieldVisible,
+    isPageRowVisible,
     keepPageField,
     resolveManufacturerField,
   } from "./engine.js";
@@ -45,7 +46,7 @@
             escState.values,
           )}
         {@const fieldId = pageField.apikey + "-" + i}
-        {#if field && pageField.apikey in escState.values && isFieldVisible(field, escState.values) && keepPageField(pageField, escState.values.layout_revision)}
+        {#if field && pageField.apikey in escState.values && isFieldVisible(field, escState.values) && isPageRowVisible(escState.manufacturer, pageField.apikey, escState.values) && keepPageField(pageField, escState.values.layout_revision)}
           <Field id={fieldId} label={pageField.label} unit={field.unit}>
             {#if hasEnum(field)}
               <Select

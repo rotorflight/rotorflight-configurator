@@ -4,33 +4,10 @@
 
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
+  import { rotorSpeeds } from "@/js/rotor_speed.js";
 
-  let headRatio = $derived(
-    FC.MOTOR_CONFIG.main_rotor_gear_ratio[0] /
-      FC.MOTOR_CONFIG.main_rotor_gear_ratio[1],
-  );
-
-  let tailRatio = $derived.by(() => {
-    const ratio =
-      FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0] /
-      FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1];
-
-    if (FC.MIXER_CONFIG.tail_rotor_mode === 0) {
-      return headRatio / ratio;
-    }
-
-    return ratio;
-  });
-
-  const headSource = 0;
-  let tailSource = $derived(FC.MIXER_CONFIG.tail_rotor_mode === 0 ? 0 : 1);
-
-  let headspeed = $derived(
-    Math.round(FC.MOTOR_TELEMETRY_DATA.rpm[headSource] * headRatio),
-  );
-  let tailspeed = $derived(
-    Math.round(FC.MOTOR_TELEMETRY_DATA.rpm[tailSource] * tailRatio),
-  );
+  let headspeed = $derived(rotorSpeeds().head);
+  let tailspeed = $derived(rotorSpeeds().tail);
 
   let headspeedMax = $state(1000);
   let tailspeedMax = $state(5000);

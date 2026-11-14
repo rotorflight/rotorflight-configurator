@@ -1,41 +1,14 @@
 <script>
   import { i18n } from "@/js/i18n.js";
+  import { SWASH_LAYOUTS as LAYOUTS } from "@/js/swash.js";
 
   // Top view of the swashplate servos for a Mixer.SWASH_TYPE_* value, nose
-  // up. Angles are measured from the nose, positive towards the right side;
-  // they follow the servo order of mixerUpdate() in the firmware.
+  // up (see swash.js).
   let { swashType, tailServo = true } = $props();
-
-  const LAYOUTS = {
-    1: [
-      { angle: null, role: "swashServoRolePitch" },
-      { angle: null, role: "swashServoRoleRoll" },
-      { angle: null, role: "swashServoRoleCollective" },
-    ],
-    2: ccpm(120),
-    3: ccpm(135),
-    4: ccpm(140),
-    5: [
-      { angle: 0, role: "swashServoRoleFront" },
-      { angle: -90, role: "swashServoRoleLeft" },
-    ],
-    6: [
-      { angle: -45, role: "swashServoRoleFrontLeft" },
-      { angle: 45, role: "swashServoRoleFrontRight" },
-    ],
-  };
 
   // Servo 1 can sit in front of or behind the main shaft; the rear variant
   // mirrors the layout front to back, so servo 2 stays on the left.
   const REAR_VARIANT = new Set([2, 3, 4]);
-
-  function ccpm(angle) {
-    return [
-      { angle: 0, role: "swashServoRoleCenter" },
-      { angle: -angle, role: "swashServoRoleLeft" },
-      { angle: angle, role: "swashServoRoleRight" },
-    ];
-  }
 
   const CX = 40;
   const CY = 40;

@@ -2,14 +2,11 @@ import { config } from "@/js/config.svelte.ts";
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
+import { RemoteSupport, REMOTE_PORT_PREFIX } from "@/js/protocols/RemoteSupport.js";
 import { serial } from "@/js/serial.js";
 import { generateVirtualApiVersions, getTextWidth } from "@/js/utils/common.js";
 
 const TIMEOUT_CHECK = 500 ; // With 250 it seems that it produces a memory leak and slowdown in some versions, reason unknown
-
-// The Virtual FC is a developer tool on desktop; on the web it doubles as a
-// no-hardware demo of every tab.
-const SHOW_VIRTUAL_PORT = import.meta.env.DEV || __BACKEND__ === "web";
 
 // The flasher owns the port while it's open, or being opened (it reboots the FC
 // into the bootloader itself).
@@ -36,6 +33,10 @@ PortHandler.initialize = function (showAllPorts) {
     this.selectList = document.querySelector(portPickerElementSelector);
     this.initialWidth = this.selectList.offsetWidth + 12;
     this.showingAllPorts = showAllPorts;
+
+    // Remote support: release a board a crashed session left open, and
+    // know the DFU devices a shared board may show up as.
+    RemoteSupport.start({ dfuFilters: usbDevices.filters });
 
     // fill dropdown with version numbers
     generateVirtualApiVersions();
@@ -91,7 +92,8 @@ PortHandler.check_serial_devices = function () {
         // Web: every listed port is one the user explicitly granted, so
         // there is nothing to filter out.
         if (__BACKEND__ !== "web" && !self.showingAllPorts) {
-            currentPorts = currentPorts.filter((p) => portRecognized(p.displayName, p.path));
+            // Remote ports are already limited to USB/Bluetooth ones by the tool.
+            currentPorts = currentPorts.filter((p) => p.path.startsWith(REMOTE_PORT_PREFIX) || portRecognized(p.displayName, p.path));
         }
         // on initialization of the port selector (i.e. app startup or toggling whether to show all ports), only select a detected port, don't auto-connect
         if (!self.initialPorts) {
@@ -113,18 +115,26 @@ PortHandler.check_usb_devices = function (callback) {
         return;
     }
 
-    chrome.usb.getDevices(usbDevices, function (result) {
+    // An explicit check (with a callback, e.g. STM32.js looking for the board
+    // it just rebooted into DFU) can't make do with the remote device list
+    // the tool last pushed, so fetch a fresh one first.
+    const remoteRefresh = (callback && RemoteSupport.available)
+        ? RemoteSupport.refreshDevices().catch(() => {})
+        : Promise.resolve();
+
+    remoteRefresh.then(() => chrome.usb.getDevices(usbDevices, function (result) {
+        // STM32DFU.connect() prefers a remote DFU device over a local one, so
+        // label the option after the one it would use.
+        const remoteDfu = RemoteSupport.findDfuDevice(usbDevices.filters);
 
         const dfuElement = self.portPickerElement.children("[value='DFU']");
-        if (result?.length) {
+        if (remoteDfu || result?.length) {
             if (!dfuElement.length) {
                 self.portPickerElement.empty();
-                let usbText;
-                if (result[0].productName) {
-                    usbText = (`DFU - ${result[0].productName}`);
-                } else {
-                    usbText = "DFU";
-                }
+                const productName = remoteDfu
+                    ? i18n.getMessage('portsRemoteDevice', [remoteDfu.productName || remoteDfu.id])
+                    : result[0].productName;
+                const usbText = productName ? `DFU - ${productName}` : "DFU";
 
                 self.portPickerElement.append($('<option/>', {
                     value: "DFU",
@@ -154,7 +164,7 @@ PortHandler.check_usb_devices = function (callback) {
             self.dfu_available = false;
         }
         self.finishUsbDeviceCheck(callback);
-    });
+    }));
 };
 
 /**
@@ -169,6 +179,12 @@ PortHandler.check_usb_devices = function (callback) {
 PortHandler.check_web_usb_devices = async function (callback) {
     const self = this;
 
+    // As in check_usb_devices(): an explicit check can't make do with the
+    // remote device list the pilot last pushed.
+    if (callback && RemoteSupport.available) {
+        await RemoteSupport.refreshDevices().catch(() => {});
+    }
+
     let matched = [];
     if ('usb' in navigator) {
         try {
@@ -181,7 +197,8 @@ PortHandler.check_web_usb_devices = async function (callback) {
         }
     }
 
-    self.dfu_available = matched.length > 0;
+    // STM32DFU.connect() prefers a remote DFU device over a local one.
+    self.dfu_available = matched.length > 0 || RemoteSupport.findDfuDevice(usbDevices.filters) !== null;
     self.finishUsbDeviceCheck(callback);
 };
 
@@ -261,11 +278,24 @@ PortHandler.detectPort = function(currentPorts) {
             }
         }
 
-        // auto-connect if enabled, but never while the flasher owns the port
-        if (GUI.auto_connect && !GUI.connecting_to && !GUI.connected_to && !flasherOwnsPort()) {
+        // Never while the flasher owns the port, or while remote support
+        // shares this computer's board with a supporter.
+        const portBusy = () => flasherOwnsPort() || RemoteSupport.session.role === 'share';
+
+        // While joined to a remote support session, only the pilot's board is
+        // worked on: a board plugged in here must not take over by itself.
+        const joined = RemoteSupport.session.role === 'join';
+        const newRemotePort = newPorts.find((p) => p.path.startsWith(REMOTE_PORT_PREFIX));
+        if (joined && newRemotePort) {
+            self.portPickerElement.val(newRemotePort.path);
+        }
+        const localOnlyWhileJoined = joined && !newRemotePort;
+
+        // auto-connect if enabled
+        if (GUI.auto_connect && !GUI.connecting_to && !GUI.connected_to && !portBusy() && !localOnlyWhileJoined) {
             GUI.timeout_add('auto-connect_timeout', function () {
                 // A device appearing is never a reason to connect to the Virtual FC
-                if (flasherOwnsPort() || self.virtualSelected()) {
+                if (portBusy() || self.virtualSelected()) {
                     return;
                 }
                 $('div#header_btns a.connect').click();
@@ -350,7 +380,7 @@ PortHandler.updatePortSelect = function (ports) {
  * last, so a rebuilt picker never defaults to it.
  */
 PortHandler.virtualPortListed = function () {
-    return SHOW_VIRTUAL_PORT && !flasherOwnsPort();
+    return !flasherOwnsPort();
 };
 
 PortHandler.virtualSelected = function () {

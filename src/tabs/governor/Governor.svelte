@@ -19,6 +19,7 @@
   import Filters from "./Filters.svelte";
   import General from "./General.svelte";
   import Ramps from "./Ramps.svelte";
+  import RpmSensorTest from "./RpmSensorTest.svelte";
   import ThrottleCurve from "./ThrottleCurve.svelte";
   import govState from "./state.svelte.js";
 
@@ -96,7 +97,7 @@
   <button class="btn" onclick={onRevert}>
     {$i18n.t("buttonRevert")}
   </button>
-  <button class="btn" onclick={onSave}>
+  <button class="btn" onclick={onSave} data-save>
     {$i18n.t("buttonSaveReboot")}
   </button>
 {/snippet}
@@ -112,6 +113,7 @@
       {/if}
     </div>
     <div>
+      <RpmSensorTest />
       {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) && govState.enabled}
         <div transition:slide>
           <ThrottleCurve />

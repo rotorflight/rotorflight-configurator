@@ -10,6 +10,8 @@
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import { REMOTE_SUPPORT_AVAILABLE as remoteSupportSupported } from "@/js/protocols/RemoteSupport.js";
+  import { openRemoteSupportTab } from "@/js/protocols/RemoteView.svelte.js";
   import { have_sensor, reinitialiseConnection } from "@/js/serial_backend.js";
 
   let loading = $state(true);
@@ -229,6 +231,19 @@
       {@html $i18n.t("initialSetupButtonRebootText")}
     </div>
   </div>
+
+  {#if remoteSupportSupported}
+    <div class="row">
+      <div class="action">
+        <button class="btn" onclick={openRemoteSupportTab}>
+          {$i18n.t("initialSetupButtonRemoteSupport")}
+        </button>
+      </div>
+      <div class="description">
+        {$i18n.t("initialSetupRemoteSupportText")}
+      </div>
+    </div>
+  {/if}
 </Page>
 
 <dialog bind:this={resetDialogEl}>

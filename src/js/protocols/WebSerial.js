@@ -14,7 +14,9 @@ function isAndroid() {
     return /Android/.test(navigator.userAgent);
 }
 
-function getSerialProvider() {
+// Also used by WebRemoteDeviceHost.js, which shares the same granted ports
+// with a supporter.
+export function getSerialProvider() {
     if (!isAndroid() && 'serial' in navigator) {
         return navigator.serial;
     }
@@ -104,7 +106,7 @@ function getStableWebSerialId(info, port, indexAmongSameVidPid) {
     return id;
 }
 
-function createWebSerialPortEntries(ports) {
+export function createWebSerialPortEntries(ports) {
     const vidPidSeen = new Map();
     return ports.map((port) => {
         const info = port.getInfo?.() || {};
