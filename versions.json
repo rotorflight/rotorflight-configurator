@@ -62,16 +62,6 @@
       "title": "Add motorised tail TTA threshold, banking and tail motor lead",
       "url": "https://github.com/rotorflight/rotorflight-configurator/pull/540",
       "draft": false
-    },
-    {
-      "type": "pr",
-      "name": "456",
-      "path": "./pr/456/",
-      "branch": "feature/expert-mode-basic",
-      "date": "2026-09-30T19:50:13Z",
-      "number": 456,
-      "title": "Hide advanced settings when expert mode is off",
-      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/456"
     }
   ]
 }
