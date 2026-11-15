@@ -1,0 +1,1 @@
+import{Dt as e}from"./client.js";e();
