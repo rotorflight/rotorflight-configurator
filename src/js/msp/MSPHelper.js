@@ -4,6 +4,7 @@ import {
     API_VERSION_12_7,
     API_VERSION_12_8,
     API_VERSION_12_9,
+    API_VERSION_12_11,
     CONFIGURATOR,
 } from "@/js/configurator.svelte.js";
 import { defaultHuffmanTree, defaultHuffmanLenIndex } from "@/js/default_huffman_tree.js";
@@ -1055,6 +1056,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.MIXER_CONFIG.coll_tilt_correction_pos = data.read8();
                     FC.MIXER_CONFIG.coll_tilt_correction_neg = data.read8();
                 }
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_11)) {
+                    FC.MIXER_CONFIG.tail_motor_lead = data.readU8();
+                }
                 break;
             }
 
@@ -1561,6 +1565,12 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
                     FC.GOVERNOR.gov_fallback_drop            = data.readU8();
                     FC.GOVERNOR.gov_flags                    = data.readU16();
+                }
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_11)) {
+                    FC.GOVERNOR.gov_tta_threshold            = data.readU8();
+                    FC.GOVERNOR.gov_tta_bank_limit           = data.readU8();
+                    FC.GOVERNOR.gov_tta_bank_rate            = data.readU8();
+                    FC.GOVERNOR.gov_tta_bank_release         = data.readU8();
                 }
                 break;
             }
@@ -2139,6 +2149,9 @@ MspHelper.prototype.crunch = function(code) {
                 buffer.push8(FC.MIXER_CONFIG.coll_tilt_correction_pos)
                     .push8(FC.MIXER_CONFIG.coll_tilt_correction_neg);
             }
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_11)) {
+                buffer.push8(FC.MIXER_CONFIG.tail_motor_lead);
+            }
             break;
         }
 
@@ -2601,6 +2614,12 @@ MspHelper.prototype.crunch = function(code) {
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
                 buffer.push8(FC.GOVERNOR.gov_fallback_drop)
                     .push16(FC.GOVERNOR.gov_flags);
+            }
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_11)) {
+                buffer.push8(FC.GOVERNOR.gov_tta_threshold)
+                    .push8(FC.GOVERNOR.gov_tta_bank_limit)
+                    .push8(FC.GOVERNOR.gov_tta_bank_rate)
+                    .push8(FC.GOVERNOR.gov_tta_bank_release);
             }
             break;
         }

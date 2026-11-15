@@ -16,6 +16,7 @@
   import {
     API_VERSION_12_8,
     API_VERSION_12_9,
+    API_VERSION_12_11,
   } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
@@ -40,6 +41,7 @@
   import MixerOverride from "./MixerOverride.svelte";
 
   const TAIL_VARIABLE_PITCH = 0;
+  const TAIL_MOTORISED = 1;
   const TAIL_BIDIRECTIONAL = 2;
 
   let loading = $state(true);
@@ -56,6 +58,7 @@
   let customConfig = $state(false);
   let hasTiltCorrection = $state(false);
   let hasPassthrough = $state(false);
+  let hasTailMotorLead = $state(false);
 
   let form = $state({});
 
@@ -159,6 +162,7 @@
       tailDir: dir(inputs[3].rate),
       tailCal: round(Math.abs(inputs[3].rate) * 0.1, 1),
       tailMotorIdle: round(config.tail_motor_idle / 10, 1),
+      tailMotorLead: config.tail_motor_lead,
       tailRotorCenterTrim: 0,
       tailMotorCenterTrim: 0,
       tailRotorMinYaw: 0,
@@ -194,6 +198,7 @@
     c.swash_trim[2] = Math.round(form.trimCollective * 10);
     c.tail_rotor_mode = form.tailMode;
     c.tail_motor_idle = Math.round(form.tailMotorIdle * 10);
+    c.tail_motor_lead = Math.round(form.tailMotorLead);
     c.coll_geo_correction = Math.round(form.collGeoCorrection * 5);
     c.coll_tilt_correction_pos = Math.round(form.tiltPos);
     c.coll_tilt_correction_neg = Math.round(form.tiltNeg);
@@ -294,6 +299,7 @@
 
     hasTiltCorrection = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8);
     hasPassthrough = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8);
+    hasTailMotorLead = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_11);
 
     origConfig = Mixer.cloneConfig(FC.MIXER_CONFIG);
     origInputs = Mixer.cloneInputs(FC.MIXER_INPUTS);
@@ -632,6 +638,18 @@
               undefined,
               { changed: FC.MIXER_CONFIG.tail_motor_idle !== 0 },
             )}
+            {#if hasTailMotorLead && form.tailMode === TAIL_MOTORISED}
+              {@render numberField(
+                "mixer-tail-motor-lead",
+                "mixerTailMotorLead",
+                "mixerTailMotorLeadHelp",
+                "tailMotorLead",
+                { min: 0, max: 250, step: 1 },
+                applyConfig,
+                undefined,
+                { changed: FC.MIXER_CONFIG.tail_motor_lead !== 0 },
+              )}
+            {/if}
           {:else}
             {@render numberField(
               "mixer-tail-rotor-min",
