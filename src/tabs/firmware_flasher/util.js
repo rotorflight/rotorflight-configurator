@@ -46,10 +46,25 @@ function formatDate(date) {
   return `${pad(date.getDate())}-${pad(date.getMonth() + 1)}-${date.getFullYear()} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
 }
 
+// Feature-branch dev builds (rotorflight-firmware's dev-build.yml, tag
+// dev/<branch-slug>) are GitHub prereleases like the snapshot/* builds, but
+// they're rebuilt on every push to an unreviewed, in-progress branch rather
+// than cut deliberately, so they get their own build-type level instead of
+// showing up under "All Releases and Snapshots".
+export const FEATURE_BRANCH_LEVEL = 3;
+
+function isFeatureBranchBuild(release) {
+  return release.tag_name?.startsWith("dev/") ?? false;
+}
+
 export function processBoardOptions(releaseData, buildLevel, minVersion, maxVersion) {
   const releases = {};
   releaseData.forEach((release) => {
-    if (release.prerelease && buildLevel < 2) return;
+    if (isFeatureBranchBuild(release)) {
+      if (buildLevel < FEATURE_BRANCH_LEVEL) return;
+    } else if (release.prerelease && buildLevel < 2) {
+      return;
+    }
     release.assets.forEach((asset) => {
       const match = FILENAME_EXPRESSION.exec(asset.name);
       if (!match) return;

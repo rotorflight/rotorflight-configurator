@@ -23,6 +23,24 @@ ReleaseChecker.prototype.loadReleaseData = function (processFunction, force) {
             $.get(self._releaseUrl, function (releaseData) {
                 GUI.log(i18n.getMessage('releaseCheckLoaded',[self._releaseName]));
 
+                // The full API response is large (uploader/author objects,
+                // asset metadata) and is cached in localStorage on the web.
+                // Keep only what the flasher and update check read.
+                if (Array.isArray(releaseData)) {
+                    releaseData = releaseData.map((release) => ({
+                        tag_name: release.tag_name,
+                        name: release.name,
+                        prerelease: release.prerelease,
+                        html_url: release.html_url,
+                        published_at: release.published_at,
+                        body: release.body,
+                        assets: (release.assets ?? []).map((asset) => ({
+                            name: asset.name,
+                            browser_download_url: asset.browser_download_url,
+                        })),
+                    }));
+                }
+
                 const data = {};
                 data[self._releaseDataTag] = releaseData;
                 data[self._releaseLastUpdateTag] = releaseDataTimestamp;

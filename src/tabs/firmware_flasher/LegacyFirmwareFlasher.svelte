@@ -39,6 +39,7 @@
     setFlashingMessage,
   } from "./state.svelte.js";
   import {
+    FEATURE_BRANCH_LEVEL,
     buildTargetsByManufacturer,
     cleanUnifiedConfigFile,
     grabBuildNameFromConfig,
@@ -57,13 +58,19 @@
 
   const releaseChecker = new ReleaseChecker(
     "firmware",
-    "https://api.github.com/repos/rotorflight/rotorflight-firmware/releases",
+    // GitHub returns 30 releases per page by default; feature-branch dev
+    // builds would soon push the real releases off the end of that.
+    "https://api.github.com/repos/rotorflight/rotorflight-firmware/releases?per_page=100",
   );
 
   const BUILD_TYPES = [
     { tag: "firmwareFlasherOptionLabelBuildTypeRelease", level: 0 },
     { tag: "firmwareFlasherOptionLabelBuildTypePreRelease", level: 1 },
     { tag: "firmwareFlasherOptionLabelBuildTypeDevelopment", level: 2 },
+    {
+      tag: "firmwareFlasherOptionLabelBuildTypeFeatureBranch",
+      level: FEATURE_BRANCH_LEVEL,
+    },
   ];
 
   let buildTypeIndex = $state(0);
@@ -130,7 +137,16 @@
     document.addEventListener("keypress", onKeypress);
 
     chrome.storage.local.get("selected_build_type", (result) => {
-      buildTypeIndex = result.selected_build_type ?? 0;
+      let index = result.selected_build_type ?? 0;
+      // Feature branches are only offered with the advanced firmware options
+      // turned on (see BUILD_TYPES); don't keep loading them once it's off.
+      if (
+        !showAdvancedOpts &&
+        BUILD_TYPES[index]?.level >= FEATURE_BRANCH_LEVEL
+      ) {
+        index = 0;
+      }
+      buildTypeIndex = index;
       loadBuildType(buildTypeIndex);
     });
   });
@@ -926,7 +942,10 @@
         options={BUILD_TYPES.map((b, i) => ({
           value: i,
           label: $i18n.t(b.tag),
-        }))}
+        })).filter(
+          (_, i) =>
+            showAdvancedOpts || BUILD_TYPES[i].level < FEATURE_BRANCH_LEVEL,
+        )}
         onchange={(e) => onBuildTypeChange(e.target.value)}
       />
       <span class="description"

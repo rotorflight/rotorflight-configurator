@@ -52,6 +52,7 @@
     setFlashingMessage,
   } from "./state.svelte.js";
   import {
+    FEATURE_BRANCH_LEVEL,
     buildTargetsByManufacturer,
     cleanUnifiedConfigFile,
     customTarget,
@@ -72,20 +73,25 @@
 
   const releaseChecker = new ReleaseChecker(
     "firmware",
-    "https://api.github.com/repos/rotorflight/rotorflight-firmware/releases",
+    // GitHub returns 30 releases per page by default; feature-branch dev
+    // builds would soon push the real releases off the end of that.
+    "https://api.github.com/repos/rotorflight/rotorflight-firmware/releases?per_page=100",
   );
 
   const BUILD_TYPES = [
     { tag: "firmwareFlasherOptionLabelBuildTypeRelease", level: 0 },
     { tag: "firmwareFlasherOptionLabelBuildTypePreRelease", level: 1 },
     { tag: "firmwareFlasherOptionLabelBuildTypeDevelopment", level: 2 },
+    {
+      tag: "firmwareFlasherOptionLabelBuildTypeFeatureBranch",
+      level: FEATURE_BRANCH_LEVEL,
+    },
   ];
   // Feature branches are unreviewed, in-progress work -- offering them to
   // everyone by default invites someone to flash one without realizing
   // what it is. Gated behind the same "advanced firmware flashing options"
   // toggle (Options page) that already guards showLegacyTargets/eraseChip
   // below, rather than a new preference of its own.
-  const FEATURE_BRANCH_LEVEL = 3;
 
   let buildTypeIndex = $state(0);
   let releases = $state({});
