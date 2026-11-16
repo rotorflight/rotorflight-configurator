@@ -269,6 +269,10 @@ function defaultGovernorProfile() {
     gov_f_gain: 10,
     gov_tta_gain: 0,
     gov_tta_limit: 20,
+    gov_tta_threshold: 0,
+    gov_tta_bank_limit: 10,
+    gov_tta_bank_rate: 20,
+    gov_tta_bank_release: 50,
     gov_yaw_ff_weight: 10,
     gov_cyclic_ff_weight: 10,
     gov_collective_ff_weight: 50,
@@ -1271,6 +1275,7 @@ export function applyVirtualConfig() {
     coll_geo_correction: 0,
     coll_tilt_correction_pos: 0,
     coll_tilt_correction_neg: 10,
+    tail_motor_lead: 0,
   });
 
   FC.MIXER_INPUTS = [];

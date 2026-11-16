@@ -227,6 +227,7 @@ class FlightController {
       coll_geo_correction:        0,
       coll_tilt_correction_pos:   0,
       coll_tilt_correction_neg:   0,
+      tail_motor_lead:            0,
     };
 
     this.MIXER_INPUTS =             [];
@@ -667,6 +668,10 @@ class FlightController {
       gov_f_gain:                     0,
       gov_tta_gain:                   0,
       gov_tta_limit:                  0,
+      gov_tta_threshold:              0,
+      gov_tta_bank_limit:             0,
+      gov_tta_bank_rate:              0,
+      gov_tta_bank_release:           0,
       gov_yaw_ff_weight:              0,
       gov_cyclic_ff_weight:           0,
       gov_collective_ff_weight:       0,
