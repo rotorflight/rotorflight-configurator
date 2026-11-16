@@ -698,22 +698,28 @@
     }, force);
   }
 
-  function onBuildTypeChange(index) {
-    buildTypeIndex = Number(index);
-    selectedBoard = "0";
-    clearCustomDetect();
+  // Changing the release type (or refreshing the list) only changes which
+  // firmware versions are offered -- the board itself is the same physical
+  // hardware. Keep it (whether detected or picked by hand) and reload its
+  // version list once the new release data is in, rather than sending the
+  // user back to detect it again.
+  let restoreBoardAfterReload = null;
+
+  function reloadReleasesKeepingBoard(force = false) {
+    restoreBoardAfterReload = selectedBoard !== "0" ? selectedBoard : null;
     firmwareVersionEntries = [];
     selectedVersion = "0";
-    loadBuildType(buildTypeIndex);
+    loadBuildType(buildTypeIndex, force);
+  }
+
+  function onBuildTypeChange(index) {
+    buildTypeIndex = Number(index);
+    reloadReleasesKeepingBoard();
   }
 
   function onClickRefreshReleases() {
     if (releasesLoading || GUI.connect_lock) return;
-    selectedBoard = "0";
-    clearCustomDetect();
-    firmwareVersionEntries = [];
-    selectedVersion = "0";
-    loadBuildType(buildTypeIndex, true);
+    reloadReleasesKeepingBoard(true);
   }
 
   async function onReleaseData(releaseData, buildLevel) {
@@ -799,6 +805,16 @@
     unifiedConfigs = parsed.unifiedConfigs;
     boardsLoading = false;
 
+    // Release type changed / list refreshed with a board already chosen:
+    // re-load that board's versions for the new release type. Skip it if
+    // the user has picked a different board in the meantime.
+    const restoreBoard = restoreBoardAfterReload;
+    restoreBoardAfterReload = null;
+    if (restoreBoard && selectedBoard === restoreBoard) {
+      await restoreBoardAfterReleaseReload(restoreBoard);
+      return;
+    }
+
     // This is two sequential GitHub API calls on a cache miss, kicked off
     // from onMount() -- easily still in flight well after the user has
     // already picked a board themselves (manually or via Detect), loaded
@@ -817,6 +833,51 @@
     if (initialBoard && isSelectableBoard(initialBoard)) {
       selectedBoard = initialBoard;
       await onBoardChange(initialBoard);
+    }
+  }
+
+  async function restoreBoardAfterReleaseReload(target) {
+    if (!isSelectableBoard(target)) {
+      // Not built for this release type -- fall back to no board.
+      detectStatus = null;
+      detectedBoardName = "";
+      await onBoardChange("0");
+      return;
+    }
+
+    const mcu = customTargetMcu(target);
+    if (!mcu) {
+      await onBoardChange(target);
+      return;
+    }
+
+    // A Custom (MCU) board: onBoardChange() drops the Detect result and any
+    // config already read off the board, neither of which depends on the
+    // release type -- keep them and only relist the MCU's versions.
+    const keep = {
+      customBoard,
+      customConfigStatus,
+      unifiedTarget,
+      isConfigLocal,
+      detectStatus,
+    };
+    await onBoardChange(target);
+    customBoard = keep.customBoard ?? customBoard;
+    customConfigStatus = keep.customConfigStatus;
+    unifiedTarget = keep.unifiedTarget;
+    isConfigLocal = keep.isConfigLocal;
+    detectStatus = keep.detectStatus;
+
+    // Same listing onClickReadBoardConfig() produces for a config read off
+    // the board.
+    if (customConfigStatus === "ready" && unifiedTarget.config) {
+      const builds = {};
+      populateBuilds(
+        builds,
+        unifiedTarget.manufacturerId || mcu,
+        releases[mcu],
+      );
+      showVersions(builds);
     }
   }
 
@@ -1699,17 +1760,6 @@
   function clearCustomBoard() {
     customBoard = null;
     customConfigStatus = "idle";
-  }
-
-  // For the resets that drop selectedBoard back to "0" without going through
-  // onBoardChange(): a "custom" Detect result would otherwise keep offering
-  // to read a config for a board that's no longer selected.
-  function clearCustomDetect() {
-    clearCustomBoard();
-    if (detectStatus === "custom") {
-      detectStatus = null;
-      detectedBoardName = "";
-    }
   }
 
   // Reads the detected board's hardware config back over the CLI and uses it
