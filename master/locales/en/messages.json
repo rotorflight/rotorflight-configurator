@@ -770,6 +770,45 @@
     "setupWizardReceiverCheckWrong": {
         "message": "A bar that moves the wrong way: reverse that channel on the radio. The wrong bar moves: choose another channel order."
     },
+    "setupWizardReceiverCentreTitle": {
+        "message": "Stick center"
+    },
+    "setupWizardReceiverCentreText": {
+        "message": "Not every radio sends 1500µs with the sticks centered: some send 1520µs. If the center is wrong, the helicopter reads every stick as slightly off center."
+    },
+    "setupWizardReceiverCentreTrims": {
+        "message": "First center the roll, pitch and yaw trims on your radio, and remove any subtrim. Then center the sticks, let go, and press Detect."
+    },
+    "setupWizardReceiverCentreCurrent": {
+        "message": "Center: {{1}}µs"
+    },
+    "setupWizardReceiverCentreDetect": {
+        "message": "Detect center"
+    },
+    "setupWizardReceiverCentreSampling": {
+        "message": "Hold still…"
+    },
+    "setupWizardReceiverCentreHint": {
+        "message": "Your centered sticks read about {{1}}µs, but the center is set to {{2}}µs. Center the trims and press Detect."
+    },
+    "setupWizardReceiverCentreSet": {
+        "message": "Center set to {{1}}µs."
+    },
+    "setupWizardReceiverCentreSame": {
+        "message": "Center is right: {{1}}µs."
+    },
+    "setupWizardReceiverCentreNoSignal": {
+        "message": "No receiver signal. Check the receiver first."
+    },
+    "setupWizardReceiverCentreMoving": {
+        "message": "A stick moved. Let go of the sticks and try again."
+    },
+    "setupWizardReceiverCentreTrim": {
+        "message": "{{1}} does not match the other sticks. Center its trim (and subtrim) on your radio, then try again."
+    },
+    "setupWizardReceiverCentreRange": {
+        "message": "The sticks read {{1}}µs, outside {{2}}-{{3}}µs. Check the sticks are centered and the radio's channel outputs are not offset."
+    },
     "setupWizardThrottleRangeTitle": {
         "message": "Throttle switch"
     },
