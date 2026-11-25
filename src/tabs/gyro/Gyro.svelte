@@ -20,6 +20,7 @@
   import DynamicFilter from "./DynamicFilter.svelte";
   import LowpassFilter from "./LowpassFilter.svelte";
   import NotchFilter from "./NotchFilter.svelte";
+  import NotchResponse from "./NotchResponse.svelte";
   import RpmFilter from "./RpmFilter.svelte";
   import {
     NOTCH_COUNT,
@@ -87,6 +88,9 @@
     await MSP.promise(MSPCodes.MSP_FILTER_CONFIG);
     await MSP.promise(MSPCodes.MSP_MOTOR_CONFIG);
     await MSP.promise(MSPCodes.MSP_MIXER_CONFIG);
+    // Gyro rate, PID denom and head speed for the notch response chart
+    await MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG);
+    await MSP.promise(MSPCodes.MSP_GOVERNOR_PROFILE);
 
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
       await mspHelper.requestRpmFilterBanks();
@@ -192,6 +196,9 @@
         </div>
       {/if}
     </div>
+    <div class="full-width">
+      <NotchResponse {FC} />
+    </div>
   </div>
 </Page>
 
@@ -204,6 +211,10 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     column-gap: var(--section-gap);
+  }
+
+  .full-width {
+    grid-column: 1 / -1;
   }
 
   .btn {

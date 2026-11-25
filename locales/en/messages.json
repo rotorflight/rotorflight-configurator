@@ -8454,6 +8454,33 @@
     "gyroNotchFilterHeading": {
         "message": "Notch Filter"
     },
+    "gyroNotchResponse": {
+        "message": "Notch Filter Response"
+    },
+    "gyroNotchResponseHelp": {
+        "message": "How much the notch filters attenuate the gyro signal at each frequency, as the flight controller will set them up at the head speed entered here. RPM notches follow the rotor speed, so change the head speed to see them move. The chart includes the static notch filters and the RPM filter notches, with any unsaved changes. Axes with the same notches share one curve; when they differ, each gets its own curve in the axis colour. Faded markers are RPM notches below the minimum frequency, which the firmware fades out. The shaded band is the range the dynamic notch filters search."
+    },
+    "gyroNotchResponseHeadspeed": {
+        "message": "Head speed"
+    },
+    "gyroNotchResponseTailSpeed": {
+        "message": "Tail rotor speed"
+    },
+    "gyroNotchResponseDynamic": {
+        "message": "Dynamic notch range"
+    },
+    "gyroNotchResponseNone": {
+        "message": "No notch filters are active."
+    },
+    "gyroNotchResponseCount": {
+        "message": "{{notches}} notch filters, the same on all axes. Point at the chart to read the attenuation."
+    },
+    "gyroNotchResponseAxesDiffer": {
+        "message": "The axes have different notches. Point at the chart to compare the attenuation."
+    },
+    "gyroNotchResponseNoRate": {
+        "message": "The gyro rate is unknown, so the response cannot be drawn."
+    },
     "gyroNotchFilterHelp": {
         "message": "The Notch Filters are used for filtering out additional resonances. Each filter has a Center and a Cutoff. The Center Frequency is the center of the filter and the Cutoff Frequency is where filter starts. For example with cutoff of 160 and center of 260, it means the range is 160-360Hz with most attenuation around the center."
     },
