@@ -120,6 +120,84 @@ export function movedChannel(peaks, exclude = [], minUs = DETECT_MIN_US) {
   return peaks[best] >= second * DETECT_RATIO ? best : -1;
 }
 
+//// Stick center (rc_center). Radios don't all send 1500 us with the
+//// sticks centered (some ELRS setups send 1520), and an offset reads as
+//// every stick held slightly off center. Measured on roll, pitch and yaw,
+//// which spring back to center; collective does not.
+
+// The range rc_center accepts here (the Receiver tab's).
+export const CENTRE_MIN = 1400;
+export const CENTRE_MAX = 1600;
+// A channel whose readings spread more than this (us) is still moving.
+const CENTRE_STILL_US = 10;
+// Roll, pitch and yaw must agree to within this (us). One further out has
+// its trim (or subtrim) off center.
+const CENTRE_AGREE_US = 5;
+// Center is worth changing when it is off by more than this (us).
+const CENTRE_OFF_US = 3;
+// Sticks resting this close (us) to rc_center are taken to be centered.
+const CENTRE_NEAR_US = 60;
+
+// From samples of the centered sticks, each [roll, pitch, yaw] in us, the
+// stick center, or why there isn't one:
+//   { status: "ok", centre }
+//   { status: "noSignal" }        no samples, or a channel reads 0
+//   { status: "moving" }          a stick moved while sampling
+//   { status: "trim", axis, centre }
+//                                 axis (0 roll, 1 pitch, 2 yaw) is further
+//                                 than CENTRE_AGREE_US from the others
+//   { status: "range", centre }   centre outside CENTRE_MIN..CENTRE_MAX
+export function centreFromSamples(samples) {
+  if (!samples?.length) return { status: "noSignal" };
+  const means = [0, 1, 2].map((axis) => {
+    let min = Infinity;
+    let max = -Infinity;
+    let sum = 0;
+    for (const s of samples) {
+      const v = s[axis] ?? 0;
+      min = Math.min(min, v);
+      max = Math.max(max, v);
+      sum += v;
+    }
+    return { min, max, mean: sum / samples.length };
+  });
+  if (means.some((m) => m.min <= 0)) return { status: "noSignal" };
+  if (means.some((m) => m.max - m.min > CENTRE_STILL_US)) {
+    return { status: "moving" };
+  }
+  const values = means.map((m) => m.mean);
+  const centre = Math.round(values.reduce((a, b) => a + b, 0) / 3);
+  // The odd one out is the axis furthest from the middle value.
+  const middle = [...values].sort((a, b) => a - b)[1];
+  let worst = 0;
+  for (let axis = 1; axis < 3; axis++) {
+    if (Math.abs(values[axis] - middle) > Math.abs(values[worst] - middle)) {
+      worst = axis;
+    }
+  }
+  if (Math.abs(values[worst] - middle) > CENTRE_AGREE_US) {
+    return { status: "trim", axis: worst, centre };
+  }
+  if (centre < CENTRE_MIN || centre > CENTRE_MAX) {
+    return { status: "range", centre };
+  }
+  return { status: "ok", centre };
+}
+
+// Whether a measured centre differs enough from rc_center to change it.
+export function centreIsOff(centre, rcCenter) {
+  return Math.abs(centre - rcCenter) > CENTRE_OFF_US;
+}
+
+// For the live hint: the centre the sticks show while they rest near
+// rc_center, when it differs from rc_center, otherwise null.
+export function suggestedCentre(samples, rcCenter) {
+  const result = centreFromSamples(samples);
+  if (result.status !== "ok") return null;
+  if (Math.abs(result.centre - rcCenter) > CENTRE_NEAR_US) return null;
+  return centreIsOff(result.centre, rcCenter) ? result.centre : null;
+}
+
 //// Mode switches.
 
 const CHANNEL_MIN = 900;
