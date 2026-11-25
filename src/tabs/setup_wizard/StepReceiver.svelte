@@ -91,6 +91,7 @@
     async function poll() {
       if (stopped) return;
       await MSP.promise(MSPCodes.MSP_RX_CHANNELS);
+      if (stopped) return;
       orderDetectTick();
       centreTick();
       if (!stopped) pollTimer = setTimeout(poll, POLL_MS);
@@ -462,6 +463,16 @@
   }
 
   function centreTick() {
+    // In failsafe the channels hold failsafe values, which are still and
+    // agree, so they would pass as a centre.
+    if (!linkUp) {
+      centreWindow = [];
+      if (centreSampling) {
+        centreSampling = null;
+        centreResult = { status: "noSignal", applied: false };
+      }
+      return;
+    }
     const values = stickValues();
     centreWindow = [...centreWindow, values].slice(-CENTRE_WINDOW);
     if (!centreSampling) return;
@@ -481,8 +492,13 @@
       rcChanged = true;
       applied = true;
       wiz.markChanged();
+      // The travel seen so far was measured from the old centre.
+      travel = {};
     }
     centreResult = { ...result, applied };
+    // The hint starts again from readings after this result, so it can't
+    // hide the result with readings taken before it.
+    centreWindow = [];
   }
 
   function startCentreDetect() {
@@ -491,7 +507,7 @@
   }
 
   let centreHint = $derived(
-    centreSampling
+    centreSampling || centreWindow.length < CENTRE_WINDOW
       ? null
       : suggestedCentre(centreWindow, FC.RC_CONFIG?.rc_center || 1500),
   );
