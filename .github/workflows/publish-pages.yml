@@ -35,14 +35,18 @@ concurrency:
   group: pages-publish
   cancel-in-progress: false
 
+# Upload and deploy are separate jobs. deploy-pages looks the artifact up once,
+# and a just-finalized artifact can take seconds to show up in that listing
+# (actions/deploy-pages#451): run straight after the upload in the same job,
+# the lookup found nothing and the deploy failed. Starting a second job gives
+# the artifact that time, and the deploy retries once after a wait in case it
+# still isn't there. (Re-running a failed run doesn't help: it uploads a
+# second artifact and deploy-pages refuses to choose between the two.)
 jobs:
-  publish:
-    name: Deploy gh-pages to GitHub Pages
+  upload:
+    name: Upload gh-pages
     if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
 
     steps:
       - name: Checkout GitHub Pages branch
@@ -56,6 +60,25 @@ jobs:
         with:
           path: pages
 
+  publish:
+    name: Deploy gh-pages to GitHub Pages
+    needs: upload
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url || steps.retry.outputs.page_url }}
+
+    steps:
       - name: Deploy to GitHub Pages
         id: deploy
+        continue-on-error: true
+        uses: actions/deploy-pages@v5
+
+      - name: Wait for the artifact to be listed
+        if: steps.deploy.outcome == 'failure'
+        run: sleep 60
+
+      - name: Deploy to GitHub Pages (retry)
+        id: retry
+        if: steps.deploy.outcome == 'failure'
         uses: actions/deploy-pages@v5
