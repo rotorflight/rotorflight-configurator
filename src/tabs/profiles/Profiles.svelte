@@ -19,6 +19,7 @@
     API_VERSION_12_7,
     API_VERSION_12_8,
     API_VERSION_12_9,
+    API_VERSION_12_11,
     CONFIGURATOR,
   } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
@@ -28,6 +29,8 @@
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import { bit_check, bit_clear, bit_set } from "@/js/serial_backend.js";
+  import govState from "@/tabs/governor/state.svelte.js";
 
   import EffectivePidGains from "./EffectivePidGains.svelte";
   import Governor from "./Governor.svelte";
@@ -50,9 +53,14 @@
   };
 
   let loading = $state(true);
-  let api = $state({ v127: false, v128: false, v129: false });
+  let api = $state({ v127: false, v128: false, v129: false, v1211: false });
   let pidMode = $state(3);
   let govEnabled = $state(false);
+  // TTA threshold and banking only act with a motorised tail (API 12.11).
+  let tailMotorTTA = $state(false);
+
+  // gov_flags bit of gov_use_tta_banking (GOV_FLAG_TTA_BANKING)
+  const GOV_FLAG_TTA_BANKING = 7;
   let govChanged = $state(false);
   let reloadKey = $state(0);
 
@@ -132,6 +140,11 @@
     f.rescueAltHold = p.rescueMode > 1;
     f.govTTAGain = FC.GOVERNOR.gov_tta_gain;
     f.govTTALimit = FC.GOVERNOR.gov_tta_limit;
+    f.govTTAThreshold = FC.GOVERNOR.gov_tta_threshold / 10;
+    f.govTTABanking = bit_check(FC.GOVERNOR.gov_flags, GOV_FLAG_TTA_BANKING);
+    f.govTTABankLimit = FC.GOVERNOR.gov_tta_bank_limit;
+    f.govTTABankRate = FC.GOVERNOR.gov_tta_bank_rate;
+    f.govTTABankRelease = FC.GOVERNOR.gov_tta_bank_release;
 
     form = f;
     // Altitude hold is hidden unless it is already in use.
@@ -151,6 +164,16 @@
         return FC.GOVERNOR.gov_tta_gain;
       case "govTTALimit":
         return FC.GOVERNOR.gov_tta_limit;
+      case "govTTAThreshold":
+        return FC.GOVERNOR.gov_tta_threshold;
+      case "govTTABanking":
+        return bit_check(FC.GOVERNOR.gov_flags, GOV_FLAG_TTA_BANKING) ? 1 : 0;
+      case "govTTABankLimit":
+        return FC.GOVERNOR.gov_tta_bank_limit;
+      case "govTTABankRate":
+        return FC.GOVERNOR.gov_tta_bank_rate;
+      case "govTTABankRelease":
+        return FC.GOVERNOR.gov_tta_bank_release;
       default:
         return FC.PID_PROFILE[key];
     }
@@ -211,6 +234,16 @@
       FC.GOVERNOR.gov_tta_gain = f.govTTAGain;
       FC.GOVERNOR.gov_tta_limit = f.govTTALimit;
     }
+    if (govEnabled && tailMotorTTA) {
+      FC.GOVERNOR.gov_tta_threshold = Math.round(f.govTTAThreshold * 10);
+      FC.GOVERNOR.gov_flags = (f.govTTABanking ? bit_set : bit_clear)(
+        FC.GOVERNOR.gov_flags,
+        GOV_FLAG_TTA_BANKING,
+      );
+      FC.GOVERNOR.gov_tta_bank_limit = f.govTTABankLimit;
+      FC.GOVERNOR.gov_tta_bank_rate = f.govTTABankRate;
+      FC.GOVERNOR.gov_tta_bank_release = f.govTTABankRelease;
+    }
   }
 
   async function loadData() {
@@ -223,16 +256,22 @@
     await MSP.promise(MSPCodes.MSP_GOVERNOR_CONFIG);
     await MSP.promise(MSPCodes.MSP_SENSOR_CONFIG);
     await MSP.promise(MSPCodes.MSP_BATTERY_CONFIG);
+    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_11)) {
+      await MSP.promise(MSPCodes.MSP_MIXER_CONFIG);
+    }
 
     api = {
       v127: semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7),
       v128: semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8),
       v129: semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9),
+      v1211: semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_11),
     };
     pidMode = FC.PID_PROFILE.pid_mode;
     govEnabled =
       FC.FEATURE_CONFIG.features.isEnabled("GOVERNOR") &&
       FC.GOVERNOR.gov_mode > 0;
+    // Only TAIL_MODE_MOTORIZED (1); not the variable pitch or bidirectional tail.
+    tailMotorTTA = api.v1211 && FC.MIXER_CONFIG.tail_rotor_mode === 1;
 
     formFromFc();
     initialForm = $state.snapshot(form);
@@ -803,6 +842,51 @@
                   },
                   true,
                 )}
+                {#if tailMotorTTA}
+                  {@render num(
+                    "govTTAThreshold",
+                    "govTTAThreshold",
+                    "govTTAThresholdHelp",
+                    { min: 0, max: 25, step: 0.1 },
+                    true,
+                  )}
+                  {#if govState.govMode === "ELECTRIC"}
+                    <Expert
+                      changed={changed(
+                        "govTTABanking",
+                        "govTTABankLimit",
+                        "govTTABankRate",
+                        "govTTABankRelease",
+                      )}
+                    >
+                      {@render toggle(
+                        "govTTABanking",
+                        "govTTABanking",
+                        "govTTABankingHelp",
+                      )}
+                      {#if form.govTTABanking}
+                        {@render num(
+                          "govTTABankLimit",
+                          "govTTABankLimit",
+                          "govTTABankLimitHelp",
+                          { min: 0, max: 25, step: 1 },
+                        )}
+                        {@render num(
+                          "govTTABankRate",
+                          "govTTABankRate",
+                          "govTTABankRateHelp",
+                          { min: 1, max: 100, step: 1 },
+                        )}
+                        {@render num(
+                          "govTTABankRelease",
+                          "govTTABankRelease",
+                          "govTTABankReleaseHelp",
+                          { min: 10, max: 100, step: 1 },
+                        )}
+                      {/if}
+                    </Expert>
+                  {/if}
+                {/if}
               {/if}
             </Section>
           {/if}

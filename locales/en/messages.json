@@ -5870,6 +5870,12 @@
     "mixerTailMotorIdleHelp": {
         "message": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop"
     },
+    "mixerTailMotorLead": {
+        "message": "Motor lead time [ms]"
+    },
+    "mixerTailMotorLeadHelp": {
+        "message": "Drops the tail throttle early when it falls, to offset the tail motor spinning down slower than it spins up. Reduces overshoot on tail stops. Takes away at most half of the throttle above the idle. 0 = off."
+    },
     "mixerTailRotorCenterTrim": {
         "message": "Yaw center trim"
     },
@@ -6748,6 +6754,36 @@
     },
     "govTTALimitHelp": {
         "message": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%."
+    },
+    "govTTAThreshold": {
+        "message": "Tail Torque Assist (TTA) start [%]"
+    },
+    "govTTAThresholdHelp": {
+        "message": "Tail throttle below which TTA starts. The tail motor keeps control down to the idle throttle, and between the two the tail and the main rotor torque act together. Start about 10..12 points below the hover tail throttle. 0 = TTA starts at the idle throttle."
+    },
+    "govTTABanking": {
+        "message": "TTA banking"
+    },
+    "govTTABankingHelp": {
+        "message": "Holds the headspeed added by TTA above the target instead of pulling it straight back, and winds it down as the yaw stick returns. When the tail needs more than the release throttle, the held speed is released as a main throttle cut so the slowing rotor helps the tail. Electric governor only."
+    },
+    "govTTABankLimit": {
+        "message": "TTA bank limit [%]"
+    },
+    "govTTABankLimitHelp": {
+        "message": "Maximum headspeed held above the governor target, in % of headspeed."
+    },
+    "govTTABankRate": {
+        "message": "TTA bank wind-down rate [%/s]"
+    },
+    "govTTABankRateHelp": {
+        "message": "Maximum rate at which the held headspeed is wound down once the yaw stick is back at zero, in % of headspeed per second."
+    },
+    "govTTABankRelease": {
+        "message": "TTA bank release [%]"
+    },
+    "govTTABankReleaseHelp": {
+        "message": "Tail throttle above which the held headspeed is released as a main throttle cut. Never below the TTA start. Use 50, or at least 12 points above the hover tail throttle if that is higher."
     },
     "govYawPrecomp": {
         "message": "Yaw"
